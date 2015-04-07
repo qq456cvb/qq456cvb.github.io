@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <title>[求助]CString如何转换为LPCSTR？ - VC++/MFC - C++论坛 - 编程论坛</title>
+  <link rel="shortcut icon" href="http://bbs.bccn.net/favicon.ico" type="image/x-icon" />
+  			<link rel="stylesheet" type="text/css" href="skin/skin1_special.css" />
+		<link rel="stylesheet" type="text/css" href="skin/skin1_thread.php?urlget=__1__109" />
+	<script src="include/javascript/main.php?urlget=__109" type="text/javascript"></script>
+</head>
+
+<body>
+	<div class="top_channel">
+	  | <a href="http://www.bccn.net/" target="_blank">网站首页</a> |
+	  <a href="http://my.bccn.net/news/" target="_blank">业界新闻</a> |
+    <a href="http://my.bccn.net/group/all_topics/" target="_blank">小组</a> |
+	  <a href="http://www.bccn.net/article/" target="_blank">技术文章</a> |
+	  <a href="http://down.bccn.net/" target="_blank">下载频道</a> |
+	  <a href="http://blog.bccn.net/" target="_blank">博客</a> |
+	  <a href="http://my.bccn.net/paste/" target="_blank">代码贴</a> |
+	  <a href="http://bbs.bccn.net/">编程论坛</a> |&nbsp;
+	</div>
+	<div class="header">
+	  <div class="logo"><a href="http://bbs.bccn.net/"><img src="images/default/logo.gif" alt="编程论坛" border="0" /></a></div>
+	  <div class="quanzhandingbu"><div style='padding:5px 30px 0 0'>
+<iframe border="0" marginwidth="0" src="http://www.bccn.net/aaa/index_top.html" frameborder="0" width="468px" scrolling="no" height="60px"></iframe>
+</div></div>
+	</div>
+	<div class="topbar_bottom"></div>
+	<div class="menu">
+					<div class="md2"><a href="http://bbs.bccn.net/logging.php?action=login">登录</a></div>
+			<div class="md1"><a href="http://bbs.bccn.net/register.php">注册</a></div>
+						<iframe style="border:0px;width:0px;height:0px;" src="" id="z_map" name="z_map"></iframe>
+							<div class="md1">
+			  <div id="memcp" class="menu_popup" onmouseover="ShowMenu('memcp')" onmouseout="HideMenu('memcp')">
+			    <a href="###" onclick="pmwin('open')">短消息</a><br/>
+			    <a href="/space.php?action=threads&amp;uid=0">我发表的主题</a><br/>
+			    <a href="/space.php?action=posts&amp;uid=0">我参与的主题</a><br/>
+			    <a href="/memcp.php?action=profile">编辑个人资料</a><br/>
+			    <a href="/my.php?item=favorites&amp;type=thread">我的收藏</a><br/>
+			    <a href="/my.php?item=subscriptions">我的订阅</a><br/>
+			    <a href="/my.php?item=buddylist">我的好友</a><br/>
+			    <a href="http://blog.bccn.net/">我的博客</a>
+			  </div>
+			  <a href="/memcp.php" onmouseover="ShowMenu('memcp')" onmouseout="HideMenu('memcp')">用户控制面板</a></div>
+				<div class="md1"><a href="search.php?srchfid=55">搜索</a></div>
+													<div class="md1"><a href="magic.php">道具</a></div>
+							<div class="md1"><a href="###" class="notabs" id="pmnotice" onclick="pmwin('open')">短消息</a></div>
+								<div class="md1"><a href="faq.php">帮助</a></div>
+	</div>
+
+<div class="nav">
+  <div style="float:left; padding-left:17px; width:80%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+    <a href="http://bbs.bccn.net/">编程论坛</a> → <a href="/?gid=119">开发语言</a> → <a href="forum-7-1.html">C++论坛</a> → <a href="forum-55-1.html">『 VC++/MFC 』</a> → [求助]CString如何转换为LPCSTR？  </div>
+  <div style="float:right; padding-right:8px;"><a href="###" onclick="pmwin('open')">我的收件箱(0)</a></div>
+</div>
+
+<div style="width:98%; min-width:760px; height:148px; margin:14px auto 14px auto; border:#9DBED9 1px solid;">
+  <div style="height:140px; border:#9DBED9 4px solid; background:#fff;">
+    <div style="width:320px; margin:20px auto 0px auto;">
+	  <b>欢迎加入我们，一同切磋技术 :)</b><br>
+	  	  <form method="post" action="http://bbs.bccn.net/logging.php?action=login&amp;loginsubmit=true" style="margin:18px 0px 0px 0px;">
+			<input type="hidden" name="formhash" value="c5edc685" />
+			<input type="hidden" name="cookietime" value="2592000" />
+			<input type="hidden" name="loginfield" value="username" />
+			用户名：<input type="text" id="usernameid" name="username" style="width:120px; font-size:14px; padding:5px; border-radius:3px" maxlength="40" tabindex="1" /> &nbsp;<a href="register.php" style='color:blue;'>注册</a>&nbsp;&nbsp;<a href="member.php?action=lostpasswd" style='color:blue;'>忘记密码</a><br>
+			<div style="font-size:1px; height:5px;">&nbsp;</div>
+			密&nbsp; 码：<input type="password" name="password" style="width:120px; font-size:14px; padding:5px; border-radius:3px" tabindex="2" /> &nbsp;<input type="submit" value="登录" style="padding:3px 8px;" />
+		  </form>
+	</div>
+  </div>
+</div>
+<script language="JavaScript">
+	$("usernameid").focus();
+</script>
+<div style="width:98%; min-width:760px; height:28px; overflow:hidden; margin:10px auto 0px auto;">
+  <div style="float:left;">
+	<a href="http://bbs.bccn.net/post.php?action=newthread&amp;fid=55&amp;extra=page%3D1"><img src="/skin/img/postnew.gif" /></a><a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;extra=page%3D1"><img src="/skin/img/mreply.gif" /></a>  </div>
+  <div style="float:right; margin-top:9px; white-space:nowrap;">共有 <b>4457</b> 人关注过本帖</div>
+</div>
+<div class="div_top">
+  <div style="float:left;"><b>标题：[求助]CString如何转换为LPCSTR？</b></div>
+  <div style="float:right; padding-right:10px;">
+          <a href="viewthread.php?tid=294526&amp;authorid=392767">[只看楼主]</a>&nbsp;
+  	<a href="my.php?item=favorites&amp;tid=294526">[收藏]</a>
+	  </div>
+</div>
+
+  <a name="pid1710342"></a>
+<div style="border-top:1px #a9d46d solid;" class="div1">
+  <div class="userinfo">
+						<div class="name_hy">ypl_hust</div>
+				<div class="online_sex">
+														<img src="/images/default/user_male_offline.gif" border="0" title="帅哥哟，离线，有人找我吗？" />
+											</div>
+					<div class="avatar"><a href="/space-uid-392767.html" target="_blank"><img src="/images/noavatar_middle.gif"></a></div>				<div class="umenu">
+		  <img src="images/default/star_level1.gif" alt="Rank: 1" /><br/>
+		  		  等　级：新手上路<br/>
+		  		  帖　子：3<br/>
+		  专家分：0<br/>
+		  注　册：2009-8-29<br/>
+		  							结帖率：<span style="cursor:default; color:red;" title="发给分贴 1 次&#10履行承诺 0 次&#10信誉值：0%">0</span>
+					  		  		</div>
+	  </div>
+  <div class="post">
+    <div class="otherinfo">
+	  <div class="floor"><a href="###" title="复制本楼链接到剪贴板" onclick="setcopy('http://bbs.bccn.net/viewthread.php?tid=294526&page=1#pid1710342', '本楼链接已经复制到剪贴板')">楼主</a>
+		</div>
+	 	  <div style="float:right; margin-top:1px;">
+				  &nbsp;&nbsp;<font color="red"><b>已结贴<font face=Verdana>√</font></b></font>
+				&nbsp;&nbsp;问题点数：10&nbsp;&nbsp;回复次数：4&nbsp;&nbsp;&nbsp;
+	  </div>
+	 		<a href="###" onclick="pmwin('open', '392767')" title="发短消息"><img height="18" src="/skin/img/message.gif" /></a>
+		<a href="/my.php?item=buddylist&amp;newbuddyid=392767&amp;buddysubmit=yes" target="_blank" title="加为好友"><img height="18" src="/skin/img/friend.gif" /></a>
+		<a href="/space-uid-392767.html" target="_blank" title="详细资料"><img height="18" src="/skin/img/profile.gif" /></a>
+	  <a href="http://blog.bccn.net/ypl_hust" target="_blank" title="ypl_hust的博客"><img height="18" src="/skin/img/boke.gif" /></a>
+	</div>
+	<div  class="content">
+						
+					<div style="font-weight:bold; margin-bottom:8px;">[求助]CString如何转换为LPCSTR？</div>
+		
+											有一个CString类型的量str，要把它作为函数Write的第一个参数，Write要求第一个参数<br />
+是LPCSTR类型，因此需要把CString转化为LPCSTR类型。试了下面几种方法：<br />
+1. (LPCSTR)str，结果提示无法从CString转LPCSTR；<br />
+2. (LPCTSTR)str作为参数，结果提示Write的第一个参数无法从LPCTSTR转LPCSTR；<br />
+3. (LPCSTR)(LPCTSTR)str,结果str转换后只剩第一个字符了，比如原来str=&quot;hello&quot;,转换后只剩&quot;h&quot;。<br />
+4.网上有很多人说用CString的GetBuffer方法，如下：<br />
+CString str;<br />
+GetDlgItemText(IDC_EDT_SEND,str);<br />
+int nLength=str.GetLength();<br />
+LPCSTR lpszBuf=str.GetBuffer(nLength);<br />
+m_port.Write(lpszBuf);<br />
+结果指向倒数第二行，报错说“无法从“wchar_t *”转换为“LPCSTR””。<br />
+<br />
+到底该怎么做呢？请各位赐教。<br />
+										<div style="margin:25px 0px 0px 0px; font-size:12px;">搜索更多相关主题的帖子:
+				<a href="tag-LPCSTR.html" target="_blank"><font color="red"><b>LPCSTR</b></font></a>&nbsp;&nbsp;<a href="tag-CString.html" target="_blank"><font color="red"><b>CString</b></font></a>&nbsp;&nbsp;								</div>
+										<div id="post_rate_div_1710342"></div>
+										<div style="width:85%; overflow-x:hidden; margin-top:3px;">
+        <!-- 2014-11-17到期，QQ：11577***** -->
+				<a target="_blank" href="http://www.ibeifeng.com/base.html"><img style="border:none; width:728px; height:90px;" src="/aaa/ibeifeng.jpg"></a>
+			</div>
+			</div>
+	  </div>
+</div>
+<div class="div1">
+  <div class="userinfo u_b">
+			<img align="absmiddle" src="/skin/img/ip.gif" title="发帖时间" />
+	    <span style='cursor:default;' title='2009-12-28 21:53:50'>2009-12-28 21:53</span>
+  </div>
+  <div class="p_b">
+			<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;repquote=1710342&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply.gif" /></a>
+				<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;reply=1710342&amp;floor=1&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply_a.gif" /></a>
+		
+	  <div style="float:right; text-align:left; margin:-19px 100px 0px 0px; _margin-right:50px;">
+		<div id="t_m_1710342" class="menu_popup_t" onmouseover="ShowMenu('t_m_1710342')" onmouseout="HideMenu('t_m_1710342')">
+							<a href="misc.php?action=report&amp;fid=55&amp;tid=294526&amp;pid=1710342&amp;page=1">举报帖子</a><BR>
+										<a href="magic.php?action=user&amp;pid=1710342" target="_blank">使用道具</a><BR>
+														</div>
+	  </div>
+		<img style="cursor:pointer;" src="/skin/img/topicmanage.gif"  onmouseover="ShowMenu('t_m_1710342')" onmouseout="HideMenu('t_m_1710342')" />
+
+
+	<a href="#"><img src="/skin/img/p_up.gif" /></a></div>
+</div>  <a name="pid1710526"></a>
+<div style="border-top:1px #a9d46d solid;" class="div0">
+  <div class="userinfo">
+						<div class="name_gb">debroa723</div>
+				<div class="online_sex">
+														<img src="/images/default/user_male_offline.gif" border="0" title="帅哥哟，离线，有人找我吗？" />
+											</div>
+					<div class="avatar"><a href="/space-uid-295074.html" target="_blank"><img src="http://pass.bccn.net/data/avatar/000/29/50/74_avatar_middle.jpg?has_upload_face=1"></a></div>				<div class="umenu">
+		  <img src="images/default/star_level3.gif" alt="Rank: 10" /><img src="images/default/star_level3.gif" alt="Rank: 10" /><img src="images/default/star_level2.gif" alt="Rank: 10" /><br/>
+		  		  等　级：贵宾<br/>
+		  			威　望：<font color="red"><b>23</b></font><br/>
+		  		  帖　子：862<br/>
+		  专家分：1954<br/>
+		  注　册：2008-10-12<br/>
+		  		  		</div>
+	  </div>
+  <div class="post">
+    <div class="otherinfo">
+	  <div class="floor"><a href="###" title="复制本楼链接到剪贴板" onclick="setcopy('http://bbs.bccn.net/viewthread.php?tid=294526&page=1#pid1710526', '本楼链接已经复制到剪贴板')">第 <b>2</b> 楼</a>
+		</div>
+	 	  <div style="float:right; margin-top:3px;">
+		&nbsp;&nbsp;<font color=#FF6600>得分:3</font>&nbsp;	  </div>
+	 		<a href="###" onclick="pmwin('open', '295074')" title="发短消息"><img height="18" src="/skin/img/message.gif" /></a>
+		<a href="/my.php?item=buddylist&amp;newbuddyid=295074&amp;buddysubmit=yes" target="_blank" title="加为好友"><img height="18" src="/skin/img/friend.gif" /></a>
+		<a href="/space-uid-295074.html" target="_blank" title="详细资料"><img height="18" src="/skin/img/profile.gif" /></a>
+	  <a href="http://blog.bccn.net/debroa723" target="_blank" title="debroa723的博客"><img height="18" src="/skin/img/boke.gif" /></a>
+	</div>
+	<div  class="content">
+						
+		
+											你的工程属性应该是默认的宽字节，所以，CString是一个宽字节字符串，而LPCSTR是一个多字节字符串指针，当然不能转了，就算强转成了，也是乱码。<br />
+C++库或是WIN API都有多字节字符串和宽字节字符串之间相互转换的函数，上网去搜一下，找找如何将宽字节字符串转换成多字节字符串，了解一下这个概念。													<div id="post_rate_div_1710526"></div>
+								</div>
+	  </div>
+</div>
+<div class="div0">
+  <div class="userinfo u_b">
+			<img align="absmiddle" src="/skin/img/ip.gif" title="发帖时间" />
+	    <span style='cursor:default;' title='2009-12-29 12:15:14'>2009-12-29 12:15</span>
+  </div>
+  <div class="p_b">
+			<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;repquote=1710526&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply.gif" /></a>
+				<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;reply=1710526&amp;floor=2&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply_a.gif" /></a>
+		
+	  <div style="float:right; text-align:left; margin:-19px 100px 0px 0px; _margin-right:50px;">
+		<div id="t_m_1710526" class="menu_popup_t" onmouseover="ShowMenu('t_m_1710526')" onmouseout="HideMenu('t_m_1710526')">
+							<a href="misc.php?action=report&amp;fid=55&amp;tid=294526&amp;pid=1710526&amp;page=1">举报帖子</a><BR>
+										<a href="magic.php?action=user&amp;pid=1710526" target="_blank">使用道具</a><BR>
+														</div>
+	  </div>
+		<img style="cursor:pointer;" src="/skin/img/topicmanage.gif"  onmouseover="ShowMenu('t_m_1710526')" onmouseout="HideMenu('t_m_1710526')" />
+
+
+	<a href="#"><img src="/skin/img/p_up.gif" /></a></div>
+</div>  <a name="pid1710548"></a>
+<div style="border-top:1px #a9d46d solid;" class="div1">
+  <div class="userinfo">
+						<div class="name_hy">bccnbin2009</div>
+				<div class="online_sex">
+														<img src="/images/default/user_male_offline.gif" border="0" title="帅哥哟，离线，有人找我吗？" />
+											</div>
+					<div class="avatar"><a href="/space-uid-401002.html" target="_blank"><img src="http://pass.bccn.net/data/avatar/000/40/10/02_avatar_middle.jpg?has_upload_face=1"></a></div>				<div class="umenu">
+		  <img src="images/default/star_level3.gif" alt="Rank: 7" /><img src="images/default/star_level2.gif" alt="Rank: 7" /><img src="images/default/star_level1.gif" alt="Rank: 7" /><br/>
+		  			来　自：浙江<br/>
+		  		  等　级：黑侠<br/>
+		  		  帖　子：86<br/>
+		  专家分：602<br/>
+		  注　册：2009-10-5<br/>
+		  		  		</div>
+	  </div>
+  <div class="post">
+    <div class="otherinfo">
+	  <div class="floor"><a href="###" title="复制本楼链接到剪贴板" onclick="setcopy('http://bbs.bccn.net/viewthread.php?tid=294526&page=1#pid1710548', '本楼链接已经复制到剪贴板')">第 <b>3</b> 楼</a>
+		</div>
+	 	  <div style="float:right; margin-top:3px;">
+		&nbsp;&nbsp;<font color=#FF6600>得分:3</font>&nbsp;	  </div>
+	 		<a href="###" onclick="pmwin('open', '401002')" title="发短消息"><img height="18" src="/skin/img/message.gif" /></a>
+		<a href="/my.php?item=buddylist&amp;newbuddyid=401002&amp;buddysubmit=yes" target="_blank" title="加为好友"><img height="18" src="/skin/img/friend.gif" /></a>
+		<a href="/space-uid-401002.html" target="_blank" title="详细资料"><img height="18" src="/skin/img/profile.gif" /></a>
+	  <a href="http://blog.bccn.net/bccnbin2009" target="_blank" title="bccnbin2009的博客"><img height="18" src="/skin/img/boke.gif" /></a>
+	</div>
+	<div  class="content">
+						
+		
+											同上所说，<br />
+wchar_t是宽字节；<br />
+LPCSTR:是32-bit指针 指向一个常字符串，每个字符占1字节；<br />
+LPCTSTR:是32-bit指针 指向一个常字符串,每字符可能占1字节或2字节，取决于Unicode是否定义；<br />
+CString 和 LPCTSTR 可以说通用，因为CString定义了自动类型转换。<br />
+<br />
+不过我在VC6.0中试了一下，下面这样可行。<br />
+<br />
+CString str =&quot;nihao&quot;;<br />
+LPCSTR lpcstr = str.GetBuffer(0);<br />
+cout&lt;&lt;lpcstr&lt;&lt;endl;<br />
+<br />
+你试试，不行的话就得用WideCharToMultiBytes转换一下了<br />
+													<div id="post_rate_div_1710548"></div>
+								</div>
+			<div class="sign">
+		  <img src="/skin/img/sigline.gif" /><br/>
+		  滨封千里		</div>
+	  </div>
+</div>
+<div class="div1">
+  <div class="userinfo u_b">
+			<img align="absmiddle" src="/skin/img/ip.gif" title="发帖时间" />
+	    <span style='cursor:default;' title='2009-12-29 13:00:14'>2009-12-29 13:00</span>
+  </div>
+  <div class="p_b">
+			<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;repquote=1710548&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply.gif" /></a>
+				<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;reply=1710548&amp;floor=3&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply_a.gif" /></a>
+		
+	  <div style="float:right; text-align:left; margin:-19px 100px 0px 0px; _margin-right:50px;">
+		<div id="t_m_1710548" class="menu_popup_t" onmouseover="ShowMenu('t_m_1710548')" onmouseout="HideMenu('t_m_1710548')">
+							<a href="misc.php?action=report&amp;fid=55&amp;tid=294526&amp;pid=1710548&amp;page=1">举报帖子</a><BR>
+										<a href="magic.php?action=user&amp;pid=1710548" target="_blank">使用道具</a><BR>
+														</div>
+	  </div>
+		<img style="cursor:pointer;" src="/skin/img/topicmanage.gif"  onmouseover="ShowMenu('t_m_1710548')" onmouseout="HideMenu('t_m_1710548')" />
+
+
+	<a href="#"><img src="/skin/img/p_up.gif" /></a></div>
+</div>  <a name="pid1710685"></a>
+<div style="border-top:1px #a9d46d solid;" class="div0">
+  <div class="userinfo">
+						<div class="name_hy">asd6791868</div>
+				<div class="online_sex">
+														<img src="/images/default/user_male_offline.gif" border="0" title="帅哥哟，离线，有人找我吗？" />
+											</div>
+					<div class="avatar"><a href="/space-uid-273220.html" target="_blank"><img src="http://pass.bccn.net/data/avatar/000/27/32/20_avatar_middle.jpg?has_upload_face=1"></a></div>				<div class="umenu">
+		  <img src="images/default/star_level1.gif" alt="Rank: 1" /><br/>
+		  			来　自：逆流<br/>
+		  		  等　级：新手上路<br/>
+		  		  帖　子：362<br/>
+		  专家分：7<br/>
+		  注　册：2008-7-27<br/>
+		  		  		</div>
+	  </div>
+  <div class="post">
+    <div class="otherinfo">
+	  <div class="floor"><a href="###" title="复制本楼链接到剪贴板" onclick="setcopy('http://bbs.bccn.net/viewthread.php?tid=294526&page=1#pid1710685', '本楼链接已经复制到剪贴板')">第 <b>4</b> 楼</a>
+		</div>
+	 	  <div style="float:right; margin-top:3px;">
+		&nbsp;&nbsp;<font color=#FF6600>得分:3</font>&nbsp;	  </div>
+	 		<a href="###" onclick="pmwin('open', '273220')" title="发短消息"><img height="18" src="/skin/img/message.gif" /></a>
+		<a href="/my.php?item=buddylist&amp;newbuddyid=273220&amp;buddysubmit=yes" target="_blank" title="加为好友"><img height="18" src="/skin/img/friend.gif" /></a>
+		<a href="/space-uid-273220.html" target="_blank" title="详细资料"><img height="18" src="/skin/img/profile.gif" /></a>
+	  <a href="http://blog.bccn.net/asd6791868" target="_blank" title="asd6791868的博客"><img height="18" src="/skin/img/boke.gif" /></a>
+	</div>
+	<div  class="content">
+						
+		
+											不能转！													<div id="post_rate_div_1710685"></div>
+								</div>
+			<div class="sign">
+		  <img src="/skin/img/sigline.gif" /><br/>
+		  ─條路 :&nbsp;&nbsp;┈片天&nbsp;&nbsp;┈個人&nbsp;&nbsp;─瞬間:		</div>
+	  </div>
+</div>
+<div class="div0">
+  <div class="userinfo u_b">
+			<img align="absmiddle" src="/skin/img/ip.gif" title="发帖时间" />
+	    <span style='cursor:default;' title='2009-12-29 19:22:32'>2009-12-29 19:22</span>
+  </div>
+  <div class="p_b">
+			<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;repquote=1710685&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply.gif" /></a>
+				<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;reply=1710685&amp;floor=4&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply_a.gif" /></a>
+		
+	  <div style="float:right; text-align:left; margin:-19px 100px 0px 0px; _margin-right:50px;">
+		<div id="t_m_1710685" class="menu_popup_t" onmouseover="ShowMenu('t_m_1710685')" onmouseout="HideMenu('t_m_1710685')">
+							<a href="misc.php?action=report&amp;fid=55&amp;tid=294526&amp;pid=1710685&amp;page=1">举报帖子</a><BR>
+										<a href="magic.php?action=user&amp;pid=1710685" target="_blank">使用道具</a><BR>
+														</div>
+	  </div>
+		<img style="cursor:pointer;" src="/skin/img/topicmanage.gif"  onmouseover="ShowMenu('t_m_1710685')" onmouseout="HideMenu('t_m_1710685')" />
+
+
+	<a href="#"><img src="/skin/img/p_up.gif" /></a></div>
+</div> <a name="lastpost"></a> <a name="pid1710761"></a>
+<div style="border-top:1px #a9d46d solid;" class="div1">
+  <div class="userinfo">
+						<div class="name_gb">debroa723</div>
+				<div class="online_sex">
+														<img src="/images/default/user_male_offline.gif" border="0" title="帅哥哟，离线，有人找我吗？" />
+											</div>
+					<div class="avatar"><a href="/space-uid-295074.html" target="_blank"><img src="http://pass.bccn.net/data/avatar/000/29/50/74_avatar_middle.jpg?has_upload_face=1"></a></div>				<div class="umenu">
+		  <img src="images/default/star_level3.gif" alt="Rank: 10" /><img src="images/default/star_level3.gif" alt="Rank: 10" /><img src="images/default/star_level2.gif" alt="Rank: 10" /><br/>
+		  		  等　级：贵宾<br/>
+		  			威　望：<font color="red"><b>23</b></font><br/>
+		  		  帖　子：862<br/>
+		  专家分：1954<br/>
+		  注　册：2008-10-12<br/>
+		  		  		</div>
+	  </div>
+  <div class="post">
+    <div class="otherinfo">
+	  <div class="floor"><a href="###" title="复制本楼链接到剪贴板" onclick="setcopy('http://bbs.bccn.net/viewthread.php?tid=294526&page=1#pid1710761', '本楼链接已经复制到剪贴板')">第 <b>5</b> 楼</a>
+		</div>
+	 	  <div style="float:right; margin-top:3px;">
+		&nbsp;&nbsp;<font color=#555555>得分:0</font>&nbsp;	  </div>
+	 		<a href="###" onclick="pmwin('open', '295074')" title="发短消息"><img height="18" src="/skin/img/message.gif" /></a>
+		<a href="/my.php?item=buddylist&amp;newbuddyid=295074&amp;buddysubmit=yes" target="_blank" title="加为好友"><img height="18" src="/skin/img/friend.gif" /></a>
+		<a href="/space-uid-295074.html" target="_blank" title="详细资料"><img height="18" src="/skin/img/profile.gif" /></a>
+	  <a href="http://blog.bccn.net/debroa723" target="_blank" title="debroa723的博客"><img height="18" src="/skin/img/boke.gif" /></a>
+	</div>
+	<div  class="content">
+						
+		
+											<div class="quote"><b>以下是引用<u>bccnbin2009</u>在2009-12-29 13:00:14的发言：</b><br />
+<br />
+同上所说，<br />
+wchar_t是宽字节；<br />
+LPCSTR:是32-bit指针 指向一个常字符串，每个字符占1字节；<br />
+LPCTSTR:是32-bit指针 指向一个常字符串,每字符可能占1字节或2字节，取决于Unicode是否定义；<br />
+CString 和 LPCTSTR 可以说通 ...</div>CString str =&quot;nihao&quot;;<br />
+这句代码说明了你的工程属性里设置的是多字节的。所以可以直接取得。楼主的工程属性是宽字节的，所以不能直接转，要使用API来转换。													<div id="post_rate_div_1710761"></div>
+								</div>
+	  </div>
+</div>
+<div class="div1">
+  <div class="userinfo u_b">
+			<img align="absmiddle" src="/skin/img/ip.gif" title="发帖时间" />
+	    <span style='cursor:default;' title='2009-12-29 22:07:06'>2009-12-29 22:07</span>
+  </div>
+  <div class="p_b">
+			<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;repquote=1710761&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply.gif" /></a>
+				<a href="http://bbs.bccn.net/post.php?action=reply&amp;fid=55&amp;tid=294526&amp;reply=1710761&amp;floor=5&amp;extra=page%3D1&amp;page=1"><img src="/skin/img/reply_a.gif" /></a>
+		
+	  <div style="float:right; text-align:left; margin:-19px 100px 0px 0px; _margin-right:50px;">
+		<div id="t_m_1710761" class="menu_popup_t" onmouseover="ShowMenu('t_m_1710761')" onmouseout="HideMenu('t_m_1710761')">
+							<a href="misc.php?action=report&amp;fid=55&amp;tid=294526&amp;pid=1710761&amp;page=1">举报帖子</a><BR>
+										<a href="magic.php?action=user&amp;pid=1710761" target="_blank">使用道具</a><BR>
+														</div>
+	  </div>
+		<img style="cursor:pointer;" src="/skin/img/topicmanage.gif"  onmouseover="ShowMenu('t_m_1710761')" onmouseout="HideMenu('t_m_1710761')" />
+
+
+	<a href="#"><img src="/skin/img/p_up.gif" /></a></div>
+</div><div style="width:98%; min-width:760px; height:38px; overflow:hidden; margin:2px auto 0px auto;">
+  <div style="margin-top:12px;">
+	<ul class="pages"><form action="viewthread.php?tid=294526&amp;extra=page%3D1&amp;" method="get"><li title="回复数" style="border-left:1px #d6e0ef solid;"><span>5</span></li><li><span>1/1页</span></li><li><em><img src="/skin/img/first.gif" /></em></li><li><b>1</b></li><li><em><img src="/skin/img/last.gif" /></em></li></form></ul>  </div>
+</div>
+
+  <br><br><br><br>
+<BR><BR><BR>
+
+
+<script type="text/javascript">
+var maxpage = 1;
+if(maxpage > 1) {
+	document.onkeyup = function(e){
+		e = e ? e : window.event;
+		var tagname = false ? e.srcElement.tagName : e.target.tagName;
+		if(tagname == 'INPUT' || tagname == 'TEXTAREA') return;
+		actualCode = e.keyCode ? e.keyCode : e.charCode;
+					}
+}
+</script>			<div style="width:98%; min-width:760px; text-align:center; margin:0px auto;"><script>
+if(screen.height>768){dw("<br>");}
+</script>
+<a href="http://www.ucancode.com/index.htm" target="_blank"><img src="/aaa/www.ucancode.com.jpg" border="0" style="width:1000px; height:80px;"></a>
+<br><br>
+<script>
+if(screen.height>768){dw("<br><br>");}
+if(screen.height>900){dw("<br>");}
+</script></div>
+				<div class="ad_footerbanner" id="ad_footerbanner2"></div>
+				<div class="ad_footerbanner" id="ad_footerbanner3"></div>
+	<div style="clear:both; width:98%; min-width:760px; margin:24px auto 0px auto; padding:4px 0px 30px 0px; line-height:16px; text-align:center;">
+  <a href="http://www.bccn.net/info/normal/200607/4225.html" target="_blank">关于我们</a> |
+  <a href="http://www.bccn.net/info/normal/200601/3090.html" target="_blank">广告合作</a> |
+  <a href="http://www.bccn.net/" target="_blank">编程中国</a> |
+  <a href="member.php?action=clearcookies&amp;formhash=c5edc685">清除Cookies</a> |
+      <a href="#">TOP</a>
+  <br/><br/>
+  <a href="http://www.bccn.net/" target="_blank"><b>编程中国</b></a> 版权所有，并保留所有权利。
+  <div style="font:7pt verdana,sans-serif;">		Powered by <a href="http://www.discuz.net" target="_blank">Discuz</a>, Processed in 0.036211 second(s), 7 queries.<BR>
+		Copyright&copy;2004-2014, BCCN.NET, All Rights Reserved
+  </div>
+</div>
+<script type="text/javascript">
+var _url = window.location.href;
+if(_url.indexOf("#pid")<0 && _url.indexOf("#lastpost")<0){
+  var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+  document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff8d418c6b1c41368e6178f76d1276e53' type='text/javascript'%3E%3C/script%3E"));
+}
+</script></body>
+</html>

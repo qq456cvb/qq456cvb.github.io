@@ -1,0 +1,26 @@
+﻿生成启动时间为 2014/11/2 14:26:31。
+     1>项目“C:\Users\Administrator\Documents\Visual Studio 2013\Projects\adclose-master\AdClose.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         E:\Visual Studio\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AdCloseDlg.cpp
+         AdCloseDlg.cpp
+     1>E:\Visual Studio\VC\atlmfc\include\afx.h(38): warning C4996: 'MBCS_Support_Deprecated_In_MFC': MBCS support in MFC is deprecated and may be removed in a future version of MFC.
+                 E:\Visual Studio\VC\atlmfc\include\afx.h(33) : 参见“MBCS_Support_Deprecated_In_MFC”的声明
+     1>AdCloseDlg.cpp(470): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Visual Studio\VC\include\string.h(195) : 参见“strncpy”的声明
+     1>AdCloseDlg.cpp(712): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Visual Studio\VC\include\string.h(112) : 参见“strcpy”的声明
+       Link:
+         E:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Administrator\Documents\Visual Studio 2013\Projects\adclose-master\Release\AdClose.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST:NO /DEBUG /PDB:"C:\Users\Administrator\Documents\Visual Studio 2013\Projects\adclose-master\Release\AdClose.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Administrator\Documents\Visual Studio 2013\Projects\adclose-master\Release\AdClose.lib" /MACHINE:X86 /SAFESEH Release\AdClose.res
+         Release\AdClose.obj
+         Release\AdCloseDlg.obj
+         Release\base64.obj
+         Release\CSmtp.obj
+         Release\stdafx.obj
+         正在生成代码
+         已完成代码的生成
+         AdClose.vcxproj -> C:\Users\Administrator\Documents\Visual Studio 2013\Projects\adclose-master\Release\AdClose.exe
+     1>已完成生成项目“C:\Users\Administrator\Documents\Visual Studio 2013\Projects\adclose-master\AdClose.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:38.09

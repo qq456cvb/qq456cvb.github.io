@@ -1,0 +1,29 @@
+{
+  "name" : "成绩提醒",
+  "version" : "1.0",
+
+  "description" : "当成绩来敲门",
+  "icons": { "16": "test.png", "48": "test.png", "128": "test.png" },
+  "browser_action": {
+    "default_icon": "test.png"
+  },
+
+  "permissions": [
+    "webRequest",
+    "*://jwc.jxnu.edu.cn/",
+    "notifications",
+    "tabs", "http://*/*"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+  // "content_scripts": [
+  //   {
+  //     "matches": ["<all_urls>"],
+  //     "js" : ["yy.js"]
+  //   }
+  // ],
+
+  "manifest_version": 2
+}
