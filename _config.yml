@@ -11,7 +11,7 @@ title                    : "Yang You / MVIG"
 title_separator          : "-"
 name                     : &name "Yang You"
 description              : &description "personal description"
-url                      : https://qq456cvb.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : "https://qq456cvb.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "qq456cvb.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
@@ -80,36 +80,36 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Sidebar Name"
+  name             : "Yang You (尤洋)"
   avatar           : "profile.png"
-  bio              : "Your biography for the left-hand sidebar"
-  location         : "Location"
-  employer         :
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  googlescholar    : "http://yourfullgooglescholarurl.com"
-  email            :
-  researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
-  uri              :
+  bio              : "Third-year Ph.D. candidate in <a href='http://mvig.sjtu.edu.cn/'>Machine Vision and Intelligence Group (MVIG)</a> at Shanghai Jiao Tong University (SJTU), under the supervision of Prof. <i>Cewu Lu</i> and Assoc. Prof. <i>Weiming Wang</i>. Research interests include <i>3D graphics, 3D computer vision and robotics</i>."
+  location         : "Shanghai, China"
+  employer         : 
+  pubmed           : 
+  googlescholar    : "https://scholar.google.com/citations?user=1YV1_KUAAAAJ&hl=en"
+  email            : "qq456cvb@sjtu.edu.cn"
+  researchgate     : "https://www.researchgate.net/profile/Yang_You8"
+  uri              : "http://www.youyangsoft.com"
   bitbucket        :
   codepen          :
   dribbble         :
   flickr           :
   facebook         :
   foursquare       :
-  github           : "academicpages"
+  github           : "qq456cvb"
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
   linkedin         :
-  orcid            : "http://orcid.org/yourorcidurl"
+  orcid            : "http://orcid.org/0000-0003-0125-0792"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
-  steam            :
+  steam            : 
   tumblr           :
-  twitter          : "replacethistwitterhandle"
+  twitter          :
   vine             :
   weibo            :
   xing             :
