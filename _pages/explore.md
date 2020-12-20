@@ -75,7 +75,6 @@ sidebar: true
         "04530566": "vessel"
     };
 
-    document.on
     let canvasHolder = document.getElementById('canvas-holder');
     // Apply your desired aspect ratio
     var width = canvasHolder.clientWidth;
