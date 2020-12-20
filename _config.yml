@@ -189,6 +189,24 @@ collections:
     permalink: /:collection/:path/
 
 
+kpnet_categories:
+  - airplane
+  - bathtub
+  - bed
+  - bottle
+  - cap
+  - car
+  - chair
+  - guitar
+  - helmet
+  - knife
+  - laptop
+  - motorcycle
+  - mug
+  - skateboard
+  - table
+  - vessel
+
 # Defaults
 defaults:
   # _posts

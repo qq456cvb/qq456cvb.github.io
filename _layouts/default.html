@@ -14,7 +14,7 @@ layout: compress
   <body>
 
     {% include browser-upgrade.html %}
-    {% include masthead.html %}
+    {% include masthead.html navigation=site.data.navigation.main base_path=base_path title=site.title%}
 
     {{ content }}
 

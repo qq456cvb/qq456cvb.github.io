@@ -1,1 +1,1 @@
-2020.06: Our code and full dataset for <a href='/publications/kpnet'>KeypointNet</a> are released on <a href='https://github.com/qq456cvb/KeypointNet'>Github</a>!
+2020.06: Our code and full dataset for <a href='/keypointnet'>KeypointNet</a> are released on <a href='https://github.com/qq456cvb/KeypointNet'>Github</a>!

@@ -1,0 +1,12 @@
+{% include base_path %}
+
+<div class="sidebar sticky">
+    <nav class="greedy-nav">
+        <span class="nav__sub-title" style="padding-right: 0em;">Category Selection</span>
+        <ul class="visible-links">
+            {% for category in site.kpnet_categories %}
+            <li style="display: inline-block; "><a href="#" onclick="class_name='{{ category }}'; reload(); return false;" style="font-weight: normal; margin-left: 4rem; margin-right: 0rem;">{{ category | capitalize }}</a></li><br>
+            {% endfor %}
+        </ul>
+      </nav>
+</div>
