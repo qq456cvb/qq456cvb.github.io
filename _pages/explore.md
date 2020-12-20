@@ -76,7 +76,6 @@ sidebar: true
     };
 
     let canvasHolder = document.getElementById('canvas-holder');
-    // Apply your desired aspect ratio
     var width = canvasHolder.clientWidth;
     var height = width;
     canvasHolder.clientHeight = height;
