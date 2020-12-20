@@ -1,10 +1,10 @@
 ---
 layout: keypointnet-single
-permalink: /keypointnet/explore
+permalink: /keypointnet/explore/
 title: "KeypointNet Explore"
 excerpt: ""
 author_profile: false
-redirect_from:
+redirect_from: /keypointnet/explore.html
 sidebar: true
 ---
 
