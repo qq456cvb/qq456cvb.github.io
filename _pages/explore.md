@@ -171,13 +171,11 @@ sidebar: true
                             }
                         }, function (xhr) {
                             if (id2name[label.class_id] !== class_name) {
-                                // console.log(xhr);
                                 xhr.currentTarget.abort();
                             }
                         });
                     }, function (xhr) {
                         if (id2name[label.class_id] !== class_name) {
-                            // console.log(xhr);
                             xhr.currentTarget.abort();
                         }
                     });
