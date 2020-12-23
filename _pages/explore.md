@@ -84,7 +84,7 @@ sidebar: true
     renderer.setClearColor(0xffffff);
     canvasHolder.appendChild( renderer.domElement );
 
-    var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
+    var camera = new THREE.PerspectiveCamera( 45, width / height, 0.1, 10000 );
     camera.applyMatrix( new THREE.Matrix4().makeTranslation( 0,0, 1.25 ) );
     camera.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 ) );
 
