@@ -157,10 +157,10 @@ sidebar: true
                     let idx = Math.floor(Math.random() * labels.length);
                     let label = labels[idx];
                     let mtlloader = new THREE.MTLLoader();
-                    mtlloader.setResourcePath('http://202.121.182.216:21386/shapenet/' + label.class_id + '/' + label.model_id + '/images/');
-                    mtlloader.load( 'http://202.121.182.216:21386/mtl?name=' + label.class_id + '-' + label.model_id, function (materials) {
+                    mtlloader.setResourcePath('https://202.121.182.216:21387/' + label.class_id + '/' + label.model_id + '/images/');
+                    mtlloader.load('https://202.121.182.216:21387/' + label.class_id + '/' + label.model_id + '/models/model_normalized.mtl', function (materials) {
                         materials.preload();
-                        new THREE.OBJLoader().setMaterials( materials ).load( 'http://202.121.182.216:21386/obj?name=' + label.class_id + '-' + label.model_id, function ( object ) {
+                        new THREE.OBJLoader().setMaterials( materials ).load('https://202.121.182.216:21387/' + label.class_id + '/' + label.model_id + '/models/model_normalized.obj', function ( object ) {
                             objs[i] = object;
                             scenes[i].add( object );
                             for (let j = 0; j < label.keypoints.length; j++) {
