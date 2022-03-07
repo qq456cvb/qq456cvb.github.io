@@ -10,5 +10,5 @@ arxiv: 'https://arxiv.org/abs/2103.10814'
 code: 'https://github.com/eliphatfs/SkeletonMerger'
 weight: 85
 citation: 'Shi, R., Xue, Z., You, Y., & Lu, C. (2021). Skeleton Merger: an Unsupervised Aligned Keypoint Detector. arXiv preprint arXiv:2103.10814.'
-authors: 'Ruoxi Shi, Zhengrong Xue, Yang You, Cewu Lu'
+authors: 'Ruoxi Shi, Zhengrong Xue, <b>Yang You</b>, Cewu Lu'
 ---

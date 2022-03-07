@@ -121,6 +121,7 @@ author:
 include:
   - .htaccess
   - _pages
+  - _projects
   - files
 exclude:
   - "*.sublime-project"
@@ -181,6 +182,9 @@ collections:
   publications:
     output: true
     permalink: /:collection/:path/
+  projects:
+    output: true
+    permalink: /:collection/:path/
   portfolio:
     output: true
     permalink: /:collection/:path/
@@ -227,6 +231,12 @@ defaults:
     values:
       layout: single
       author_profile: true
+  # _projects
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
   # _teaching
   - scope:
       path: ""

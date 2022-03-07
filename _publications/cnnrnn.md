@@ -9,5 +9,5 @@ image: '/images/cnnrnn.png'
 pdf: 'https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8412582'
 weight: 50
 citation: 'You, Y., Lu, C., Wang, W., & Tang, C. K. (2018). Relative CNN-RNN: Learning relative atmospheric visibility from images. IEEE Transactions on Image Processing, 28(1), 45-55.'
-authors: 'Yang You, Cewu Lu, Weiming Wang, Chi-Keung Tang'
+authors: '<b>Yang You</b>, Cewu Lu, Weiming Wang, Chi-Keung Tang'
 ---

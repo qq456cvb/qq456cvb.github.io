@@ -11,5 +11,5 @@ code: 'https://github.com/qq456cvb/KeypointNet'
 video: 'https://www.youtube.com/watch?v=_xy8h1M8Ejs'
 weight: 100
 citation: 'You, Y., Lou, Y., Li, C., Cheng, Z., Li, L., Ma, L., ... & Wang, W. (2020). KeypointNet: A Large-scale 3D Keypoint Dataset Aggregated from Numerous Human Annotations. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 13647-13656).'
-authors: 'Yang You, Yujing Lou, Chengkun Li, Zhoujun Cheng, Liangwei Li, Lizhuang Ma, Cewu Lu, Weiming Wang'
+authors: '<b>Yang You</b>, Yujing Lou, Chengkun Li, Zhoujun Cheng, Liangwei Li, Lizhuang Ma, Cewu Lu, Weiming Wang'
 ---

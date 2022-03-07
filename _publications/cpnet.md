@@ -9,5 +9,5 @@ weight: 40
 image: '/images/cpnet.jpg'
 arxiv: 'https://arxiv.org/abs/1912.12577'
 citation: 'Lou, Y., You, Y., Li, C., Cheng, Z., Li, L., Ma, L., ... & Lu, C. (2020, August). Human Correspondence Consensus for 3D Object Semantic Understanding. In European Conference on Computer Vision (pp. 496-512). Springer, Cham.'
-authors: 'Yujing Lou*, Yang You*, Chengkun Li*, Zhoujun Cheng, Liangwei Li, Lizhuang Ma, Weiming Wang, Yuwing Tai, Cewu Lu <i>(*=equal contribution)</i>'
+authors: 'Yujing Lou*, <b>Yang You</b>*, Chengkun Li*, Zhoujun Cheng, Liangwei Li, Lizhuang Ma, Weiming Wang, Yuwing Tai, Cewu Lu <i>(*=equal contribution)</i>'
 ---

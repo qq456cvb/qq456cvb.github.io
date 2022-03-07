@@ -18,6 +18,10 @@ layout: compress
     {% include masthead.html navigation=site.data.navigation_kpnet.main base_path=home_path title="KeypointNet"%}
 
     {% include scripts.html %}
+    <script src="{{ base_path }}/assets/js/three.min.js"></script>
+    <script src="{{ base_path }}/assets/js/OBJLoader.js"></script>
+    <script src="{{ base_path }}/assets/js/MTLLoader.js"></script>
+    <script src="{{ base_path }}/assets/js/TrackballControls.js"></script>
     
     {{ content }}
 

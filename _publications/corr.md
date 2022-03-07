@@ -10,5 +10,5 @@ image: '/images/corr.jpg'
 arxiv: 'https://arxiv.org/abs/2004.09061'
 code: 'https://github.com/qq456cvb/SemanticTransfer'
 citation: 'You, Y., Li, C., Lou, Y., Cheng, Z., Ma, L., Lu, C., & Wang, W. (2020). Semantic Correspondence via 2D-3D-2D Cycle. arXiv preprint arXiv:2004.09061.'
-authors: 'Yang You, Chengkun Li, Yujing Lou, Zhoujun Cheng, Lizhuang Ma, Cewu Lu, Weiming Wang'
+authors: '<b>Yang You</b>, Chengkun Li, Yujing Lou, Zhoujun Cheng, Lizhuang Ma, Cewu Lu, Weiming Wang'
 ---

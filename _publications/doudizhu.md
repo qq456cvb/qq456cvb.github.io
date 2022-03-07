@@ -10,5 +10,5 @@ arxiv: 'https://arxiv.org/abs/1901.08925'
 code: 'https://github.com/qq456cvb/doudizhu-C'
 weight: 10
 citation: 'You, Y., Li, L., Guo, B., Wang, W., & Lu, C. (2019). Combinational Q-Learning for Dou Di Zhu. arXiv preprint arXiv:1901.08925.'
-authors: 'Yang You, Liangwei Li, Baisong Guo, Weiming Wang, Cewu Lu'
+authors: '<b>Yang You</b>, Liangwei Li, Baisong Guo, Weiming Wang, Cewu Lu'
 ---

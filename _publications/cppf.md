@@ -10,5 +10,5 @@ arxiv: '/files/cppf.pdf'
 code: 'https://github.com/qq456cvb/CPPF'
 weight: 210
 citation: ''
-authors: 'Yang You, Ruoxi Shi, Weiming Wang, Cewu Lu'
+authors: '<b>Yang You</b>, Ruoxi Shi, Weiming Wang, Cewu Lu'
 ---

@@ -10,5 +10,5 @@ arxiv: 'https://arxiv.org/abs/2102.12093'
 code: 'https://github.com/qq456cvb/SPRIN'
 weight: 200
 citation: 'You, Y., Lou, Y., Shi, R., Liu, Q., Tai, Y. W., Ma, L., ... & Lu, C. (2021). PRIN/SPRIN: On Extracting Point-wise Rotation Invariant Features. arXiv preprint arXiv:2102.12093.'
-authors: 'Yang You, Yujing Lou, Ruoxi Shi, Qi Liu, Yu-Wing Tai, Lizhuang Ma, Weiming Wang, Cewu Lu'
+authors: '<b>Yang You</b>, Yujing Lou, Ruoxi Shi, Qi Liu, Yu-Wing Tai, Lizhuang Ma, Weiming Wang, Cewu Lu'
 ---

@@ -9,5 +9,5 @@ image: '/images/knowledge.jpg'
 arxiv: 'https://arxiv.org/abs/2111.10817'
 weight: 190
 citation: 'You, Y., Li, C., Lou, Y., Cheng, Z., Li, L., Ma, L., ... & Lu, C. (2021). Understanding Pixel-level 2D Image Semantics with 3D Keypoint Knowledge Engine. IEEE Transactions on Pattern Analysis and Machine Intelligence.'
-authors: 'Yang You, Chengkun Li, Yujing Lou, Zhoujun Cheng, Liangwei Li, Lizhuang Ma, Weiming Wang, Cewu Lu'
+authors: '<b>Yang You</b>, Chengkun Li, Yujing Lou, Zhoujun Cheng, Liangwei Li, Lizhuang Ma, Weiming Wang, Cewu Lu'
 ---
