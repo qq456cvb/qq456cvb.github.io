@@ -1,3 +1,3 @@
-Third-year Ph.D. candidate in <a href='http://mvig.sjtu.edu.cn/'>Machine Vision and Intelligence Group (MVIG)</a> at Shanghai Jiao Tong University (SJTU), under the supervision of Prof. <i>Cewu Lu</i> and Assoc. Prof. <i>Weiming Wang</i>. Research interests include <i>3D graphics, 3D computer vision and robotics</i>.
+Fourth-year Ph.D. candidate in <a href='http://mvig.sjtu.edu.cn/'>Machine Vision and Intelligence Group (MVIG)</a> at Shanghai Jiao Tong University (SJTU), under the supervision of Prof. <i>Cewu Lu</i> and Assoc. Prof. <i>Weiming Wang</i>. Research interests include <i>3D graphics, 3D computer vision and robotics</i>.
 
 A bit lazy sometimes. Lazy to write blogs, lazy to write tons of codes, but not lazy in trying to catch everything behind the truth.
