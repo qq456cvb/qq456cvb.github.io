@@ -2,7 +2,7 @@
 
 2022.03: Our paper: <a href='https://arxiv.org/abs/2011.12001'>Canonical Voting: Towards Robust Oriented Bounding Box Detection in 3D Scenes</a> is accepted to <i>CVPR 2022</i>! <a href='https://github.com/qq456cvb/CanonicalVoting'>[Code]</a> <a href='/canon-voting'>[Project Page]</a>
 
-2022.03: Our paper: <a href='/files/cppf.pdf'>CPPF: Towards Robust Category-Level 9D Pose Estimation in the Wild</a> is accepted to <i>CVPR 2022</i>! <a href='https://github.com/qq456cvb/CPPF'>[Code]</a> <a href='/cppf'>[Project Page]</a>
+2022.03: Our paper: <a href='/files/cppf.pdf'>CPPF: Towards Robust Category-Level 9D Pose Estimation in the Wild</a> is accepted to <i>CVPR 2022</i>! <a href='https://github.com/qq456cvb/CPPF'>[Code]</a> <a href='/projects/cppf'>[Project Page]</a>
 
 2021.11: Our paper: <a href='https://arxiv.org/abs/2102.12093'>PRIN/SPRIN: On Extracting Point-wise Rotation Invariant Features</a> is accepted to <i>TPAMI</i>, and to appear in the upcoming issues! <a href='https://github.com/qq456cvb/SPRIN'>[Code]</a> <a href='/sprin'>[Project Page]</a>
 
