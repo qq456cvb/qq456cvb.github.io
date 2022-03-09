@@ -22,8 +22,8 @@ CVPR 2022
 <a href='https://arxiv.org/pdf/2011.11974.pdf'>
   <img src='https://img.shields.io/badge/Paper-PDF-orange?style=flat&logo=arxiv&logoColor=orange' alt='Paper PDF'>
 </a>
-<a href='https://qq456cvb.github.io/projects/ukpgan'>
-  <img src='https://img.shields.io/badge/Project-Page-green?style=flat&logo=googlechrome&logoColor=green' alt='Project Page'>
+<a href='https://github.com/qq456cvb/UKPGAN'>
+<img src='https://img.shields.io/badge/Github-Code-green?style=flat&logo=github' alt='Code'>
 </a>
   <!-- <a href='https://colab.research.google.com/'>
     <img src='https://colab.research.google.com/assets/colab-badge.svg' alt='Google Colab'>
