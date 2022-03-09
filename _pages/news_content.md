@@ -1,4 +1,4 @@
-2022.03: Our paper: <a href='https://arxiv.org/abs/2011.11974.pdf'>UKPGAN: A General Self-Supervised Keypoint Detector</a> is accepted to <i>CVPR 2022</i>! <a href='https://github.com/qq456cvb/UKPGAN'>[Code]</a> <a href='/ukpgan'>[Project Page]</a>
+2022.03: Our paper: <a href='https://arxiv.org/abs/2011.11974.pdf'>UKPGAN: A General Self-Supervised Keypoint Detector</a> is accepted to <i>CVPR 2022</i>! <a href='https://github.com/qq456cvb/UKPGAN'>[Code]</a> <a href='/projects/ukpgan'>[Project Page]</a>
 
 2022.03: Our paper: <a href='https://arxiv.org/abs/2011.12001.pdf'>Canonical Voting: Towards Robust Oriented Bounding Box Detection in 3D Scenes</a> is accepted to <i>CVPR 2022</i>! <a href='https://github.com/qq456cvb/CanonicalVoting'>[Code]</a> <a href='/canon-voting'>[Project Page]</a>
 

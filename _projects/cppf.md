@@ -75,7 +75,7 @@ For each sampled point pair lying on an object, we generate both center votes an
 
 ---
 
-# Quantitative Results
+# Qualitative Results
 ## NOCS REAL275 with Instance Segmentation Masks
 <figure style='width:40%;align:center'>
 <img src="/images/cppf/nocsinst.png" alt="Architecture" style="width:100%">
