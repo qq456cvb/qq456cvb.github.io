@@ -6,7 +6,7 @@ excerpt: 'In this paper, we tackle the problem of category-level 9D pose estimat
 date: '2022-03-01'
 venue: 'CVPR'
 image: '/images/cppf.jpg'
-arxiv: '/files/cppf.pdf'
+arxiv: 'https://arxiv.org/abs/2203.03089'
 code: 'https://github.com/qq456cvb/CPPF'
 weight: 210
 citation: ''

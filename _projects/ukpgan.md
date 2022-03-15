@@ -45,6 +45,7 @@ Keypoint detection is an essential component for the object registration and ali
 <figcaption style="text-align: left;"><b>Fig.1 - Our network architecture.</b> We first extract point-wise rotation invariant features and then output keypoint probabilities and semantic embeddings through two MLPs, respectively. GAN is leveraged to control keypoint sparsity, and salient information distillation is utilized to distill most salient features. A decoder is concatenated to reconstruct original point clouds.</figcaption>
 </figure>
 </p>
+
 # Qualitative Results
 ## ShapeNet Models
 ### With NMS
@@ -120,10 +121,9 @@ Keypoint detection is an essential component for the object registration and ali
 {% endif %}
 {% endfor %}
 </div>
+
 ## SMPL Models
 TODO.
-
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 # Citation
 <pre>
@@ -134,3 +134,5 @@ TODO.
   year={2022}
 }
 </pre>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
