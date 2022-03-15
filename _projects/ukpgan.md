@@ -47,6 +47,30 @@ Keypoint detection is an essential component for the object registration and ali
 </p>
 
 # Qualitative Results
+
+## SMPL Models
+### With NMS
+<div align='center'>
+{% assign width = 99 | divided_by: 5 %}
+{% for glb in site.static_files %}
+{% if glb.path contains 'models/ukpgan/smpl_nms' %}
+  <model-viewer style="width:{{ width }}%; height: 250px; display:inline-block;" src="{{ glb.path }}" alt="{{ glb.path }}" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+  </model-viewer>
+{% endif %}
+{% endfor %}
+</div>
+
+### Without NMS (*p* > 0.5)
+<div align='center'>
+{% assign width = 99 | divided_by: 5 %}
+{% for glb in site.static_files %}
+{% if glb.path contains 'models/ukpgan/smpl_nonms' %}
+  <model-viewer style="width:{{ width }}%; height: 250px; display:inline-block;" src="{{ glb.path }}" alt="{{ glb.path }}" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+  </model-viewer>
+{% endif %}
+{% endfor %}
+</div>
+
 ## ShapeNet Models
 ### With NMS
 - Chairs
@@ -121,9 +145,6 @@ Keypoint detection is an essential component for the object registration and ali
 {% endif %}
 {% endfor %}
 </div>
-
-## SMPL Models
-TODO.
 
 # Citation
 <pre>
