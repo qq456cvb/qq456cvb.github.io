@@ -48,6 +48,17 @@ Keypoint detection is an essential component for the object registration and ali
 
 # Qualitative Results
 
+## Real-world Scenes
+<div align='center'>
+{% assign width = 99 | divided_by: 2 %}
+{% for glb in site.static_files %}
+{% if glb.path contains 'models/ukpgan/3dmatch' %}
+  <model-viewer style="width:{{ width }}%; height: 250px; display:inline-block;" src="{{ glb.path }}" alt="{{ glb.path }}" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+  </model-viewer>
+{% endif %}
+{% endfor %}
+</div>
+
 ## SMPL Models
 ### With NMS
 <div align='center'>
