@@ -191,6 +191,9 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
+  sideprojects:
+    output: true
+    permalink: /:collection/:path/
 
 
 kpnet_categories:
@@ -250,6 +253,15 @@ defaults:
   - scope:
       path: ""
       type: publications
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+  # side projects
+  - scope:
+      path: ""
+      type: sideprojects
     values:
       layout: single
       author_profile: true

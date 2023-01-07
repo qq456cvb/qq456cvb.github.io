@@ -1,0 +1,24 @@
+<table style="width:100%;border:none;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+  {% assign projects = site.sideprojects %}  
+  {% assign projects = projects | sort:"weight" %}  
+  {% for post in projects reversed %}
+  <tr style="border:none">
+    <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px;border:none">
+      {% if post.image %}
+      <img src="{{ base_path }}{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+      {% else %}
+      <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+      {% endif %}
+    </td>
+    <td style="padding:2.5%;width:75%;vertical-align:middle;border:none">
+      <h1>{{post.title}}</h1>
+      <br>
+      {% if post.code %}
+      <a href="{{post.code}}">code</a> /
+      {% endif %}
+      <p></p>
+      {{ post.excerpt }}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
