@@ -1,3 +1,3 @@
-Fourth-year Ph.D. candidate in <a href='http://mvig.sjtu.edu.cn/'>Machine Vision and Intelligence Group (MVIG)</a> at Shanghai Jiao Tong University (SJTU), under the supervision of Prof. <i>Cewu Lu</i> and Assoc. Prof. <i>Weiming Wang</i>. Research interests include <i>3D graphics, 3D computer vision and robotics</i>.
+Ph.D. in <a href='http://mvig.sjtu.edu.cn/'>Machine Vision and Intelligence Group (MVIG)</a> at Shanghai Jiao Tong University (SJTU), under the supervision of Prof. <i>Cewu Lu</i> and Assoc. Prof. <i>Weiming Wang</i>. Research interests include <i>3D graphics, 3D computer vision and robotics</i>. About to join the <a href='https://geometry.stanford.edu/'>Geometric Computation group</a> led by Prof. <a href='https://profiles.stanford.edu/leonidas-guibas'>Leonidas Guibas</a> at Stanford University on April, 2023.
 
 Interested in new and cool things, and wanted to figure out everything beneath a particular technique.
