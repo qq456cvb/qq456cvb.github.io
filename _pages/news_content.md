@@ -1,3 +1,5 @@
+2023.03: Our paper: <a href='https://arxiv.org/abs/2303.03101'>CRIN: Rotation-Invariant Point Cloud Analysis and Rotation Estimation via Centrifugal Reference Frame</a> is accepted to <i>AAAI 2023</i> <b>Oral</b>! <a href='hhttps://arxiv.org/abs/2303.03101'>[Paper]</a> <a href='https://github.com/yokinglou/CRIN'>[Code]</a>
+
 2022.03: Our paper: <a href='https://arxiv.org/abs/2011.11974'>UKPGAN: A General Self-Supervised Keypoint Detector</a> is accepted to <i>CVPR 2022</i>! <a href='https://arxiv.org/abs/2011.11974'>[Paper]</a> <a href='https://github.com/qq456cvb/UKPGAN'>[Code]</a> <a href='/projects/ukpgan'>[Project Page]</a>
 
 2022.03: Our paper: <a href='https://arxiv.org/abs/2011.12001'>Canonical Voting: Towards Robust Oriented Bounding Box Detection in 3D Scenes</a> is accepted to <i>CVPR 2022</i>! <a href='https://arxiv.org/abs/2011.12001'>[Paper]</a> <a href='https://github.com/qq456cvb/CanonicalVoting'>[Code]</a> <a href='/projects/canonical-voting'>[Project Page]</a>
