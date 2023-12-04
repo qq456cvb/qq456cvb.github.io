@@ -11,6 +11,6 @@ image: '/images/beyondcppf.jpg'
 weight: 250
 arxiv: 'https://arxiv.org/abs/2211.13398'
 code: 'https://github.com/qq456cvb/BeyondPPF'
-citation: 'You, Y., He, W., Liu, J., Xiong, H., Wang, W., & Lu, C. (2022). GCPPF++: Uncertainty-Aware Sim2Real Object Pose Estimation by Vote Aggregation. arXiv preprint arXiv:2211.13398.'
+citation: 'You, Y., He, W., Liu, J., Xiong, H., Wang, W., & Lu, C. (2022). CPPF++: Uncertainty-Aware Sim2Real Object Pose Estimation by Vote Aggregation. arXiv preprint arXiv:2211.13398.'
 authors: '<b>Yang You</b>, Wenhao He, Jin Liu, Hongkai Xiong, Weiming Wang, Cewu Lu'
 ---
