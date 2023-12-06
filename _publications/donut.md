@@ -8,6 +8,7 @@ venue: 'Arxiv'
 image: '/images/donut.png'
 weight: 300
 arxiv: 'https://arxiv.org/abs/2311.02787'
+poster: '/images/make_a_donut.pdf'
 site: '/projects/donut'
 citation: 'You, Y., Shen, B., Deng, C., Geng, H., Wang, H., & Guibas, L. (2023). Make a Donut: Language-Guided Hierarchical EMD-Space Planning for Zero-shot Deformable Object Manipulation. arXiv preprint arXiv:2311.02787.'
 authors: '<b>Yang You</b>, Bokui Shen, Congyue Deng, Haoran Geng, He Wang, Leonidas Guibas'
