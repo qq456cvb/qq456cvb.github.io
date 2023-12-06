@@ -7,7 +7,7 @@ permalink: /projects/donut
   <head>
     <meta charset="UTF-8">
 
-    <meta name="description" content="Project website for EquivAct">
+    <meta name="description" content="Project website for Make a Donut">
     <meta name="author" content="Yang You">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="icons/donut_icon.png">
@@ -93,16 +93,6 @@ permalink: /projects/donut
           </p>
         </div>
       </div>
-      <!-- <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
-        <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
-          <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Video</span></h2>
-          <div>
-            <video height="auto" width="100%" controls="" style="border: 1px solid #000;">
-              <source src="./video/equivact.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-      </div> -->
       <div class="flex flex-col items-center px-5 pt-9 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
         <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
           <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Method Overview</span></h2>
