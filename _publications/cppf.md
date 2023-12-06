@@ -8,6 +8,7 @@ venue: 'CVPR'
 image: '/images/cppf.jpg'
 arxiv: 'https://arxiv.org/abs/2203.03089'
 code: 'https://github.com/qq456cvb/CPPF'
+site: '/projects/cppf'
 weight: 210
 citation: ''
 authors: '<b>Yang You</b>, Ruoxi Shi, Weiming Wang, Cewu Lu'

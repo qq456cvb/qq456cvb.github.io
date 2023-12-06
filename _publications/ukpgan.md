@@ -8,6 +8,7 @@ venue: 'CVPR'
 image: '/images/ukpgan.jpg'
 arxiv: 'https://arxiv.org/abs/2011.11974'
 code: 'https://github.com/qq456cvb/UKPGAN'
+site: '/projects/ukpgan'
 weight: 200
 citation: 'You, Y., Liu, W., Li, Y. L., Wang, W., & Lu, C. (2020). UKPGAN: Unsupervised KeyPoint GANeration. arXiv preprint arXiv:2011.11974.'
 authors: '<b>Yang You</b>, Wenhai Liu, Yong-Lu Li, Weiming Wang, Cewu Lu'

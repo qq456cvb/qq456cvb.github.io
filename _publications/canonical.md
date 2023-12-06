@@ -9,6 +9,7 @@ image: '/images/canonical.jpg'
 weight: 200
 arxiv: 'https://arxiv.org/abs/2011.12001'
 code: 'https://github.com/qq456cvb/CanonicalVoting'
+site: '/projects/canonical-voting'
 citation: 'You, Y., Ye, Z., Lou, Y., Li, C., Li, Y. L., Ma, L., ... & Lu, C. (2020). Canonical Voting: Towards Robust Oriented Bounding Box Detection in 3D Scenes. arXiv preprint arXiv:2011.12001.'
 authors: '<b>Yang You</b>, Zelin Ye, Yujing Lou, Chengkun Li, Yong-Lu Li, Lizhuang Ma, Weiming Wang, Cewu Lu'
 ---
