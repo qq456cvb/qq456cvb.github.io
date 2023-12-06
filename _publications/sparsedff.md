@@ -8,6 +8,7 @@ venue: 'Arxiv'
 image: '/images/sparsedff.png'
 weight: 299
 arxiv: 'https://arxiv.org/abs/2310.16838'
+site: 'https://halowangqx.github.io/SparseDFF'
 citation: 'Wang, Q., Zhang, H., Deng, C., You, Y., Dong, H., Zhu, Y., & Guibas, L. (2023). SparseDFF: Sparse-View Feature Distillation for One-Shot Dexterous Manipulation. arXiv preprint arXiv:2310.16838.'
 authors: 'Qianxu Wang, Haotong Zhang, Congyue Deng, <b>Yang You</b>, Hao Dong, Yixin Zhu, Leonidas Guibas'
 ---
