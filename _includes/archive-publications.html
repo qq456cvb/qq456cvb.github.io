@@ -4,7 +4,19 @@
   {% for post in pubs reversed %}
   <tr style="border:none">
     <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px;border:none">
-      <img src="{{ base_path }}{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+      <!-- <img src="{{ base_path }}{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" /> -->
+      <!-- Image Wrapper -->
+    <div style="cursor: pointer;">
+      <!-- Your Existing Image Tag -->
+      <img src="{{ base_path }}{{ post.image }}" alt="project image" style="width:auto; height:auto; max-width:100%; transition: transform 0.25s ease; cursor: zoom-in;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"  onclick="document.getElementById('popup-modal').style.display='block'; document.getElementById('popup-img').src=this.src;"/>
+
+      <!-- Popup Modal -->
+      <div id="popup-modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9);" onclick="this.style.display='none'">
+          <span style="position: absolute; top: 15px; right: 35px; color: white; font-size: 40px; font-weight: bold; cursor: pointer;" onclick="document.getElementById('popup-modal').style.display='none'">&times;</span>
+          <img class="popup-content" id="popup-img" style="margin: auto; display: block; width: 80%; background-color: white;">
+          <div class="caption" style="margin: auto; display: block; width: 80%; text-align: center; color: white; padding: 10px 0; height: 150px;"></div>
+      </div>
+    </div>
     </td>
     <td style="padding:2.5%;width:75%;vertical-align:middle;border:none">
       <h1>{{post.title}}</h1>

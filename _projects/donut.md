@@ -259,7 +259,7 @@ permalink: /projects/donut
             <p class="font-bold pb-2">Real-Robot Experiments</p>
             <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg lg:px-10 max-w-4xl">
               <video height="auto" width="80%" autoplay loop muted>
-                <source src="./video/visualized_goal_compressed.mp4" type="video/mp4">
+                <source src="video/visualized_goal_compressed.mp4" type="video/mp4">
               </video>
             </div>
         </div>

@@ -1,2 +1,0 @@
-The dough is initially a rectangle at (0, 0, 0) with dimensions (1, 0.4, 0.4). Make two
-pancakes.
