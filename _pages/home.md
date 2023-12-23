@@ -12,6 +12,6 @@ News
 ======
 {% include_relative news_content.md %}
 
-Publications
+Papers
 ======
 {% include archive-publications.html %}

@@ -21,7 +21,7 @@ Work experience
   * Duties: WebRTC Development, iOS Test
   * Supervisor: Jianjun Zhu (诸剑俊)
 
-Publications
+Papers
 ======
   <ul>{% for post in site.publications %}
     {% include archive-single-cv.html %}

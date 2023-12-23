@@ -29,20 +29,20 @@ permalink: /projects/pace
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="/projects/pace/static/css/bulma.min.css">
+  <link rel="stylesheet" href="/projects/pace/static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="/projects/pace/static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="/projects/pace/static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-  <link rel="icon" href="static/images/favicon.svg">
+  <link rel="stylesheet" href="/projects/pace/static/css/index.css">
+  <link rel="icon" href="/projects/pace/static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+  <script defer src="/projects/pace/static/js/fontawesome.all.min.js"></script>
+  <script src="/projects/pace/static/js/bulma-carousel.min.js"></script>
+  <script src="/projects/pace/static/js/bulma-slider.min.js"></script>
+  <script src="/projects/pace/static/js/index.js"></script>
 </head>
 <body>
 
@@ -181,7 +181,7 @@ permalink: /projects/pace
   <div class="container is-max-desktop">
     <div class="hero-body">
       <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="static/videos/teaser.mp4"
+        <source src="/projects/pace/static/videos/teaser.mp4"
                 type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
@@ -200,49 +200,49 @@ permalink: /projects/pace
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-steve">
           <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="static/videos/steve.mp4"
+            <source src="/projects/pace/static/videos/steve.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-chair-tp">
           <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="static/videos/chair-tp.mp4"
+            <source src="/projects/pace/static/videos/chair-tp.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-shiba">
           <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="static/videos/shiba.mp4"
+            <source src="/projects/pace/static/videos/shiba.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-fullbody">
           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="static/videos/fullbody.mp4"
+            <source src="/projects/pace/static/videos/fullbody.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-blueshirt">
           <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="static/videos/blueshirt.mp4"
+            <source src="/projects/pace/static/videos/blueshirt.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-mask">
           <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="static/videos/mask.mp4"
+            <source src="/projects/pace/static/videos/mask.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-coffee">
           <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="static/videos/coffee.mp4"
+            <source src="/projects/pace/static/videos/coffee.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-toby">
           <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="static/videos/toby2.mp4"
+            <source src="/projects/pace/static/videos/toby2.mp4"
                     type="video/mp4">
           </video>
         </div>
@@ -286,7 +286,7 @@ permalink: /projects/pace
       <div class="column is-five-sixths">
         <!-- <h2 class="title is-3">Video</h2> -->
         <div class="content">
-          <img src="static/images/teaser.jpg" />
+          <img src="/projects/pace/static/images/teaser.jpg" />
         </div>
       </div>
     </div>
@@ -295,7 +295,7 @@ permalink: /projects/pace
       <div class="column is-five-sixths">
         <h2 class="title is-3">Dataset Comparison</h2>
         <div class="content">
-          <img src="static/images/compare.svg" width="100%" />
+          <img src="/projects/pace/static/images/compare.svg" width="100%" />
         </div>
       </div>
     </div>
@@ -304,10 +304,10 @@ permalink: /projects/pace
       <div class="column is-five-sixths">
         <h2 class="title is-3">Data Distribution</h2>
         <div class="content">
-          <img src="static/images/dist-cat.png" />
-          <img src="static/images/dist-size.png" width="44%" />
-          <img src="static/images/dist-pose.png" width="57%" />
-          <img src="static/images/dist-occ.png" width="55%" />
+          <img src="/projects/pace/static/images/dist-cat.png" />
+          <img src="/projects/pace/static/images/dist-size.png" width="44%" />
+          <img src="/projects/pace/static/images/dist-pose.png" width="57%" />
+          <img src="/projects/pace/static/images/dist-occ.png" width="55%" />
         </div>
       </div>
     </div>
@@ -316,19 +316,19 @@ permalink: /projects/pace
       <div class="column is-five-sixths">
         <h2 class="title is-3">Benchmarks</h2>
         <div class="content">
-          <img src="static/images/bench-ins.svg" width="70%" />
+          <img src="/projects/pace/static/images/bench-ins.svg" width="70%" />
           <p>Instance-level Pose Estimation</p>
         </div>
         <div class="content">
-          <img src="static/images/bench-cat.svg" width="100%" />
+          <img src="/projects/pace/static/images/bench-cat.svg" width="100%" />
           <p>Category-level Pose Estimation</p>
         </div>
         <div class="content">
-          <img src="static/images/bench-mf.svg" width="70%" />
+          <img src="/projects/pace/static/images/bench-mf.svg" width="70%" />
           <p>Model-free Pose Tracking</p>
         </div>
         <div class="content">
-          <img src="static/images/bench-mb.svg" width="50%" />
+          <img src="/projects/pace/static/images/bench-mb.svg" width="50%" />
           <p>Model-based Pose Tracking</p>
         </div>
       </div>
@@ -338,7 +338,7 @@ permalink: /projects/pace
       <div class="column is-five-sixths">
         <h2 class="title is-3">Pipeline</h2>
         <div class="content">
-          <img src="static/images/pipeline.jpg" />
+          <img src="/projects/pace/static/images/pipeline.jpg" />
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ permalink: /projects/donut
     <meta name="description" content="Project website for Make a Donut">
     <meta name="author" content="Yang You">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="icons/donut_icon.png">
+    <link rel="icon" href="/projects/donut/icons/donut_icon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Make a Donut</title>
   </head>
@@ -80,7 +80,7 @@ permalink: /projects/donut
         </div>
         <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg lg:px-10 max-w-4xl">
           <div class="flex flex-col items-center justify-center py-6 mx-auto w-full">
-            <img src="images/teaser_website_cropped.gif" class="object-cover object-center" style="width:100%">
+            <img src="/projects/donut/images/teaser_website_cropped.gif" class="object-cover object-center" style="width:100%">
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ permalink: /projects/donut
               <strong>At the bottom level</strong>, given the current tool and subgoal, our technique iteratively identifies the next reachable target based on the present state and subgoal with a planning algorithm in the EMD space. 
             </p>
             <div class="flex flex-col items-center justify-center py-6 mx-auto lg:px-10">
-              <img src="images/pipeline.png" class="object-cover object-center">
+              <img src="/projects/donut/images/pipeline.png" class="object-cover object-center">
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@ permalink: /projects/donut
 	          Additionally, we introduce two guidelines: <strong>volumn preserving</strong> and <strong>chain of reasoning</strong>, which improves the feasibility and stability of the generated targets.
 	        </p>
 	        <div class="flex flex-col items-center justify-center py-6 mx-auto w-full">
-              <img src="images/tab_guidelines.png" class="object-cover object-center" style="width:60%">
+              <img src="/projects/donut/images/tab_guidelines.png" class="object-cover object-center" style="width:60%">
             </div>
 	        <p>
 	          To try the prompts yourself:
@@ -128,19 +128,19 @@ permalink: /projects/donut
 	        <ul>
 	          <li>
 	            First of all, copy this template prompt into GPT-4:
-	            <a href="prompts/template.txt" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+	            <a href="/projects/donut/prompts/template.txt" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
 	              <span>Template prompt</span>
 	            </a>
 	    	  </li>
 	          <li>
 	            Next, append your customized prompt specifying the <strong>goal</strong> as well as the <strong>initial dough state</strong>. Prompts for the examples in the paper are:
-	            <a href="prompts/exp_donut.txt" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+	            <a href="/projects/donut/prompts/exp_donut.txt" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
 	              <span>Donut</span>
 	            </a>
-	            <a href="prompts/exp_baguette.txt" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+	            <a href="/projects/donut/prompts/exp_baguette.txt" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
 	              <span>Baguette</span>
 	            </a>
-	            <a href="prompts/exp_pancakes.txt" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+	            <a href="/projects/donut/prompts/exp_pancakes.txt" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
 	              <span>Pancakes</span>
 	            </a>
 	    	  </li>
@@ -151,7 +151,7 @@ permalink: /projects/donut
 	        	We find the next reachable target by running small steps within the EMD space. The induced point-to-point correspondence can provide better gradients when optimizing actions through differential physics.
 	        </p>
 	        <div class="flex flex-col items-center justify-center py-6 mx-auto lg:px-10 max-w-3xl">
-	          <img src="images/singletool_pipeline.png" class="object-cover object-center">
+	          <img src="/projects/donut/images/singletool_pipeline.png" class="object-cover object-center">
 	        </div>
 	      </div>
         </div>
@@ -165,27 +165,27 @@ permalink: /projects/donut
               <div class="grid w-9/12 grid-cols-1 gap-10 mx-auto md:grid-cols-4 md:w-9/12">
                 <div class="p-2">
                   <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/donut-prompt1-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/donut-prompt1-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/donut-prompt1-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/donut-prompt1-0-2.gif" />
                 </div>
                 <div class="p-2">
             	  <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/donut-prompt2-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/donut-prompt2-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/donut-prompt2-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/donut-prompt2-0-2.gif" />
                 </div>
                 <div class="p-2">
                   <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/donut-prompt3-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/donut-prompt3-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/donut-prompt3-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/donut-prompt3-0-2.gif" />
                 </div>
                 <div class="p-2">
                   <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/donut-prompt4-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/donut-prompt4-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/donut-prompt4-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/donut-prompt4-0-2.gif" />
                 </div>
               </div>
             </div>
@@ -194,27 +194,27 @@ permalink: /projects/donut
               <div class="grid w-9/12 grid-cols-1 gap-10 mx-auto md:grid-cols-4 md:w-9/12">
                 <div class="p-2">
                   <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/baguette-prompt1-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/baguette-prompt1-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/baguette-prompt1-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/baguette-prompt1-0-2.gif" />
                 </div>
                 <div class="p-2">
             	  <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/baguette-prompt2-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/baguette-prompt2-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/baguette-prompt2-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/baguette-prompt2-0-2.gif" />
                 </div>
                 <div class="p-2">
                   <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/baguette-prompt3-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/baguette-prompt3-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/baguette-prompt3-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/baguette-prompt3-0-2.gif" />
                 </div>
                 <div class="p-2">
                   <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/baguette-prompt4-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/baguette-prompt4-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/baguette-prompt4-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/baguette-prompt4-0-2.gif" />
                 </div>
               </div>
             </div>
@@ -223,35 +223,35 @@ permalink: /projects/donut
               <div class="grid w-9/12 grid-cols-1 gap-10 mx-auto md:grid-cols-4 md:w-9/12">
                 <div class="p-2">
                   <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt1-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt1-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt1-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt1-0-2.gif" />
                   <p>Stage 3</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt1-0-3.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt1-0-3.gif" />
                 </div>
                 <div class="p-2">
             	  <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt2-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt2-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt2-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt2-0-2.gif" />
                   <p>Stage 3</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt2-0-3.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt2-0-3.gif" />
                 </div>
                 <div class="p-2">
                   <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt3-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt3-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt3-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt3-0-2.gif" />
                   <p>Stage 3</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt3-0-3.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt3-0-3.gif" />
                 </div>
                 <div class="p-2">
                   <p>Stage 1</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt4-0-1.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt4-0-1.gif" />
                   <p>Stage 2</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt4-0-2.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt4-0-2.gif" />
                   <p>Stage 3</p>
-                  <img class="object-cover object-center w-full rounded-md" src="images/results/twopancake-prompt4-0-3.gif" />
+                  <img class="object-cover object-center w-full rounded-md" src="/projects/donut/images/results/twopancake-prompt4-0-3.gif" />
                 </div>
               </div>
             </div>
@@ -259,7 +259,7 @@ permalink: /projects/donut
             <p class="font-bold pb-2">Real-Robot Experiments</p>
             <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg lg:px-10 max-w-4xl">
               <video height="auto" width="80%" autoplay loop muted>
-                <source src="video/visualized_goal_compressed.mp4" type="video/mp4">
+                <source src="/projects/donut/video/visualized_goal_compressed.mp4" type="video/mp4">
               </video>
             </div>
         </div>
