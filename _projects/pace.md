@@ -131,7 +131,7 @@ permalink: /projects/pace
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="/files/pace.pdf"
+                <a href="https://arxiv.org/pdf/2312.15130.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>

@@ -11,7 +11,7 @@ date: '2023-12-20'
 venue: 'Arxiv'
 image: '/images/pace.jpg'
 weight: 400
-# arxiv: 'https://arxiv.org/abs/2311.02787'
+arxiv: 'https://arxiv.org/abs/2312.15130'
 pdf: "/files/pace.pdf"
 code: "https://github.com/qq456cvb/PACE"
 site: '/projects/pace'
