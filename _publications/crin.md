@@ -8,7 +8,7 @@ venue: 'AAAI'
 image: '/images/crin.jpg'
 arxiv: 'https://arxiv.org/abs/2303.03101'
 code: 'https://github.com/yokinglou/CRIN'
-weight: 50
+weight: 51
 citation: 'Lou, Y., Ye, Z., You, Y., Jiang, N., Lu, J., Wang, W., ... & Lu, C. (2023). CRIN: Rotation-Invariant Point Cloud Analysis and Rotation Estimation via Centrifugal Reference Frame. arXiv preprint arXiv:2303.03101.'
-authors: 'Lou, Yujing and Ye, Zelin and <b>You, Yang</b> and Jiang, Nianjuan and Lu, Jiangbo and Wang, Weiming and Ma, Lizhuang and Lu, Cewu'
+authors: 'Yujing Lou, Zelin Ye, <b>Yang You</b>, Nianjuan Jiang, Jiangbo Lu, Weiming Wang, Lizhuang Ma, Cewu Lu'
 ---
