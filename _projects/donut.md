@@ -41,6 +41,7 @@ permalink: /projects/donut
                   <a href="https://cs.stanford.edu/people/bshen88/" class="hover:text-gray-800">Bokui Shen<sup>1</sup></a>
                   <a href="https://cs.stanford.edu/~congyue/" class="hover:text-gray-800">Congyue Deng<sup>1</sup></a>
                   <a href="https://geng-haoran.github.io/" class="hover:text-gray-800">Haoran Geng<sup>2</sup></a>
+                  <a href="https://github.com/songlin/" class="hover:text-gray-800">Songlin Wei<sup>2</sup></a>
                   <a href="https://hughw19.github.io/" class="hover:text-gray-800">He Wang<sup>2</sup></a>
                   <a href="https://geometry.stanford.edu/member/guibas/" class="hover:text-gray-800">Leonidas Guibas<sup>1</sup></a>
                 </p>
@@ -103,7 +104,7 @@ permalink: /projects/donut
               <strong>At the bottom level</strong>, given the current tool and subgoal, our technique iteratively identifies the next reachable target based on the present state and subgoal with a planning algorithm in the EMD space. 
             </p>
             <div class="flex flex-col items-center justify-center py-6 mx-auto lg:px-10">
-              <img src="/projects/donut/images/pipeline.png" class="object-cover object-center">
+              <img src="/projects/donut/images/pipeline2.png" class="object-cover object-center">
             </div>
           </div>
         </div>
