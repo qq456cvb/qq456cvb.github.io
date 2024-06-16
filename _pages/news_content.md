@@ -1,3 +1,5 @@
+2024.06: Our paper: <a href='https://arxiv.org/abs/2211.13398'>CPPF++: Uncertainty-Aware Sim2Real Object Pose Estimation by Vote Aggregation</a> is accepted to <i>TPAMI 2024</i>! This is perhaps the most generalizable category-level pose estimation method you can find, and it only requires cheap synthetic data for training! <a href='https://arxiv.org/abs/2211.13398'>[Paper]</a> <a href='https://github.com/qq456cvb/CPPF2'>[Code]</a>
+
 2024.01: Our paper: <a href='https://arxiv.org/abs/2310.16838'>SparseDFF: Sparse-View Feature Distillation for One-Shot Dexterous Manipulation</a> is accepted to <i>ICLR 2024</i>! <a href='https://arxiv.org/abs/2310.16838'>[Paper]</a> <a href='https://halowangqx.github.io/SparseDFF'>[Code]</a>
 
 2023.12: Our paper: <a href='https://arxiv.org/abs/2312.10714'>Primitive-based 3D Human-Object Interaction Modelling and Programming</a> is accepted to <i>AAAI 2024</i>! <a href='https://arxiv.org/abs/2312.10714'>[Paper]</a> <a href='https://mvig-rhos.com/p3haoi'>[Code]</a>
