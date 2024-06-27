@@ -12,6 +12,6 @@ News
 ======
 {% include_relative news_content.md %}
 
-Papers
+Publications and Preprints
 ======
 {% include archive-publications.html %}

@@ -3,7 +3,7 @@ main:
   - title: "News"
     url: /news/
 
-  - title: "Papers"
+  - title: "Publications"
     url: /publications/
 
   - title: "Side Projects"
