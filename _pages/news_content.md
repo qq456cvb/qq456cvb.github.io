@@ -1,3 +1,9 @@
+2024.07: Our paper: <a href='https://arxiv.org/abs/2312.15130'>PACE: Pose Annotations in Cluttered Environments</a> is accepted to <i>ECCV 2024</i>! <a href='https://arxiv.org/pdf/2312.15130'>[Paper]</a> <a href='https://github.com/qq456cvb/PACE'>[Code]</a> <a href='/projects/pace'>[Project Page]</a>
+
+2024.07: Our paper: <a href='https://arxiv.org/abs/2310.04189'>Bridging the Gap Between Human Motion and Action Semantics via Kinematics Phrases</a> is accepted to <i>ECCV 2024</i>! <a href='https://arxiv.org/pdf/2310.04189'>[Paper]</a> <a href='https://foruck.github.io/KP/'>[Project Page]</a>
+
+2024.06: Our paper: <a href='https://arxiv.org/abs/2403.16023'>RPMArt: Towards Robust Perception and Manipulation for Articulated Objects</a> is accepted to <i>IROS 2024</i>! <a href='https://arxiv.org/pdf/2403.16023'>[Paper]</a> <a href='https://github.com/R-PMArt/rpmart'>[Code]</a> <a href='https://r-pmart.github.io/'>[Project Page]</a>
+
 2024.06: Our paper: <a href='https://arxiv.org/abs/2211.13398'>CPPF++: Uncertainty-Aware Sim2Real Object Pose Estimation by Vote Aggregation</a> is accepted to <i>TPAMI 2024</i>! This is perhaps the most generalizable category-level pose estimation method you can find, and it only requires cheap synthetic data for training! <a href='https://arxiv.org/abs/2211.13398'>[Paper]</a> <a href='https://github.com/qq456cvb/CPPF2'>[Code]</a> <a href='/projects/cppf++'>[Project Page]</a>
 
 2024.01: Our paper: <a href='https://arxiv.org/abs/2310.16838'>SparseDFF: Sparse-View Feature Distillation for One-Shot Dexterous Manipulation</a> is accepted to <i>ICLR 2024</i>! <a href='https://arxiv.org/abs/2310.16838'>[Paper]</a> <a href='https://halowangqx.github.io/SparseDFF'>[Code]</a>

@@ -11,7 +11,6 @@ permalink: /projects/pace
   <meta name="keywords" content="PACE, dataset, pose estimation, clutter">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PACE: Pose Annotations in Cluttered Environments</title>
-
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
@@ -93,6 +92,7 @@ permalink: /projects/pace
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">PACE: Pose Annotations in Cluttered Environments</h1>
+          <h4 class="title is-4 conference">European Conference on Computer Vision (<span class="grad_text">ECCV</span>) 2024</h4>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://qq456cvb.github.io">Yang You</a><sup>1,3</sup>,</span>
@@ -115,6 +115,9 @@ permalink: /projects/pace
             </span>
             <span class="author-block">
               <a href="https://adamharley.com">Adam W Harley</a><sup>3</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://geometry.stanford.edu/member/guibas/">Leonidas Guibas</a><sup>3</sup>
             </span>
             <span class="author-block">
               <a href="https://www.mvig.org">Cewu Lu</a><sup>1</sup>
@@ -320,7 +323,7 @@ permalink: /projects/pace
           <p>Instance-level Pose Estimation</p>
         </div>
         <div class="content">
-          <img src="/projects/pace/static/images/bench-cat.svg" width="100%" />
+          <img src="/projects/pace/static/images/bench-cat.png" width="100%" />
           <p>Category-level Pose Estimation</p>
         </div>
         <div class="content">
@@ -351,6 +354,14 @@ permalink: /projects/pace
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>
+@misc{you2023pace,
+    title={PACE: Pose Annotations in Cluttered Environments},
+    author={Yang You and Kai Xiong and Zhening Yang and Zhengxiang Huang and Junwei Zhou and Ruoxi Shi and Zhou Fang and Adam W. Harley and Leonidas Guibas and Cewu Lu},
+    year={2023},
+    eprint={2312.15130},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
     </code></pre>
   </div>
 </section>
