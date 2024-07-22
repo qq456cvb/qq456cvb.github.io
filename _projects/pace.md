@@ -95,39 +95,39 @@ permalink: /projects/pace
           <h4 class="title is-4 conference">European Conference on Computer Vision (<span class="grad_text">ECCV</span>) 2024</h4>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://qq456cvb.github.io">Yang You</a><sup>1,3</sup>,</span>
+              <a href="https://qq456cvb.github.io">Yang You</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://xiongkai.netlify.app">Kai Xiong</a><sup>1</sup>,</span>
+              <a href="https://xiongkai.netlify.app">Kai Xiong</a><sup>2</sup>,</span>
             <span class="author-block">
-              Zhening Yang<sup>2</sup>,
+              Zhening Yang<sup>3</sup>,
             </span>
             <span class="author-block">
-              <a href="https://github.com/huangzhengxiang">Zhengxiang Huang</a><sup>1</sup>,
+              <a href="https://github.com/huangzhengxiang">Zhengxiang Huang</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://github.com/Zhou-jw">Junwei Zhou</a><sup>1</sup>,
+              <a href="https://github.com/Zhou-jw">Junwei Zhou</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://rshi.top">Ruoxi Shi</a><sup>1</sup>,
+              <a href="https://rshi.top">Ruoxi Shi</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              Zhou Fang<sup>1</sup>
+              Zhou Fang<sup>2</sup>
             </span>
             <span class="author-block">
-              <a href="https://adamharley.com">Adam W Harley</a><sup>3</sup>
+              <a href="https://adamharley.com">Adam W Harley</a><sup>1</sup>
             </span>
             <span class="author-block">
-              <a href="https://geometry.stanford.edu/member/guibas/">Leonidas Guibas</a><sup>3</sup>
+              <a href="https://geometry.stanford.edu/member/guibas/">Leonidas Guibas</a><sup>1</sup>
             </span>
             <span class="author-block">
-              <a href="https://www.mvig.org">Cewu Lu</a><sup>1</sup>
+              <a href="https://www.mvig.org">Cewu Lu</a><sup>2</sup>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Shanghai Jiao Tong University</span>
-            <span class="author-block"><sup>2</sup>Horizon Robotics</span>
-            <span class="author-block"><sup>3</sup>Stanford University</span>
+            <span class="author-block"><sup>1</sup>Stanford University</span>
+            <span class="author-block"><sup>2</sup>Shanghai Jiao Tong University</span>
+            <span class="author-block"><sup>3</sup>Horizon Robotics</span>
           </div>
 
           <div class="column has-text-centered">
@@ -149,7 +149,7 @@ permalink: /projects/pace
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
                   </span>
-                  <span>Video</span>
+                  <span>Video (Coming Soon)</span>
                 </a>
               </span>
               <!-- Code Link. -->
@@ -164,12 +164,12 @@ permalink: /projects/pace
               </span>
               <!-- Dataset Link. -->
               <span class="link-block">
-                <a href="#"
+                <a href="https://huggingface.co/datasets/qq456cvb/PACE/tree/main"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
-                  <span>Data (Coming Soon)</span>
+                  <span>Data</span>
                   </a>
               </span>
             </div>
@@ -263,22 +263,7 @@ permalink: /projects/pace
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Pose estimation is a crucial task in computer vision,
-            enabling tracking and manipulating objects in images or videos.
-            While several datasets exist for pose estimation,
-            there is a lack of large-scale datasets specifically focusing on cluttered scenes with occlusions.
-            This limitation is a bottleneck in the development and evaluation of pose estimation methods,
-            particularly toward the goal of real-world application in environments where occlusions are common.
-            Addressing this, we introduce PACE (Pose Annotations in Cluttered Environments), a large-scale
-            benchmark designed to advance the development and evaluation of pose estimation methods
-            in cluttered scenarios. PACE encompasses 54,945 frames with 257,673 annotations across 300 videos,
-            covering 576 objects from 44 categories and featuring a mix of rigid and articulated items
-            in cluttered scenes. To annotate the real-world data efficiently,
-            we developed an innovative annotation system utilizing a calibrated 3-camera setup.
-            We test state-of-the-art algorithms in PACE along two tracks: pose estimation,
-            and object pose tracking, revealing the benchmark's challenges and research opportunities.
-            We plan to release PACE as a public evaluation benchmark,
-            along the annotations tools we developed, to stimulate further advancements in the field.
+            We introduce <b>PACE</b> (Pose Annotations in Cluttered Environments), a large-scale benchmark designed to advance the development and evaluation of pose estimation methods in cluttered scenarios. PACE provides a large-scale real-world benchmark for both instance-level and category-level settings. The benchmark consists of 55K frames with 258K annotations across 300 videos, covering 238 objects from 43 categories and featuring a mix of rigid and articulated items in cluttered scenes. To annotate the real-world data efficiently, we develop an innovative annotation system with a calibrated 3-camera setup. Additionally, we offer <b>PACESim</b>, which contains 100K photo-realistic simulated frames with 2.4M annotations across 931 objects. We test state-of-the-art algorithms in PACE along two tracks: pose estimation, and object pose tracking, revealing the benchmark’s challenges and research opportunities.
           </p>
         </div>
       </div>
@@ -298,7 +283,7 @@ permalink: /projects/pace
       <div class="column is-five-sixths">
         <h2 class="title is-3">Dataset Comparison</h2>
         <div class="content">
-          <img src="/projects/pace/static/images/compare.svg" width="100%" />
+          <img src="/projects/pace/static/images/compare.png" width="100%" />
         </div>
       </div>
     </div>
@@ -308,9 +293,23 @@ permalink: /projects/pace
         <h2 class="title is-3">Data Distribution</h2>
         <div class="content">
           <img src="/projects/pace/static/images/dist-cat.png" />
-          <img src="/projects/pace/static/images/dist-size.png" width="44%" />
+          <p>Pose annotation distrubtion.</p>
+        </div>
+        <div class="content">
+          <img src="/projects/pace/static/images/dist-instance.png" width="100%" />
+          <p>Object instance distrubtion.</p>
+        </div>
+        <div class="content">
+          <img src="/projects/pace/static/images/dist-size.png" width="55%" />
+          <p>Object size distrubtion.</p>
+        </div>
+        <div class="content">
           <img src="/projects/pace/static/images/dist-pose.png" width="57%" />
+          <p>Azimuth and elevation distrubtion.</p>
+        </div>
+        <div class="content">
           <img src="/projects/pace/static/images/dist-occ.png" width="55%" />
+          <p>Occlusion distrubtion.</p>
         </div>
       </div>
     </div>
@@ -319,7 +318,7 @@ permalink: /projects/pace
       <div class="column is-five-sixths">
         <h2 class="title is-3">Benchmarks</h2>
         <div class="content">
-          <img src="/projects/pace/static/images/bench-ins.svg" width="70%" />
+          <img src="/projects/pace/static/images/bench-inst.png" width="50%" />
           <p>Instance-level Pose Estimation</p>
         </div>
         <div class="content">
@@ -339,7 +338,7 @@ permalink: /projects/pace
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
-        <h2 class="title is-3">Pipeline</h2>
+        <h2 class="title is-3">Data Collection Pipeline</h2>
         <div class="content">
           <img src="/projects/pace/static/images/pipeline.jpg" />
         </div>
@@ -356,11 +355,10 @@ permalink: /projects/pace
     <pre><code>
 @misc{you2023pace,
     title={PACE: Pose Annotations in Cluttered Environments},
-    author={Yang You and Kai Xiong and Zhening Yang and Zhengxiang Huang and Junwei Zhou and Ruoxi Shi and Zhou Fang and Adam W. Harley and Leonidas Guibas and Cewu Lu},
-    year={2023},
-    eprint={2312.15130},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
+    author={You, Yang and Xiong, Kai and Yang, Zhening and Huang, Zhengxiang and Zhou, Junwei and Shi, Ruoxi and Fang, Zhou and Harley, Adam W. and Guibas, Leonidas and Lu, Cewu},
+    booktitle={European Conference on Computer Vision},
+    year={2024},
+    organization={Springer}
 }
     </code></pre>
   </div>
