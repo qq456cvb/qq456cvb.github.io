@@ -188,12 +188,12 @@ permalink: /projects/pace
               </span>
               <!-- Dataset Link. -->
               <span class="link-block">
-                <a href="#"
+                <a href="https://huggingface.co/datasets/qq456cvb/PACE"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
-                  <span>Data (Coming Soon)</span>
+                  <span>Data</span>
                   </a>
               </span>
             </div>
@@ -242,20 +242,50 @@ permalink: /projects/pace
           <div class="grid-container">
             <div class="grid-item"><img src="/projects/pace/static/images/slide1/rgb_000092.png" alt="Image 1"><p>RGB</p></div>
             <div class="grid-item"><img src="/projects/pace/static/images/slide1/render_000092.png" alt="Image 2"><p>Rendered Object</p></div>
-            <div class="grid-item"><img src="/projects/pace/static/images/slide1/pose_000092.png" alt="Image 3">Object Pose</div>
-            <div class="grid-item"><img src="/projects/pace/static/images/slide1/depth_000092.png" alt="Image 4">Depth</div>
-            <div class="grid-item"><img src="/projects/pace/static/images/slide1/nocs_000092.png" alt="Image 5">NOCS Map</div>
-            <div class="grid-item"><img src="/projects/pace/static/images/slide1/mask_000092.png" alt="Image 6">Instance Mask</div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/pose_000092.png" alt="Image 3"><p>Object Pose</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/depth_000092.png" alt="Image 4"><p>Depth</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/nocs_000092.png" alt="Image 5"><p>NOCS Map</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/mask_000092.png" alt="Image 6"><p>Instance Mask</p></div>
           </div>
         </div>
         <div class="swiper-slide">
           <div class="grid-container">
-            <div class="grid-item"><img src="/projects/pace/static/images/slide2/rgb_000059.png" alt="Image 1"></div>
-            <div class="grid-item"><img src="/projects/pace/static/images/slide2/render_000059.png" alt="Image 2"></div>
-            <div class="grid-item"><img src="/projects/pace/static/images/slide2/pose_000059.png" alt="Image 3"></div>
-            <div class="grid-item"><img src="/projects/pace/static/images/slide2/depth_000059.png" alt="Image 4"></div>
-            <div class="grid-item"><img src="/projects/pace/static/images/slide2/nocs_000059.png" alt="Image 5"></div>
-            <div class="grid-item"><img src="/projects/pace/static/images/slide2/mask_000059.png" alt="Image 6"></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/rgb_000059.png" alt="Image 1"><p>RGB</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/render_000059.png" alt="Image 2"><p>Rendered Object</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/pose_000059.png" alt="Image 3"><p>Object Pose</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/depth_000059.png" alt="Image 4"><p>Depth</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/nocs_000059.png" alt="Image 5"><p>NOCS Map</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/mask_000059.png" alt="Image 6"><p>Instance Mask</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="grid-container">
+            <div class="grid-item"><img src="/projects/pace/static/images/slide3/rgb_000117.png" alt="Image 1"><p>RGB</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide3/render_000117.png" alt="Image 2"><p>Rendered Object</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide3/pose_000117.png" alt="Image 3"><p>Object Pose</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide3/depth_000117.png" alt="Image 4"><p>Depth</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide3/nocs_000117.png" alt="Image 5"><p>NOCS Map</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide3/mask_000117.png" alt="Image 6"><p>Instance Mask</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="grid-container">
+            <div class="grid-item"><img src="/projects/pace/static/images/slide4/rgb_000077.png" alt="Image 1"><p>RGB</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide4/render_000077.png" alt="Image 2"><p>Rendered Object</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide4/pose_000077.png" alt="Image 3"><p>Object Pose</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide4/depth_000077.png" alt="Image 4"><p>Depth</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide4/nocs_000077.png" alt="Image 5"><p>NOCS Map</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide4/mask_000077.png" alt="Image 6"><p>Instance Mask</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="grid-container">
+            <div class="grid-item"><img src="/projects/pace/static/images/slide5/rgb_000109.png" alt="Image 1"><p>RGB</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide5/render_000109.png" alt="Image 2"><p>Rendered Object</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide5/pose_000109.png" alt="Image 3"><p>Object Pose</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide5/depth_000109.png" alt="Image 4"><p>Depth</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide5/nocs_000109.png" alt="Image 5"><p>NOCS Map</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide5/mask_000109.png" alt="Image 6"><p>Instance Mask</p></div>
           </div>
         </div>
       </div>
