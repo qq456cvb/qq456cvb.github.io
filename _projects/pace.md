@@ -11,19 +11,6 @@ permalink: /projects/pace
   <meta name="keywords" content="PACE, dataset, pose estimation, clutter">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PACE: Pose Annotations in Cluttered Environments</title>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script> -->
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -36,12 +23,51 @@ permalink: /projects/pace
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="/projects/pace/static/css/index.css">
   <link rel="icon" href="/projects/pace/static/images/favicon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="/projects/pace/static/js/fontawesome.all.min.js"></script>
   <script src="/projects/pace/static/js/bulma-carousel.min.js"></script>
   <script src="/projects/pace/static/js/bulma-slider.min.js"></script>
   <script src="/projects/pace/static/js/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <style>
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 10px; /* Adjust the gap between images as needed */
+    }
+
+    .grid-item {
+      overflow: hidden;
+      width: 100%;
+      height: auto;
+    }
+
+    .grid-item img {
+      width: 100%;
+      height: auto;
+      object-fit: cover; /* Adjust this as needed */
+    }
+
+    .swiper {
+      width: 100%;
+      height: auto;
+      display: flex;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
 </head>
 <body>
 
@@ -123,13 +149,11 @@ permalink: /projects/pace
               <a href="https://www.mvig.org">Cewu Lu</a><sup>2</sup>
             </span>
           </div>
-
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Stanford University</span>
             <span class="author-block"><sup>2</sup>Shanghai Jiao Tong University</span>
             <span class="author-block"><sup>3</sup>Horizon Robotics</span>
           </div>
-
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
@@ -180,79 +204,6 @@ permalink: /projects/pace
   </div>
 </section>
 
-<!-- <section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="/projects/pace/static/videos/teaser.mp4"
-                type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
-      </h2>
-    </div>
-  </div>
-</section>
-
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="/projects/pace/static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="/projects/pace/static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="/projects/pace/static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="/projects/pace/static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="/projects/pace/static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="/projects/pace/static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="/projects/pace/static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="/projects/pace/static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 
 <section class="section">
@@ -269,16 +220,57 @@ permalink: /projects/pace
       </div>
     </div>
     <!--/ Abstract. -->
-
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
-        <!-- <h2 class="title is-3">Video</h2> -->
         <div class="content">
           <img src="/projects/pace/static/images/teaser.jpg" />
         </div>
       </div>
     </div>
+  </div>
+</section>
 
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Annotation Visualization</h2>
+    </div>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="grid-container">
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/rgb_000092.png" alt="Image 1"><p>RGB</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/render_000092.png" alt="Image 2"><p>Rendered Object</p></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/pose_000092.png" alt="Image 3">Object Pose</div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/depth_000092.png" alt="Image 4">Depth</div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/nocs_000092.png" alt="Image 5">NOCS Map</div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide1/mask_000092.png" alt="Image 6">Instance Mask</div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="grid-container">
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/rgb_000059.png" alt="Image 1"></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/render_000059.png" alt="Image 2"></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/pose_000059.png" alt="Image 3"></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/depth_000059.png" alt="Image 4"></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/nocs_000059.png" alt="Image 5"></div>
+            <div class="grid-item"><img src="/projects/pace/static/images/slide2/mask_000059.png" alt="Image 6"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
         <h2 class="title is-3">Dataset Comparison</h2>
@@ -287,33 +279,31 @@ permalink: /projects/pace
         </div>
       </div>
     </div>
-
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
         <h2 class="title is-3">Data Distribution</h2>
         <div class="content">
           <img src="/projects/pace/static/images/dist-cat.png" />
-          <p>Pose annotation distrubtion.</p>
+          <p>Pose Annotation Distrubtion</p>
         </div>
         <div class="content">
           <img src="/projects/pace/static/images/dist-instance.png" width="100%" />
-          <p>Object instance distrubtion.</p>
+          <p>Object Instance Distrubtion</p>
         </div>
         <div class="content">
           <img src="/projects/pace/static/images/dist-size.png" width="55%" />
-          <p>Object size distrubtion.</p>
+          <p>Object Size Distrubtion</p>
         </div>
         <div class="content">
           <img src="/projects/pace/static/images/dist-pose.png" width="57%" />
-          <p>Azimuth and elevation distrubtion.</p>
+          <p>Azimuth and Elevation Distrubtion</p>
         </div>
         <div class="content">
           <img src="/projects/pace/static/images/dist-occ.png" width="55%" />
-          <p>Occlusion distrubtion.</p>
+          <p>Occlusion Distrubtion</p>
         </div>
       </div>
     </div>
-
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
         <h2 class="title is-3">Benchmarks</h2>
@@ -335,7 +325,6 @@ permalink: /projects/pace
         </div>
       </div>
     </div>
-
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
         <h2 class="title is-3">Data Collection Pipeline</h2>
@@ -345,7 +334,6 @@ permalink: /projects/pace
       </div>
     </div>
   </div>
-
 </section>
 
 
@@ -391,6 +379,27 @@ permalink: /projects/pace
     </div>
   </div>
 </footer>
+
+<script>
+    var swiper = new Swiper('.swiper', {
+      spaceBetween: 30,
+      centeredSlides: false,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+
+  
 
 </body>
 </html>
