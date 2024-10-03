@@ -119,6 +119,7 @@ permalink: /projects/pace
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">PACE: Pose Annotations in Cluttered Environments</h1>
           <h4 class="title is-4 conference">European Conference on Computer Vision (<span class="grad_text">ECCV</span>) 2024</h4>
+          <h4 class="title is-4 conference">Fri Oct 4, 10:30am-12:30pm CEST, Poster#191, Exhibition Area</h4>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://qq456cvb.github.io">Yang You</a><sup>1</sup>,</span>
@@ -168,12 +169,12 @@ permalink: /projects/pace
               </span>
               <!-- Video Link. -->
               <span class="link-block">
-                <a href="#"
+                <a href="https://youtu.be/RX1K-xA99ZI"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
                   </span>
-                  <span>Video (Coming Soon)</span>
+                  <span>Video</span>
                 </a>
               </span>
               <!-- Code Link. -->
