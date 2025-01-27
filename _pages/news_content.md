@@ -1,3 +1,5 @@
+2025.01: Our paper: <a href='https://arxiv.org/abs/2411.19458'>Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning</a> is accepted to <i>ICLR 2025</i>! <a href='https://arxiv.org/pdf/2411.19458'>[Paper]</a> <a href='https://github.com/qq456cvb/3DCorrEnhance'>[Code]</a> <a href='https://huggingface.co/spaces/qq456cvb/3DCorrEnhance'>[Huggingface Demo]</a>
+
 2025.01: Our paper: <a href='https://arxiv.org/abs/2311.02787'>Make a Donut: Language-Guided Hierarchical EMD-Space Planning for Zero-shot Deformable Object Manipulation</a> is accepted to <i>IEEE Robotics and Automation Letters (RA-L)</i>! <a href='https://arxiv.org/pdf/2311.02787'>[Paper]</a> <a href='#'>[Code (Coming soon)]</a> <a href='/projects/donut'>[Project Page]</a>
 
 2024.10: Our paper: <a href='https://arxiv.org/abs/2401.08140'>ProvNeRF: Modeling per Point Provenance in NeRFs as a Stochastic Process</a> is accepted to <i>NeurIPS 2024</i>! <a href='https://arxiv.org/pdf/2401.08140'>[Paper]</a> <a href='https://provnerf.github.io/'>[Project Page]</a>
