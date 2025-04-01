@@ -12,6 +12,4 @@ News
 ======
 {% include_relative news_content.md %}
 
-Publications and Preprints
-======
-{% include archive-publications.html %}
+<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=ITC_n17GnW8MvYaj6dODQ5gmImJN9qZvv7DZxSELpVQ&cl=ffffff&w=a"></script>
