@@ -8,7 +8,7 @@ venue: 'ECCV'
 image: '/images/pace.jpg'
 weight: 450
 arxiv: 'https://arxiv.org/abs/2312.15130'
-pdf: "/files/pace.pdf"
+supp: "/files/pace_supp.pdf"
 code: "https://github.com/qq456cvb/PACE"
 site: '/projects/pace'
 authors: '<b>Yang You</b>, Kai Xiong, Zhening Yang, Zhengxiang Huang, Junwei Zhou, Ruoxi Shi, Zhou Fang, Adam W Harley, Cewu Lu'

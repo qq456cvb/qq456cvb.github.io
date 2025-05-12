@@ -167,6 +167,15 @@ permalink: /projects/pace
                   <span>Paper</span>
                 </a>
               </span>
+              <span class="link-block">
+                <a href="https://qq456cvb.github.io/files/pace_supp.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+              </span>
               <!-- Video Link. -->
               <span class="link-block">
                 <a href="https://youtu.be/RX1K-xA99ZI"
