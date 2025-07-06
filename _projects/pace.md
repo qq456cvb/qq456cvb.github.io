@@ -119,7 +119,7 @@ permalink: /projects/pace
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">PACE: Pose Annotations in Cluttered Environments</h1>
           <h4 class="title is-4 conference">European Conference on Computer Vision (<span class="grad_text">ECCV</span>) 2024</h4>
-          <h4 class="title is-4 conference">Fri Oct 4, 10:30am-12:30pm CEST, Poster#191, Exhibition Area</h4>
+          <!-- <h4 class="title is-4 conference">Fri Oct 4, 10:30am-12:30pm CEST, Poster#191, Exhibition Area</h4> -->
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://qq456cvb.github.io">Yang You</a><sup>1</sup>,</span>
@@ -234,6 +234,7 @@ permalink: /projects/pace
       <div class="column is-five-sixths">
         <div class="content">
           <img src="/projects/pace/static/images/teaser.jpg" />
+          <p>PACE is a large-scale object pose dataset with diverse objects, complex scenes, and various types of occlusions, reflecting real-world challenges.</p>
         </div>
       </div>
     </div>
@@ -246,6 +247,15 @@ permalink: /projects/pace
     <div class="columns is-centered has-text-centered">
       <h2 class="title is-3">Annotation Visualization</h2>
     </div>
+    <div class="columns is-centered has-text-centered">
+		<div class="column is-five-sixths">
+			<div class="content has-text-justified">
+				<p>
+					The PACE dataset provides comprehensive annotations for each frame, including RGB images, depth maps, instance masks, and Normalized Object Coordinate Space (NOCS) maps. These annotations are crucial for training and evaluating pose estimation models. The slider below showcases the various types of annotations available in our dataset.
+				</p>
+			</div>
+		</div>
+	</div>
     <div class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
@@ -314,6 +324,11 @@ permalink: /projects/pace
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
         <h2 class="title is-3">Dataset Comparison</h2>
+        <div class="content has-text-justified">
+			<p>
+				The PACE dataset is compared with other existing datasets in terms of modality, number of categories, objects, videos, images, and annotations. The table highlights the scale and diversity of PACE, which includes a large number of objects and annotations in cluttered environments, making it a challenging benchmark for pose estimation.
+			</p>
+		  </div>
         <div class="content">
           <img src="/projects/pace/static/images/compare.png" width="100%" />
         </div>
@@ -322,6 +337,11 @@ permalink: /projects/pace
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
         <h2 class="title is-3">Data Distribution</h2>
+        <div class="content has-text-justified">
+			<p>
+				The distribution of data in the PACE dataset is analyzed across several dimensions. The graphs below show the distribution of pose annotations, object instances, object sizes, azimuth and elevation, and occlusion. This analysis provides insights into the diversity and complexity of the dataset.
+			</p>
+		  </div>
         <div class="content">
           <img src="/projects/pace/static/images/dist-cat.png" />
           <p>Pose Annotation Distrubtion</p>
@@ -347,6 +367,11 @@ permalink: /projects/pace
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
         <h2 class="title is-3">Benchmarks</h2>
+        <div class="content has-text-justified">
+			<p>
+				We evaluate state-of-the-art algorithms on the PACE benchmark for both pose estimation and object pose tracking. The results reveal the challenges posed by our dataset and highlight opportunities for future research. The benchmarks are divided into instance-level and category-level pose estimation, as well as model-free and model-based pose tracking.
+			</p>
+		  </div>
         <div class="content">
           <img src="/projects/pace/static/images/bench-inst.png" width="50%" />
           <p>Instance-level Pose Estimation</p>
@@ -368,6 +393,11 @@ permalink: /projects/pace
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
         <h2 class="title is-3">Data Collection Pipeline</h2>
+        <div class="content has-text-justified">
+			<p>
+				To efficiently annotate real-world data, we developed an innovative annotation system with a calibrated 3-camera setup. This pipeline enables the acquisition of high-quality 3D scans of objects and their corresponding poses in cluttered scenes. The image below provides an overview of our data collection and annotation pipeline.
+			</p>
+		  </div>
         <div class="content">
           <img src="/projects/pace/static/images/pipeline.jpg" />
         </div>
