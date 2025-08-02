@@ -1,3 +1,7 @@
+2025.08: We're hosting the cross-disciplinary workshop ``WCLOP: 1st ICCV Workshop and Challenge on Category-Level Object Pose Estimation in the Wild'' at ICCV 2025, spotlighting advances in category-level object pose estimation for robotic manipulation scenarios. We are now accepting paper submissions and challenge participants! Awards totaling over $6000 are available! Please see our <a href='https://wclop.github.io/'>website</a> for more details.
+
+2025.08: Two papers got accepted to CoRL 2025! Details coming soon.
+
 2025.06: Our paper: <a href='https://arxiv.org/abs/2506.07310'>AllTracker: Efficient Dense Point Tracking at High Resolution</a> is accepted to <i>ICCV 2025</i>! <a href='https://arxiv.org/pdf/2506.07310'>[Paper]</a> <a href='https://github.com/aharley/alltracker'>[Code]</a> <a href='https://alltracker.github.io/'>[Project Page]</a>
 
 2025.01: Our paper: <a href='https://arxiv.org/abs/2411.19458'>Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning</a> is accepted to <i>ICLR 2025</i>! <a href='https://arxiv.org/pdf/2411.19458'>[Paper]</a> <a href='https://github.com/qq456cvb/3DCorrEnhance'>[Code]</a> <a href='https://huggingface.co/spaces/qq456cvb/3DCorrEnhance'>[Huggingface Demo]</a><a href='https://qq456cvb.github.io/3DCorrEnhance'>[Project Page]</a>
