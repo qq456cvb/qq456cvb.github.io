@@ -76,3 +76,30 @@ $(document).ready(function() {
     bulmaSlider.attach();
 
 })
+
+// Tab functionality for the project page
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  var parent = evt.currentTarget.parentNode.parentNode; // Get the grandparent container of the button
+  tabcontent = parent.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+  tablinks = parent.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Initialize tabs when DOM is loaded
+$(document).ready(function() {
+    var tablinks = document.getElementsByClassName("tablinks");
+    for (var i = 0; i < tablinks.length; i += 3) {
+        tablinks[i].click();
+    }
+});
+
+// Make openTab available globally
+window.openTab = openTab;

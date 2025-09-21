@@ -6,7 +6,7 @@ excerpt: 'Img2CAD introduces a novel approach for reconstructing 3D CAD models f
 date: '2024-08-20'
 venue: 'Arxiv'
 image: '/images/img2cad.png'
-weight: 500
+weight: 1000
 arxiv: 'https://arxiv.org/abs/2408.01437'
 site: '/projects/img2cad'
 citation: 'You, Y., Uy, M.A., Han, J., Thomas, R., Zhang, H., You, S., & Guibas, L. (2024). Img2CAD: Reverse Engineering 3D CAD Models from Images through VLM-Assisted Conditional Factorization. ECCV 2024.'

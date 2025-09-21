@@ -29,7 +29,7 @@ permalink: /projects/img2cad
   <script defer src="/projects/img2cad/js/fontawesome.all.min.js"></script>
   <script src="/projects/img2cad/js/bulma-carousel.min.js"></script>
   <script src="/projects/img2cad/js/bulma-slider.min.js"></script>
-  <script src="/projects/img2cad/js/index.js"></script>
+  <script src="/projects/img2cad/js/index.js?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 
   <style>
     /* Basic styling for tabs */
@@ -124,7 +124,21 @@ permalink: /projects/img2cad
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">Img2CAD: Reverse Engineering 3D CAD Models from Images through VLM-Assisted Conditional Factorization</h1>
-          <h2>Yang You, Mikaela Angelina Uy, Jiaqi Han, Rahul Thomas, Haotong Zhang, Suya You, Leonidas Guibas</h2>
+          <div class="conference-badge" style="margin-bottom: 20px;">
+            <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 18px;">SIGGRAPH Asia 2025</span>
+          </div>
+          <div class="authors-section">
+            <p class="authors" style="font-size: 18px; line-height: 1.4; margin-bottom: 10px;">
+              <a href="https://qq456cvb.github.io/" style="color: #0ea5e9; text-decoration: none;">Yang You<sup>1</sup></a>, <a href="https://mikacuy.github.io/" style="color: #0ea5e9; text-decoration: none;">Mikaela Angelina Uy<sup>1,2</sup></a>, <a href="https://hanjq17.github.io/" style="color: #0ea5e9; text-decoration: none;">Jiaqi Han<sup>1</sup></a>, <a href="https://scholar.google.com/citations?user=dXOWqeYAAAAJ&hl=en" style="color: #0ea5e9; text-decoration: none;">Rahul Thomas<sup>1</sup></a>, <a href="https://pku.ai/author/haotong-zhang/" style="color: #0ea5e9; text-decoration: none;">Haotong Zhang<sup>3</sup></a>,<br>
+              <a href="https://profiles.stanford.edu/yi-du" style="color: #0ea5e9; text-decoration: none;">Yi Du<sup>1</sup></a>, <a href="https://hanshengchen.com/" style="color: #0ea5e9; text-decoration: none;">Hansheng Chen<sup>1</sup></a>, <a href="https://francisengelmann.github.io/" style="color: #0ea5e9; text-decoration: none;">Francis Engelmann<sup>1</sup></a>, <a href="https://scholar.google.com/citations?user=LkpA-L0AAAAJ&hl=en" style="color: #0ea5e9; text-decoration: none;">Suya You<sup>4</sup></a>, <a href="https://geometry.stanford.edu/" style="color: #0ea5e9; text-decoration: none;">Leonidas Guibas<sup>1</sup>✉</a>
+            </p>
+            <p class="affiliations" style="font-size: 14px; color: #666; line-height: 1.3; margin-bottom: 5px;">
+              <sup>1</sup>Stanford University; <sup>2</sup>NVIDIA; <sup>3</sup>Peking University; <sup>4</sup>DEVCOM Army Research Laboratory;
+            </p>
+            <p class="contributions" style="font-size: 12px; color: #888; font-style: italic;">
+              ✉ Corresponding Author
+            </p>
+          </div>
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
@@ -137,6 +151,16 @@ permalink: /projects/img2cad
                   <span>Arxiv</span>
                 </a>
               </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/qq456cvb/Img2CAD"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
               
             </div>
           </div>
@@ -145,8 +169,11 @@ permalink: /projects/img2cad
     </div>
   </div>
 </section>
-
-
+<div class="container is-max-desktop">
+  <div class="content">
+    <img src="/projects/img2cad/images/teaser.gif" />
+  </div>
+</div>
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -158,7 +185,7 @@ permalink: /projects/img2cad
         <div class="content has-text-justified">
           <p>
             Reverse engineering 3D computer-aided design (CAD) models from images is an important task for many downstream applications including interactive editing, manufacturing, architecture, robotics, etc. The difficulty of the task lies in vast representational disparities between the CAD output and the image input. CAD models are precise, programmatic constructs that involves sequential operations combining discrete command structure with continuous attributes -- making it challenging to learn and optimize in an end-to-end fashion. 
-            Concurrently, input images introduce inherent challenges such as photometric variability and sensor noise, complicating the reverse engineering process. In this work, we introduce a novel approach that conditionally factorizes the task into two sub-problems. First, we leverage large foundation models, particularly GPT-4V, to predict the global discrete structure with semantic information. Second, we propose TrAssembler that conditioned on the discrete structure with semantics predicts the continuous attribute values.
+            Concurrently, input images introduce inherent challenges such as photometric variability and sensor noise, complicating the reverse engineering process. In this work, we introduce a novel approach that conditionally factorizes the task into two sub-problems. First, we leverage vision-language foundation models (VLMs), a finetuned Llama3.2, to predict the global <em>discrete base structure</em> with semantic information. Second, we propose TrAssembler that conditioned on the discrete structure with semantics predicts the <em>continuous attribute</em> values.
             To support the training of our TrAssembler, we further constructed an annotated CAD dataset of common objects from ShapeNet. Putting all together, our approach and data demonstrate significant first steps towards CAD-ifying images in the wild.
           </p>
         </div>
@@ -175,7 +202,7 @@ permalink: /projects/img2cad
           </div>
           <div class="content has-text-justified">
             <p>
-              The task of reverse engineering a 3D model from input images is a challenging task in the computer graphics and vision literature due to the discrete-continuous nature of the problem, requiring the learning of the combinatorial space of shape and program structure and their corresponding continuous attributes. Our approach tackles the challenging image-to-CAD problem for common objects through <b>conditionally factorizing</b> the task into two sub-problems. First, we leverage on the capabilities of large foundation models (i.e., GPT-4V) to predict the global <b>discrete base structure</b> of the shape from a single input image. This discrete problem includes inferring the <b>semantics</b>semantics parts that are present in the image as well as providing the <b>CAD structure</b>, i.e. command types, of each underlying part. We then propose a novel transformer-based model that conditioned on this semantic-informed, discrete base structure predicts the <b>continuous attributes</b> for the sequence of CAD commands for each semantic part.
+              The task of reverse engineering a 3D model from input images is a challenging task in the computer graphics and vision literature due to the discrete-continuous nature of the problem, requiring the learning of the combinatorial space of shape and program structure and their corresponding continuous attributes. Our approach tackles the challenging image-to-CAD problem for common objects through <b>conditionally factorizing</b> the task into two sub-problems. First, we leverage on the capabilities of finetuned large foundation models (i.e., Llama 3.2) to predict the global <b>discrete base structure</b> of the shape from a single input image. This discrete problem includes inferring the <b>semantics</b>semantics parts that are present in the image as well as providing the <b>CAD structure</b>, i.e. command types, of each underlying part. We then propose a novel transformer-based model that conditioned on this semantic-informed, discrete base structure predicts the <b>continuous attributes</b> for the sequence of CAD commands for each semantic part.
             </p>
           </div>
         </div>
@@ -183,404 +210,135 @@ permalink: /projects/img2cad
     <br>
     <div class="columns is-centered has-text-centered">
       <div class="column is-five-sixths">
-        <h2 class="title is-3">Qualitative Comparison on ShapeNet</h2>
-        <div class="tab">
+        <h2 class="title is-3">Qualitative Results on ShapeNet</h2>
+        <!-- <div class="tab">
           <button class="tablinks" onclick="openTab(event, 'Tab1')">Chair</button>
           <button class="tablinks" onclick="openTab(event, 'Tab2')">Table</button>
           <button class="tablinks" onclick="openTab(event, 'Tab3')">Cabinet</button>
-        </div>
+        </div> -->
         <div id="Tab1" class="tabcontent">
           <div class="models-flex-container">
-
             <div class="model-container">
               <div class="img-container">
-                <img src="/projects/img2cad/meshes/shapenet/37821_gt.png" alt="Input"/>
+                <img src="/projects/img2cad/meshes/shapenet/42569_gt.png" alt="GT"/>
               </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/37821_gpt-only.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/37821_img-3d-cad.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/37821_deepcad-end2end.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/37821_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
             </div>
 
             <div class="model-container">
               <div class="img-container">
-                <img src="/projects/img2cad/meshes/shapenet/36957_gt.png" alt="Input"/>
+                <img src="/projects/img2cad/meshes/shapenet/44319_gt.png" alt="GT"/>
               </div>
             </div>
 
             <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/36957_gpt-only.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              <div class="img-container">
+                <img src="/projects/img2cad/meshes/shapenet/40338_gt.png" alt="GT"/>
+              </div>
+            </div>
+
+            <div class="model-container">
+              <div class="img-container">
+                <img src="/projects/img2cad/meshes/shapenet/43477_gt.png" alt="GT"/>
+              </div>
+            </div>
+
+            <div class="model-container">
+              <div class="img-container">
+                <img src="/projects/img2cad/meshes/shapenet/37874_gt.png" alt="GT"/>
+              </div>
+            </div>
+
+            <div style="width: 100%; height: 0;"></div>
+
+            <div class="model-container">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/42569_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
               </model-viewer>
             </div>
 
             <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/36957_img-3d-cad.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/44319_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
               </model-viewer>
             </div>
 
             <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/36957_deepcad-end2end.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/40338_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
               </model-viewer>
             </div>
-
+            
             <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/36957_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/43477_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
               </model-viewer>
             </div>
-
-              <div class="model-container">
-                <div class="img-container">
-                  <img src="/projects/img2cad/meshes/shapenet/42713_gt.png" alt="Input"/>
-                </div>
-                <p class="caption">Input</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/42713_gpt-only.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">GPT-only</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/42713_img-3d-cad.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">Image-3D-CAD</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/42713_deepcad-end2end.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">DeepCAD-End2End</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/42713_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">Ours</p>
-              </div>
-              
+            
+            <div class="model-container">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/37874_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              </model-viewer>
+            </div>
+            
           </div>
-        </div>
-
-        <div id="Tab2" class="tabcontent">
+          
           <div class="models-flex-container">
-
             <div class="model-container">
               <div class="img-container">
-                <img src="/projects/img2cad/meshes/shapenet/33007_gt.png" alt="Input"/>
+                <img src="/projects/img2cad/meshes/shapenet/40783_gt.png" alt="GT"/>
               </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/33007_gpt-only.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/33007_img-3d-cad.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/33007_deepcad-end2end.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/33007_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
             </div>
 
             <div class="model-container">
               <div class="img-container">
-                <img src="/projects/img2cad/meshes/shapenet/19665_gt.png" alt="Input"/>
+                <img src="/projects/img2cad/meshes/shapenet/31105_gt.png" alt="GT"/>
               </div>
             </div>
 
             <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/19665_gpt-only.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              <div class="img-container">
+                <img src="/projects/img2cad/meshes/shapenet/3271_gt.png" alt="GT"/>
+              </div>
+            </div>
+
+            <div class="model-container">
+              <div class="img-container">
+                <img src="/projects/img2cad/meshes/shapenet/29373_gt.png" alt="GT"/>
+              </div>
+            </div>
+
+            <div class="model-container">
+              <div class="img-container">
+                <img src="/projects/img2cad/meshes/shapenet/19167_gt.png" alt="GT"/>
+              </div>
+            </div>
+
+            <div style="width: 100%; height: 0;"></div>
+
+            <div class="model-container">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/40783_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
               </model-viewer>
             </div>
 
             <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/19665_img-3d-cad.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/31105_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
               </model-viewer>
             </div>
 
             <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/19665_deepcad-end2end.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/3271_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
               </model-viewer>
             </div>
 
             <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/19665_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/29373_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
               </model-viewer>
             </div>
 
-              <div class="model-container">
-                <div class="img-container">
-                  <img src="/projects/img2cad/meshes/shapenet/26488_gt.png" alt="Input"/>
-                </div>
-                <p class="caption">Input</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/26488_gpt-only.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">GPT-only</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/26488_img-3d-cad.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">Image-3D-CAD</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/26488_deepcad-end2end.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">DeepCAD-End2End</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/26488_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">Ours</p>
-              </div>
-              
+            <div class="model-container">
+              <model-viewer src="/projects/img2cad/meshes/shapenet/19167_ours.glb" alt="Prediction" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
+              </model-viewer>
+            </div>
           </div>
         </div>
-
-
-        <div id="Tab3" class="tabcontent">
-          <div class="models-flex-container">
-
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/shapenet/47154_gt.png" alt="Input"/>
-              </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/47154_gpt-only.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/47154_img-3d-cad.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/47154_deepcad-end2end.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/47154_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/shapenet/46586_gt.png" alt="Input"/>
-              </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/46586_gpt-only.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/46586_img-3d-cad.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/46586_deepcad-end2end.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/shapenet/46586_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-              <div class="model-container">
-                <div class="img-container">
-                  <img src="/projects/img2cad/meshes/shapenet/46553_gt.png" alt="Input"/>
-                </div>
-                <p class="caption">Input</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/46553_gpt-only.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">GPT-only</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/46553_img-3d-cad.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">Image-3D-CAD</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/46553_deepcad-end2end.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">DeepCAD-End2End</p>
-              </div>
-
-              <div class="model-container">
-                <model-viewer src="/projects/img2cad/meshes/shapenet/46553_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-                </model-viewer>
-                <p class="caption">Ours</p>
-              </div>
-              
-          </div>
-        </div>
-
 
       </div>
     </div>
-
-    <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-five-sixths">
-        <h2 class="title is-3">Qualitative Comparison on Pix3D<br>(Real Images in the Wild)</h2>
-        <div class="content">
-          <img src="/projects/img2cad/images/dist-cat.png" />
-          <img src="/projects/img2cad/images/dist-size.png" width="44%" />
-          <img src="/projects/img2cad/images/dist-pose.png" width="57%" />
-          <img src="/projects/img2cad/images/dist-occ.png" width="55%" />
-        </div>
-      </div>
-    </div> -->
-
-    <br>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-five-sixths">
-        <h2 class="title is-3">Robustness on Random Viewpoints</h2>
-          <div class="models-flex-container">
-
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/robust/2360_gt.png" alt="Input"/>
-              </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/robust/2360_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-            
-            <div style="width: 10%; height: 200px;"></div>
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/robust/2858_gt.png" alt="Input"/>
-              </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/robust/2858_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/robust/43149_gt.png" alt="Input"/>
-              </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/robust/43149_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-            
-            <div style="width: 10%; height: 200px;"></div>
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/robust/41067_gt.png" alt="Input"/>
-              </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/robust/41067_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-
-
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/robust/19416_gt.png" alt="Input"/>
-              </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/robust/19416_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-            
-            <div style="width: 10%; height: 200px;"></div>
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/robust/21700_gt.png" alt="Input"/>
-              </div>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/robust/21700_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-            </div>
-
-
-
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/robust/37821_gt.png" alt="Input"/>
-              </div>
-              <p class="caption">Input</p>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/robust/37821_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-              <p class="caption">Ours</p>
-            </div>
-            
-            <div style="width: 10%; height: 200px;"></div>
-            <div class="model-container">
-              <div class="img-container">
-                <img src="/projects/img2cad/meshes/robust/26150_gt.png" alt="Input"/>
-              </div>
-              <p class="caption">Input</p>
-            </div>
-
-            <div class="model-container">
-              <model-viewer src="/projects/img2cad/meshes/robust/26150_ours.glb" alt="3D Model" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" auto-rotate camera-controls ar-status="not-presenting">
-              </model-viewer>
-              <p class="caption">Ours</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -606,27 +364,4 @@ permalink: /projects/img2cad
   </div>
 </footer>
 </body>
-
-<script>
-  function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    var parent = evt.currentTarget.parentNode.parentNode; // Get the grandparent container of the button
-    tabcontent = parent.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = parent.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
-  }
-  document.addEventListener("DOMContentLoaded", function() {
-      var tablinks = document.getElementsByClassName("tablinks");
-      for (var i = 0; i < tablinks.length; i += 3) {
-          tablinks[i].click();
-      }
-  });
-</script>
 </html>
