@@ -9,6 +9,7 @@ weight: 1000
 code: 'https://github.com/PointsCoder/OpenReal2Sim'
 arxiv: 'https://arxiv.org/abs/2509.22970'
 site: 'https://sihengz02.github.io/RoLA/'
+image: '/images/rola.gif'
 citation: 'Zhao, S., Mao, J., Chow, W., Shangguan, Z., Shi, T., Xue, R., Zheng, Y., Weng, Y., You, Y., Seita, D., Guibas, L., Zakharov, S., Guizilini, V., & Wang, Y. (2025). Robot Learning from Any Images. CoRL 2025.'
 authors: 'Siheng Zhao, Jiageng Mao, Wei Chow, Zeyu Shangguan, Tianheng Shi, Rong Xue, Yuxi Zheng, Yijia Weng, <b>Yang You</b>, Daniel Seita, Leonidas Guibas, Sergey Zakharov, Vitor Guizilini, Yue Wang'
 ---

@@ -8,6 +8,7 @@ venue: 'CoRL 2025'
 weight: 1000
 arxiv: 'https://arxiv.org/abs/2409.16451'
 site: 'https://long-horizon-assembly.github.io/'
+image: '/images/arch.png'
 citation: 'Sun, J., Curtis, A., You, Y., Xu, Y., Koehle, M., Chen, Q., Huang, S., Guibas, L., Chitta, S., Schwager, M., & Li, H. (2025). ARCH: Hierarchical Hybrid Learning for Long-Horizon Contact-Rich Robotic Assembly. CoRL 2025.'
 authors: 'Jiankai Sun, Aidan Curtis, <b>Yang You</b>, Yan Xu, Michael Koehle, Qianzhong Chen, Suning Huang, Leonidas Guibas, Sachin Chitta, Mac Schwager, Hui Li'
 ---
