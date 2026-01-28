@@ -1,8 +1,10 @@
+🎉 **2026.01: Our paper: <a href='/publications/rodrinet'>Rodrigues Network for Learning Robot Actions</a> is accepted to <i>ICLR 2026</i>! <a href='https://arxiv.org/pdf/2506.02618'>[Paper]</a>**
+
 🎉 **2025.09: Our paper: <a href='https://arxiv.org/abs/2408.01437'>Img2CAD: Reverse Engineering 3D CAD Models from Images through VLM-Assisted Conditional Factorization</a> is accepted to <i>SIGGRAPH Asia 2025</i>! <a href='https://arxiv.org/pdf/2408.01437'>[Paper]</a> <a href='https://github.com/qq456cvb/Img2CAD'>[Code]</a> <a href='/projects/img2cad'>[Project Page]</a>**
 
-🎉 **2025.08: We're hosting the cross-disciplinary workshop ``WCLOP: 1st ICCV Workshop and Challenge on Category-Level Object Pose Estimation in the Wild'' at ICCV 2025, spotlighting advances in category-level object pose estimation for robotic manipulation scenarios. We are now accepting paper submissions and challenge participants! Awards totaling over $6000 are available!** Please see our <a href='https://wclop.github.io/'>website</a> for more details.
+🎉 2025.08: We're hosting the cross-disciplinary workshop ``WCLOP: 1st ICCV Workshop and Challenge on Category-Level Object Pose Estimation in the Wild'' at ICCV 2025, spotlighting advances in category-level object pose estimation for robotic manipulation scenarios. We are now accepting paper submissions and challenge participants! Awards totaling over $6000 are available! Please see our <a href='https://wclop.github.io/'>website</a> for more details.
 
-🎉 **2025.08: Two papers (<a href='https://www.arxiv.org/abs/2509.22970'>Robot Learning from Any Images</a>, <a href='https://arxiv.org/abs/2409.16451'>ARCH: Hierarchical Hybrid Learning for Long-Horizon Contact-Rich Robotic Assembly</a>) got accepted to CoRL 2025!**
+🎉 2025.08: Two papers (<a href='https://www.arxiv.org/abs/2509.22970'>Robot Learning from Any Images</a>, <a href='https://arxiv.org/abs/2409.16451'>ARCH: Hierarchical Hybrid Learning for Long-Horizon Contact-Rich Robotic Assembly</a>) got accepted to CoRL 2025!
 
 2025.06: Our paper: <a href='https://arxiv.org/abs/2506.07310'>AllTracker: Efficient Dense Point Tracking at High Resolution</a> is accepted to <i>ICCV 2025</i>! <a href='https://arxiv.org/pdf/2506.07310'>[Paper]</a> <a href='https://github.com/aharley/alltracker'>[Code]</a> <a href='https://alltracker.github.io/'>[Project Page]</a>
 

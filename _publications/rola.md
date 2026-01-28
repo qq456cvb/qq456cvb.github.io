@@ -4,7 +4,7 @@ collection: publications
 permalink: /publications/rola
 excerpt: 'RoLA is a framework that transforms any in-the-wild image into an interactive, physics-enabled robotic environment. It operates directly on a single image without requiring additional hardware or digital assets. RoLA democratizes robotic data generation by producing massive visuomotor robotic demonstrations within minutes from a wide range of image sources.'
 date: '2025-09-26'
-venue: 'CoRL 2025'
+venue: 'CoRL'
 weight: 1000
 code: 'https://github.com/PointsCoder/OpenReal2Sim'
 arxiv: 'https://arxiv.org/abs/2509.22970'

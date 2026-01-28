@@ -4,7 +4,7 @@ collection: publications
 permalink: /publications/arch
 excerpt: 'ARCH proposes a hierarchical modular approach for long-horizon, high-precision robotic assembly in contact-rich settings. It employs a hierarchical planning framework, including a low-level primitive library of parameterized skills and a high-level policy learned via IL. ARCH generalizes well to unseen objects and outperforms baseline methods in terms of success rate and data efficiency.'
 date: '2025-09-08'
-venue: 'CoRL 2025'
+venue: 'CoRL'
 weight: 1000
 arxiv: 'https://arxiv.org/abs/2409.16451'
 site: 'https://long-horizon-assembly.github.io/'
