@@ -1,3 +1,5 @@
+🎉 **2026.01: Our paper: <a href='/publications/dotsim'>DOT-Sim: Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration</a> is accepted to <i>ICRA 2026</i>! <a href='https://arxiv.org/pdf/2604.27367'>[Paper]</a>**
+
 🎉 **2026.01: Our paper: <a href='/publications/rodrinet'>Rodrigues Network for Learning Robot Actions</a> is accepted to <i>ICLR 2026</i>! <a href='https://arxiv.org/pdf/2506.02618'>[Paper]</a>**
 
 🎉 **2025.09: Our paper: <a href='https://arxiv.org/abs/2408.01437'>Img2CAD: Reverse Engineering 3D CAD Models from Images through VLM-Assisted Conditional Factorization</a> is accepted to <i>SIGGRAPH Asia 2025</i>! <a href='https://arxiv.org/pdf/2408.01437'>[Paper]</a> <a href='https://github.com/qq456cvb/Img2CAD'>[Code]</a> <a href='/projects/img2cad'>[Project Page]</a>**
