@@ -148,7 +148,7 @@ sidebar: true
 
     var class_name = 'airplane';
     var labels;
-    // Guards against stale async loads when the user switches category / refreshes.
+    /* Guards against stale async loads when the user switches category / refreshes. */
     var loadToken = 0;
 
     var scenes = [], objs = [];
@@ -204,8 +204,8 @@ sidebar: true
 
     var balls = create_balls();
 
-    // Point clouds are fetched on demand as individual files from the KeypointNet
-    // dataset on Hugging Face: pcds/<class_id>/<model_id>.pcd
+    /* Point clouds are fetched on demand as individual files from the KeypointNet
+       dataset on Hugging Face: pcds/<class_id>/<model_id>.pcd */
     var HF_PCD_BASE = "https://huggingface.co/datasets/qq456cvb/KeypointNet/resolve/main/pcds/";
 
     function fetch_pcd(url) {
