@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Modern academic polish
+   ========================================================================== */
+
+:root {
+  --academic-ink: #172033;
+  --academic-muted: #5d6b7b;
+  --academic-accent: #2f6f9f;
+  --academic-accent-2: #7a4cc2;
+  --academic-surface: rgba(255, 255, 255, 0.86);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #f6f8fb;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(47, 111, 159, 0.12), transparent 32rem),
+    linear-gradient(180deg, #f8fafc 0%, #ffffff 34rem);
+  color: var(--academic-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--academic-accent);
+  text-underline-offset: 0.18em;
+  transition: color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+
+  &:hover {
+    color: mix(#000, $info-color, 35%);
+  }
+}
+
+.masthead {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(84, 94, 102, 0.14);
+  box-shadow: 0 12px 32px rgba(23, 32, 51, 0.06);
+  backdrop-filter: saturate(180%) blur(16px);
+}
+
+.greedy-nav {
+  background: transparent;
+
+  a {
+    color: var(--academic-ink);
+    border-radius: 999px;
+
+    &:hover {
+      color: var(--academic-accent);
+      background: rgba(47, 111, 159, 0.09);
+    }
+  }
+}
+
+.masthead__menu-item--lg a {
+  letter-spacing: -0.02em;
+}
+
+#main {
+  margin-top: 2.5em;
+}
+
+.page,
+.archive {
+  background: var(--academic-surface);
+  border: 1px solid rgba(84, 94, 102, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 22px 70px rgba(23, 32, 51, 0.08);
+  padding: 1.4rem;
+
+  @include breakpoint($medium) {
+    padding: 2rem;
+  }
+}
+
+.page__title,
+.archive h1 {
+  letter-spacing: -0.04em;
+}
+
+.page__content {
+  line-height: 1.72;
+
+  h2 {
+    margin-top: 2.2em;
+    padding-bottom: 0.35em;
+    border-bottom: 1px solid rgba(47, 111, 159, 0.22);
+    letter-spacing: -0.025em;
+  }
+
+  h2::after {
+    display: block;
+    width: 3rem;
+    height: 3px;
+    margin-top: 0.55rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--academic-accent), var(--academic-accent-2));
+    content: "";
+  }
+
+  img {
+    border-radius: 14px;
+  }
+}
+
+.academic-hero {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(47, 111, 159, 0.14);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(47, 111, 159, 0.11), rgba(122, 76, 194, 0.08)),
+    #ffffff;
+}
+
+.academic-kicker {
+  margin-bottom: 0.45rem;
+  color: var(--academic-accent);
+  font-size: $type-size-6;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.academic-hero h1 {
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  letter-spacing: -0.055em;
+}
+
+.academic-hero p {
+  max-width: 48rem;
+  color: var(--academic-muted);
+  font-size: 1.05rem;
+}
+
+.academic-highlights {
+  display: grid;
+  gap: 1rem;
+  margin: 1.6rem 0 2rem;
+
+  @include breakpoint($medium) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.academic-card {
+  padding: 1rem;
+  border: 1px solid rgba(84, 94, 102, 0.14);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
+}
+
+.academic-card strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--academic-ink);
+}
+
+.sidebar {
+  @include breakpoint($large) {
+    padding: 1rem;
+    border: 1px solid rgba(84, 94, 102, 0.12);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 18px 48px rgba(23, 32, 51, 0.07);
+  }
+}
+
+.author__avatar img {
+  border: 4px solid #fff;
+  box-shadow: 0 14px 34px rgba(23, 32, 51, 0.18);
+}
+
+.author__bio {
+  color: var(--academic-muted);
+}
+
+.author__urls a {
+  border-radius: 10px;
+
+  &:hover {
+    background: rgba(47, 111, 159, 0.08);
+    text-decoration: none;
+  }
+}
+
+.page__content table {
+  border-collapse: separate;
+  border-spacing: 0 1rem;
+}
+
+.page__content table tr {
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
+}
+
+.page__content table td {
+  border-top: 1px solid rgba(84, 94, 102, 0.11) !important;
+  border-bottom: 1px solid rgba(84, 94, 102, 0.11) !important;
+}
+
+.page__content table td:first-child {
+  border-left: 1px solid rgba(84, 94, 102, 0.11) !important;
+  border-radius: 18px 0 0 18px;
+}
+
+.page__content table td:last-child {
+  border-right: 1px solid rgba(84, 94, 102, 0.11) !important;
+  border-radius: 0 18px 18px 0;
+}
