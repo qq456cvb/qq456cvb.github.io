@@ -47,6 +47,10 @@ a {
   background: transparent;
 
   a {
+    margin-right: 0.6rem;
+    margin-left: 0.6rem;
+    padding-right: 0.4rem;
+    padding-left: 0.4rem;
     color: var(--academic-ink);
     border-radius: 999px;
 
@@ -125,12 +129,6 @@ a {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.academic-hero h1 {
-  margin-bottom: 0.6rem;
-  font-size: clamp(1.85rem, 4vw, 3rem);
-  letter-spacing: -0.055em;
 }
 
 .academic-hero p {

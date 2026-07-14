@@ -1,6 +1,5 @@
 <div class="academic-hero">
   <div class="academic-kicker">3D Vision · Graphics · Robotics</div>
-  <h1>Designing geometric intelligence for the physical world.</h1>
   <p>I am a postdoctoral researcher in the <a href='https://geometry.stanford.edu/'>Geometric Computation group</a> led by Prof. <a href='https://profiles.stanford.edu/leonidas-guibas'>Leonidas Guibas</a> at Stanford. My research focuses on 3D graphics, 3D computer vision, and robotics, with an emphasis on robust perception and representation for real-world spatial understanding.</p>
 </div>
 
