@@ -8,7 +8,7 @@
       <!-- Image Wrapper -->
     <div style="cursor: pointer;">
       <!-- Your Existing Image Tag -->
-      <img src="{{ base_path }}{{ post.image }}" alt="project image" style="width:auto; height:auto; max-width:100%; transition: transform 0.25s ease; cursor: zoom-in;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"  onclick="var m=document.getElementById('popup-modal'); if(m.parentElement!==document.body){document.body.appendChild(m);} m.style.display='block'; document.getElementById('popup-img').src=this.src;"/>
+      <img src="{{ base_path }}{{ post.image }}" alt="project image" style="width:auto; height:auto; max-width:100%; transition: transform 0.25s ease; cursor: zoom-in;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"  onclick="openPubPopup(this.src)"/>
     </div>
     </td>
     <td style="padding:2.5%;width:75%;vertical-align:middle;border:none">
@@ -53,11 +53,34 @@
   {% endfor %}
 </table>
 
-<!-- Image popup modal: single instance, shared by all publication images. On open it is
+<!-- Image popup lightbox: single instance, shared by all publication images. On open it is
      moved to document.body so it escapes the #main stacking context (created by the intro
      opacity animation) and covers the masthead menu. -->
-<div id="popup-modal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9);" onclick="this.style.display='none'">
-    <span style="position: absolute; top: 15px; right: 35px; color: white; font-size: 40px; font-weight: bold; cursor: pointer;" onclick="document.getElementById('popup-modal').style.display='none'">&times;</span>
-    <img class="popup-content" id="popup-img" style="margin: auto; display: block; width: 80%; background-color: white;">
-    <div class="caption" style="margin: auto; display: block; width: 80%; text-align: center; color: white; padding: 10px 0; height: 150px;"></div>
+<style>
+  #popup-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 4vh 4vw; box-sizing: border-box; background: rgba(8, 11, 18, 0.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; visibility: hidden; transition: opacity 0.28s ease, visibility 0s linear 0.28s; cursor: zoom-out; }
+  #popup-modal.open { opacity: 1; visibility: visible; transition: opacity 0.28s ease; }
+  #popup-modal img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 10px; background: #fff; box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55); transform: scale(0.94) translateY(12px); transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.3, 1); cursor: default; }
+  #popup-modal.open img { transform: scale(1) translateY(0); }
+  #popup-modal .popup-close { position: absolute; top: 12px; right: 22px; font-size: 34px; line-height: 1; font-weight: bold; color: rgba(255, 255, 255, 0.8); cursor: pointer; user-select: none; transition: color 0.2s ease, transform 0.2s ease; }
+  #popup-modal .popup-close:hover { color: #fff; transform: scale(1.15); }
+</style>
+<div id="popup-modal" onclick="closePubPopup()">
+  <span class="popup-close">&times;</span>
+  <img id="popup-img" alt="enlarged project image" onclick="event.stopPropagation()">
 </div>
+<script>
+  /* Lightbox helpers. Block comments only: this HTML may be minified onto a single line. */
+  function openPubPopup(src) {
+    var m = document.getElementById('popup-modal');
+    if (m.parentElement !== document.body) { document.body.appendChild(m); }
+    document.getElementById('popup-img').src = src;
+    m.getBoundingClientRect(); /* flush styles so the open transition always plays */
+    m.classList.add('open');
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function closePubPopup() {
+    document.getElementById('popup-modal').classList.remove('open');
+    document.documentElement.style.overflow = '';
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closePubPopup(); } });
+</script>
