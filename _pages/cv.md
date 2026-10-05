@@ -13,7 +13,7 @@ redirect_from:
 {: .h1-style}
 * B.S. in School of Software, Shanghai Jiao Tong University, China, 2016
 * M.S. in Computer Science, University of Virginia, United States, 2018
-* Ph.D. Candidate in School of Mechanical Engineering, Shanghai Jiao Tong University, China, 2022 (expected)
+* Ph.D. in School of Mechanical Engineering, Shanghai Jiao Tong University, China, 2022
 
 ## Work experience
 {: .h1-style}
