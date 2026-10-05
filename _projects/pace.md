@@ -10,7 +10,7 @@ permalink: /projects/pace
         content="Pose Annotations in Cluttered Environments">
   <meta name="keywords" content="PACE, dataset, pose estimation, clutter">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PACE: Pose Annotations in Cluttered Environments</title>
+  <title>PACE: A Large-Scale Dataset with Pose Annotations in Cluttered Environments</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -117,7 +117,7 @@ permalink: /projects/pace
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">PACE: Pose Annotations in Cluttered Environments</h1>
+          <h1 class="title is-1 publication-title">PACE: A Large-Scale Dataset with Pose Annotations in Cluttered Environments</h1>
           <h4 class="title is-4 conference">European Conference on Computer Vision (<span class="grad_text">ECCV</span>) 2024</h4>
           <!-- <h4 class="title is-4 conference">Fri Oct 4, 10:30am-12:30pm CEST, Poster#191, Exhibition Area</h4> -->
           <div class="is-size-5 publication-authors">
@@ -411,10 +411,10 @@ permalink: /projects/pace
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>
-@misc{you2023pace,
-    title={PACE: Pose Annotations in Cluttered Environments},
+@inproceedings{you2024pace,
+    title={PACE: A Large-Scale Dataset with Pose Annotations in Cluttered Environments},
     author={You, Yang and Xiong, Kai and Yang, Zhening and Huang, Zhengxiang and Zhou, Junwei and Shi, Ruoxi and Fang, Zhou and Harley, Adam W. and Guibas, Leonidas and Lu, Cewu},
-    booktitle={European Conference on Computer Vision},
+    booktitle={European Conference on Computer Vision (ECCV)},
     year={2024},
     organization={Springer}
 }
