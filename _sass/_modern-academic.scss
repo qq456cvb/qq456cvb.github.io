@@ -214,3 +214,25 @@ a {
   border-right: 1px solid rgba(84, 94, 102, 0.11) !important;
   border-radius: 0 18px 18px 0;
 }
+
+/* Headings demoted from <h1> to <h2> so each page has a single <h1> (Bing and
+   other SEO checkers flag multiple), kept at the size and spacing of the <h1>. */
+h2.h1-style {
+  margin-top: 0;
+  font-size: $type-size-3;
+}
+
+.archive h2.h1-style {
+  letter-spacing: -0.04em;
+}
+
+.page__content h2.h1-style {
+  margin-top: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+  letter-spacing: normal;
+
+  &::after {
+    display: none;
+  }
+}

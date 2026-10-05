@@ -32,9 +32,9 @@ permalink: /projects/donut
               <h1 class="max-w-5xl text-3xl font-bold leading-none tracking-tighter text-black-600 md:text-5xl lg:text-5xl lg:max-w-7xl">
                 <span class="grad_text">Make a Donut</span> &#127849;
               </h1>
-              <h1 class="max-w-5xl text-3xl font-bold leading-none text-black-600 md:text-5xl lg:text-5xl lg:max-w-8xl pt-5" style="font-size:26pt">
+              <h2 class="max-w-5xl text-3xl font-bold leading-none text-black-600 md:text-5xl lg:text-5xl lg:max-w-8xl pt-5" style="font-size:26pt">
             		Language-Guided Hierarchical EMD-Space Planning for Zero-Shot Deformable Object Manipulation
-        	  </h1>
+        	  </h2>
               <div class="space-y-2">
                 <p class="max-w-6xl mx-auto mt-8 text-md md:text-xl lg:text-xl lg:text-xl leading-relaxed text-gray-600 space-x-5">
                   <a href="https://qq456cvb.github.io/" class="hover:text-gray-800">Yang You<sup>1</sup></a>

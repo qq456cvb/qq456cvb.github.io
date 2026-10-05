@@ -1,6 +1,8 @@
 ---
 permalink: /projects/cppf
 classes: wide
+title: "CPPF: Towards Robust Category-Level 9D Pose Estimation in the Wild"
+excerpt: "Project page for CPPF (CVPR 2022), a category-level point pair feature voting method for accurate, robust and generalizable 9D object pose estimation in the wild from a single RGB-D frame."
 ---
 
 <h1 align="center">
@@ -39,11 +41,13 @@ CPPF is a pure sim-to-real method that achieves 9D pose estimation in the wild. 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/MbR3Lq1kJaM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 
-# Abstract
+## Abstract
+{: .h1-style}
 In this paper, we tackle the problem of category-level 9D pose estimation in the wild, given a single RGB-D frame. Using supervised data of real-world 9D poses is tedious and erroneous, and also fails to generalize to unseen scenarios. Besides, category-level pose estimation requires a method to be able to generalize to unseen objects at test time, which is also challenging. Drawing inspirations from traditional point pair features (PPFs), in this paper, we design a novel Category-level PPF (CPPF) voting method to achieve accurate, robust and generalizable 9D pose estimation in the wild. To obtain robust pose estimation, we sample numerous point pairs on an object, and for each pair our model predicts necessary SE(3)-invariant voting statistics on object centers, orientations and scales. A novel coarse-to-fine voting algorithm is proposed to eliminate noisy point pair samples and generate final predictions from the population. To get rid of false positives in the orientation voting process, an auxiliary binary disambiguating classification task is introduced for each sampled point pair. In order to detect objects in the wild, we carefully design our sim-to-real pipeline by training on synthetic point clouds only, unless objects have ambiguous poses in geometry. Under this circumstance, color information is leveraged to disambiguate these poses. Results on standard benchmarks show that our method is on par with current state of the arts with real-world training data. Extensive experiments further show that our method is robust to noise and gives promising results under extremely challenging scenarios.
 
 
-# Method Overview
+## Method Overview
+{: .h1-style}
 <figure style='width:25%;display:inline-block;margin-right:10%'>
 <!-- <img src="/images/cppf/centervotes.png" alt="CenterVotes" style="width:100%">
 <figcaption style="text-align: left;"><b>Fig.1 - Center voting scheme.</b> For each point pair, candidate centers are generated on the dash circle for an interval of $\frac{2\pi}{K}$.</figcaption> -->
@@ -69,13 +73,15 @@ For each sampled point pair lying on an object, we generate both center votes an
 </figure>
 </p>
 
-# Quantitative Results
+## Quantitative Results
+{: .h1-style}
 <figure style='width:60%;align:center'>
 <img src="/images/cppf/quan.png" alt="Architecture" style="width:100%">
 <figcaption style="text-align: left;"><b>Fig.4 - Performance comparison of various methods.</b> <i>Syn.(O)</i> means synthetic ShapeNet objects only; while <i>Syn.(O+B)</i> means ShapeNet models rendered with real backgrounds. <i>Real</i> means the real-world training data provided by NOCS. The best using real-world training data is marked <span style="color:blue;">blue</span>, and the best using synthetic training data is marked <span style="color:red;">red</span>. *Our model only leverages RGB information for laptops.</figcaption>
 </figure>
 
-# Qualitative Results
+## Qualitative Results
+{: .h1-style}
 ## NOCS REAL275 with Instance Segmentation Masks
 <figure style='width:40%;align:center'>
 <img src="/images/cppf/nocsinst.png" alt="Architecture" style="width:100%">
@@ -91,7 +97,8 @@ For each sampled point pair lying on an object, we generate both center votes an
 <img src="/images/cppf/sunrgbd.png" alt="Architecture" style="width:100%">
 </figure>
 
-# Citation
+## Citation
+{: .h1-style}
 <pre>
 @inproceedings{you2022cppf,
   title={CPPF: Towards Robust Category-Level 9D Pose Estimation in the Wild},

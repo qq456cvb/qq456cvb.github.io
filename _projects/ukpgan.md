@@ -1,6 +1,8 @@
 ---
 permalink: /projects/ukpgan
 classes: wide
+title: "UKPGAN: A General Self-Supervised Keypoint Detector"
+excerpt: "Project page for UKPGAN (CVPR 2022), an unsupervised 3D keypoint detector that finds keypoints able to reconstruct the original object shape, using GAN-based keypoint sparsity control and salient information distillation."
 ---
 
 <h1 align="center">
@@ -38,10 +40,12 @@ UKPGAN is a **self-supervised** 3D keypoint detector on both rigid/non-rigid obj
 <iframe width="640" height="360" align="middle" src="https://www.youtube.com/embed/IyGzkdR5MLU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 
-# Abstract
+## Abstract
+{: .h1-style}
 Keypoint detection is an essential component for the object registration and alignment. In this work, we reckon keypoint detection as information compression, and force the model to distill out irrelevant points of an object. Based on this, we propose UKPGAN, a general **self-supervised** 3D keypoint detector where keypoints are detected so that they could reconstruct the original object shape. Two modules: **GAN-based keypoint sparsity control** and **salient information distillation** modules are proposed to locate those important keypoints. Extensive experiments show that our keypoints align well with human annotated keypoint labels, and can be applied to SMPL human bodies under various non-rigid deformations. Furthermore, our keypoint detector trained on clean object collections generalizes well to real-world scenarios, thus further improves geometric registration when combined with off-the-shelf point descriptors. Repeatability experiments show that our model is stable under both rigid and non-rigid transformations, with local reference frame estimation. 
 
-# Method Overview
+## Method Overview
+{: .h1-style}
 
 <p align="center">
 <figure style='width:90%'>
@@ -50,7 +54,8 @@ Keypoint detection is an essential component for the object registration and ali
 </figure>
 </p>
 
-# Qualitative Results
+## Qualitative Results
+{: .h1-style}
 
 ## Real-world Scenes
 <div align='center'>
@@ -161,7 +166,8 @@ Keypoint detection is an essential component for the object registration and ali
 {% endfor %}
 </div>
 
-# Citation
+## Citation
+{: .h1-style}
 <pre>
 @inproceedings{you2022ukpgan,
   title={UKPGAN: A General Self-Supervised Keypoint Detector},
