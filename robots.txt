@@ -1,0 +1,11 @@
+---
+layout: null
+permalink: /robots.txt
+sitemap: false
+---
+# All crawlers welcome, including search engines and AI assistants
+# (Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, ...).
+User-agent: *
+Allow: /
+
+Sitemap: {{ site.url }}/sitemap.xml

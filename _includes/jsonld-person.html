@@ -1,0 +1,48 @@
+{% comment %}
+  schema.org ProfilePage + Person + WebSite for the home and About pages.
+  All values come from site.person / site.author in _config.yml.
+{% endcomment %}
+{% assign p = site.person %}
+{% assign home_url = site.url | append: "/" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": {{ site.url | append: "/#person" | jsonify }},
+      "name": {{ site.name | jsonify }},
+      "alternateName": {{ p.alternate_names | jsonify }},
+      "url": {{ home_url | jsonify }},
+      "image": {{ site.author.avatar | prepend: "/images/" | prepend: site.url | jsonify }},
+      "email": {{ site.author.email | prepend: "mailto:" | jsonify }},
+      "jobTitle": {{ p.job_title | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "disambiguatingDescription": {{ p.job_title | append: ", " | append: p.group | append: ", " | append: p.affiliation | append: "; 3D computer vision, graphics and robotics researcher." | jsonify }},
+      "affiliation": { "@type": "CollegeOrUniversity", "name": {{ p.affiliation | jsonify }}, "url": {{ p.affiliation_url | jsonify }} },
+      "worksFor": { "@type": "CollegeOrUniversity", "name": {{ p.affiliation | jsonify }}, "url": {{ p.affiliation_url | jsonify }} },
+      "memberOf": { "@type": "ResearchOrganization", "name": {{ p.group | jsonify }}, "url": {{ p.group_url | jsonify }} },
+      "alumniOf": [{% for s in p.alumni_of %}{ "@type": "CollegeOrUniversity", "name": {{ s.name | jsonify }}, "url": {{ s.url | jsonify }} }{% unless forloop.last %}, {% endunless %}{% endfor %}],
+      "knowsAbout": {{ p.knows_about | jsonify }},
+      "identifier": { "@type": "PropertyValue", "propertyID": "ORCID", "value": {{ p.orcid | jsonify }} },
+      "sameAs": {{ p.same_as | jsonify }}
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": {{ page.url | prepend: site.url | append: "#profile" | jsonify }},
+      "url": {{ page.url | prepend: site.url | jsonify }},
+      "name": {{ page.seo_title | default: page.title | jsonify }},
+      "mainEntity": { "@id": {{ site.url | append: "/#person" | jsonify }} },
+      "isPartOf": { "@id": {{ site.url | append: "/#website" | jsonify }} }
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ site.url | append: "/#website" | jsonify }},
+      "url": {{ home_url | jsonify }},
+      "name": {{ site.title | jsonify }},
+      "inLanguage": "en",
+      "author": { "@id": {{ site.url | append: "/#person" | jsonify }} }
+    }
+  ]
+}
+</script>

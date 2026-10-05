@@ -1,0 +1,43 @@
+{%- comment -%}
+  Normalizes one publication's front matter into pv_* variables.
+  Usage: {%- include pub-vars.html pub=post -%}
+  Sets: pv_authors (array of plain names), pv_year, pv_venue_name, pv_venue_type,
+        pv_arxiv_id, pv_pdf_url, pv_code, pv_project, pv_url, pv_bibkey, pv_bibtype
+{%- endcomment -%}
+{%- assign pub = include.pub -%}
+{%- assign pv_authors = pub.authors | strip_html | replace: "(*=equal contribution)", "" | remove: "*" | replace: ", and ", ", " | replace: " and ", ", " | strip | split: ", " -%}
+{%- assign pv_year = pub.date | date: "%Y" -%}
+
+{%- assign pv_venue = site.data.venues[pub.venue] -%}
+{%- if pv_venue -%}
+  {%- assign pv_venue_name = pv_venue.name -%}
+  {%- assign pv_venue_type = pv_venue.type -%}
+{%- else -%}
+  {%- assign pv_venue_name = pub.venue -%}
+  {%- assign pv_venue_type = "conference" -%}
+{%- endif -%}
+
+{%- assign pv_arxiv_id = nil -%}
+{%- if pub.arxiv contains "arxiv.org/abs/" -%}
+  {%- assign pv_arxiv_id = pub.arxiv | split: "/abs/" | last | remove: "/" -%}
+{%- endif -%}
+{%- if pub.pdf and pub.pdf != "" -%}
+  {%- assign pv_pdf_url = pub.pdf -%}
+{%- elsif pv_arxiv_id -%}
+  {%- assign pv_pdf_url = "https://arxiv.org/pdf/" | append: pv_arxiv_id -%}
+{%- else -%}
+  {%- assign pv_pdf_url = nil -%}
+{%- endif -%}
+
+{%- assign pv_code = nil -%}
+{%- if pub.code and pub.code != "" and pub.code != "#" -%}{%- assign pv_code = pub.code -%}{%- endif -%}
+{%- assign pv_project = nil -%}
+{%- if pub.site and pub.site != "" -%}
+  {%- if pub.site contains "://" -%}{%- assign pv_project = pub.site -%}{%- else -%}{%- assign pv_project = pub.site | prepend: site.url -%}{%- endif -%}
+{%- endif -%}
+{%- assign pv_url = pub.url | prepend: site.url -%}
+
+{%- assign pv_first_last = pv_authors.first | split: " " | last | downcase -%}
+{%- assign pv_title_word = pub.title | split: ":" | first | split: " " | first | downcase | remove: "/" | remove: "-" | remove: "+" -%}
+{%- assign pv_bibkey = pv_first_last | append: pv_year | append: pv_title_word -%}
+{%- if pv_venue_type == "conference" -%}{%- assign pv_bibtype = "inproceedings" -%}{%- else -%}{%- assign pv_bibtype = "article" -%}{%- endif -%}

@@ -1,0 +1,33 @@
+{% comment %}
+  Authors, links, abstract and BibTeX for a single publication page.
+  Block comments only in the script: the page is HTML-compressed onto one line.
+{% endcomment %}
+{% include pub-vars.html pub=page %}
+<p class="pub-authors">{{ page.authors }}</p>
+<p class="pub-links">
+  {% if page.arxiv %}<a href="{{ page.arxiv }}">arXiv</a> / {% endif %}
+  {% if pv_pdf_url %}<a href="{{ pv_pdf_url }}">PDF</a> / {% endif %}
+  {% if page.supp %}<a href="{{ page.supp }}">supplementary</a> / {% endif %}
+  {% if pv_code %}<a href="{{ pv_code }}">code</a> / {% endif %}
+  {% if page.video %}<a href="{{ page.video }}">video</a> / {% endif %}
+  {% if pv_project %}<a href="{{ page.site }}">project page</a> / {% endif %}
+  <a href="#bibtex">BibTeX</a>
+</p>
+{% if page.excerpt %}
+<h2 class="pub-section">Abstract</h2>
+<p>{{ page.excerpt | strip_html }}</p>
+{% endif %}
+<h2 class="pub-section" id="bibtex">BibTeX</h2>
+<div style="position:relative">
+<button type="button" onclick="navigator.clipboard.writeText(document.getElementById('bibtex-entry').innerText); this.textContent='Copied';" style="position:absolute;top:8px;right:8px;font-size:0.75em;padding:2px 10px;cursor:pointer">Copy</button>
+<pre id="bibtex-entry" style="white-space:pre-wrap;font-size:0.8em">@{{ pv_bibtype }}{ {{- pv_bibkey }},
+  title     = { {{- page.title | strip_html -}} },
+  author    = { {{- pv_authors | join: " and " -}} },
+{% if pv_venue_type == "conference" %}  booktitle = { {{- pv_venue_name -}} },
+{% elsif pv_venue_type == "journal" %}  journal   = { {{- pv_venue_name -}} },
+{% elsif pv_arxiv_id %}  journal   = {arXiv preprint arXiv:{{ pv_arxiv_id }}},
+{% endif %}  year      = { {{- pv_year -}} }{% if pv_arxiv_id %},
+  eprint    = { {{- pv_arxiv_id -}} },
+  archivePrefix = {arXiv}{% endif %}
+}</pre>
+</div>

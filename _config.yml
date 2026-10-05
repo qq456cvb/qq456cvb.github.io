@@ -10,8 +10,8 @@ locale                   : "en-US"
 title                    : "Yang You / Guibas Lab"
 title_separator          : "-"
 name                     : &name "Yang You"
-description              : &description "personal description"
-url                      : "//qq456cvb.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+description              : &description "Yang You (尤洋) is a postdoctoral researcher in Leonidas Guibas's Geometric Computation group at Stanford University, working on 3D computer vision, computer graphics and robotics: object pose estimation, 3D correspondence and keypoints, and perception for robot manipulation."
+url                      : "https://qq456cvb.github.io" # must be absolute (with https://) so canonical links, the sitemap and robots.txt are valid
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "qq456cvb.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
@@ -62,7 +62,7 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 :  # Open Graph/Twitter default site image
+og_image                 : "profile.jpg" # Open Graph/Twitter default site image (in /images/)
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
@@ -73,7 +73,7 @@ social:
 
 # Analytics
 analytics:
-  provider               :  "google-universal" # false (default), "google", "google-universal", "custom"
+  provider               : false # false (default), "google", "google-universal", "custom". Universal Analytics was shut down in 2023; use "custom" with a GA4 snippet if needed.
   google:
     tracking_id          :
 
@@ -89,7 +89,7 @@ author:
   googlescholar    : "https://scholar.google.com/citations?user=1YV1_KUAAAAJ&hl=en"
   email            : "yangyou@stanford.edu"
   researchgate     : "https://www.researchgate.net/profile/Yang_You8"
-  uri              : "http://www.youyangsoft.com"
+  uri              : # "http://www.youyangsoft.com" no longer resolves
   bitbucket        :
   codepen          :
   dribbble         :
@@ -103,7 +103,7 @@ author:
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
   linkedin         : "yang-you-502128108/"
-  orcid            : "http://orcid.org/0000-0003-0125-0792"
+  orcid            : "https://orcid.org/0000-0003-0125-0792"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
@@ -115,6 +115,43 @@ author:
   xing             :
   youtube          :
   wikipedia        :
+
+
+# Machine-readable identity (schema.org JSON-LD and /llms.txt).
+# Keep this consistent with Google Scholar, ORCID, OpenReview, etc. so search and AI
+# engines can tell this Yang You apart from other researchers with the same name.
+person:
+  alternate_names  : ["尤洋", "You Yang"]
+  job_title        : "Postdoctoral Researcher"
+  affiliation      : "Stanford University"
+  affiliation_url  : "https://www.stanford.edu/"
+  group            : "Geometric Computation Group (Guibas Lab)"
+  group_url        : "https://geometry.stanford.edu/"
+  advisor          : "Leonidas Guibas"
+  alumni_of:
+    - name: "Shanghai Jiao Tong University"
+      url : "https://www.sjtu.edu.cn/"
+    - name: "University of Virginia"
+      url : "https://www.virginia.edu/"
+  orcid            : "0000-0003-0125-0792"
+  knows_about:
+    - "3D computer vision"
+    - "Computer graphics"
+    - "Robotics"
+    - "Category-level object pose estimation"
+    - "3D keypoint detection and correspondence"
+    - "Rotation-invariant point cloud learning"
+    - "Image-to-CAD reconstruction"
+    - "Robotic manipulation"
+  # Profiles that are definitely you. Add DBLP / Semantic Scholar / OpenReview author pages here.
+  same_as:
+    - "https://scholar.google.com/citations?user=1YV1_KUAAAAJ"
+    - "https://orcid.org/0000-0003-0125-0792"
+    - "https://github.com/qq456cvb"
+    - "https://www.linkedin.com/in/yang-you-502128108/"
+    - "https://www.researchgate.net/profile/Yang_You8"
+  # Shown to AI crawlers in /llms.txt to avoid being merged with a namesake.
+  disambiguation   : "This is Yang You (尤洋) of Stanford University (3D vision, graphics and robotics; ORCID 0000-0003-0125-0792; GitHub qq456cvb), a different person from Yang You (尤洋) of the National University of Singapore, who works on high-performance computing and large-scale ML training."
 
 
 # Reading Files
@@ -147,6 +184,34 @@ exclude:
   - package.json
   - tmp
   - vendor
+  # Placeholder content from the academicpages template ("Blog Post number 1", "Talk 1 on
+  # Relevant Topic in Your Field", ...). Search engines and AI assistants were indexing it as
+  # facts about Yang You, so it is kept out of the published site.
+  - _posts
+  - _drafts
+  - _talks
+  - _teaching
+  - _portfolio
+  - _pages/markdown.md
+  - _pages/non-menu-page.md
+  - _pages/archive-layout-with-content.md
+  - _pages/terms.md
+  - _pages/page-archive.html
+  - _pages/collection-archive.html
+  - _pages/category-archive.html
+  - _pages/tag-archive.html
+  - _pages/year-archive.html
+  - _pages/talkmap.html
+  - _pages/talks.html
+  - _pages/teaching.html
+  - _pages/portfolio.html
+  # Partials pulled into the home/about/news pages with include_relative; don't publish them standalone.
+  - _pages/about_content.md
+  - _pages/news_content.md
+  - markdown_generator
+  - talkmap
+  - talkmap.py
+  - talkmap.ipynb
 keep_files:
   - .git
   - .svn

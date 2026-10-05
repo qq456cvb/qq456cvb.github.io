@@ -1,0 +1,54 @@
+# Full names for the short `venue:` values used in _publications.
+# type: conference | journal | preprint  (drives citation_* meta tags and BibTeX entry type)
+# Add a line here whenever a publication uses a new venue.
+"CVPR":
+  name: "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)"
+  type: conference
+"CVPR OpenSUN3D Workshop":
+  name: "CVPR Workshop on Open-World 3D Scene Understanding (OpenSUN3D)"
+  type: conference
+"ICCV":
+  name: "IEEE/CVF International Conference on Computer Vision (ICCV)"
+  type: conference
+"ECCV":
+  name: "European Conference on Computer Vision (ECCV)"
+  type: conference
+"ICLR":
+  name: "International Conference on Learning Representations (ICLR)"
+  type: conference
+"NeurIPS":
+  name: "Conference on Neural Information Processing Systems (NeurIPS)"
+  type: conference
+"AAAI":
+  name: "AAAI Conference on Artificial Intelligence (AAAI)"
+  type: conference
+"AIIDE":
+  name: "AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment (AIIDE)"
+  type: conference
+"SIGGRAPH Asia":
+  name: "ACM SIGGRAPH Asia"
+  type: conference
+"CoRL":
+  name: "Conference on Robot Learning (CoRL)"
+  type: conference
+"ICRA":
+  name: "IEEE International Conference on Robotics and Automation (ICRA)"
+  type: conference
+"IROS":
+  name: "IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)"
+  type: conference
+"RA-L,IROS":
+  name: "IEEE Robotics and Automation Letters (RA-L)"
+  type: journal
+"TPAMI":
+  name: "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)"
+  type: journal
+"IEEE Transactions on Image Processing":
+  name: "IEEE Transactions on Image Processing (TIP)"
+  type: journal
+"arXiv":
+  name: "arXiv preprint"
+  type: preprint
+"Preprint":
+  name: "arXiv preprint"
+  type: preprint

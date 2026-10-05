@@ -1,0 +1,36 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+{%- assign p = site.person -%}
+# {{ site.name }} ({{ p.alternate_names | first }})
+
+> {{ site.description }}
+
+{{ p.disambiguation }}
+
+## Profile
+
+- Position: {{ p.job_title }}, {{ p.group }}, {{ p.affiliation }} (with Prof. {{ p.advisor }})
+- Education: {% for s in p.alumni_of %}{{ s.name }}{% unless forloop.last %}; {% endunless %}{% endfor %}
+- Research areas: {{ p.knows_about | join: ", " }}
+- Email: {{ site.author.email }}
+- Homepage: {{ site.url }}/
+{% for link in p.same_as %}- Profile: {{ link }}
+{% endfor %}
+## Publications (newest first)
+{% assign pubs = site.publications | sort: "weight" | reverse %}
+{% for post in pubs %}{% include pub-vars.html pub=post %}
+### [{{ post.title | strip_html }}]({{ pv_url }})
+{{ pv_authors | join: ", " }}. *{{ pv_venue_name }}*, {{ pv_year }}.
+Links: [paper page]({{ pv_url }}){% if post.arxiv %} · [arXiv]({{ post.arxiv }}){% endif %}{% if pv_code %} · [code]({{ pv_code }}){% endif %}{% if pv_project %} · [project page]({{ pv_project }}){% endif %}
+
+{{ post.excerpt | strip_html | strip_newlines | strip }}
+{% endfor %}
+## Other pages
+
+- [Publications]({{ site.url }}/publications/): full list with BibTeX
+- [News]({{ site.url }}/news/): paper acceptances and releases
+- [CV]({{ site.url }}/cv/)
+- [Side projects]({{ site.url }}/sideprojects/)

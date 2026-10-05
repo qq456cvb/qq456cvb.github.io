@@ -1,6 +1,7 @@
 ---
 layout: archive
 title: "Publications and Preprints"
+description: "Publications by Yang You (尤洋, Stanford) on 3D computer vision, graphics and robotics, including KeypointNet, CPPF, CPPF++, PACE, Img2CAD and UniPose9D, with papers, code and BibTeX."
 permalink: /publications/
 author_profile: true
 ---
