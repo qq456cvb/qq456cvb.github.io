@@ -158,7 +158,8 @@ person:
 include:
   - .htaccess
   - _pages
-  - _projects
+  # _projects is not listed: it is already the `projects` collection (which also copies its
+  # assets). Including it here made every project page build twice and appear twice in sitemap.xml.
   - files
 exclude:
   - "*.sublime-project"
