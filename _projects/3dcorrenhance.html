@@ -1,0 +1,626 @@
+---
+layout: compress
+permalink: /projects/3dcorrenhance
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning (ICLR 2025)</title>
+  <meta name="description" content="How well do vision transformers like DINOv2 understand 3D? We measure the multiview equivariance of their features, show it predicts performance on pose estimation, tracking and semantic correspondence, and improve it by finetuning on 3D correspondences, even with one object for one iteration. ICLR 2025.">
+  <meta name="keywords" content="3D correspondence, multiview equivariance, vision foundation models, DINOv2, ViT, finetuning, pose estimation, video tracking, semantic correspondence, ICLR 2025">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/3dcorrenhance">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning">
+  <meta property="og:description" content="Finetuning ViT features on 3D correspondences, even with one object for one iteration, improves pose estimation, tracking and semantic correspondence. ICLR 2025.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/3dcorrenhance">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/3dcorrenhance/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/3dcorrenhance/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0710'/%3E%3Ccircle cx='20' cy='34' r='8' fill='%23fb7185'/%3E%3Ccircle cx='44' cy='30' r='8' fill='%23fb7185'/%3E%3Cpath d='M28 33q8-10 8-3' stroke='%23fecdd3' stroke-width='3' fill='none' stroke-dasharray='3 3'/%3E%3C/svg%3E">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMWMSYT7XX"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-PMWMSYT7XX');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/3dcorrenhance#article",
+        "headline": "Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning",
+        "url": "https://qq456cvb.github.io/projects/3dcorrenhance",
+        "datePublished": "2025",
+        "publication": { "@type": "PublicationEvent", "name": "International Conference on Learning Representations (ICLR) 2025" },
+        "sameAs": ["https://arxiv.org/abs/2411.19458", "https://openreview.net/forum?id=CNO4rbSV6v", "https://qq456cvb.github.io/publications/3dcorrenhance"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Yixin Li" }, { "@type": "Person", "name": "Congyue Deng" }, { "@type": "Person", "name": "Yue Wang" }, { "@type": "Person", "name": "Leonidas Guibas" }
+        ],
+        "keywords": ["3D correspondence", "multiview equivariance", "vision transformers", "DINOv2", "feature finetuning"],
+        "image": "https://qq456cvb.github.io/projects/3dcorrenhance/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/3dcorrenhance#video" }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "3DCorrEnhance",
+        "codeRepository": "https://github.com/qq456cvb/3DCorrEnhance",
+        "programmingLanguage": "Python",
+        "license": "https://opensource.org/licenses/MIT",
+        "sameAs": ["https://huggingface.co/qq456cvb/3DCorrEnhance", "https://huggingface.co/spaces/qq456cvb/3DCorrEnhance"],
+        "citation": { "@id": "https://qq456cvb.github.io/projects/3dcorrenhance#article" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/3dcorrenhance#video",
+        "name": "3DCorrEnhance teaser",
+        "description": "One-minute overview: measuring the multiview equivariance of ViT features, its link to pose estimation, tracking and semantic correspondence, finetuning on 3D correspondences, results for five ViTs, and finetuning with one object for one iteration.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/3dcorrenhance/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/3dcorrenhance/static/media/teaser.mp4",
+        "uploadDate": "2026-10-06",
+        "duration": "PT62S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f8f6f7; --surface: #ffffff; --ink: #1a0f14; --muted: #4f4249; --faint: #85767d; --line: #ebe3e6;
+      --accent: #e11d48; --accent-ink: #be123c; --accent-soft: rgba(225, 29, 72, .08); --best: #1a0f14; --pre: #94a3b8;
+      --hero: #0b0710; --hero-2: #2a0f1f; --radius: 18px; --shadow: 0 1px 2px rgba(26, 15, 20, .05), 0 8px 28px rgba(26, 15, 20, .06);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0a0d; --surface: #181217; --ink: #f4ecef; --muted: #c0b1b8; --faint: #93838a; --line: #2e2329;
+        --accent: #fb7185; --accent-ink: #fda4af; --accent-soft: rgba(251, 113, 133, .11); --best: #ffffff; --pre: #64748b;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    /* hero */
+    .hero { background: radial-gradient(1200px 600px at 70% 10%, var(--hero-2), var(--hero) 70%); color: #f4eef1; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #fecdd3; border: 1px solid rgba(251, 113, 133, .55); background: rgba(251, 113, 133, .13); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 8px; font-size: clamp(46px, 8.4vw, 96px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { color: #fb7185; text-shadow: 0 0 40px rgba(251, 113, 133, .35); }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #efe3e8; margin: 0 0 22px; max-width: 940px; }
+    .authors { font-size: 18px; font-weight: 500; color: #ddd0d6; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #fb7185; }
+    .authors sup, .affil sup { color: #fda4af; font-weight: 600; margin-left: 1px; }
+    .affil { color: #a8959e; font-size: 15px; margin-top: 6px; display: flex; flex-wrap: wrap; gap: 2px 18px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #fb7185; border-color: #fb7185; color: #2a0610; }
+    .btn.primary:hover { background: #fda4af; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(11, 7, 16, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(11, 7, 16, .8); }
+
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b, p b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+    .sub { margin-top: 44px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 38px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .cards.four { grid-template-columns: repeat(4, 1fr); }
+    .cards.three { grid-template-columns: repeat(3, 1fr); }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card .big { font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: var(--accent-ink); line-height: 1.1; margin-bottom: 6px; }
+    .card p { margin: 0; font-size: 15.5px; }
+    .task img { border-radius: 10px; margin-bottom: 14px; background: #fff; border: 1px solid var(--line); }
+
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    .figure.dark { background: #000; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .stack { display: grid; gap: 16px; }
+
+    /* before / after comparison */
+    .cmp { margin-top: 22px; }
+    .cmp-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .cmp-box { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+    .cmp-in { width: 100%; border-radius: 10px; }
+    .cmp-stage { position: relative; margin-top: 10px; border-radius: 10px; overflow: hidden; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
+    .cmp-stage img { width: 100%; display: block; }
+    .cmp-stage .after { position: absolute; inset: 0; height: 100%; object-fit: cover; clip-path: inset(0 0 0 50%); }
+    .cmp-div { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, .5); pointer-events: none; }
+    .cmp-div::after { content: "◀ ▶"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; color: #1a0f14; font: 700 11px Inter, sans-serif; letter-spacing: 2px; padding: 7px 9px; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 10px rgba(0, 0, 0, .35); }
+    .cmp-lab { position: absolute; top: 8px; font-size: 12.5px; font-weight: 700; color: #fff; background: rgba(11, 7, 16, .62); padding: 3px 10px; border-radius: 999px; pointer-events: none; }
+    .cmp-lab.l { left: 8px; } .cmp-lab.r { right: 8px; }
+    .cmp-stage input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+    .cmp-note { font-size: 14px; color: var(--faint); margin: 10px 2px 0; }
+
+    /* results explorer */
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip.on { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .chip:disabled { opacity: .45; cursor: not-allowed; }
+    .rx { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px 16px; }
+    .rx-top { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .rx-legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; color: var(--muted); }
+    .rx-legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 6px; }
+    .rx-row { display: grid; grid-template-columns: 130px 1fr 74px; gap: 14px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line); }
+    .rx-row:last-child { border-bottom: 0; }
+    .rx-name { font-weight: 700; font-size: 15px; }
+    .rx-name small { display: block; font-weight: 500; font-size: 12px; color: var(--faint); }
+    .rx-bars { position: relative; display: grid; gap: 4px; }
+    .rx-bar { position: relative; height: 16px; border-radius: 5px; background: color-mix(in srgb, var(--line) 55%, transparent); }
+    .rx-bar span { position: absolute; inset: 0 auto 0 0; border-radius: 5px; transition: width .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-bar.pre span { background: var(--pre); }
+    .rx-bar.ft span { background: var(--accent); }
+    .rx-bar b { position: absolute; top: 50%; transform: translateY(-50%); font: 600 12px/1 "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; transition: left .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-bar.ft b { color: var(--accent-ink); }
+    .rx-ref { position: absolute; top: -4px; bottom: -4px; width: 0; border-left: 2px dashed var(--ink); opacity: .5; transition: left .5s; }
+    .rx-delta { font: 700 15px "JetBrains Mono", monospace; text-align: right; color: var(--accent-ink); }
+    .rx-delta.neg { color: var(--faint); }
+    .rx-base { margin-top: 14px; font-size: 14px; color: var(--faint); line-height: 1.6; }
+    .rx-base b { color: var(--muted); font-weight: 600; }
+
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .tbl + .tbl { margin-top: 16px; }
+    table { border-collapse: collapse; width: 100%; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 9px 12px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    thead th.grp { text-align: center; }
+    th[scope=row], thead tr:first-child th:first-child { text-align: left; color: var(--ink); font-weight: 600; }
+    td { color: var(--muted); }
+    td.best { color: var(--best); font-weight: 800; }
+    tr.ours th, tr.ours td { background: var(--accent-soft); }
+    tr.ours th[scope=row] { color: var(--accent-ink); font-weight: 800; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    .panel { margin-top: 16px; }
+    .callout { margin-top: 18px; padding: 16px 20px; border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 12px 12px 0; color: var(--ink); }
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 26px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .steps li::before { color: #2a0610; } }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+
+    .dl { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: start; }
+    .dl ul { padding-left: 20px; margin: 0 0 14px; color: var(--muted); }
+    .dl li { margin: 6px 0; }
+    .dl .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .dl .btn { background: var(--ink); color: var(--bg); border: 0; }
+    .dl .btn:hover { background: var(--accent); color: #fff; }
+    .codes { display: grid; gap: 12px; }
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; }
+    pre.code, .bib { position: relative; background: #140d12; color: #efe3e8; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    @media (prefers-color-scheme: dark) { pre.code, .bib { border: 1px solid var(--line); } }
+    pre.code .c { color: #a08f98; }
+
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(11, 7, 16, .9); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats, .cards.four { grid-template-columns: repeat(2, 1fr); }
+      .cards, .cards.three, .related, .dl, .grid2 { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stat .num { font-size: 30px; }
+      .steps, .cards.four { grid-template-columns: 1fr; }
+      .lead { font-size: 18.5px; }
+      .rx { padding: 16px 14px 12px; }
+      .rx-row { grid-template-columns: 92px 1fr 58px; gap: 8px; }
+      .rx-name { font-size: 13.5px; }
+      .rx-delta { font-size: 13px; }
+      th, td { padding: 8px 9px; }
+      .bib { padding-top: 54px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b, .rx-ref { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">ICLR 2025</span>
+    <h1>3DCorr<span>Enhance</span></h1>
+    <p class="subtitle">Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a><sup>1</sup></span>
+      <span><a href="https://github.com/yixinliii">Yixin Li</a><sup>1</sup></span>
+      <span><a href="https://cs.stanford.edu/~congyue/">Congyue Deng</a><sup>1</sup></span>
+      <span><a href="https://yuewang.xyz/">Yue Wang</a><sup>2</sup></span>
+      <span><a href="https://geometry.stanford.edu/">Leonidas Guibas</a><sup>1</sup></span>
+    </div>
+    <div class="affil"><span><sup>1</sup>Stanford University</span><span><sup>2</sup>University of Southern California</span></div>
+    <div class="links">
+      <a class="btn primary" href="https://arxiv.org/pdf/2411.19458"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://openreview.net/forum?id=CNO4rbSV6v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>OpenReview</a>
+      <a class="btn" href="https://github.com/qq456cvb/3DCorrEnhance"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="https://huggingface.co/spaces/qq456cvb/3DCorrEnhance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor"/></svg>Demo</a>
+      <a class="btn" href="https://huggingface.co/qq456cvb/3DCorrEnhance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>Models</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/3dcorrenhance/static/media/teaser.mp4" poster="/projects/3dcorrenhance/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="3DCorrEnhance teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#equivariance">3D equivariance</a><a href="#method">Finetuning</a><a href="#results">Results</a><a href="#minimal">One object</a><a href="#wild">In the wild</a><a href="#code">Code &amp; demo</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>Do vision transformers understand 3D?</h2>
+    <p class="lead">Foundation models such as <b>DINOv2</b> are trained on 2D images, yet 3D tasks increasingly rely on their features. We measure how <b>view-equivariant</b> those features are, meaning whether the same 3D point gets the same feature from every viewpoint. Equivariance turns out to predict performance on pose estimation, tracking and semantic correspondence, and a <b>light finetuning on 3D correspondences</b> improves it for every model we tried.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">1.8B</div><p>correspondence pairs to measure equivariance, from 1,000 Objaverse objects in 42 views</p></div>
+      <div class="stat"><div class="num">+9.58</div><p>3cm-3deg pose accuracy on OnePose-LowTex for DINOv2 after finetuning</p></div>
+      <div class="stat"><div class="num">+6.45</div><p>Average Jaccard on TAP-Vid-DAVIS tracking, and +5.06 PCK@0.05 on PF-PASCAL</p></div>
+      <div class="stat"><div class="num">1<small>object</small></div><p>one multiview pair and a single iteration already give about half of the full gain or more</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="equivariance">
+  <div class="wrap">
+    <div class="kicker">3D equivariance</div>
+    <h2>The same 3D point should get the same feature</h2>
+    <p>We render 1,000 Objaverse objects from 42 views (42,000 images and 1.8 billion dense correspondences) and sample 1,000 real MVImgNet objects (33.3 million correspondences). For each point in one view, we find its nearest neighbour in feature space in another view, and score how far it lands from the true match: <b>APE</b>, the average pixel error, and <b>PCDP</b>, the percentage of correct dense points. We compare DINOv2, DINOv2 with registers, MAE, CLIP and DeiT.</p>
+    <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/features_models.jpg" width="1638" height="673" loading="lazy" decoding="async" alt="An Objaverse horse skeleton from a reference view and two other views, with the features of DINOv2, DINOv2-Reg, MAE, CLIP and DeiT shown as PCA colours; DINOv2's colours stay the most consistent across views."><figcaption>Features as PCA colours across three views. MAE mixes up the head and the body, CLIP and DeiT change the chest's features between views, and DINOv2 is the most consistent.</figcaption></figure>
+
+    <h3 class="sub">Equivariance predicts 3D task performance</h3>
+    <p>We test three tasks that rely on correspondences, from easy to hard. Across models, lower APE (more equivariant features) goes with better scores on all of them.</p>
+    <div class="cards three">
+      <div class="card task"><img src="/projects/3dcorrenhance/static/media/task_pose_estimation.jpg" width="1200" height="530" loading="lazy" decoding="async" alt="One-shot pose estimation: 2D descriptors from reference views are back-projected into a database and matched to a query image, then RANSAC-PnP gives the pose."><h3>One-shot pose estimation</h3><p>Same object, rigid motion. Match a query image to stored views, then solve RANSAC-PnP. OnePose-LowTex and YCB-Video.</p></div>
+      <div class="card task"><img src="/projects/3dcorrenhance/static/media/task_tracking.jpg" width="1200" height="564" loading="lazy" decoding="async" alt="Video tracking: a point in the first frame is found in later frames by nearest-neighbour search on dense features."><h3>Video tracking</h3><p>Same object, non-rigid motion. Follow points through a video by feature similarity. TAP-Vid-DAVIS.</p></div>
+      <div class="card task"><img src="/projects/3dcorrenhance/static/media/task_semantic_transfer.jpg" width="1200" height="492" loading="lazy" decoding="async" alt="Semantic transfer: keypoints on a reference airplane are transferred to another airplane by nearest-neighbour search on features."><h3>Semantic correspondence</h3><p>Different objects of a category, any viewpoint. Transfer keypoints by feature similarity. PF-PASCAL.</p></div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/correlation_pose_image.jpg" width="1000" height="588" loading="lazy" decoding="async" alt="Scatter plot: pose accuracy on OnePose-LowTex against APE for five ViTs; DINOv2 has the lowest APE and the highest accuracy."></figure>
+      <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/correlation_tracking.jpg" width="1000" height="588" loading="lazy" decoding="async" alt="Scatter plot: tracking Average Jaccard on TAP-Vid-DAVIS against APE for five ViTs; lower APE goes with higher AJ."></figure>
+      <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/correlation_pose_video.jpg" width="1000" height="588" loading="lazy" decoding="async" alt="Scatter plot: average recall on YCB-Video against APE for five ViTs."></figure>
+      <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/correlation_corr.jpg" width="1000" height="588" loading="lazy" decoding="async" alt="Scatter plot: PF-PASCAL keypoint matching accuracy against APE for five ViTs."></figure>
+    </div>
+    <p class="callout">The points line up from the top left to the bottom right: <b>more equivariant features, better 3D task performance</b>. DINOv2 leads on both axes.</p>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="kicker">Finetuning</div>
+    <h2>Pull corresponding pixels together</h2>
+    <p>If equivariance helps, can we train for it? We finetune each model so that pixels showing the same 3D point in two views get similar features.</p>
+    <ol class="steps">
+      <li><b>Two views</b>Pick an Objaverse object and two of its rendered views, and sample pixels that see the same 3D points.</li>
+      <li><b>Light adapters</b>LoRA on the last four transformer blocks, plus one 3×3 convolution that mixes neighbouring patches before upsampling.</li>
+      <li><b>Ranking loss</b>SmoothAP makes each pixel's true match rank first among candidates. It beats a contrastive loss with a fixed margin.</li>
+      <li><b>Short training</b>10K iterations with AdamW at learning rate 1e-5, on a 10K-object subset of Objaverse.</li>
+    </ol>
+    <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/overview.jpg" width="2000" height="767" loading="lazy" decoding="async" alt="Overview: feature PCA colours of an acorn and a stapler from a pretrained ViT and from the same ViT finetuned on one synthetic object; radar charts show finetuned DINOv2, MAE, CLIP and DeiT beating the originals on pose estimation, tracking and semantic transfer."><figcaption>Finetuned on one synthetic object, a ViT gives more consistent features on other objects (left) and better scores on pose estimation, tracking and semantic transfer (right).</figcaption></figure>
+
+    <div class="cmp" id="cmp">
+      <div class="cmp-head">
+        <h3 style="margin:0">Before and after, on unseen objects and scenes</h3>
+        <div class="chips" role="group" aria-label="Example"><button class="chip on" type="button" data-ex="speaker">Speaker</button><button class="chip" type="button" data-ex="turtle">Turtle</button><button class="chip" type="button" data-ex="scooter">Street scene</button></div>
+      </div>
+      <div class="cmp-box">
+        <img class="cmp-in" id="cmp-in" src="/projects/3dcorrenhance/static/media/cmp_speaker_input.jpg" width="1141" height="411" alt="Three input views">
+        <div class="cmp-stage" id="cmp-stage">
+          <img id="cmp-before" src="/projects/3dcorrenhance/static/media/cmp_speaker_before.jpg" width="1141" height="412" alt="DINOv2 features before finetuning">
+          <img class="after" id="cmp-after" src="/projects/3dcorrenhance/static/media/cmp_speaker_after.jpg" width="1141" height="411" alt="DINOv2 features after finetuning">
+          <div class="cmp-div" id="cmp-div"></div>
+          <span class="cmp-lab l">Before</span><span class="cmp-lab r">After finetuning</span>
+          <input type="range" id="cmp-range" min="0" max="100" value="50" aria-label="Drag to compare features before and after finetuning">
+        </div>
+      </div>
+      <p class="cmp-note">DINOv2 features as PCA colours, before and after finetuning. Drag across the image: after finetuning, features are smoother, less noisy and more consistent between views. Objects from MVImgNet; scene from TAP-Vid-DAVIS.</p>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="kicker">Results</div>
+    <h2>Every model gets better at every 3D task</h2>
+    <p>The same finetuning recipe improves DINOv2, DINOv2 with registers, MAE, CLIP and DeiT, and it is trained only on synthetic objects, yet it also improves equivariance on real MVImgNet images. Pick a benchmark and a metric.</p>
+    <div class="tabs" role="tablist" aria-label="Benchmark" id="rx-tabs"></div>
+    <div class="rx" id="rx">
+      <div class="rx-top">
+        <div class="chips" id="rx-metrics" role="group" aria-label="Metric"></div>
+        <div class="chips" role="group" aria-label="Backbones"><button class="chip on" type="button" data-set="main">5 ViTs</button><button class="chip" type="button" data-set="more" id="rx-more">More backbones</button></div>
+      </div>
+      <div class="rx-legend"><span><i style="background:var(--pre)"></i>Pretrained</span><span><i style="background:var(--accent)"></i>Finetuned</span><span id="rx-reflab" hidden><i style="border:2px dashed var(--ink);opacity:.5"></i><span id="rx-refname"></span></span></div>
+      <div id="rx-rows" style="margin-top:10px"></div>
+      <p class="rx-base" id="rx-base"></p>
+    </div>
+    <p class="cmp-note">All numbers from the paper and its appendix. The main metric of every benchmark improves for every model; a few secondary ones barely move (for example tracking occlusion accuracy for MAE and CLIP). "More backbones" covers DINOv2 Small to Giant, with and without registers, and ConvNeXt, on the three main benchmarks.</p>
+  </div>
+</section>
+
+<section id="minimal">
+  <div class="wrap">
+    <div class="kicker">One object</div>
+    <h2>A little 3D goes a long way</h2>
+    <p>Finetuning on a <b>single object</b> already brings large improvements, and which object hardly matters: six random Objaverse objects all work, even an <b>untextured hemisphere</b>. Training on one multiview pair for a <b>single iteration</b> improves DINOv2 by 4.85 (3cm-3deg pose), 3.55 (tracking AJ) and 3.47 (PCK@0.05).</p>
+    <div class="grid2">
+      <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/diff_objs.jpg" width="1800" height="645" loading="lazy" decoding="async" alt="Bar charts of DINOv2 finetuned on six different single objects, including an untextured hemisphere; all beat the pretrained model, shown as dashed lines."><figcaption>Finetuning on six different single objects. Dashed lines: the pretrained model.</figcaption></figure>
+      <figure class="figure dark" data-zoom><img src="/projects/3dcorrenhance/static/media/hemisphere.jpg" width="1400" height="893" loading="lazy" decoding="async" alt="An untextured hemisphere from four viewpoints, with DINOv2 features before and after finetuning; after finetuning, edges and inward and outward views get consistent features."><figcaption>An untextured hemisphere: after finetuning, edges and inward and outward views get consistent features.</figcaption></figure>
+    </div>
+    <div class="stack" style="margin-top:16px">
+      <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/ablation_iter_pose.jpg" width="1800" height="200" loading="lazy" decoding="async" alt="One-shot pose accuracy on OnePose-LowTex against the number of training iterations on one object; the curve jumps after the first iteration."></figure>
+      <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/ablation_iter_tracking.jpg" width="1800" height="200" loading="lazy" decoding="async" alt="Tracking metrics on TAP-Vid-DAVIS against the number of training iterations on one object."></figure>
+      <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/ablation_iter_corr.jpg" width="1800" height="200" loading="lazy" decoding="async" alt="PF-PASCAL PCK against the number of training iterations on one object."><figcaption>Performance against training iterations on a single object (0 to 10,000). The jump happens at the first iteration.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="wild">
+  <div class="wrap">
+    <div class="kicker">In the wild</div>
+    <h2>Drop-in better features</h2>
+    <p>Methods that use DINO features can simply swap in the finetuned ones. In <b>Wild Gaussians</b>, which uses DINOv2 to handle occluders in novel view synthesis, the finetuned features improve PSNR, SSIM and LPIPS on almost every scene. In <b>LERF</b>, they sharpen the language-embedded relevancy maps.</p>
+    <div class="tbl wide"><table><caption>Novel view synthesis in the wild with Wild Gaussians, swapping in the finetuned DINOv2 features. <b>Bold</b>: better.</caption><thead><tr><th rowspan="2">Features</th><th colspan="3" class="grp">Mountain</th><th colspan="3" class="grp">Fountain</th><th colspan="3" class="grp">Corner</th><th colspan="3" class="grp">Patio</th><th colspan="3" class="grp">Spot</th><th colspan="3" class="grp">Patio-High</th></tr><tr><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th></tr></thead><tbody><tr><th scope="row">Wild Gaussians, original DINOv2</th><td>20.82</td><td>0.668</td><td>0.239</td><td>20.90</td><td>0.668</td><td>0.213</td><td>23.51</td><td>0.810</td><td>0.152</td><td class=best>21.31</td><td>0.802</td><td>0.134</td><td>23.96</td><td>0.777</td><td>0.165</td><td>22.04</td><td>0.734</td><td>0.202</td></tr><tr class=ours><th scope="row">Wild Gaussians, finetuned DINOv2</th><td class=best>21.01</td><td class=best>0.672</td><td class=best>0.234</td><td class=best>20.97</td><td class=best>0.672</td><td class=best>0.212</td><td class=best>23.74</td><td class=best>0.810</td><td class=best>0.151</td><td>21.23</td><td>0.802</td><td class=best>0.133</td><td class=best>24.01</td><td class=best>0.778</td><td class=best>0.163</td><td class=best>22.11</td><td>0.734</td><td class=best>0.201</td></tr></tbody></table></div>
+    <figure class="figure" data-zoom style="margin-top:16px"><img src="/projects/3dcorrenhance/static/media/lerf.jpg" width="1800" height="395" loading="lazy" decoding="async" alt="LERF relevancy maps for a query: with the original DINO regularizer and with the finetuned one, which localizes the object more tightly."><figcaption>LERF with the original DINO regularizer (middle) and with the finetuned one (right).</figcaption></figure>
+    <div class="grid2" style="margin-top:16px">
+      <figure class="figure dark" data-zoom><img src="/projects/3dcorrenhance/static/media/matches_before.jpg" width="1280" height="429" loading="lazy" decoding="async" alt="Mutual nearest-neighbour matches between an object with and without its background, using pretrained DINOv2 features: few matches."><figcaption>Pretrained DINOv2: matches between an object with and without its background.</figcaption></figure>
+      <figure class="figure dark" data-zoom><img src="/projects/3dcorrenhance/static/media/matches_after.jpg" width="1280" height="429" loading="lazy" decoding="async" alt="The same pair with finetuned features: many more matches."><figcaption>Finetuned: more matches. Inliers on 1K COCO objects, before → after: DINOv2 99 → 159 · DINOv2-Reg 76 → 148 · MAE 97 → 196 · CLIP 18 → 61 · DeiT 25 → 81.</figcaption></figure>
+    </div>
+    <p class="cmp-note">Finetuning targets 3D correspondence. On tasks that need other things, features stay close to the original: Paris-H instance retrieval 75.92 → 76.23, VOC2012 segmentation mIoU 83.60 → 82.65, NYUv2 depth δ<sub>1</sub> 86.88 → 85.48 (DINOv2-Base, from the appendix).</p>
+  </div>
+</section>
+
+<section id="ablations">
+  <div class="wrap">
+    <div class="kicker">Design choices</div>
+    <h2>What matters in the recipe</h2>
+    <div class="tabs" role="tablist" aria-label="Ablation">
+      <button role="tab" class="tab on" data-ab="0" aria-selected="true">Conv layers</button>
+      <button role="tab" class="tab" data-ab="1" aria-selected="false">Loss</button>
+      <button role="tab" class="tab" data-ab="2" aria-selected="false">Training data</button>
+      <button role="tab" class="tab" data-ab="3" aria-selected="false">Learning rate</button>
+    </div>
+    <div class="panel" id="ab-panels"><div class="tbl wide"><table><caption>Number of convolution layers added after the ViT. DINOv2-Base. <b>Bold</b>: best in each column; highlighted: the setting used.</caption><thead><tr><th rowspan="2">Variant</th><th colspan="3" class="grp">OnePose-LowTex</th><th colspan="3" class="grp">TAP-Vid-DAVIS</th><th colspan="3" class="grp">PF-PASCAL, diff. views</th></tr><tr><th>1cm-1deg</th><th>3cm-3deg</th><th>5cm-5deg</th><th>AJ</th><th>δ<sub>avg</sub></th><th>OA</th><th>PCK@0.05</th><th>PCK@0.10</th><th>PCK@0.15</th></tr></thead><tbody><tr><th scope="row">0 conv layers</th><td>11.69</td><td>53.85</td><td>72.83</td><td>44.50</td><td>60.79</td><td>84.08</td><td>44.82</td><td>57.14</td><td>65.26</td></tr><tr class=ours><th scope="row">1 conv layer</th><td class=best>13.58</td><td class=best>58.03</td><td class=best>77.35</td><td>46.85</td><td class=best>63.84</td><td class=best>84.15</td><td class=best>47.25</td><td class=best>60.76</td><td class=best>67.57</td></tr><tr><th scope="row">2 conv layers</th><td>13.12</td><td>56.14</td><td>75.45</td><td class=best>47.42</td><td>63.25</td><td>84.12</td><td>46.32</td><td>58.05</td><td>64.90</td></tr><tr><th scope="row">3 conv layers</th><td>12.15</td><td>53.63</td><td>74.46</td><td>46.84</td><td>62.14</td><td>82.90</td><td>41.60</td><td>53.97</td><td>60.22</td></tr></tbody></table></div><div class="tbl wide"><table><caption>Training loss. DINOv2-Base. <b>Bold</b>: best in each column; highlighted: the setting used.</caption><thead><tr><th rowspan="2">Variant</th><th colspan="3" class="grp">OnePose-LowTex</th><th colspan="3" class="grp">TAP-Vid-DAVIS</th><th colspan="3" class="grp">PF-PASCAL, diff. views</th></tr><tr><th>1cm-1deg</th><th>3cm-3deg</th><th>5cm-5deg</th><th>AJ</th><th>δ<sub>avg</sub></th><th>OA</th><th>PCK@0.05</th><th>PCK@0.10</th><th>PCK@0.15</th></tr></thead><tbody><tr class=ours><th scope="row">SmoothAP</th><td class=best>13.58</td><td class=best>58.03</td><td class=best>77.35</td><td class=best>46.85</td><td class=best>63.84</td><td class=best>84.15</td><td class=best>47.25</td><td class=best>60.76</td><td class=best>67.57</td></tr><tr><th scope="row">Contrastive</th><td>13.28</td><td>55.57</td><td>75.68</td><td>43.79</td><td>62.20</td><td>81.84</td><td>46.70</td><td>58.08</td><td>66.21</td></tr><tr><th scope="row">Differentiable Procrustes</th><td>12.92</td><td>55.00</td><td>74.86</td><td>43.60</td><td>61.32</td><td>82.74</td><td>43.89</td><td>57.22</td><td>64.66</td></tr></tbody></table></div><div class="tbl wide"><table><caption>Finetuning data. DINOv2-Base. <b>Bold</b>: best in each column; highlighted: the setting used.</caption><thead><tr><th rowspan="2">Variant</th><th colspan="3" class="grp">OnePose-LowTex</th><th colspan="3" class="grp">TAP-Vid-DAVIS</th><th colspan="3" class="grp">PF-PASCAL, diff. views</th></tr><tr><th>1cm-1deg</th><th>3cm-3deg</th><th>5cm-5deg</th><th>AJ</th><th>δ<sub>avg</sub></th><th>OA</th><th>PCK@0.05</th><th>PCK@0.10</th><th>PCK@0.15</th></tr></thead><tbody><tr class=ours><th scope="row">Objaverse (synthetic objects)</th><td>13.58</td><td>58.03</td><td class=best>77.35</td><td>46.85</td><td class=best>63.84</td><td class=best>84.15</td><td class=best>47.25</td><td class=best>60.76</td><td class=best>67.57</td></tr><tr><th scope="row">MVImgNet (real objects)</th><td>13.65</td><td>56.98</td><td>74.61</td><td>41.53</td><td>58.89</td><td>82.67</td><td>45.13</td><td>57.93</td><td>65.40</td></tr><tr><th scope="row">Scene-centric (RealEstate10K, Spaces, LLFF)</th><td class=best>15.95</td><td class=best>60.79</td><td>76.35</td><td class=best>47.36</td><td>63.07</td><td>80.27</td><td>41.73</td><td>52.33</td><td>60.33</td></tr></tbody></table></div><div class="tbl wide"><table><caption>Learning rate. DINOv2-Base. <b>Bold</b>: best in each column; highlighted: the setting used.</caption><thead><tr><th rowspan="2">Variant</th><th colspan="3" class="grp">OnePose-LowTex</th><th colspan="3" class="grp">TAP-Vid-DAVIS</th><th colspan="3" class="grp">PF-PASCAL, diff. views</th></tr><tr><th>1cm-1deg</th><th>3cm-3deg</th><th>5cm-5deg</th><th>AJ</th><th>δ<sub>avg</sub></th><th>OA</th><th>PCK@0.05</th><th>PCK@0.10</th><th>PCK@0.15</th></tr></thead><tbody><tr><th scope="row">learning rate 1e-6</th><td>11.86</td><td>55.03</td><td>73.12</td><td>44.79</td><td>62.56</td><td>83.17</td><td class=best>47.34</td><td>60.10</td><td class=best>68.23</td></tr><tr><th scope="row">learning rate 3e-6</th><td>13.05</td><td>57.45</td><td>75.89</td><td>45.93</td><td>63.32</td><td>83.73</td><td>47.20</td><td>60.50</td><td>67.21</td></tr><tr class=ours><th scope="row">learning rate 1e-5</th><td class=best>13.58</td><td>58.03</td><td>77.35</td><td class=best>46.85</td><td class=best>63.84</td><td class=best>84.15</td><td>47.25</td><td class=best>60.76</td><td>67.57</td></tr><tr><th scope="row">learning rate 3e-5</th><td>13.15</td><td class=best>58.33</td><td class=best>77.49</td><td>46.70</td><td>63.45</td><td>83.35</td><td>45.70</td><td>57.96</td><td>65.99</td></tr></tbody></table></div></div>
+    <p class="cmp-note">One convolution layer works best; SmoothAP beats contrastive and Procrustes losses; object-centric Objaverse beats real MVImgNet and scene-centric data overall; results are stable across learning rates.</p>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap dl">
+    <div>
+      <div class="kicker">Code &amp; demo</div>
+      <h2>Use the features</h2>
+      <ul>
+        <li><b>Demo:</b> try the finetuned features on your own images in the Hugging Face Space.</li>
+        <li><b>Models:</b> finetuned DINOv2 Small, Base, Large and Giant, and the other ViTs, on Hugging Face.</li>
+        <li><b>Code:</b> finetuning on Objaverse and evaluation on pose estimation, tracking and semantic transfer.</li>
+      </ul>
+      <div class="btns">
+        <a class="btn" href="https://huggingface.co/spaces/qq456cvb/3DCorrEnhance">Demo</a>
+        <a class="btn" href="https://huggingface.co/qq456cvb/3DCorrEnhance">Models</a>
+        <a class="btn" href="https://github.com/qq456cvb/3DCorrEnhance">GitHub</a>
+      </div>
+    </div>
+    <div class="codes">
+<pre class="code">from finetune import FinetuneDINO   <span class="c"># from the GitHub repo</span>
+
+model = FinetuneDINO.load_from_checkpoint(
+    'https://huggingface.co/qq456cvb/3DCorrEnhance/resolve/main/dinov2_base.ckpt',
+    r=4, backbone_size='base').eval().cuda()
+
+<span class="c"># rgb: 3 x H x W float tensor in [0, 1]</span>
+with torch.no_grad():
+    feats = model.get_feature_wo_kp(rgb[None].cuda(), normalize=True)[0]   <span class="c"># H x W x F</span></pre>
+<pre class="code">python evaluate.py --ckpt /path/to/ckpt --pose --tracking --transfer</pre>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>Vision foundation models, particularly the ViT family, have revolutionized image understanding by providing rich semantic features. However, despite their success in 2D comprehension, their abilities on grasping 3D spatial relationships are still unclear. In this work, we evaluate and enhance the 3D awareness of ViT-based models. We begin by systematically assessing their ability to learn 3D equivariant features, specifically examining the consistency of semantic embeddings across different viewpoints. Our findings indicate that improved 3D equivariance leads to better performance on various downstream tasks, including pose estimation, tracking, and semantic transfer. Building on this insight, we propose a simple yet effective finetuning strategy based on 3D correspondences, which significantly enhances the 3D correspondence understanding of existing vision models. Remarkably, finetuning on a single object for one iteration results in substantial gains.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/publications/sparsedff"><div class="venue">ICLR 2024</div><h3>SparseDFF</h3><p>Distilling DINO features across sparse views for one-shot dexterous manipulation.</p></a>
+      <a class="card" href="/projects/keypointnet"><div class="venue">CVPR 2020</div><h3>KeypointNet</h3><p>A large 3D keypoint dataset with semantic correspondences across objects of a category.</p></a>
+      <a class="card" href="/publications/corr"><div class="venue">Preprint</div><h3>Semantic Correspondence via 2D-3D-2D Cycle</h3><p>Semantic correspondence between images, reasoned through 3D.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@inproceedings{you2025multiview,
+  title={Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning},
+  author={You, Yang and Li, Yixin and Deng, Congyue and Wang, Yue and Guibas, Leonidas},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2025},
+  url={https://openreview.net/forum?id=CNO4rbSV6v}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2025 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script id="rx-data" type="application/json">{"tasks":[{"id":"onepose","label":"OnePose-LowTex","metrics":["1cm-1deg","3cm-3deg","5cm-5deg"],"higher":[1,1,1],"dec":2,"models":{"DINOv2":[[9.43,48.45,67.45],[13.58,58.03,77.35]],"DINOv2-Reg":[[9.95,52.65,71.72],[13.41,59.32,78.64]],"MAE":[[4.41,20.76,32.27],[10.27,39.37,52.97]],"CLIP":[[2.85,19.65,33.84],[6.72,35.63,52.94]],"DeiT":[[2.55,16.85,31.67],[7.2,33.24,49.43]]},"baselines":{"DUSt3R":[2.88,16.61,26.79],"FiT":[1.05,9.18,16.52],"FiT-Reg":[3.44,23.51,37.68]},"ref":["OnePose++",[16.8,57.7,72.1]]},{"id":"ycbv","label":"YCB-Video","metrics":["VSD","MSSD","MSPD","AR"],"higher":[1,1,1,1],"dec":1,"models":{"DINOv2":[[34.9,39.4,58.8,44.4],[39.9,44.4,63.9,49.4]],"DINOv2-Reg":[[34.2,37.9,55.4,42.5],[38.1,42.3,60.0,46.8]],"MAE":[[15.9,17.9,26.8,20.2],[32.2,36.8,54.0,41.0]],"CLIP":[[17.0,19.1,31.0,22.4],[28.3,31.3,35.6,28.3]],"DeiT":[[19.4,19.8,31.2,23.5],[29.4,31.1,45.6,35.4]]},"baselines":{"DUSt3R":[11.6,11.5,15.8,13.0],"FiT":[4.4,3.2,3.4,3.7],"FiT-Reg":[10.2,9.4,11.3,10.3]},"ref":["MegaPose",[53.5,59.7,72.8,62.0]]},{"id":"davis","label":"TAP-Vid-DAVIS","metrics":["AJ","\u03b4<sub>avg</sub>","OA"],"higher":[1,1,1],"dec":2,"models":{"DINOv2":[[40.4,58.11,81.46],[46.85,63.84,84.15]],"DINOv2-Reg":[[37.89,55.43,80.77],[44.91,62.23,83.85]],"MAE":[[29.99,48.16,77.27],[36.04,54.97,77.27]],"CLIP":[[25.86,41.17,79.28],[32.13,49.31,79.09]],"DeiT":[[26.8,42.06,78.45],[32.55,48.41,78.49]]},"baselines":{"DUSt3R":[13.06,22.64,77.27],"FiT":[20.45,33.46,77.27],"FiT-Reg":[23.28,37.3,77.27]},"ref":["Co-Tracker",[65.6,79.4,89.5]]},{"id":"pfdiff","label":"PF-PASCAL, different views","metrics":["PCK@0.05","PCK@0.10","PCK@0.15"],"higher":[1,1,1],"dec":2,"models":{"DINOv2":[[42.18,56.9,65.59],[47.24,60.76,67.57]],"DINOv2-Reg":[[38.29,53.74,61.94],[44.44,57.27,65.27]],"MAE":[[11.98,20.16,28.16],[14.45,23.79,32.56]],"CLIP":[[13.87,24.85,35.13],[20.39,32.36,42.58]],"DeiT":[[17.73,31.17,41.17],[20.24,33.29,41.62]]},"baselines":{"DUSt3R":[4.7,8.21,13.01],"FiT":[13.1,23.99,33.45],"FiT-Reg":[22.39,36.45,45.27]},"ref":null},{"id":"pfsame","label":"PF-PASCAL, same view","metrics":["PCK@0.05","PCK@0.10","PCK@0.15"],"higher":[1,1,1],"dec":2,"models":{"DINOv2":[[60.22,79.05,85.95],[69.16,84.94,89.82]],"DINOv2-Reg":[[52.86,71.93,80.11],[62.63,79.24,86.69]],"MAE":[[17.16,31.52,43.54],[21.26,36.16,48.52]],"CLIP":[[17.44,31.38,41.81],[27.4,42.72,52.67]],"DeiT":[[21.21,38.96,50.36],[30.18,49.69,60.34]]},"baselines":{"DUSt3R":[2.64,8.01,15.0],"FiT":[13.96,27.42,37.39],"FiT-Reg":[26.47,45.74,55.32]},"ref":null},{"id":"objaverse","label":"Objaverse equivariance","metrics":["PCDP@0.05","PCDP@0.1","PCDP@0.2","APE"],"higher":[1,1,1,0],"dec":2,"models":{"DINOv2":[[22.6,36.84,58.88,19.12],[30.61,43.65,61.78,17.98]],"DINOv2-Reg":[[23.05,37.24,58.23,19.51],[22.81,36.39,57.84,19.48]],"MAE":[[16.25,30.71,55.46,20.58],[22.57,35.94,56.93,19.88]],"CLIP":[[17.05,33.0,57.17,20.11],[22.54,38.01,59.71,19.17]],"DeiT":[[18.07,33.89,58.05,19.72],[23.39,38.47,59.95,19.0]]},"baselines":{},"ref":null},{"id":"mvimgnet","label":"MVImgNet equivariance","metrics":["PCDP@0.05","PCDP@0.1","PCDP@0.2","APE"],"higher":[1,1,1,0],"dec":2,"models":{"DINOv2":[[62.09,77.94,92.49,6.24],[71.74,83.12,93.41,4.96]],"DINOv2-Reg":[[64.54,78.99,92.25,6.06],[64.35,78.38,92.36,5.9]],"MAE":[[59.1,75.82,91.42,6.73],[73.76,82.58,92.75,4.76]],"CLIP":[[46.63,63.49,80.53,11.34],[60.23,72.78,85.69,8.42]],"DeiT":[[54.63,72.36,87.64,8.34],[67.31,80.12,91.63,5.89]]},"baselines":{},"ref":null}],"more":{"DINOv2-S":[[8.14,45.77,65.79,37.56,55.04,80.54,39.02,53.26,61.49],[12.85,56.17,74.27,45.17,61.35,83.14,41.02,53.78,60.95]],"DINOv2-L":[[10.83,51.68,70.01,42.56,59.88,83.29,44.22,57.92,65.85],[13.86,58.79,77.46,49.1,65.0,85.42,51.66,62.96,70.48]],"DINOv2-G":[[13.58,58.73,76.27,44.79,61.01,85.27,44.57,57.63,65.76],[14.58,60.08,78.48,50.77,66.0,85.82,50.89,61.98,68.44]],"DINOv2-S-reg":[[10.25,49.04,68.83,34.61,52.21,79.35,31.3,45.47,54.73],[12.25,56.69,75.66,40.53,58.5,81.14,38.78,52.08,59.26]],"DINOv2-L-reg":[[10.89,51.17,69.99,39.47,56.69,82.26,41.26,56.24,63.38],[14.0,58.58,77.12,46.43,63.2,84.43,48.03,60.17,67.13]],"DINOv2-G-reg":[[11.14,53.84,72.28,41.39,58.62,83.09,40.94,53.84,61.87],[14.24,59.88,79.19,47.93,64.43,85.38,47.36,59.2,66.55]],"ConvNext-small":[[3.25,13.46,21.39,15.98,26.08,74.72,10.32,16.3,22.17],[5.28,19.98,28.23,16.7,26.56,74.54,11.61,19.38,25.56]],"ConvNext-base":[[5.1,22.22,34.81,17.57,28.21,72.47,13.62,21.03,27.81],[8.05,32.69,46.41,18.53,28.48,71.24,15.64,25.37,32.13]],"ConvNext-large":[[4.71,25.33,36.48,19.43,30.24,73.71,11.05,17.57,24.19],[7.21,30.68,44.47,19.45,30.68,74.33,14.56,24.04,31.57]]},"headline":{"onepose":{"label":"OnePose-LowTex","metric":"3cm-3deg","before":48.45,"after":58.03,"gain":9.58},"ycbv":{"label":"YCB-Video","metric":"AR","before":44.4,"after":49.4,"gain":5.0},"davis":{"label":"TAP-Vid-DAVIS","metric":"AJ","before":40.4,"after":46.85,"gain":6.45},"pfdiff":{"label":"PF-PASCAL, different views","metric":"PCK@0.05","before":42.18,"after":47.24,"gain":5.06}}}</script>
+<script>
+(function () {
+  /* ---------- before / after comparison slider ---------- */
+  var cmpIn = document.getElementById('cmp-in'), cb = document.getElementById('cmp-before'), ca = document.getElementById('cmp-after');
+  var cdiv = document.getElementById('cmp-div'), cr = document.getElementById('cmp-range');
+  function split(p) { ca.style.clipPath = 'inset(0 0 0 ' + p + '%)'; cdiv.style.left = p + '%'; }
+  cr.addEventListener('input', function () { split(cr.value); });
+  document.querySelectorAll('#cmp .chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      document.querySelectorAll('#cmp .chip').forEach(function (x) { x.classList.toggle('on', x === c); });
+      var e = c.dataset.ex, base = '/projects/3dcorrenhance/static/media/cmp_' + e + '_';
+      cmpIn.src = base + 'input.jpg'; cb.src = base + 'before.jpg'; ca.src = base + 'after.jpg';
+    });
+  });
+
+  /* ---------- results explorer: pretrained vs finetuned bars from the paper's tables ---------- */
+  var D = JSON.parse(document.getElementById('rx-data').textContent), tabs = document.getElementById('rx-tabs');
+  var rowsEl = document.getElementById('rx-rows'), metEl = document.getElementById('rx-metrics'), baseEl = document.getElementById('rx-base');
+  var moreBtn = document.getElementById('rx-more'), refLab = document.getElementById('rx-reflab'), refName = document.getElementById('rx-refname');
+  var MORE_TASKS = { onepose: 0, davis: 3, pfdiff: 6 };
+  var MORE_NAMES = { 'DINOv2-S': 'DINOv2-S', 'DINOv2-L': 'DINOv2-L', 'DINOv2-G': 'DINOv2-G', 'DINOv2-S-reg': 'DINOv2-S-Reg', 'DINOv2-L-reg': 'DINOv2-L-Reg', 'DINOv2-G-reg': 'DINOv2-G-Reg', 'ConvNext-small': 'ConvNeXt-S', 'ConvNext-base': 'ConvNeXt-B', 'ConvNext-large': 'ConvNeXt-L' };
+  var task = D.tasks[0], metric = 1, set = 'main';
+  D.tasks.forEach(function (t, i) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'tab' + (i ? '' : ' on'); b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', String(!i));
+    b.textContent = t.label; b.dataset.task = t.id; tabs.appendChild(b);
+  });
+  function f2(v) { return v.toFixed(task.dec); }
+  function render() {
+    moreBtn.disabled = !(task.id in MORE_TASKS);
+    if (moreBtn.disabled && set === 'more') set = 'main';
+    document.querySelectorAll('[data-set]').forEach(function (c) { c.classList.toggle('on', c.dataset.set === set); });
+    metEl.innerHTML = task.metrics.map(function (m, i) { return '<button type="button" class="chip' + (i === metric ? ' on' : '') + '" data-m="' + i + '">' + m + (task.higher[i] ? '' : ' ↓') + '</button>'; }).join('');
+    var rows = [], hib = task.higher[metric];
+    if (set === 'main') {
+      Object.keys(task.models).forEach(function (m) { var v = task.models[m]; rows.push([m, v[0][metric], v[1][metric]]); });
+    } else {
+      var off = MORE_TASKS[task.id], dv = task.models['DINOv2'];
+      rows.push(['DINOv2-B', dv[0][metric], dv[1][metric]]);
+      Object.keys(D.more).forEach(function (m) { var v = D.more[m]; rows.push([MORE_NAMES[m] || m, v[0][off + metric], v[1][off + metric]]); });
+      rows.sort(function (a, b) { return a[0].localeCompare(b[0]); });
+    }
+    var ref = task.ref && set === 'main' ? task.ref[1][metric] : null;
+    /* leave room after the longest bar for its value label; narrow screens need more */
+    var mx = Math.max.apply(null, rows.map(function (r) { return Math.max(r[1], r[2]); }).concat(ref ? [ref] : [])) * (rowsEl.clientWidth < 520 ? 1.6 : 1.14);
+    rowsEl.innerHTML = rows.map(function (r) {
+      var d = r[2] - r[1], good = hib ? d > 0 : d < 0, pw = r[1] / mx * 100, fw = r[2] / mx * 100;
+      return '<div class="rx-row"><div class="rx-name">' + r[0] + '</div><div class="rx-bars">' +
+        '<div class="rx-bar pre"><span style="width:' + pw + '%"></span><b style="left:calc(' + pw + '% + 6px)">' + f2(r[1]) + '</b></div>' +
+        '<div class="rx-bar ft"><span style="width:' + fw + '%"></span><b style="left:calc(' + fw + '% + 6px)">' + f2(r[2]) + '</b></div>' +
+        (ref ? '<i class="rx-ref" style="left:' + (ref / mx * 100) + '%"></i>' : '') +
+        '</div><div class="rx-delta' + (good ? '' : ' neg') + '">' + (d > 0 ? '+' : d < 0 ? '−' : '±') + f2(Math.abs(d)) + '</div></div>';
+    }).join('');
+    refLab.hidden = !ref; if (ref) refName.textContent = task.ref[0] + ' (specialised method): ' + f2(ref);
+    var bl = Object.keys(task.baselines || {});
+    baseEl.innerHTML = set === 'main' && bl.length ? 'Other general-purpose features on this metric: ' + bl.map(function (k) { return '<b>' + k + '</b> ' + f2(task.baselines[k][metric]); }).join(' · ') + '.' : (set === 'more' ? 'Other DINOv2 sizes, with and without registers, and ConvNeXt (a CNN) also improve on almost every metric.' : (hib ? '' : 'APE: lower is better.'));
+  }
+  tabs.addEventListener('click', function (e) {
+    var b = e.target.closest('.tab'); if (!b) return;
+    tabs.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', String(x === b)); });
+    task = D.tasks.filter(function (t) { return t.id === b.dataset.task; })[0];
+    metric = { onepose: 1, ycbv: 3, davis: 0, pfdiff: 0, pfsame: 0, objaverse: 0, mvimgnet: 0 }[task.id] || 0; render();
+  });
+  metEl.addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (!c) return; metric = +c.dataset.m; render(); });
+  document.querySelectorAll('[data-set]').forEach(function (c) { c.addEventListener('click', function () { if (c.disabled) return; set = c.dataset.set; render(); }); });
+  render();
+  window.__rx = { state: function () { return { task: task.id, metric: task.metrics[metric], set: set, rows: rowsEl.children.length, deltas: [].map.call(rowsEl.querySelectorAll('.rx-delta'), function (d) { return d.textContent; }) }; } };
+
+  /* ---------- ablation tabs ---------- */
+  var abPanels = document.querySelectorAll('#ab-panels .tbl');
+  abPanels.forEach(function (p, i) { p.hidden = i !== 0; });
+  document.querySelectorAll('[data-ab]').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('[data-ab]').forEach(function (x) { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', String(x === t)); });
+      abPanels.forEach(function (p, i) { p.hidden = i !== +t.dataset.ab; });
+    });
+  });
+
+  /* ---------- teaser, BibTeX, lightbox ---------- */
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>

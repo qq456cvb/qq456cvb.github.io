@@ -10,7 +10,7 @@ image: '/images/3dcorrenhance.png'
 weight: 600
 arxiv: 'https://arxiv.org/abs/2411.19458'
 code: 'https://github.com/qq456cvb/3DCorrEnhance'
-site: 'https://qq456cvb.github.io/3DCorrEnhance'
-citation: 'You, Y., Li, Y., Deng, C., Wang, Y., & Guibas, L. (2024). Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning. arXiv preprint arXiv:2411.19458.'
+site: '/projects/3dcorrenhance'
+citation: 'You, Y., Li, Y., Deng, C., Wang, Y., & Guibas, L. (2025). Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning. In International Conference on Learning Representations (ICLR).'
 authors: '<b>Yang You</b>, Yixin Li, Congyue Deng, Yue Wang, Leonidas Guibas'
 ---
