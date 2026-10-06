@@ -151,6 +151,8 @@ permalink: /projects/3dcorrenhance
     /* before / after comparison */
     .cmp { margin-top: 22px; }
     .cmp-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    /* the box is capped per example (see the script), so one object does not fill the screen */
+    .cmp-body { max-width: var(--cmpw, 720px); margin: 0 auto; transition: max-width .3s; }
     .cmp-box { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
     .cmp-in { width: 100%; border-radius: 10px; }
     .cmp-stage { position: relative; margin-top: 10px; border-radius: 10px; overflow: hidden; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
@@ -356,6 +358,7 @@ permalink: /projects/3dcorrenhance
     <figure class="figure" data-zoom><img src="/projects/3dcorrenhance/static/media/overview.jpg" width="2000" height="767" loading="lazy" decoding="async" alt="Overview: feature PCA colours of an acorn and a stapler from a pretrained ViT and from the same ViT finetuned on one synthetic object; radar charts show finetuned DINOv2, MAE, CLIP and DeiT beating the originals on pose estimation, tracking and semantic transfer."><figcaption>Finetuned on one synthetic object, a ViT gives more consistent features on other objects (left) and better scores on pose estimation, tracking and semantic transfer (right).</figcaption></figure>
 
     <div class="cmp" id="cmp">
+      <div class="cmp-body" id="cmp-body">
       <div class="cmp-head">
         <h3 style="margin:0">Before and after, on unseen objects and scenes</h3>
         <div class="chips" role="group" aria-label="Example"><button class="chip on" type="button" data-ex="speaker">Speaker</button><button class="chip" type="button" data-ex="turtle">Turtle</button><button class="chip" type="button" data-ex="scooter">Street scene</button></div>
@@ -371,6 +374,7 @@ permalink: /projects/3dcorrenhance
         </div>
       </div>
       <p class="cmp-note">DINOv2 features as PCA colours, before and after finetuning. Drag across the image: after finetuning, features are smoother, less noisy and more consistent between views. Objects from MVImgNet; scene from TAP-Vid-DAVIS.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -534,6 +538,7 @@ with torch.no_grad():
       document.querySelectorAll('#cmp .chip').forEach(function (x) { x.classList.toggle('on', x === c); });
       var e = c.dataset.ex, base = '/projects/3dcorrenhance/static/media/cmp_' + e + '_';
       cmpIn.src = base + 'input.jpg'; cb.src = base + 'before.jpg'; ca.src = base + 'after.jpg';
+      document.getElementById('cmp-body').style.setProperty('--cmpw', e === 'scooter' ? '1000px' : '720px');
     });
   });
 
