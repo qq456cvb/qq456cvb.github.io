@@ -1,0 +1,696 @@
+---
+layout: compress
+permalink: /projects/cppf
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPPF: Towards Robust Category-Level 9D Pose Estimation in the Wild (CVPR 2022)</title>
+  <meta name="description" content="CPPF (Category-level Point Pair Features) estimates the 9D pose of unseen objects from a single RGB-D frame by letting point pairs vote for center, orientation and size. Trained on synthetic ShapeNet models only, it transfers to real scenes. CVPR 2022.">
+  <meta name="keywords" content="CPPF, category-level pose estimation, 9D pose, 6D pose, point pair features, voting, sim-to-real, NOCS REAL275, SUN RGB-D, CVPR 2022">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/cppf">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CPPF: Towards Robust Category-Level 9D Pose Estimation in the Wild">
+  <meta property="og:description" content="Point pairs vote for the 9D pose of unseen objects. Trained on synthetic models only, best sim-to-real results on NOCS REAL275. CVPR 2022.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/cppf">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/cppf/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/cppf/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306070f'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23a78bfa' stroke-width='4' stroke-dasharray='5 5'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23ede9fe'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/cppf#article",
+        "headline": "CPPF: Towards Robust Category-Level 9D Pose Estimation in the Wild",
+        "url": "https://qq456cvb.github.io/projects/cppf",
+        "datePublished": "2022",
+        "publication": { "@type": "PublicationEvent", "name": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) 2022" },
+        "pagination": "6866-6875",
+        "sameAs": ["https://arxiv.org/abs/2203.03089", "https://openaccess.thecvf.com/content/CVPR2022/html/You_CPPF_Towards_Robust_Category-Level_9D_Pose_Estimation_in_the_Wild_CVPR_2022_paper.html", "https://qq456cvb.github.io/publications/cppf"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Ruoxi Shi" }, { "@type": "Person", "name": "Weiming Wang" }, { "@type": "Person", "name": "Cewu Lu" }
+        ],
+        "keywords": ["category-level pose estimation", "9D pose", "point pair features", "voting", "sim-to-real"],
+        "image": "https://qq456cvb.github.io/projects/cppf/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/cppf#video" }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "CPPF",
+        "codeRepository": "https://github.com/qq456cvb/CPPF",
+        "programmingLanguage": "Python",
+        "license": "https://opensource.org/licenses/MIT",
+        "sameAs": ["https://huggingface.co/qq456cvb/CPPF"],
+        "citation": { "@id": "https://qq456cvb.github.io/projects/cppf#article" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/cppf#video",
+        "name": "CPPF teaser",
+        "description": "One-minute overview of CPPF: category-level 9D pose, point pairs voting for the object center and orientation, coarse-to-fine voting with bounding-box masks, and results on NOCS REAL275 and SUN RGB-D.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/cppf/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/cppf/static/media/teaser.mp4",
+        "uploadDate": "2026-10-06",
+        "duration": "PT61S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f6f6fb; --surface: #ffffff; --ink: #0f1024; --muted: #474a66; --faint: #7a7d97; --line: #e4e3ef;
+      --accent: #7c3aed; --accent-ink: #6d28d9; --accent-soft: rgba(124, 58, 237, .09); --best: #0f1024; --real: #2563eb;
+      --hero: #06070f; --hero-2: #1a1440; --radius: 18px; --shadow: 0 1px 2px rgba(15, 16, 36, .05), 0 8px 28px rgba(15, 16, 36, .06);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a16; --surface: #13132a; --ink: #ecebf7; --muted: #aeacc8; --faint: #8381a0; --line: #26254a;
+        --accent: #a78bfa; --accent-ink: #c4b5fd; --accent-soft: rgba(167, 139, 250, .11); --best: #ffffff; --real: #93c5fd;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video, iframe { max-width: 100%; height: auto; display: block; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    /* hero */
+    .hero { background: radial-gradient(1200px 600px at 70% 10%, var(--hero-2), var(--hero) 70%); color: #eef0fa; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #ddd6fe; border: 1px solid rgba(167, 139, 250, .55); background: rgba(167, 139, 250, .13); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 2px; font-size: clamp(64px, 11vw, 124px); line-height: 1; font-weight: 800; letter-spacing: -.04em; text-shadow: 0 0 50px rgba(167, 139, 250, .35); }
+    .expand { font-size: 17px; font-weight: 600; color: #a78bfa; letter-spacing: .02em; margin: 6px 0 4px; }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.6vw, 30px); line-height: 1.3; color: #e4e2f5; margin: 0 0 22px; max-width: 900px; }
+    .authors { font-size: 18px; font-weight: 500; color: #d6d6ec; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #a78bfa; }
+    .authors sup, .affil sup { color: #c4b5fd; font-weight: 600; margin-left: 1px; }
+    .affil { color: #9290b0; font-size: 15px; margin-top: 6px; display: flex; flex-wrap: wrap; gap: 2px 18px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #a78bfa; border-color: #a78bfa; color: #140b2e; }
+    .btn.primary:hover { background: #c4b5fd; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(6, 7, 15, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(6, 7, 15, .8); }
+
+    /* nav */
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    /* sections */
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+    p b { color: var(--ink); }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 38px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card .big { font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: var(--accent-ink); line-height: 1.1; margin-bottom: 6px; }
+    .card p { margin: 0; font-size: 16px; }
+    .card .ico { width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; margin-bottom: 14px; }
+    .card .ico svg { width: 22px; height: 22px; }
+
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    .figure.dark { background: #000; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+
+    /* voting demo */
+    .vd { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 22px; margin-top: 26px; align-items: start; }
+    .vd-stage { position: relative; aspect-ratio: 16 / 10; border-radius: 18px; overflow: hidden; background: radial-gradient(700px 400px at 60% 40%, #1a1440, #07070f 75%); box-shadow: var(--shadow); cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .vd-stage.drag { cursor: grabbing; }
+    .vd-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .vd-tag { position: absolute; left: 14px; top: 13px; font: 600 12.5px/1 "JetBrains Mono", monospace; color: #b8b6d8; pointer-events: none; }
+    .vd-side { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .vd-side h3 { font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin: 0 0 8px; }
+    .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 4px; margin-bottom: 16px; }
+    .seg button { border: 0; background: transparent; color: var(--muted); font: 600 14.5px Inter, sans-serif; padding: 8px 6px; border-radius: 9px; cursor: pointer; }
+    .seg button.on { background: var(--ink); color: var(--bg); }
+    .vd-range { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+    .vd-range input { flex: 1; accent-color: var(--accent); }
+    .vd-range output { font: 600 14px "JetBrains Mono", monospace; color: var(--ink); min-width: 34px; text-align: right; }
+    .vd-hint { font-size: 14px; line-height: 1.55; color: var(--muted); min-height: 110px; margin: 10px 0 12px; }
+    .vd-hint b { color: var(--ink); }
+    .vd-check { display: flex; gap: 8px; align-items: center; font-size: 14.5px; color: var(--muted); margin: 0 0 14px; cursor: pointer; }
+    .vd-check input { accent-color: var(--accent); width: 16px; height: 16px; }
+    .vd-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .vd-btns button { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 9px 10px; border-radius: 10px; cursor: pointer; }
+    .vd-btns button:hover { border-color: var(--accent); color: var(--accent-ink); }
+    .vd-btns .wide { grid-column: 1 / -1; background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .vd-btns .wide:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .vd-note { font-size: 13px; color: var(--faint); margin: 12px 0 0; line-height: 1.5; }
+    .ideas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 26px; }
+    .ideas .card { padding: 20px; }
+    .ideas .card p { font-size: 15px; }
+    .figrow { display: grid; grid-template-columns: 1fr 1.6fr; gap: 16px; margin-top: 26px; align-items: start; }
+
+    /* tables */
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 16px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .panel { margin-top: 18px; }
+    .panel > p { max-width: 860px; }
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .tbl + .tbl, .tbl + .figure, .figure + .tbl { margin-top: 16px; }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13.5px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    th[scope=row], thead tr:first-child th:first-child { text-align: left; color: var(--ink); font-weight: 600; }
+    td.l, thead th.l { text-align: left; }
+    td.l { color: var(--faint); font-size: 14px; }
+    td { color: var(--muted); }
+    td.best { color: var(--best); font-weight: 800; }
+    td.real { color: var(--real); font-weight: 700; }
+    .realkey { color: var(--real); font-weight: 700; }
+    td.na { color: var(--faint); }
+    tr.gstart th, tr.gstart td { border-top: 2px solid var(--line); }
+    tr.ours th, tr.ours td { background: var(--accent-soft); }
+    tr.ours th[scope=row] { color: var(--accent-ink); font-weight: 800; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    .tnote { font-size: 14px; color: var(--faint); margin-top: 12px; }
+    .findings { margin-bottom: 30px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; align-items: start; }
+
+    .dl { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .dl ul { padding-left: 20px; margin: 0 0 14px; color: var(--muted); }
+    .dl li { margin: 6px 0; }
+    .dl code { font: 500 .88em "JetBrains Mono", monospace; background: var(--accent-soft); color: var(--ink); padding: 1px 5px; border-radius: 5px; }
+    .dl .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .dl .btn { background: var(--ink); color: var(--bg); border: 0; }
+    .dl .btn:hover { background: var(--accent); color: #fff; }
+    .codes { display: grid; gap: 12px; }
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; }
+    pre.code, .bib { position: relative; background: #0d0c1d; color: #dedcf3; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    pre.code .c { color: #8d8aae; }
+    @media (prefers-color-scheme: dark) { pre.code, .bib { border: 1px solid var(--line); } }
+
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(5, 5, 14, .9); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .cards, .related, .dl, .figrow, .two, .gallery { grid-template-columns: 1fr; }
+      .ideas { grid-template-columns: 1fr 1fr; }
+      .vd { grid-template-columns: 1fr; }
+      .vd-hint { min-height: 0; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stat .num { font-size: 30px; }
+      .ideas { grid-template-columns: 1fr; }
+      .lead { font-size: 18.5px; }
+      th, td { padding: 9px 10px; }
+      .bib { padding-top: 54px; }
+      .vd-stage { aspect-ratio: 4 / 3; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">CVPR 2022</span>
+    <h1>CPPF</h1>
+    <div class="expand">Category-level Point Pair Features</div>
+    <p class="subtitle">Towards Robust Category-Level 9D Pose Estimation in the Wild</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a></span>
+      <span><a href="https://rshi.top">Ruoxi Shi</a></span>
+      <span>Weiming Wang<sup>†</sup></span>
+      <span><a href="https://www.mvig.org">Cewu Lu</a><sup>†</sup></span>
+    </div>
+    <div class="affil"><span>Shanghai Jiao Tong University</span><span><sup>†</sup>Corresponding authors</span></div>
+    <div class="links">
+      <a class="btn primary" href="https://arxiv.org/pdf/2203.03089"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://openaccess.thecvf.com/content/CVPR2022/html/You_CPPF_Towards_Robust_Category-Level_9D_Pose_Estimation_in_the_Wild_CVPR_2022_paper.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>CVPR version</a>
+      <a class="btn" href="https://github.com/qq456cvb/CPPF"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="https://huggingface.co/qq456cvb/CPPF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>Models</a>
+      <a class="btn" href="https://huggingface.co/datasets/qq456cvb/CPPF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>Data</a>
+      <a class="btn" href="https://youtu.be/MbR3Lq1kJaM"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg>Video</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/cppf/static/media/teaser.mp4" poster="/projects/cppf/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="CPPF teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#method">How it works</a><a href="#results">Results</a><a href="#gallery">Gallery</a><a href="#code">Code &amp; models</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>9D pose of unseen objects, learned from synthetic models alone</h2>
+    <p class="lead"><b>CPPF</b> estimates the 9D pose (3D position, orientation and size) of objects it has never seen, from a single RGB-D frame. Instead of regressing the pose, it lets <b>thousands of point pairs vote</b> for the object's center, orientation and size, using features that do not change when the object moves. Trained only on <b>synthetic ShapeNet models</b>, with no real images or pose labels, it transfers directly to real scenes.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">0</div><p>real pose labels or real images used for training</p></div>
+      <div class="stat"><div class="num">50.8<small>mAP</small></div><p>on NOCS REAL275 at 15° / 5 cm; the best earlier sim-to-real method reaches 26.5</p></div>
+      <div class="stat"><div class="num">+27.8</div><p>mAP at 10° / 5 cm over the best sim-to-real baseline</p></div>
+      <div class="stat"><div class="num">0.41<small>s</small></div><p>voting per image on one GTX 1080 Ti: 171 ms center, 229 ms orientation, 13 ms size</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="kicker">How it works</div>
+    <h2>Point pairs vote for the pose</h2>
+    <p>For each pair of points, a network predicts a few numbers that pin down the object's pose up to one degree of freedom. One pair can only say "the center is somewhere on this circle", but thousands of pairs agree on one point. Try it: add pairs and watch the votes pile up.</p>
+    <div class="vd">
+      <div class="vd-stage" id="vd-stage"><canvas id="vd-cv" aria-label="Voting demo on a bowl point cloud"></canvas><span class="vd-tag" id="vd-tag"></span></div>
+      <div class="vd-side">
+        <h3>Vote for</h3>
+        <div class="seg" role="group" aria-label="What to vote for"><button type="button" class="on" data-mode="center">Center</button><button type="button" data-mode="ori">Orientation</button></div>
+        <h3>Point pairs</h3>
+        <div class="vd-range"><input type="range" id="vd-n" min="1" max="200" value="1" aria-label="Number of point pairs"><output id="vd-nout">1</output></div>
+        <p class="vd-hint" id="vd-hint"></p>
+        <label class="vd-check" id="vd-auxrow" hidden><input type="checkbox" id="vd-aux" checked>Auxiliary sign classification</label>
+        <div class="vd-btns">
+          <button type="button" class="wide" id="vd-play">Cast 200 pairs</button>
+          <button type="button" id="vd-resample">Resample</button>
+          <button type="button" id="vd-spin" aria-pressed="true">Auto-rotate</button>
+        </div>
+        <p class="vd-note">A synthetic bowl with ground-truth voting targets, which the network learns to predict. Drag to rotate.</p>
+      </div>
+    </div>
+
+    <div class="ideas">
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg></div><h3>Invariant targets</h3><p>Each pair predicts μ, ν (center), α, β (orientation) and a log-size offset. None of them change under rotation or translation, and symmetric objects need no special treatment.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/></svg></div><h3>Sign disambiguation</h3><p>Symmetric shapes also vote for the flipped axis. An auxiliary classifier, which predicts whether each normal faces up or right, picks the right sign.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="3 3"/><circle cx="12" cy="12" r="4"/></svg></div><h3>Coarse-to-fine voting</h3><p>Vote once with all points, keep the points whose votes land near the winning center, and vote again. Inaccurate masks, or even plain bounding boxes, still work.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/><path d="m17 15 3 2-3 2"/></svg></div><h3>Sim-to-real by design</h3><p>Only rendered depth of ShapeNet models with self-occlusion; points are voxelized and jittered on both sides. RGB is used only to tell a laptop's lid from its keyboard.</p></div>
+    </div>
+
+    <div class="figrow">
+      <figure class="figure" data-zoom><img src="/projects/cppf/static/media/intro.jpg" width="883" height="727" loading="lazy" decoding="async" alt="Overview: during training, point pairs sampled on synthetic models train a network to predict voting targets; at inference, objects are segmented from the input depth, point pairs vote, and 9D poses are output."><figcaption>Training on synthetic models (top) and voting at inference (bottom).</figcaption></figure>
+      <div>
+        <figure class="figure" data-zoom><img src="/projects/cppf/static/media/arch.jpg" width="1555" height="328" loading="lazy" decoding="async" alt="Network architecture: kNN search, SE(3)-invariant sparse spherical correlation layers for each point, point embeddings concatenated with the point pair feature, MLP layers predicting mu, nu, alpha, beta and gamma."><figcaption>For each pair, SE(3)-invariant embeddings of both points (SPRIN layers) are concatenated with the point pair feature, and MLPs predict the voting targets. Regression is cast as classification over bins.</figcaption></figure>
+        <div class="two" style="margin-top:16px">
+          <figure class="figure dark" data-zoom><img src="/projects/cppf/static/media/centerstat.jpg" width="437" height="293" loading="lazy" decoding="async" alt="Center voting on a bowl: mu along p1 to p2 to the foot c, nu from c to the center o; the center lies on a dashed circle."><figcaption>Center: μ and ν place the center on a circle.</figcaption></figure>
+          <figure class="figure" data-zoom><img src="/projects/cppf/static/media/symmetry.jpg" width="587" height="554" loading="lazy" decoding="async" alt="Bird's-eye view of a bowl: symmetric point pairs around the rim share the same input features and the same mu and nu."><figcaption>Symmetric pairs share the same features and targets.</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="kicker">Results</div>
+    <h2>The best sim-to-real results on REAL275, and robust in the wild</h2>
+    <p>Trained on synthetic ShapeNet models only, and evaluated on real RGB-D frames with the NOCS protocol (mAP over 3D IoU and rotation / translation thresholds).</p>
+    <div class="cards findings">
+      <div class="card"><div class="big">16.9 · 44.9 · 50.8</div><h3>Without real labels</h3><p>mAP at 5°, 10° and 15° / 5 cm on NOCS REAL275 with instance masks, trained on synthetic objects only.</p></div>
+      <div class="card"><div class="big">+9.1 · +27.8 · +24.3</div><h3>Over the best sim-to-real baseline</h3><p>Ahead of Chen et al. and Gao et al. at each of these thresholds, by a wide margin.</p></div>
+      <div class="card"><div class="big">12.4 · 35.3 · 41.2</div><h3>Bounding boxes are enough</h3><p>With only box masks, CPPF still beats NOCS trained with real pose labels (9.8 · 24.1 · 34.9).</p></div>
+      <div class="card"><div class="big">10.7 vs 1.0</div><h3>In the wild</h3><p>mAP at 40° / 20 cm on SUN RGB-D chairs, zero-shot and on randomly rotated scenes, against Gao et al.</p></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Results">
+      <button role="tab" class="tab on" data-tab="nocs" aria-selected="true">NOCS REAL275</button>
+      <button role="tab" class="tab" data-tab="sun" aria-selected="false">SUN RGB-D</button>
+      <button role="tab" class="tab" data-tab="ab" aria-selected="false">Ablations</button>
+      <button role="tab" class="tab" data-tab="cat" aria-selected="false">Per category</button>
+    </div>
+    <div class="panel" data-panel="nocs">
+      <div class="tbl"><table><caption>mAP (%) on NOCS REAL275. <b>Syn. (O)</b>: synthetic ShapeNet objects only; <b>Syn. (O+B)</b>: rendered on real backgrounds; <b>Real</b>: NOCS real-world training data. <b>Bold</b>: best with synthetic training data; <span class="realkey">blue</span>: best with real data. DualPoseNet uses its own instance masks.</caption><thead><tr><th>Method</th><th class="l">Training data</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°, 5 cm</th><th>10°, 5 cm</th><th>15°, 5 cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td class="l">Syn. (O+B) + Real</td><td>74.4</td><td>27.8</td><td>9.8</td><td>24.1</td><td>34.9</td></tr><tr><th scope="row">CASS</th><td class="l">Syn. (O+B) + Real</td><td class="na">–</td><td class="na">–</td><td>23.5</td><td>58.0</td><td class="na">–</td></tr><tr><th scope="row">SPD</th><td class="l">Syn. (O+B) + Real</td><td class="na">–</td><td class="na">–</td><td>21.4</td><td>54.1</td><td class="na">–</td></tr><tr><th scope="row">FS-Net</th><td class="l">Syn. (O+B) + Real</td><td class="na">–</td><td class="na">–</td><td>28.2</td><td>60.8</td><td class="na">–</td></tr><tr><th scope="row">DualPoseNet</th><td class="l">Syn. (O) + Real</td><td class="real">82.3</td><td class="real">57.3</td><td class="real">36.1</td><td class="real">67.8</td><td class="real">76.3</td></tr><tr class="gstart"><th scope="row">Chen et al.</th><td class="l">Syn. (O)</td><td>15.5</td><td>1.3</td><td>0.7</td><td>3.6</td><td>9.1</td></tr><tr><th scope="row">Gao et al.</th><td class="l">Syn. (O)</td><td>68.6</td><td>24.7</td><td>7.8</td><td>17.1</td><td>26.5</td></tr><tr class="ours gstart"><th scope="row">CPPF, bounding-box masks</th><td class="l">Syn. (O)</td><td>73.7</td><td class="best">27.2</td><td>12.4</td><td>35.3</td><td>41.2</td></tr><tr class="ours"><th scope="row">CPPF, instance masks</th><td class="l">Syn. (O)</td><td class="best">78.2</td><td>26.4</td><td class="best">16.9</td><td class="best">44.9</td><td class="best">50.8</td></tr></tbody></table></div>
+      <figure class="figure" data-zoom><img src="/projects/cppf/static/media/curves.jpg" width="1800" height="694" loading="lazy" decoding="async" alt="Rotation AP and translation AP curves on NOCS REAL275 against error thresholds, for CPPF, Gao et al., Chen et al., DualPoseNet and NOCS; CPPF is the best of the synthetic-only methods."><figcaption>Rotation and translation AP against the error threshold. CPPF leads the methods trained on synthetic data.</figcaption></figure>
+    </div>
+    <div class="panel" data-panel="sun" hidden><div class="tbl"><table><caption>Chairs in the SUN RGB-D validation split (2,699 images), zero-shot: scenes randomly rotated, detections from a COCO-trained model not fine-tuned on SUN RGB-D. Rotation error is measured along the up axis.</caption><thead><tr><th>Method</th><th>3D<sub>10</sub></th><th>3D<sub>25</sub></th><th>20°, 10 cm</th><th>40°, 20 cm</th><th>60°, 30 cm</th></tr></thead><tbody><tr><th scope="row">Back-projection</th><td>20.2</td><td>4.4</td><td>0.0</td><td>0.6</td><td>5.8</td></tr><tr><th scope="row">Gao et al.</th><td>22.2</td><td>6.0</td><td>0.0</td><td>1.0</td><td>7.0</td></tr><tr class="ours"><th scope="row">CPPF</th><td class="best">24.7</td><td class="best">8.3</td><td class="best">0.8</td><td class="best">10.7</td><td class="best">17.6</td></tr></tbody></table></div><div class="tbl"><table><caption>More SUN RGB-D categories (supplementary), using the instance masks annotated by SUN RGB-D. Rotation error along the gravity axis.</caption><thead><tr><th>Category</th><th>20°, 10 cm</th><th>40°, 20 cm</th><th>60°, 30 cm</th></tr></thead><tbody><tr><th scope="row">Bathtub</th><td>10.9</td><td>38.8</td><td>49.8</td></tr><tr><th scope="row">Bookshelf</th><td>0.0</td><td>1.0</td><td>6.4</td></tr><tr><th scope="row">Bed</th><td>0.0</td><td>0.8</td><td>3.4</td></tr><tr><th scope="row">Sofa</th><td>0.0</td><td>1.7</td><td>10.5</td></tr><tr><th scope="row">Table</th><td>0.5</td><td>6.9</td><td>17.5</td></tr></tbody></table></div></div>
+    <div class="panel" data-panel="ab" hidden><div class="tbl"><table><caption>Removing one component at a time (NOCS REAL275). Voxelization and jittering are from the supplementary.</caption><thead><tr><th>Variant</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°, 5 cm</th><th>10°, 5 cm</th><th>15°, 5 cm</th></tr></thead><tbody><tr><th scope="row">No auxiliary classification</th><td>69.2</td><td>23.9</td><td>12.0</td><td>31.7</td><td>36.8</td></tr><tr><th scope="row">No coarse-to-fine voting</th><td>75.6</td><td>22.3</td><td>9.7</td><td>27.4</td><td>32.6</td></tr><tr><th scope="row">Regression instead of classification</th><td>73.3</td><td>14.7</td><td>1.8</td><td>12.7</td><td>24.2</td></tr><tr class="gstart"><th scope="row">No voxelization</th><td>76.7</td><td>21.6</td><td>11.9</td><td>37.2</td><td>45.6</td></tr><tr><th scope="row">No jittering</th><td>77.1</td><td>24.6</td><td>16.2</td><td>43.1</td><td>49.7</td></tr><tr class="ours gstart"><th scope="row">CPPF (full)</th><td class="best">78.2</td><td class="best">26.4</td><td class="best">16.9</td><td class="best">44.9</td><td class="best">50.8</td></tr></tbody></table></div><div class="tbl"><table><caption>Number of sampled point pairs and orientation bin size (NOCS REAL275). The full model uses 100,000 pairs and 1.5° bins.</caption><thead><tr><th class="l">Point pairs</th><th class="l">Orientation bin (°)</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°, 5 cm</th><th>10°, 5 cm</th><th>15°, 5 cm</th></tr></thead><tbody><tr><td class="l">100,000</td><td class="l">1</td><td>78.3</td><td>24.3</td><td>13.2</td><td>38.2</td><td>45.7</td></tr><tr><td class="l">100,000</td><td class="l">2</td><td class="best">78.5</td><td>25.9</td><td>13.4</td><td class="best">46.6</td><td>52.2</td></tr><tr><td class="l">100,000</td><td class="l">4</td><td>78.4</td><td>26.2</td><td>7.0</td><td>42.7</td><td class="best">53.5</td></tr><tr class="gstart"><td class="l">10,000</td><td class="l">1.5</td><td>68.5</td><td>21.7</td><td>8.6</td><td>27.2</td><td>34.1</td></tr><tr><td class="l">60,000</td><td class="l">1.5</td><td>78.1</td><td>25.8</td><td>15.6</td><td>42.8</td><td>49.1</td></tr><tr><td class="l">200,000</td><td class="l">1.5</td><td>78.4</td><td class="best">26.6</td><td class="best">17.3</td><td>45.5</td><td>51.3</td></tr><tr class="ours gstart"><td class="l">100,000</td><td class="l">1.5</td><td>78.2</td><td>26.4</td><td>16.9</td><td>44.9</td><td>50.8</td></tr></tbody></table></div><p class="tnote">Running time per image on one GTX 1080 Ti: 171 ms for center voting, 229 ms for orientation and 13 ms for size.</p></div>
+    <div class="panel" data-panel="cat" hidden>
+      <div class="two">
+        <figure class="figure" data-zoom><img src="/projects/cppf/static/media/supprot.jpg" width="900" height="1013" loading="lazy" decoding="async" alt="Rotation AP curves for each NOCS category: bowl, bottle, camera, can, laptop and mug."><figcaption>Rotation AP per category.</figcaption></figure>
+        <figure class="figure" data-zoom><img src="/projects/cppf/static/media/supptrans.jpg" width="900" height="1012" loading="lazy" decoding="async" alt="Translation AP curves for each NOCS category: bowl, bottle, camera, can, laptop and mug."><figcaption>Translation AP per category.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="kicker">Gallery</div>
+    <h2>Real scenes, synthetic training</h2>
+    <figure class="figure" data-zoom><img src="/projects/cppf/static/media/nocsexp.jpg" width="2000" height="545" loading="lazy" decoding="async" alt="Predicted 9D boxes on two NOCS REAL275 scenes for NOCS, DualPoseNet, Chen et al., Gao et al., CPPF and the ground truth."><figcaption>NOCS REAL275: NOCS, DualPoseNet, Chen et al., Gao et al., CPPF and the ground truth (left to right).</figcaption></figure>
+    <div class="gallery">
+      <figure class="figure" data-zoom><img src="/projects/cppf/static/media/bbox.jpg" width="1306" height="729" loading="lazy" decoding="async" alt="NOCS REAL275 scenes: the predicted 2D bounding boxes, CPPF's 9D poses from those boxes only, and the ground truth."><figcaption>Given only bounding boxes (left), CPPF's poses (middle) against the ground truth (right).</figcaption></figure>
+      <figure class="figure dark" data-zoom><img src="/projects/cppf/static/media/sunrgbd.jpg" width="1335" height="1093" loading="lazy" decoding="async" alt="CPPF's 9D boxes on SUN RGB-D: a bathtub, a table with chairs, an office chair and a sofa."><figcaption>SUN RGB-D, zero-shot: a model trained on ShapeNet only.</figcaption></figure>
+    </div>
+    <figure class="figure" data-zoom style="margin-top:16px"><img src="/projects/cppf/static/media/expnomask.jpg" width="1293" height="457" loading="lazy" decoding="async" alt="Bowls found without any detector: 9D poses and instance masks produced by voting over the whole scene point cloud."><figcaption>No detector at all (supplementary): voting over the whole scene finds the bowls and, as a by-product, their instance masks. mAP for bowls at 3D<sub>25</sub> / 3D<sub>50</sub> / 5°, 5 cm / 10°, 5 cm / 15°, 5 cm: 43.0 / 6.9 / 0.8 / 10.1 / 22.6.</figcaption></figure>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap dl">
+    <div>
+      <div class="kicker">Code &amp; models</div>
+      <h2>Run it</h2>
+      <ul>
+        <li><b>Code:</b> training on ShapeNet, evaluation on NOCS REAL275 and SUN RGB-D, and training on your own object categories.</li>
+        <li><b>Models:</b> checkpoints for 12 categories, plus the laptop lid/keyboard segmenter, on Hugging Face.</li>
+        <li><b>Data:</b> detection priors for REAL275 (<code>nocs_seg.zip</code>), rendered laptop images and prepared SUN RGB-D data.</li>
+        <li><b>License:</b> MIT.</li>
+      </ul>
+      <div class="btns">
+        <a class="btn" href="https://github.com/qq456cvb/CPPF">GitHub</a>
+        <a class="btn" href="https://huggingface.co/qq456cvb/CPPF">Models</a>
+        <a class="btn" href="https://huggingface.co/datasets/qq456cvb/CPPF">Data</a>
+      </div>
+    </div>
+    <div class="codes">
+<pre class="code">git clone https://github.com/qq456cvb/CPPF &amp;&amp; cd CPPF
+pip install -U "huggingface_hub[cli]"
+hf download qq456cvb/CPPF --local-dir checkpoints</pre>
+<pre class="code"><span class="c"># NOCS REAL275 (data setup in the README)</span>
+python nocs/inference.py --adaptive_voting
+python nocs/eval.py
+<span class="c"># bounding-box masks only: add --bbox_mask</span></pre>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>In this paper, we tackle the problem of category-level 9D pose estimation in the wild, given a single RGB-D frame. Using supervised data of real-world 9D poses is tedious and erroneous, and also fails to generalize to unseen scenarios. Besides, category-level pose estimation requires a method to be able to generalize to unseen objects at test time, which is also challenging. Drawing inspirations from traditional point pair features (PPFs), in this paper, we design a novel Category-level PPF (CPPF) voting method to achieve accurate, robust and generalizable 9D pose estimation in the wild. To obtain robust pose estimation, we sample numerous point pairs on an object, and for each pair our model predicts necessary SE(3)-invariant voting statistics on object centers, orientations and scales. A novel coarse-to-fine voting algorithm is proposed to eliminate noisy point pair samples and generate final predictions from the population. To get rid of false positives in the orientation voting process, an auxiliary binary disambiguating classification task is introduced for each sampled point pair. In order to detect objects in the wild, we carefully design our sim-to-real pipeline by training on synthetic point clouds only, unless objects have ambiguous poses in geometry. Under this circumstance, color information is leveraged to disambiguate these poses. Results on standard benchmarks show that our method is on par with current state of the arts with real-world training data. Extensive experiments further show that our method is robust to noise and gives promising results under extremely challenging scenarios.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/projects/cppf++"><div class="venue">TPAMI 2024</div><h3>CPPF++</h3><p>The follow-up: uncertainty-aware voting, better sim-to-real transfer, and a new in-the-wild benchmark.</p></a>
+      <a class="card" href="/projects/canonical-voting"><div class="venue">CVPR 2022</div><h3>Canonical Voting</h3><p>Voting for oriented 3D bounding boxes in scenes, which inspired CPPF's center voting.</p></a>
+      <a class="card" href="/publications/sprin"><div class="venue">TPAMI</div><h3>SPRIN</h3><p>The rotation-invariant point network that CPPF builds its SE(3)-invariant point embeddings on.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@inproceedings{you2022cppf,
+  title={CPPF: Towards Robust Category-Level 9D Pose Estimation in the Wild},
+  author={You, Yang and Shi, Ruoxi and Wang, Weiming and Lu, Cewu},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={6866--6875},
+  year={2022}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2022 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script>
+/* Block comments only: this page is HTML-compressed onto one line. */
+(function () {
+  /* ---------- voting demo: a synthetic bowl, ground-truth voting targets, votes drawn with additive blending ---------- */
+  var stage = document.getElementById('vd-stage'), cv = document.getElementById('vd-cv'), ctx = cv.getContext('2d');
+  var nIn = document.getElementById('vd-n'), nOut = document.getElementById('vd-nout'), hint = document.getElementById('vd-hint'), tag = document.getElementById('vd-tag');
+  var aux = document.getElementById('vd-aux'), auxRow = document.getElementById('vd-auxrow'), spinBtn = document.getElementById('vd-spin'), playBtn = document.getElementById('vd-play');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mode = 'center', n = 1, seed = 1, yaw = 0.45, pitch = 0.55, spin = !reduce, held = false, last = null, idleAt = 0, dirty = true, visible = true, playing = 0, Wc = 0, Hc = 0;
+  var BOWL = null, PAIRS = [];
+
+  function rng(s) { return function () { s |= 0; s = (s + 0x6D2B79F5) | 0; var t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function sub(a, b) { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
+  function add(a, b) { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
+  function mul(a, s) { return [a[0] * s, a[1] * s, a[2] * s]; }
+  function dotp(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+  function cross(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+  function len(a) { return Math.hypot(a[0], a[1], a[2]); }
+  function unit(a) { return mul(a, 1 / (len(a) || 1)); }
+  function basis(d) { var t = Math.abs(d[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0], u = unit(cross(d, t)); return [u, cross(d, u)]; }
+
+  function makeBowl(N, s) {
+    var R = rng(s), Hh = 0.62, r0 = 0.4, r1 = 1.0, th = 0.045, pts = [];
+    function prof(h) { return r0 + (r1 - r0) * Math.pow(h / Hh, 0.6); }
+    while (pts.length < N) {
+      var part = R(), a = R() * 6.2832, h, r;
+      if (part < 0.5) { h = R() * Hh; r = prof(h); if (R() > r / r1) continue; pts.push([r * Math.cos(a), h - Hh / 2, r * Math.sin(a)]); }
+      else if (part < 0.88) { h = th + R() * (Hh - th); r = prof(h) - th; if (R() > r / r1) continue; pts.push([r * Math.cos(a), h - Hh / 2, r * Math.sin(a)]); }
+      else { r = Math.sqrt(R()) * (r0 - 0.03); pts.push([r * Math.cos(a), (R() < 0.5 ? 0 : th) - Hh / 2, r * Math.sin(a)]); }
+    }
+    return pts;
+  }
+  /* center: mu along p1->p2 and nu from the foot c to the center put the center on a circle around the pair's axis */
+  function centerCircle(p1, p2) {
+    var d = unit(sub(p2, p1)), mu = dotp(mul(p1, -1), d), c = add(p1, mul(d, mu)), nu = len(c), u = nu > 1e-6 ? unit(mul(c, -1)) : basis(d)[0], v = cross(d, u);
+    return { p1: p1, p2: p2, c: c, nu: nu, at: function (t) { return add(c, add(mul(u, nu * Math.cos(t)), mul(v, nu * Math.sin(t)))); } };
+  }
+  /* orientation: alpha = angle(up, p1->p2) puts the up vector on a circle of the unit sphere around the pair's direction */
+  function oriCircle(p1, p2) {
+    var d = unit(sub(p2, p1)), ca = Math.max(-1, Math.min(1, d[1])), sa = Math.sqrt(1 - ca * ca), b = basis(d);
+    return { at: function (t) { return add(mul(d, ca), add(mul(b[0], sa * Math.cos(t)), mul(b[1], sa * Math.sin(t)))); } };
+  }
+  function build() {
+    BOWL = makeBowl(1300, 11);
+    var R = rng(seed * 7919 + 3), cand = [];
+    while (cand.length < 600) {
+      var a = BOWL[Math.floor(R() * BOWL.length)], b = BOWL[Math.floor(R() * BOWL.length)];
+      if (len(sub(a, b)) < 0.45) continue;
+      cand.push({ cc: centerCircle(a, b), oc: oriCircle(a, b), ph: R() * 6.2832 });
+    }
+    /* the first pair is the one explained on screen: pick one whose mu and circle are both clearly visible */
+    var v0 = { cx: 0, cy: 0, R: 1, yaw: 0.45, pitch: 0.55 }, best = 0, bs = -1;
+    cand.forEach(function (c, i) {
+      var cc = c.cc, L = len(sub(cc.p2, cc.p1)), mu = dotp(sub(cc.c, cc.p1), unit(sub(cc.p2, cc.p1)));
+      if (cc.p1[1] < 0.05 || mu < 0.3 * L || mu > 0.7 * L || cc.nu < 0.3) return;
+      var q = [0, 1, 2, 3, 4, 5, 6, 7].map(function (k) { return P(cc.at(k / 8 * 6.2832), v0); });
+      var xs = q.map(function (z) { return z[0]; }), ys = q.map(function (z) { return z[1]; });
+      var A = P(cc.p1, v0), C = P(cc.c, v0), sc = Math.min(Math.hypot(A[0] - C[0], A[1] - C[1]) * 1.6, Math.min(Math.max.apply(null, xs) - Math.min.apply(null, xs), Math.max.apply(null, ys) - Math.min.apply(null, ys)));
+      if (sc > bs) { bs = sc; best = i; }
+    });
+    PAIRS = [cand[best]].concat(cand.filter(function (c, i) { return i !== best; }).slice(0, 199));
+    dirty = true;
+  }
+
+  function P(p, v) {
+    var cy = Math.cos(v.yaw), sy = Math.sin(v.yaw), cp = Math.cos(v.pitch), sp = Math.sin(v.pitch);
+    var x1 = cy * p[0] + sy * p[2], z1 = -sy * p[0] + cy * p[2], y2 = cp * p[1] - sp * z1, z2 = sp * p[1] + cp * z1, f = 1 + 0.1 * z2;
+    return [v.cx + x1 * v.R * f, v.cy - y2 * v.R * f, z2];
+  }
+  var SH = (function () { var a = [36, 38, 64], b = [203, 210, 230], out = []; for (var i = 0; i < 16; i++) { var t = i / 15; out.push('rgb(' + a.map(function (v, k) { return Math.round(v + (b[k] - v) * t); }).join(',') + ')'); } return out; })();
+  function cloud(v, alpha) {
+    var pr = BOWL.map(function (p) { return P(p, v); }).sort(function (a, b) { return a[2] - b[2]; }), bucket = -1, ps = Math.max(1.6, v.R / 130);
+    ctx.save(); ctx.globalAlpha = alpha;
+    for (var i = 0; i < pr.length; i++) { var q = pr[i], bk = Math.max(0, Math.min(15, Math.round((q[2] + 1.2) * 6.5))); if (bk !== bucket) { ctx.fillStyle = SH[bk]; bucket = bk; } ctx.fillRect(q[0] - ps / 2, q[1] - ps / 2, ps, ps); }
+    ctx.restore();
+  }
+  function circle(at, v, color, alpha, ph, K) {
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = alpha; ctx.strokeStyle = color; ctx.lineWidth = 1.4; ctx.beginPath();
+    for (var i = 0; i <= 56; i++) { var q = P(at(i / 56 * 6.2832), v); if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }
+    ctx.stroke(); ctx.fillStyle = color;
+    for (var k = 0; k < K; k++) { var r = P(at(ph + k / K * 6.2832), v); ctx.fillRect(r[0] - 1.5, r[1] - 1.5, 3, 3); }
+    ctx.restore();
+  }
+  function glow(x, y, r, color, a) {
+    if (a <= 0.01) return;
+    ctx.save(); ctx.globalAlpha = a; ctx.globalCompositeOperation = 'lighter';
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, color); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill(); ctx.restore();
+  }
+  function label(s, x, y, color, size, align) { ctx.save(); ctx.font = (size || 15) + 'px "Source Serif 4", Georgia, serif'; ctx.fillStyle = color; ctx.textAlign = align || 'left'; ctx.fillText(s, x, y); ctx.restore(); }
+  function arrow(a, b, color, w) {
+    var ang = Math.atan2(b[1] - a[1], b[0] - a[0]), h = 9 + w * 1.5;
+    ctx.save(); ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = w; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0] - Math.cos(ang) * h * 0.6, b[1] - Math.sin(ang) * h * 0.6); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(b[0], b[1]); ctx.lineTo(b[0] - h * Math.cos(ang - 0.42), b[1] - h * Math.sin(ang - 0.42)); ctx.lineTo(b[0] - h * Math.cos(ang + 0.42), b[1] - h * Math.sin(ang + 0.42)); ctx.closePath(); ctx.fill(); ctx.restore();
+  }
+  function pt(q, r, fill) { ctx.save(); ctx.beginPath(); ctx.arc(q[0], q[1], r, 0, 6.2832); ctx.fillStyle = fill; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = 'rgba(5,5,14,0.9)'; ctx.stroke(); ctx.restore(); }
+
+  function draw() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    ctx.setTransform(d, 0, 0, d, 0, 0); ctx.clearRect(0, 0, Wc, Hc);
+    var S = Math.min(Wc, Hc * 1.3), i;
+    if (mode === 'center') {
+      var v = { cx: Wc / 2, cy: Hc * 0.55, R: S * 0.34, yaw: yaw, pitch: pitch };
+      cloud(v, n > 30 ? 0.55 : 0.9);
+      for (i = 0; i < n; i++) circle(PAIRS[i].cc.at, v, i % 2 ? '#f87171' : '#60a5fa', n > 120 ? 0.14 : n > 60 ? 0.2 : 0.32, PAIRS[i].ph, 24);
+      var O = P([0, 0, 0], v), g = Math.min(1, n / 100);
+      glow(O[0], O[1], 18 + 50 * g, 'rgba(237,233,254,0.95)', n > 2 ? g : 0);
+      var f = PAIRS[0].cc, A = P(f.p1, v), B = P(f.p2, v), Cc = P(f.c, v), fa = n > 12 ? 0.25 : 1;
+      ctx.save(); ctx.globalAlpha = fa;
+      arrow(A, Cc, '#60a5fa', 3); arrow(Cc, O, '#f87171', 3); pt(A, 6, '#fff'); pt(B, 6, '#fff'); pt(Cc, 4.5, '#fb923c'); pt(O, 5, '#fff');
+      label('p₁', A[0] - 10, A[1] - 10, '#fff', 18, 'right'); label('p₂', B[0] + 10, B[1] - 8, '#fff', 18);
+      label('μ', (A[0] + Cc[0]) / 2 + 8, (A[1] + Cc[1]) / 2 - 8, '#93c5fd', 20); label('ν', (Cc[0] + O[0]) / 2 + 8, (Cc[1] + O[1]) / 2 + 20, '#fca5a5', 20);
+      ctx.restore();
+      tag.textContent = n + ' pair' + (n > 1 ? 's' : '') + ' · ' + (n * 24).toLocaleString('en-US') + ' votes';
+    } else {
+      var vs = { cx: Wc / 2, cy: Hc / 2 + 6, R: Math.min(Wc * 0.3, Hc * 0.36), yaw: yaw, pitch: Math.max(-0.5, Math.min(0.5, pitch - 0.55)) };
+      ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,0.12)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(vs.cx, vs.cy, vs.R, 0, 6.2832); ctx.stroke();
+      [-0.6, 0, 0.6].forEach(function (lat) { ctx.beginPath(); for (var k = 0; k <= 64; k++) { var a = k / 64 * 6.2832, r = Math.cos(lat), q = P([r * Math.cos(a), Math.sin(lat), r * Math.sin(a)], vs); if (k) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); } ctx.stroke(); });
+      ctx.restore();
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      for (i = 0; i < n; i++) { ctx.fillStyle = i % 2 ? '#60a5fa' : '#818cf8';
+        for (var k2 = 0; k2 < 30; k2++) { var q2 = P(PAIRS[i].oc.at(PAIRS[i].ph + k2 / 30 * 6.2832), vs); ctx.globalAlpha = 0.28 * (0.4 + 0.6 * (q2[2] + 1) / 2); ctx.fillRect(q2[0] - 1.6, q2[1] - 1.6, 3.2, 3.2); } }
+      ctx.restore();
+      var top = P([0, 1, 0], vs), bot = P([0, -1, 0], vs), g2 = Math.min(1, n / 100), ax = aux.checked;
+      glow(top[0], top[1], 14 + 40 * g2, 'rgba(237,233,254,0.95)', n > 2 ? g2 : 0);
+      glow(bot[0], bot[1], 12 + 26 * g2, 'rgba(248,113,113,0.85)', n > 2 ? g2 * (ax ? 0.25 : 0.75) : 0);
+      if (n > 20) {
+        ctx.save(); ctx.font = '600 14px Inter, sans-serif'; ctx.shadowColor = 'rgba(0,0,0,0.9)'; ctx.shadowBlur = 6;
+        ctx.fillStyle = '#ede9fe'; ctx.fillText('up: the peak', top[0] + 30, top[1] + 5);
+        ctx.fillStyle = ax ? 'rgba(252,165,165,0.8)' : '#fca5a5'; ctx.fillText(ax ? 'down: rejected by the sign classifier' : 'down: a false peak', bot[0] + 24, bot[1] + 5); ctx.restore();
+        if (ax) { ctx.save(); ctx.strokeStyle = '#f87171'; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(bot[0] - 8, bot[1] - 8); ctx.lineTo(bot[0] + 8, bot[1] + 8); ctx.moveTo(bot[0] + 8, bot[1] - 8); ctx.lineTo(bot[0] - 8, bot[1] + 8); ctx.stroke(); ctx.restore(); }
+      }
+      tag.textContent = n + ' pair' + (n > 1 ? 's' : '') + ' · candidate up directions on the unit sphere';
+    }
+  }
+  function setHint() {
+    if (mode === 'center') {
+      hint.innerHTML = n === 1 ? 'One pair predicts <b>μ</b> (along p₁p₂) and <b>ν</b> (to the center). That fixes the center only up to a <b>circle</b>, so the pair votes all around it.'
+        : 'Each circle is one pair’s votes. They all pass through the true center, which collects the most votes: <b>the peak is the prediction</b>.';
+    } else {
+      hint.innerHTML = 'Each pair predicts the angle between its direction and the object’s up axis, so its candidates form a circle on the sphere. They meet at <b>up</b>, but pairs on a symmetric rim also vote for <b>−up</b>. ' + (aux.checked ? 'The auxiliary classifier rejects it.' : 'Turn the auxiliary classifier on to resolve it.');
+    }
+  }
+  function setN(v) { n = Math.max(1, Math.min(200, Math.round(v))); nIn.value = n; nOut.value = n; nOut.textContent = n; setHint(); dirty = true; }
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2); Wc = stage.clientWidth; Hc = stage.clientHeight;
+    cv.width = Math.round(Wc * d); cv.height = Math.round(Hc * d); if (BOWL) draw();
+  }
+  function loop(ts) {
+    if (visible && !document.hidden) {
+      if (playing) { var p = Math.min(1, (ts - playing) / 3200); setN(1 + 199 * (1 - Math.pow(1 - p, 2))); if (p >= 1) playing = 0; }
+      if (spin && !held && ts > idleAt) { yaw += 0.004; dirty = true; }
+      if (dirty) { draw(); dirty = false; }
+    }
+    requestAnimationFrame(loop);
+  }
+  document.querySelectorAll('.seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      mode = b.dataset.mode; document.querySelectorAll('.seg button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      auxRow.hidden = mode !== 'ori'; setHint(); dirty = true;
+    });
+  });
+  nIn.addEventListener('input', function () { playing = 0; setN(+nIn.value); });
+  aux.addEventListener('change', function () { setHint(); dirty = true; });
+  playBtn.addEventListener('click', function () { setN(1); playing = performance.now(); });
+  document.getElementById('vd-resample').addEventListener('click', function () { seed++; build(); });
+  spinBtn.setAttribute('aria-pressed', String(spin));
+  spinBtn.addEventListener('click', function () { spin = !spin; spinBtn.setAttribute('aria-pressed', String(spin)); });
+  stage.addEventListener('pointerdown', function (e) { if (e.button !== 0) return; held = true; last = [e.clientX, e.clientY]; try { stage.setPointerCapture(e.pointerId); } catch (err) {} stage.classList.add('drag'); });
+  stage.addEventListener('pointermove', function (e) {
+    if (!held || !last) return;
+    yaw += (e.clientX - last[0]) * 0.01;
+    if (e.pointerType === 'mouse') pitch = Math.max(-0.4, Math.min(1.4, pitch + (e.clientY - last[1]) * 0.01));
+    last = [e.clientX, e.clientY]; dirty = true;
+  });
+  function up() { if (!held) return; held = false; last = null; idleAt = performance.now() + 1500; stage.classList.remove('drag'); }
+  stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
+  new ResizeObserver(size).observe(stage);
+  new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) dirty = true; }).observe(stage);
+  build(); size(); setN(1); requestAnimationFrame(loop);
+  window.__vd = { setN: setN, state: function () { return { mode: mode, n: n, yaw: yaw, aux: aux.checked, tag: tag.textContent }; } };
+
+  /* ---------- teaser, tabs, BibTeX, lightbox ---------- */
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', String(x === t)); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.hidden = p.dataset.panel !== t.dataset.tab; });
+    });
+  });
+
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
