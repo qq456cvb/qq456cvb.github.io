@@ -1,0 +1,507 @@
+---
+layout: compress
+permalink: /projects/cppf++
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPPF++: Uncertainty-Aware Sim2Real Object Pose Estimation by Vote Aggregation (TPAMI 2024)</title>
+  <meta name="description" content="CPPF++ estimates the pose and size of everyday objects from a single RGB-D frame. Trained only on synthetic CAD models, it transfers to real scenes and leads sim-to-real methods on NOCS REAL275, Wild6D, PhoCAL and the new DiversePose 300 benchmark. IEEE TPAMI 2024.">
+  <meta name="keywords" content="CPPF++, category-level object pose estimation, sim2real, 6D pose estimation, point pair voting, DiversePose 300, robotics">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/cppf++">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CPPF++: Uncertainty-Aware Sim2Real Object Pose Estimation by Vote Aggregation">
+  <meta property="og:description" content="Category-level object pose estimation trained only on synthetic CAD models. IEEE TPAMI 2024.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/cppf++">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/cppf++/static/images/teaser_poster.jpg">
+  <meta property="og:video" content="https://qq456cvb.github.io/projects/cppf++/static/videos/teaser.mp4">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/cppf++/static/images/teaser_poster.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b16'/%3E%3Cpath d='M18 24l14-8 14 8v16l-14 8-14-8z' fill='none' stroke='%23ff8a3d' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/cppf++#article",
+        "headline": "CPPF++: Uncertainty-Aware Sim2Real Object Pose Estimation by Vote Aggregation",
+        "url": "https://qq456cvb.github.io/projects/cppf++",
+        "datePublished": "2024",
+        "isPartOf": { "@type": "Periodical", "name": "IEEE Transactions on Pattern Analysis and Machine Intelligence" },
+        "sameAs": ["https://doi.org/10.1109/TPAMI.2024.3419038", "https://arxiv.org/abs/2211.13398", "https://qq456cvb.github.io/publications/cppf++"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Wenhao He" }, { "@type": "Person", "name": "Jin Liu" },
+          { "@type": "Person", "name": "Hongkai Xiong" }, { "@type": "Person", "name": "Weiming Wang" }, { "@type": "Person", "name": "Cewu Lu" }
+        ],
+        "image": "https://qq456cvb.github.io/projects/cppf++/static/images/teaser_poster.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/cppf++#teaser" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/cppf++#teaser",
+        "name": "CPPF++ teaser",
+        "description": "One-minute overview of CPPF++: training on synthetic objects, uncertainty-aware vote aggregation, results in the wild, and the DiversePose 300 benchmark.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/cppf++/static/images/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/cppf++/static/videos/teaser.mp4",
+        "uploadDate": "2026-10-06",
+        "duration": "PT1M1S"
+      },
+      {
+        "@type": "Dataset",
+        "name": "DiversePose 300",
+        "description": "305 annotated real RGB-D frames of bottles, bowls and mugs in diverse, non-upright poses, captured in a crowded box, on a desk and held in a hand. Introduced with CPPF++ for category-level object pose estimation.",
+        "url": "https://huggingface.co/datasets/qq456cvb/DiversePose300",
+        "license": "https://opensource.org/licenses/MIT",
+        "creator": { "@id": "https://qq456cvb.github.io/#person" },
+        "isBasedOn": { "@id": "https://qq456cvb.github.io/projects/cppf++#article" }
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f6f7fb; --surface: #ffffff; --ink: #0d1424; --muted: #46526a; --faint: #79849a; --line: #e2e6ee;
+      --accent: #e8661c; --accent-ink: #b34a0b; --accent-soft: rgba(232, 102, 28, .09); --best: #0d1424;
+      --hero: #070b16; --hero-2: #0f1730; --radius: 18px; --shadow: 0 1px 2px rgba(13, 20, 36, .05), 0 8px 28px rgba(13, 20, 36, .06);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0f1d; --surface: #111a2e; --ink: #e8edf7; --muted: #a8b3c9; --faint: #7d89a3; --line: #22304d;
+        --accent: #ff8a3d; --accent-ink: #ffab6e; --accent-soft: rgba(255, 138, 61, .10); --best: #ffffff;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    /* hero */
+    .hero { background: radial-gradient(1200px 600px at 70% 10%, var(--hero-2), var(--hero) 70%); color: #eef2fa; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #ffc08f; border: 1px solid rgba(255, 138, 61, .55); background: rgba(255, 138, 61, .12); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 6px; font-size: clamp(56px, 9vw, 104px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { color: #ff8a3d; text-shadow: 0 0 40px rgba(255, 138, 61, .45); }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.6vw, 30px); line-height: 1.3; color: #dfe6f5; margin: 0 0 22px; max-width: 900px; }
+    .authors { font-size: 18px; font-weight: 500; color: #d4dcee; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #ff8a3d; }
+    .authors sup, .affil sup { color: #ffb36b; font-weight: 600; margin-left: 1px; }
+    .affil { color: #8f9bb5; font-size: 15px; margin-top: 6px; display: flex; flex-wrap: wrap; gap: 2px 18px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #ff8a3d; border-color: #ff8a3d; color: #1a0d03; }
+    .btn.primary:hover { background: #ff9d5c; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(7, 11, 22, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(7, 11, 22, .8); }
+
+    /* nav */
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    /* sections */
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--ink); }
+    .lead b { font-weight: 700; }
+    p { color: var(--muted); margin: 0 0 14px; }
+    .lead, .card p { color: var(--muted); }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 22px 18px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 44px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: var(--ink); }
+    .stat .num small { font-size: 18px; font-weight: 700; color: var(--accent-ink); margin-left: 6px; letter-spacing: 0; }
+    .stat p { margin: 10px 0 0; font-size: 15px; line-height: 1.5; }
+
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card .ico { width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; margin-bottom: 14px; }
+    .card .ico svg { width: 22px; height: 22px; }
+    .card p { margin: 0; font-size: 16px; }
+
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); cursor: zoom-in; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 12px; }
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+
+    .wild { display: grid; grid-template-columns: minmax(260px, 380px) 1fr; gap: 48px; align-items: center; }
+    .phone { border-radius: 34px; overflow: hidden; border: 10px solid #0b0d12; box-shadow: 0 24px 60px rgba(13, 20, 36, .25), 0 0 0 1px rgba(255, 255, 255, .06); background: #000; aspect-ratio: 3 / 4; }
+    .phone video { width: 100%; height: 100%; object-fit: cover; }
+    .checks { list-style: none; padding: 0; margin: 18px 0; }
+    .checks li { padding-left: 34px; position: relative; margin: 10px 0; color: var(--ink); font-weight: 500; }
+    .checks li::before { content: ""; position: absolute; left: 0; top: 4px; width: 20px; height: 20px; border-radius: 50%; background: #22c55e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/14px no-repeat; }
+
+    /* results */
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 16px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .panel { margin-top: 18px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; text-transform: capitalize; }
+    .chip.on { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13.5px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    th[scope=row], thead th:first-child { text-align: left; color: var(--ink); font-weight: 600; }
+    td.train { text-align: left; color: var(--faint); font-size: 13.5px; }
+    thead th.l { text-align: left; }
+    td { color: var(--muted); }
+    td.best { color: var(--best); font-weight: 800; }
+    td.second { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+    td.na { color: var(--faint); }
+    tr.gstart th, tr.gstart td { border-top: 2px solid var(--line); }
+    tr.ours th, tr.ours td { background: var(--accent-soft); }
+    tr.ours th[scope=row] { color: var(--accent-ink); font-weight: 800; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    .tnote { font-size: 14px; color: var(--faint); margin-top: 12px; }
+    .qual { display: grid; gap: 16px; margin-top: 34px; }
+
+    /* dataset */
+    .dgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 26px 0 8px; }
+    .dgrid figure { position: relative; border-radius: 12px; overflow: hidden; background: #111; aspect-ratio: 16 / 9; }
+    .dgrid img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .dgrid figure:hover img { transform: scale(1.06); }
+    .dgrid figcaption { position: absolute; left: 8px; bottom: 8px; margin: 0; font-size: 12.5px; font-weight: 600; color: #fff; background: rgba(7, 11, 22, .62); padding: 3px 9px; border-radius: 999px; backdrop-filter: blur(6px); }
+    .dmeta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 18px; }
+    .dmeta .btn { background: var(--ink); color: var(--bg); border: 0; }
+    .dmeta .btn:hover { background: var(--accent); color: #fff; }
+
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+
+    .bib { position: relative; background: #0b1020; color: #dbe3f3; border-radius: var(--radius); padding: 22px 24px; overflow-x: auto; font: 500 14px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(5, 8, 16, .88); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 900px) {
+      .stats, .cards, .related { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .wild { grid-template-columns: 1fr; gap: 28px; }
+      .phone { max-width: 360px; margin: 0 auto; }
+      .dgrid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .steps { grid-template-columns: 1fr; }
+      .lead { font-size: 18.5px; }
+      th, td { padding: 9px 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .dgrid img, .related a.card { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">IEEE TPAMI 2024</span>
+    <h1>CPPF<span>++</span></h1>
+    <p class="subtitle">Uncertainty-Aware Sim2Real Object Pose Estimation by Vote Aggregation</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a><sup>1,3</sup></span>
+      <span>Wenhao He<sup>2</sup></span>
+      <span>Jin Liu<sup>1</sup></span>
+      <span><a href="https://min.sjtu.edu.cn/En/FacultyShow/4?Vid=14">Hongkai Xiong</a><sup>1</sup></span>
+      <span>Weiming Wang<sup>1</sup></span>
+      <span><a href="https://www.mvig.org">Cewu Lu</a><sup>1</sup></span>
+    </div>
+    <div class="affil"><span><sup>1</sup>Shanghai Jiao Tong University</span><span><sup>2</sup>Flexiv Robotics Inc.</span><span><sup>3</sup>Stanford University</span></div>
+    <div class="links">
+      <a class="btn primary" href="https://arxiv.org/pdf/2211.13398"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://doi.org/10.1109/TPAMI.2024.3419038"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>IEEE Xplore</a>
+      <a class="btn" href="https://github.com/qq456cvb/CPPF2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="https://huggingface.co/datasets/qq456cvb/DiversePose300"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>DiversePose 300</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/cppf++/static/videos/teaser.mp4" poster="/projects/cppf++/static/images/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="CPPF++ one-minute teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#ideas">Key ideas</a><a href="#method">Method</a><a href="#wild">In the wild</a><a href="#results">Results</a><a href="#dataset">DiversePose 300</a><a href="#abstract">Abstract</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>A pose estimator you can train without a single real label.</h2>
+    <p class="lead"><b>Looking for a robust, general 6D pose estimator for RGB-D images from any sensor, for your own robotic setup?</b> CPPF++ estimates the pose and size of everyday objects from a single RGB-D frame. It is trained only on synthetic CAD models, without real images, real pose labels or backgrounds, and still transfers to real scenes: a new voting mechanism keeps the model from overfitting to the training domain.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">65.9<small>mAP</small></div><p>on NOCS REAL275 at 10°/5&nbsp;cm, the best among methods trained on synthetic objects only (CPPF: 45.2).</p></div>
+      <div class="stat"><div class="num">92.2<small>AP</small></div><p>for bowls on DiversePose 300 at 60°/5&nbsp;cm, versus 66.2 for the best prior method.</p></div>
+      <div class="stat"><div class="num">0<small>real labels</small></div><p>used in training: only rendered CAD models, with no background or clutter.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ideas">
+  <div class="wrap">
+    <div class="kicker">Key ideas</div>
+    <h2>What makes it work</h2>
+    <div class="cards">
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></div>
+        <h3>Sim2Real by design</h3><p>The only prior knowledge is a set of 3D CAD models. Training data is rendered online from these objects alone, so there is no dependence on real annotations, backgrounds or a particular camera.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7" stroke-dasharray="3 3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
+        <h3>Uncertainty-aware voting</h3><p>Point pairs with similar local geometry can point to very different places on an object, a problem we call vote collision. CPPF++ predicts a probability distribution for each vote in canonical space instead of a single guess.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="18" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="16" r="2"/><path d="M6.4 16.5 10.8 6.8M13.6 6.3l4.4 7.9M7 18l10-1.6"/></svg></div>
+        <h3>N-point tuples</h3><p>Voting units of N points instead of pairs carry more context. Two pairs that look identical become distinguishable once a third point is added.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg></div>
+        <h3>Filtering and refinement</h3><p>Noisy tuples are filtered out before they vote on orientation, an online alignment step refines rotation and translation, and a tuple feature ensemble adds robustness.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="kicker">Method</div>
+    <h2>Pipeline</h2>
+    <figure class="figure" data-zoom>
+      <img src="/projects/cppf++/static/images/pipeline.png" width="3709" height="1356" loading="lazy" decoding="async" alt="CPPF++ pipeline: sample point tuples, extract features, encode tuples, predict canonical coordinates and scale with uncertainty, vote for the centre, filter noisy tuples, vote for orientation, and refine with online alignment.">
+    </figure>
+    <ol class="steps">
+      <li><b>Masked input</b>A masked point cloud from an off-the-shelf instance segmentation model.</li>
+      <li><b>Point tuples</b>Tuples are randomly sampled from the object and encoded into tuple embeddings.</li>
+      <li><b>Coordinates &amp; scale</b>Each tuple predicts its canonical coordinates and scale, with uncertainty.</li>
+      <li><b>Voting</b>Tuples vote for the centre; only reliable tuples vote for the orientation.</li>
+      <li><b>Online alignment</b>An optimization step refines the predicted rotation and translation.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="wild">
+  <div class="wrap wild">
+    <div class="phone"><video src="/projects/cppf++/static/videos/wild.mp4" poster="/projects/cppf++/static/images/wild_poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="CPPF++ predictions on a handheld iPhone 15 video of a mug"></video></div>
+    <div>
+      <div class="kicker">In the wild</div>
+      <h2>A casual iPhone 15 video, straight from the model.</h2>
+      <p>The pose of the mug is estimated independently on every frame of a handheld clip.</p>
+      <ul class="checks">
+        <li>No temporal smoothing</li>
+        <li>No object mesh required</li>
+        <li>Trained on synthetic data only</li>
+      </ul>
+      <p>CPPF++ also serves as the pose module of <a href="https://r-pmart.github.io/">RPMArt</a> (IROS 2024) for articulated objects such as microwaves and drawers.</p>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="kicker">Results</div>
+    <h2>Strong on REAL275, stronger in new domains</h2>
+    <p>On NOCS REAL275, CPPF++ is the best method trained on synthetic objects only, and is comparable to methods trained with real pose labels. When transferred to new data domains (Wild6D, PhoCAL and DiversePose 300), it generalizes better than previous methods. Pick a benchmark and a category below.</p>
+    <div class="tabs" role="tablist" aria-label="Benchmark">
+<button role="tab" class="tab on" data-tab="real275" aria-selected="true">NOCS REAL275</button>
+<button role="tab" class="tab" data-tab="wild6d" aria-selected="false">Wild6D</button>
+<button role="tab" class="tab" data-tab="phocal" aria-selected="false">PhoCAL</button>
+<button role="tab" class="tab" data-tab="diverse" aria-selected="false">DiversePose 300</button>
+</div>
+<div class="panel" data-panel="real275">
+<div class="chips"><button class="chip on" data-cat="all">All categories</button><button class="chip" data-cat="bottle">bottle</button><button class="chip" data-cat="bowl">bowl</button><button class="chip" data-cat="camera">camera</button><button class="chip" data-cat="can">can</button><button class="chip" data-cat="laptop">laptop</button><button class="chip" data-cat="mug">mug</button></div>
+<div class="tbl" data-cat="all"><table><caption>NOCS REAL275 · mAP (%) over all categories. Bold: best among methods using real training data, and best among synthetic-only methods.</caption><thead><tr><th>Method</th><th class="l">Training data</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td class="train">Syn. Obj + Real Obj &amp; BG</td><td>74.4</td><td>27.8</td><td>9.8</td><td>24.1</td><td>34.9</td></tr><tr><th scope="row">CASS</th><td class="train">Syn. Obj + Real Obj &amp; BG</td><td class="na">–</td><td class="na">–</td><td>23.5</td><td>58.0</td><td class="na">–</td></tr><tr><th scope="row">SPD</th><td class="train">Syn. Obj + Real Obj &amp; BG</td><td class="na">–</td><td class="na">–</td><td>21.4</td><td>54.1</td><td class="na">–</td></tr><tr><th scope="row">FS-Net</th><td class="train">Syn. Obj + Real Obj &amp; BG</td><td class="na">–</td><td class="na">–</td><td>28.2</td><td>60.8</td><td class="na">–</td></tr><tr><th scope="row">CenterSnap</th><td class="train">Syn. Obj + Real Obj &amp; BG</td><td class="na">–</td><td class="na">–</td><td>27.2</td><td>58.8</td><td class="na">–</td></tr><tr><th scope="row">ShAPO</th><td class="train">Syn. Obj + Real Obj &amp; BG</td><td class="na">–</td><td class="na">–</td><td>48.8</td><td>66.8</td><td class="na">–</td></tr><tr><th scope="row">DualPoseNet</th><td class="train">Syn. Obj + Real Obj &amp; BG</td><td>82.3</td><td>57.3</td><td>36.1</td><td>67.8</td><td>76.3</td></tr><tr><th scope="row">HS-Pose</th><td class="train">Syn. Obj + Real Obj &amp; BG</td><td class="best">82.6</td><td class="best">71.6</td><td class="best">56.1</td><td class="best">84.1</td><td class="best">92.8</td></tr><tr class="gstart"><th scope="row">RePoNet</th><td class="train">Syn. Obj + Real Obj &amp; BG (w/o label)</td><td class="na">–</td><td class="na">–</td><td>33.9</td><td>63.0</td><td class="na">–</td></tr><tr><th scope="row">UDA-COPE</th><td class="train">Syn. Obj + Real Obj &amp; BG (w/o label)</td><td class="na">–</td><td class="na">–</td><td>34.8</td><td>66.0</td><td class="na">–</td></tr><tr><th scope="row">TTA-COPE</th><td class="train">Syn. Obj + Real Obj &amp; BG (w/o label)</td><td class="na">–</td><td class="na">–</td><td>35.9</td><td>73.2</td><td class="na">–</td></tr><tr class="gstart"><th scope="row">SAR-Net</th><td class="train">Syn. Obj + Real BG</td><td>77.9</td><td>47.5</td><td>42.3</td><td>68.3</td><td>75.0</td></tr><tr class="gstart"><th scope="row">Chen et al.</th><td class="train">Syn. Obj</td><td>16.7</td><td>0.7</td><td>0.8</td><td>3.1</td><td>7.2</td></tr><tr><th scope="row">Gao et al.</th><td class="train">Syn. Obj</td><td>70.6</td><td>23.1</td><td>5.1</td><td>14.2</td><td>21.9</td></tr><tr><th scope="row">SAR-Net*</th><td class="train">Syn. Obj</td><td>64.0</td><td>34.0</td><td>4.8</td><td>21.1</td><td>30.7</td></tr><tr><th scope="row">CPPF</th><td class="train">Syn. Obj</td><td>78.2</td><td>25.0</td><td>18.0</td><td>45.2</td><td>51.6</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="train">Syn. Obj</td><td class="best">82.4</td><td>55.2</td><td class="best">32.3</td><td>65.9</td><td>85.2</td></tr><tr class="ours"><th scope="row">CPPF++ (ours) w/ GroundedSAM Det.</th><td class="train">Syn. Obj</td><td>72.7</td><td class="best">58.0</td><td>26.2</td><td class="best">72.0</td><td class="best">88.9</td></tr></tbody></table></div>
+<div class="tbl" data-cat="bottle" hidden><table><caption>NOCS REAL275 · bottle · mAP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>42.1</td><td>15.1</td><td>2.7</td><td>12.9</td><td>28.7</td></tr><tr><th scope="row">DualPoseNet</th><td class="best">50.2</td><td class="second">25.8</td><td>38.2</td><td>84.9</td><td>97.5</td></tr><tr><th scope="row">HS-Pose</th><td>46.8</td><td class="best">37.3</td><td class="best">53.3</td><td class="best">96.9</td><td class="best">99.8</td></tr><tr><th scope="row">SAR-Net*</th><td>28.6</td><td>6.8</td><td>11.6</td><td>42.6</td><td>61.3</td></tr><tr><th scope="row">CPPF</th><td>28.6</td><td>0.2</td><td>26.7</td><td>85.7</td><td>94.4</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="second">48.1</td><td>22.4</td><td class="second">42.6</td><td class="second">96.9</td><td class="second">99.4</td></tr></tbody></table></div>
+<div class="tbl" data-cat="bowl" hidden><table><caption>NOCS REAL275 · bowl · mAP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td class="best">100.0</td><td>88.6</td><td>49.7</td><td>84.3</td><td>96.4</td></tr><tr><th scope="row">DualPoseNet</th><td class="best">100.0</td><td class="second">97.3</td><td class="second">78.8</td><td class="second">97.5</td><td class="second">99.7</td></tr><tr><th scope="row">HS-Pose</th><td>99.7</td><td class="best">99.7</td><td class="best">92.4</td><td class="best">99.6</td><td class="best">99.8</td></tr><tr><th scope="row">SAR-Net*</th><td class="second">99.6</td><td>23.1</td><td>11.6</td><td>60.4</td><td>81.9</td></tr><tr><th scope="row">CPPF</th><td>96.8</td><td>7.1</td><td>7.7</td><td>40.1</td><td>62.9</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="best">100.0</td><td>81.0</td><td>48.5</td><td>75.8</td><td>93.3</td></tr></tbody></table></div>
+<div class="tbl" data-cat="camera" hidden><table><caption>NOCS REAL275 · camera · mAP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>79.4</td><td>13.1</td><td>0.0</td><td>0.1</td><td>0.6</td></tr><tr><th scope="row">DualPoseNet</th><td class="best">90.0</td><td>33.3</td><td>0.0</td><td>0.5</td><td>3.7</td></tr><tr><th scope="row">HS-Pose</th><td>88.4</td><td class="best">52.9</td><td class="best">5.9</td><td class="best">40.8</td><td class="best">70.9</td></tr><tr><th scope="row">SAR-Net*</th><td>60.7</td><td>0.5</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th scope="row">CPPF</th><td>88.3</td><td>4.2</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="second">89.7</td><td class="second">39.8</td><td class="second">0.4</td><td class="second">13.4</td><td class="second">48.8</td></tr></tbody></table></div>
+<div class="tbl" data-cat="can" hidden><table><caption>NOCS REAL275 · can · mAP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>39.0</td><td>6.7</td><td>0.4</td><td>7.9</td><td>18.0</td></tr><tr><th scope="row">DualPoseNet</th><td>70.2</td><td>20.9</td><td class="second">47.0</td><td>93.0</td><td class="second">97.7</td></tr><tr><th scope="row">HS-Pose</th><td class="second">73.7</td><td class="best">70.0</td><td class="best">70.6</td><td class="best">99.4</td><td class="best">99.5</td></tr><tr><th scope="row">SAR-Net*</th><td>31.3</td><td>11.8</td><td>9.4</td><td>39.7</td><td>62.5</td></tr><tr><th scope="row">CPPF</th><td class="best">73.9</td><td class="second">34.7</td><td>45.5</td><td class="second">95.4</td><td>97.7</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td>70.8</td><td>12.1</td><td>26.7</td><td>78.3</td><td>94.1</td></tr></tbody></table></div>
+<div class="tbl" data-cat="laptop" hidden><table><caption>NOCS REAL275 · laptop · mAP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td class="best">92.8</td><td>0.6</td><td>6.5</td><td>41.2</td><td>68.2</td></tr><tr><th scope="row">DualPoseNet</th><td>84.8</td><td class="best">82.5</td><td>49.2</td><td class="second">88.7</td><td class="second">95.4</td></tr><tr><th scope="row">HS-Pose</th><td class="second">86.3</td><td class="second">80.9</td><td class="best">78.7</td><td class="best">92.2</td><td>92.7</td></tr><tr><th scope="row">SAR-Net*</th><td>82.9</td><td>26.9</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th scope="row">CPPF</th><td>84.2</td><td>24.4</td><td>27.8</td><td>47.8</td><td>49.4</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td>85.9</td><td>80.9</td><td class="second">71.8</td><td>87.3</td><td class="best">95.7</td></tr></tbody></table></div>
+<div class="tbl" data-cat="mug" hidden><table><caption>NOCS REAL275 · mug · mAP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>93.6</td><td>42.8</td><td>0.0</td><td>0.1</td><td>1.9</td></tr><tr><th scope="row">DualPoseNet</th><td class="best">99.6</td><td>85.1</td><td class="second">7.1</td><td class="second">47.9</td><td>68.7</td></tr><tr><th scope="row">HS-Pose</th><td class="second">97.7</td><td class="second">90.8</td><td class="best">24.6</td><td class="best">77.6</td><td class="best">86.2</td></tr><tr><th scope="row">SAR-Net*</th><td>62.4</td><td>0.0</td><td>0.0</td><td>0.6</td><td>2.4</td></tr><tr><th scope="row">CPPF</th><td>97.6</td><td>79.6</td><td>0.1</td><td>2.0</td><td>5.0</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="best">99.6</td><td class="best">95.3</td><td>3.8</td><td>43.8</td><td class="second">80.1</td></tr></tbody></table></div>
+<p class="tnote">NOCS REAL275. In the per-category tables, NOCS, DualPoseNet and HS-Pose are trained with real-world pose annotations, while SAR-Net*, CPPF and CPPF++ are pure sim-to-real methods. <b>Bold</b>: best, <u>underlined</u>: second best, as marked in the paper.</p></div>
+<div class="panel" data-panel="wild6d" hidden>
+<div class="chips"><button class="chip on" data-cat="bottle">bottle</button><button class="chip" data-cat="bowl">bowl</button><button class="chip" data-cat="camera">camera</button><button class="chip" data-cat="laptop">laptop</button><button class="chip" data-cat="mug">mug</button></div>
+<div class="tbl" data-cat="bottle"><table><caption>Wild6D · bottle · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>50.5</td><td>34.1</td><td>39.2</td><td>82.4</td><td>91.2</td></tr><tr><th scope="row">DualPoseNet</th><td class="best">89.5</td><td>61.7</td><td>43.2</td><td>80.1</td><td>92.1</td></tr><tr><th scope="row">SAR-Net</th><td>86.1</td><td>28.5</td><td>5.8</td><td>44.0</td><td>82.4</td></tr><tr><th scope="row">RePoNet</th><td class="second">88.4</td><td class="best">76.3</td><td class="best">79.2</td><td class="second">93.9</td><td class="second">95.7</td></tr><tr><th scope="row">HS-Pose</th><td>87.1</td><td class="second">70.4</td><td class="second">54.3</td><td>89.1</td><td>94.1</td></tr><tr><th scope="row">CPPF</th><td>74.9</td><td>10.3</td><td>22.4</td><td>44.2</td><td>46.4</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td>81.9</td><td>51.9</td><td>49.7</td><td class="best">94.8</td><td class="best">97.2</td></tr></tbody></table></div>
+<div class="tbl" data-cat="bowl" hidden><table><caption>Wild6D · bowl · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>80.3</td><td>47.3</td><td>22.8</td><td>76.9</td><td>90.1</td></tr><tr><th scope="row">DualPoseNet</th><td class="best">98.1</td><td class="best">89.2</td><td>67.0</td><td>89.9</td><td class="second">93.4</td></tr><tr><th scope="row">SAR-Net</th><td>93.0</td><td class="best">0.5</td><td>38.1</td><td>83.2</td><td>92.4</td></tr><tr><th scope="row">RePoNet</th><td class="second">97.3</td><td class="second">86.2</td><td>71.2</td><td class="second">91.2</td><td>92.9</td></tr><tr><th scope="row">HS-Pose</th><td>96.5</td><td>82.3</td><td class="second">74.0</td><td>89.4</td><td>92.0</td></tr><tr><th scope="row">CPPF</th><td>91.2</td><td>14.3</td><td>11.8</td><td>35.2</td><td>49.2</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td>96.1</td><td>75.1</td><td class="best">86.1</td><td class="best">94.4</td><td class="best">95.2</td></tr></tbody></table></div>
+<div class="tbl" data-cat="camera" hidden><table><caption>Wild6D · camera · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>10.4</td><td>1.7</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th scope="row">DualPoseNet</th><td class="best">82.5</td><td class="best">22.0</td><td>0.0</td><td class="second">1.2</td><td class="second">3.9</td></tr><tr><th scope="row">SAR-Net</th><td>34.8</td><td>0.2</td><td>0.0</td><td>0.0</td><td>0.2</td></tr><tr><th scope="row">RePoNet</th><td>44.8</td><td>2.4</td><td class="second">0.1</td><td>0.6</td><td>1.5</td></tr><tr><th scope="row">HS-Pose</th><td>59.8</td><td>5.4</td><td>0.0</td><td>0.3</td><td>1.1</td></tr><tr><th scope="row">CPPF</th><td>53.4</td><td>0.1</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="second">63.0</td><td class="second">15.7</td><td class="best">0.7</td><td class="best">9.2</td><td class="best">15.8</td></tr></tbody></table></div>
+<div class="tbl" data-cat="laptop" hidden><table><caption>Wild6D · laptop · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>97.1</td><td>77.1</td><td>4.3</td><td>15.0</td><td>15.9</td></tr><tr><th scope="row">DualPoseNet</th><td>98.1</td><td class="second">97.2</td><td>12.0</td><td>14.8</td><td>15.0</td></tr><tr><th scope="row">SAR-Net</th><td>95.7</td><td>1.1</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th scope="row">RePoNet</th><td>97.3</td><td>93.1</td><td class="best">14.5</td><td>18.0</td><td class="best">19.4</td></tr><tr><th scope="row">HS-Pose</th><td class="best">99.7</td><td>90.0</td><td>12.6</td><td>17.0</td><td>17.1</td></tr><tr><th scope="row">CPPF</th><td>95.5</td><td>36.3</td><td>4.6</td><td>10.2</td><td>11.0</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="second">99.5</td><td class="best">99.2</td><td class="second">13.2</td><td class="best">18.1</td><td class="second">18.1</td></tr></tbody></table></div>
+<div class="tbl" data-cat="mug" hidden><table><caption>Wild6D · mug · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>16.5</td><td>0.4</td><td>0.0</td><td>0.2</td><td>1.0</td></tr><tr><th scope="row">DualPoseNet</th><td>82.5</td><td class="best">63.5</td><td>0.5</td><td>3.3</td><td>5.3</td></tr><tr><th scope="row">SAR-Net</th><td>78.3</td><td>0.0</td><td>0.0</td><td>0.6</td><td>2.9</td></tr><tr><th scope="row">RePoNet</th><td>77.9</td><td class="second">52.0</td><td class="best">2.5</td><td class="best">15.1</td><td class="best">23.0</td></tr><tr><th scope="row">HS-Pose</th><td class="best">83.8</td><td>42.4</td><td class="second">2.0</td><td class="second">12.3</td><td class="second">19.3</td></tr><tr><th scope="row">CPPF</th><td class="second">82.8</td><td>44.1</td><td>0.2</td><td>0.8</td><td>1.7</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td>77.6</td><td>49.4</td><td class="second">2.0</td><td>9.1</td><td>13.1</td></tr></tbody></table></div>
+<p class="tnote">Results on Wild6D. <b>Bold</b>: best, <u>underlined</u>: second best, as marked in the paper.</p></div>
+<div class="panel" data-panel="phocal" hidden>
+<div class="chips"><button class="chip on" data-cat="bottle">bottle</button><button class="chip" data-cat="can">can</button><button class="chip" data-cat="mug">mug</button></div>
+<div class="tbl" data-cat="bottle"><table><caption>PhoCAL · bottle · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>29.2</td><td>0.9</td><td>5.3</td><td>30.5</td><td>61.4</td></tr><tr><th scope="row">DualPoseNet</th><td>22.6</td><td>0.0</td><td>0.9</td><td>13.0</td><td>36.6</td></tr><tr><th scope="row">SAR-Net</th><td class="second">85.3</td><td class="best">20.2</td><td>0.3</td><td>19.8</td><td>54.8</td></tr><tr><th scope="row">RePoNet</th><td class="best">87.4</td><td class="second">18.5</td><td>11.0</td><td>60.6</td><td>78.0</td></tr><tr><th scope="row">HS-Pose</th><td>80.7</td><td>9.6</td><td class="second">41.1</td><td class="second">73.9</td><td class="second">84.6</td></tr><tr><th scope="row">CPPF</th><td>15.5</td><td>1.5</td><td>13.5</td><td>35.0</td><td>41.7</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td>53.2</td><td>8.9</td><td class="best">64.5</td><td class="best">96.0</td><td class="best">96.8</td></tr></tbody></table></div>
+<div class="tbl" data-cat="can" hidden><table><caption>PhoCAL · can · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>0.3</td><td>0.2</td><td>0.0</td><td>3.3</td><td class="second">58.0</td></tr><tr><th scope="row">DualPoseNet</th><td>18.6</td><td>4.7</td><td>2.8</td><td>13.9</td><td>26.1</td></tr><tr><th scope="row">SAR-Net</th><td>39.4</td><td>0.3</td><td>0.0</td><td>0.9</td><td>19.9</td></tr><tr><th scope="row">RePoNet</th><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="na">–</td></tr><tr><th scope="row">HS-Pose</th><td class="best">100.0</td><td class="second">17.1</td><td class="second">6.6</td><td class="second">41.8</td><td class="best">67.8</td></tr><tr><th scope="row">CPPF</th><td class="second">88.7</td><td>0.3</td><td>3.3</td><td>9.4</td><td>10.9</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td>86.8</td><td class="best">25.0</td><td class="best">12.7</td><td class="best">46.1</td><td>50.0</td></tr></tbody></table></div>
+<div class="tbl" data-cat="mug" hidden><table><caption>PhoCAL · mug · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>5°&nbsp;5&nbsp;cm</th><th>10°&nbsp;5&nbsp;cm</th><th>15°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>43.4</td><td>5.7</td><td>0.0</td><td>0.1</td><td>1.0</td></tr><tr><th scope="row">DualPoseNet</th><td>78.0</td><td>18.9</td><td>0.0</td><td>3.2</td><td>6.7</td></tr><tr><th scope="row">SAR-Net</th><td>96.6</td><td>0.1</td><td>0.0</td><td>0.7</td><td>6.5</td></tr><tr><th scope="row">RePoNet</th><td class="second">97.4</td><td class="second">55.2</td><td>1.0</td><td>20.3</td><td>39.9</td></tr><tr><th scope="row">HS-Pose</th><td class="best">100.0</td><td>27.2</td><td class="second">0.6</td><td class="second">7.7</td><td class="second">12.2</td></tr><tr><th scope="row">CPPF</th><td>96.6</td><td>6.7</td><td>0.0</td><td>0.0</td><td>0.1</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="best">100.0</td><td class="best">93.2</td><td class="best">7.9</td><td class="best">47.1</td><td class="best">65.6</td></tr></tbody></table></div>
+<p class="tnote">Results on PhoCAL. RePoNet does not report the can category. <b>Bold</b>: best, <u>underlined</u>: second best, as marked in the paper.</p></div>
+<div class="panel" data-panel="diverse" hidden>
+<div class="chips"><button class="chip on" data-cat="bottle">bottle</button><button class="chip" data-cat="bowl">bowl</button><button class="chip" data-cat="mug">mug</button></div>
+<div class="tbl" data-cat="bottle"><table><caption>DiversePose 300 · bottle · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>20°&nbsp;5&nbsp;cm</th><th>40°&nbsp;5&nbsp;cm</th><th>60°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td class="second">3.3</td><td>0.0</td><td>2.3</td><td>2.3</td><td>2.3</td></tr><tr><th scope="row">DualPoseNet</th><td>1.4</td><td>0.0</td><td>4.3</td><td>9.3</td><td>15.8</td></tr><tr><th scope="row">SAR-Net</th><td>2.5</td><td>0.0</td><td>0.1</td><td>6.3</td><td>14.2</td></tr><tr><th scope="row">RePoNet</th><td>1.9</td><td class="second">0.1</td><td>9.6</td><td class="best">20.2</td><td class="second">20.2</td></tr><tr><th scope="row">HS-Pose</th><td>0.2</td><td>0.0</td><td>0.5</td><td>10.5</td><td>15.1</td></tr><tr><th scope="row">CPPF</th><td>0.0</td><td>0.0</td><td class="best">13.3</td><td class="second">15.5</td><td>15.5</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="best">6.9</td><td class="best">0.5</td><td class="second">11.1</td><td>13.7</td><td class="best">22.9</td></tr></tbody></table></div>
+<div class="tbl" data-cat="bowl" hidden><table><caption>DiversePose 300 · bowl · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>20°&nbsp;5&nbsp;cm</th><th>40°&nbsp;5&nbsp;cm</th><th>60°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>1.7</td><td>0.3</td><td>0.5</td><td>0.5</td><td>0.5</td></tr><tr><th scope="row">DualPoseNet</th><td class="best">61.3</td><td>2.3</td><td>1.4</td><td>16.1</td><td>33.3</td></tr><tr><th scope="row">SAR-Net</th><td>4.8</td><td>0.1</td><td>1.2</td><td>28.8</td><td>55.6</td></tr><tr><th scope="row">RePoNet</th><td class="second">40.3</td><td>2.4</td><td>11.5</td><td class="second">37.9</td><td class="second">66.2</td></tr><tr><th scope="row">HS-Pose</th><td>11.2</td><td>0.0</td><td>1.4</td><td>10.5</td><td>17.3</td></tr><tr><th scope="row">CPPF</th><td>32.7</td><td class="second">3.4</td><td class="second">14.5</td><td>37.6</td><td>42.1</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td>38.5</td><td class="best">15.6</td><td class="best">79.5</td><td class="best">92.2</td><td class="best">92.2</td></tr></tbody></table></div>
+<div class="tbl" data-cat="mug" hidden><table><caption>DiversePose 300 · mug · AP (%)</caption><thead><tr><th>Method</th><th>3D<sub>25</sub></th><th>3D<sub>50</sub></th><th>20°&nbsp;5&nbsp;cm</th><th>40°&nbsp;5&nbsp;cm</th><th>60°&nbsp;5&nbsp;cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td>4.9</td><td>2.4</td><td>0.0</td><td>1.7</td><td>1.9</td></tr><tr><th scope="row">DualPoseNet</th><td class="best">60.4</td><td class="best">28.3</td><td>0.2</td><td>0.8</td><td>2.1</td></tr><tr><th scope="row">SAR-Net</th><td>49.5</td><td>0.4</td><td>0.0</td><td>0.4</td><td>0.9</td></tr><tr><th scope="row">RePoNet</th><td>21.1</td><td>1.4</td><td>0.5</td><td class="second">1.5</td><td class="second">2.3</td></tr><tr><th scope="row">HS-Pose</th><td>8.3</td><td>0.1</td><td>0.0</td><td>0.6</td><td>0.8</td></tr><tr><th scope="row">CPPF</th><td>35.8</td><td>15.2</td><td class="second">0.7</td><td>1.0</td><td class="second">2.3</td></tr><tr class="ours"><th scope="row">CPPF++ (ours)</th><td class="second">54.2</td><td class="second">21.2</td><td class="best">22.0</td><td class="best">38.9</td><td class="best">47.2</td></tr></tbody></table></div>
+<p class="tnote">Results on DiversePose 300, our new benchmark with diverse, non-upright poses. Note the looser rotation thresholds. <b>Bold</b>: best, <u>underlined</u>: second best, as marked in the paper.</p></div>
+    <div class="qual">
+      <figure class="figure" data-zoom>
+        <img src="/projects/cppf++/static/images/qual_real275.jpg" width="2109" height="386" loading="lazy" decoding="async" alt="Qualitative comparison on NOCS REAL275: ground truth; NOCS, DualPoseNet and HS-Pose trained with real-world data; CPPF and CPPF++ trained on synthetic data.">
+        <figcaption><b>NOCS REAL275.</b> NOCS, DualPoseNet and HS-Pose use real-world training data; CPPF and CPPF++ are trained on synthetic data. Though trained only on synthetic CAD models, CPPF++ is comparable to current state-of-the-art methods.</figcaption>
+      </figure>
+      <figure class="figure" data-zoom>
+        <img src="/projects/cppf++/static/images/qual_diversepose.jpg" width="1965" height="441" loading="lazy" decoding="async" alt="Qualitative comparison on DiversePose 300 for a bowl and a mug: ground truth, CPPF, NOCS, HS-Pose, DualPoseNet and CPPF++.">
+        <figcaption><b>DiversePose 300.</b> A bowl and a mug in non-upright poses: ground truth, CPPF, NOCS, HS-Pose, DualPoseNet and CPPF++ (right).</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="dataset">
+  <div class="wrap">
+    <div class="kicker">New benchmark</div>
+    <h2>DiversePose 300</h2>
+    <p class="lead">Existing benchmarks such as NOCS REAL275, Wild6D and PhoCAL are biased toward upright poses. DiversePose 300 contains <b>305 annotated real RGB-D frames</b> of bottles, bowls and mugs in diverse, non-upright poses, captured in a crowded box, on a desk, and held in a hand.</p>
+    <div class="dgrid">
+      <figure><img src="/projects/cppf++/static/images/diversepose/bottle_box.jpg" width="800" height="450" loading="lazy" decoding="async" alt="Two bottles in a crowded box with their ground-truth 3D boxes"><figcaption>bottle · in a box</figcaption></figure>
+      <figure><img src="/projects/cppf++/static/images/diversepose/bottle_desk.jpg" width="800" height="450" loading="lazy" decoding="async" alt="A bottle lying on a desk with its ground-truth 3D box"><figcaption>bottle · on a desk</figcaption></figure>
+      <figure><img src="/projects/cppf++/static/images/diversepose/bottle_hand.jpg" width="800" height="450" loading="lazy" decoding="async" alt="A bottle held in a hand with its ground-truth 3D box"><figcaption>bottle · in hand</figcaption></figure>
+      <figure><img src="/projects/cppf++/static/images/diversepose/bowl_box.jpg" width="800" height="450" loading="lazy" decoding="async" alt="A bowl in a crowded box with its ground-truth 3D box"><figcaption>bowl · in a box</figcaption></figure>
+      <figure><img src="/projects/cppf++/static/images/diversepose/bowl_desk.jpg" width="800" height="450" loading="lazy" decoding="async" alt="An upside-down bowl on a desk with its ground-truth 3D box"><figcaption>bowl · on a desk</figcaption></figure>
+      <figure><img src="/projects/cppf++/static/images/diversepose/bowl_hand.jpg" width="800" height="450" loading="lazy" decoding="async" alt="A tilted bowl held in a hand with its ground-truth 3D box"><figcaption>bowl · in hand</figcaption></figure>
+      <figure><img src="/projects/cppf++/static/images/diversepose/mug_box.jpg" width="800" height="450" loading="lazy" decoding="async" alt="A mug in a crowded box with its ground-truth 3D box"><figcaption>mug · in a box</figcaption></figure>
+      <figure><img src="/projects/cppf++/static/images/diversepose/mug_desk.jpg" width="800" height="450" loading="lazy" decoding="async" alt="A mug lying on its side on a desk with its ground-truth 3D box"><figcaption>mug · on a desk</figcaption></figure>
+      <figure><img src="/projects/cppf++/static/images/diversepose/mug_hand.jpg" width="800" height="450" loading="lazy" decoding="async" alt="A mug held in a hand with its ground-truth 3D box"><figcaption>mug · in hand</figcaption></figure>
+    </div>
+    <p class="tnote">Orange boxes: ground-truth 3D annotations. The release provides RGB images, colored point clouds, 3D box labels and camera intrinsics.</p>
+    <div class="dmeta">
+      <a class="btn" href="https://huggingface.co/datasets/qq456cvb/DiversePose300">Download on Hugging Face</a>
+      <a href="https://github.com/qq456cvb/CPPF2">Code on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>Object pose estimation constitutes a critical area within the domain of 3D vision. While contemporary state-of-the-art methods that leverage real-world pose annotations have demonstrated commendable performance, the procurement of such real training data incurs substantial costs. This paper focuses on a specific setting wherein only 3D CAD models are utilized as a priori knowledge, devoid of any background or clutter information. We introduce a novel method, CPPF++, designed for sim-to-real category-level pose estimation. This method builds upon the foundational point-pair voting scheme of CPPF, reformulating it through a probabilistic view. To address the challenge posed by vote collision, we propose a novel approach that involves modeling the voting uncertainty by estimating the probabilistic distribution of each point pair within the canonical space. Furthermore, we augment the contextual information provided by each voting unit through the introduction of <i>N</i>-point tuples. To enhance the robustness and accuracy of the model, we incorporate several innovative modules, including noisy pair filtering, online alignment optimization, and a tuple feature ensemble. Alongside these methodological advancements, we introduce a new category-level pose estimation dataset, named DiversePose 300. Empirical evidence demonstrates that our method significantly surpasses previous sim-to-real approaches and achieves comparable or superior performance on novel datasets.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/projects/cppf"><div class="venue">CVPR 2022</div><h3>CPPF</h3><p>The original category-level point pair voting method that CPPF++ builds on.</p></a>
+      <a class="card" href="/projects/pace"><div class="venue">ECCV 2024</div><h3>PACE</h3><p>A large-scale benchmark for pose estimation in cluttered environments, where CPPF++ is one of the category-level baselines.</p></a>
+      <a class="card" href="https://r-pmart.github.io/"><div class="venue">IROS 2024</div><h3>RPMArt</h3><p>Robust perception and manipulation of articulated objects, using CPPF++ for pose.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@article{You_2024,
+  title={CPPF++: Uncertainty-Aware Sim2Real Object Pose Estimation by Vote Aggregation},
+  ISSN={1939-3539},
+  url={http://dx.doi.org/10.1109/TPAMI.2024.3419038},
+  DOI={10.1109/tpami.2024.3419038},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  publisher={Institute of Electrical and Electronics Engineers (IEEE)},
+  author={You, Yang and He, Wenhao and Liu, Jin and Xiong, Hongkai and Wang, Weiming and Lu, Cewu},
+  year={2024},
+  pages={1–16}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2024 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script>
+/* Block comments only: this page is HTML-compressed onto one line. */
+(function () {
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', String(x === t)); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.hidden = p.dataset.panel !== t.dataset.tab; });
+    });
+  });
+  document.querySelectorAll('.panel').forEach(function (p) {
+    p.querySelectorAll('.chip').forEach(function (c) {
+      c.addEventListener('click', function () {
+        p.querySelectorAll('.chip').forEach(function (x) { x.classList.toggle('on', x === c); });
+        p.querySelectorAll('.tbl').forEach(function (tb) { tb.hidden = tb.dataset.cat !== c.dataset.cat; });
+      });
+    });
+  });
+
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
