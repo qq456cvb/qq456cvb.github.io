@@ -89,7 +89,7 @@ permalink: /projects/pace
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #0a0f1d; --surface: #111a2e; --ink: #e8edf7; --muted: #a8b3c9; --faint: #7d89a3; --line: #22304d;
-        --accent: #fbbf24; --accent-ink: #fcd34d; --accent-soft: rgba(250, 204, 21, .10); --best: #ffffff; --real: #64748b;
+        --accent: #fbbf24; --accent-ink: #fcd34d; --accent-soft: rgba(250, 204, 21, .10); --best: #ffffff; --real: #7c8aa5;
         --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); --yes: #4ade80; --no: #f87171; color-scheme: dark;
       }
     }
@@ -163,15 +163,15 @@ permalink: /projects/pace
     .why { display: grid; gap: 14px; margin-top: 26px; }
     .why-m { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow); display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: center; }
     .why-name { font-weight: 700; }
-    .why-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 36px; }
+    .why-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 24px; }
     .why-cat { font-size: 13px; font-weight: 600; color: var(--faint); margin-bottom: 4px; text-transform: capitalize; }
-    /* each bar row: track, then the value in its own right-aligned column so all numbers line up */
-    .bar { display: grid; grid-template-columns: 1fr 3.4em; align-items: center; gap: 8px; height: 20px; margin-bottom: 6px; }
-    .bar i { position: relative; height: 100%; border-radius: 6px; background: color-mix(in srgb, var(--line) 60%, transparent); overflow: hidden; }
+    /* REAL275 value inside its bar on the left; PACE value right after its short bar (same style as the teaser video) */
+    .bar { position: relative; display: flex; align-items: center; height: 22px; border-radius: 6px; background: color-mix(in srgb, var(--line) 60%, transparent); margin-bottom: 6px; overflow: hidden; }
     .bar span { position: absolute; inset: 0 auto 0 0; border-radius: 6px; }
     .bar.r span { background: var(--real); }
-    .bar.p span { background: #facc15; }
-    .bar b { font: 600 12.5px/1 "JetBrains Mono", monospace; text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .bar.p span { background: #facc15; min-width: 6px; border-radius: 4px; }
+    .bar b { position: relative; z-index: 1; font: 600 12.5px/1 "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .bar.r b { margin-left: 10px; color: #0b1020; }
     .bar.p b { color: var(--accent-ink); }
     .legend { display: flex; gap: 18px; font-size: 14px; color: var(--muted); margin-top: 6px; }
     .legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 6px; }
@@ -376,22 +376,22 @@ permalink: /projects/pace
     <div class="legend"><span><i style="background:var(--real)"></i>NOCS REAL275</span><span><i style="background:#facc15"></i>PACE</span><span>AP (%) at 15° / 5 cm</span></div>
     <div class="why">
 <div class="why-m"><div class="why-name">HS-Pose</div><div class="why-cats">
-<div class="why-c"><div class="why-cat">bottle</div><div class="bar r"><i><span style="width:99.8%"></span></i><b>99.8</b></div><div class="bar p"><i><span style="width:0.6%"></span></i><b>0.4</b></div></div>
-<div class="why-c"><div class="why-cat">bowl</div><div class="bar r"><i><span style="width:99.8%"></span></i><b>99.8</b></div><div class="bar p"><i><span style="width:0.6%"></span></i><b>0.0</b></div></div>
-<div class="why-c"><div class="why-cat">can</div><div class="bar r"><i><span style="width:99.5%"></span></i><b>99.5</b></div><div class="bar p"><i><span style="width:0.8%"></span></i><b>0.8</b></div></div>
-<div class="why-c"><div class="why-cat">mug</div><div class="bar r"><i><span style="width:86.2%"></span></i><b>86.2</b></div><div class="bar p"><i><span style="width:7.5%"></span></i><b>7.5</b></div></div>
+<div class="why-c"><div class="why-cat">bottle</div><div class="bar r"><span style="width:99.8%"></span><b>99.8</b></div><div class="bar p"><span style="width:0.4%"></span><b style="margin-left:calc(max(6px, 0.4%) + 8px)">0.4</b></div></div>
+<div class="why-c"><div class="why-cat">bowl</div><div class="bar r"><span style="width:99.8%"></span><b>99.8</b></div><div class="bar p"><span style="width:0.0%"></span><b style="margin-left:calc(max(6px, 0.0%) + 8px)">0.0</b></div></div>
+<div class="why-c"><div class="why-cat">can</div><div class="bar r"><span style="width:99.5%"></span><b>99.5</b></div><div class="bar p"><span style="width:0.8%"></span><b style="margin-left:calc(max(6px, 0.8%) + 8px)">0.8</b></div></div>
+<div class="why-c"><div class="why-cat">mug</div><div class="bar r"><span style="width:86.2%"></span><b>86.2</b></div><div class="bar p"><span style="width:7.5%"></span><b style="margin-left:calc(max(6px, 7.5%) + 8px)">7.5</b></div></div>
 </div></div>
 <div class="why-m"><div class="why-name">DualPoseNet</div><div class="why-cats">
-<div class="why-c"><div class="why-cat">bottle</div><div class="bar r"><i><span style="width:97.5%"></span></i><b>97.5</b></div><div class="bar p"><i><span style="width:0.6%"></span></i><b>0.3</b></div></div>
-<div class="why-c"><div class="why-cat">bowl</div><div class="bar r"><i><span style="width:99.7%"></span></i><b>99.7</b></div><div class="bar p"><i><span style="width:2.0%"></span></i><b>2.0</b></div></div>
-<div class="why-c"><div class="why-cat">can</div><div class="bar r"><i><span style="width:97.7%"></span></i><b>97.7</b></div><div class="bar p"><i><span style="width:0.6%"></span></i><b>0.5</b></div></div>
-<div class="why-c"><div class="why-cat">mug</div><div class="bar r"><i><span style="width:68.7%"></span></i><b>68.7</b></div><div class="bar p"><i><span style="width:1.6%"></span></i><b>1.6</b></div></div>
+<div class="why-c"><div class="why-cat">bottle</div><div class="bar r"><span style="width:97.5%"></span><b>97.5</b></div><div class="bar p"><span style="width:0.3%"></span><b style="margin-left:calc(max(6px, 0.3%) + 8px)">0.3</b></div></div>
+<div class="why-c"><div class="why-cat">bowl</div><div class="bar r"><span style="width:99.7%"></span><b>99.7</b></div><div class="bar p"><span style="width:2.0%"></span><b style="margin-left:calc(max(6px, 2.0%) + 8px)">2.0</b></div></div>
+<div class="why-c"><div class="why-cat">can</div><div class="bar r"><span style="width:97.7%"></span><b>97.7</b></div><div class="bar p"><span style="width:0.5%"></span><b style="margin-left:calc(max(6px, 0.5%) + 8px)">0.5</b></div></div>
+<div class="why-c"><div class="why-cat">mug</div><div class="bar r"><span style="width:68.7%"></span><b>68.7</b></div><div class="bar p"><span style="width:1.6%"></span><b style="margin-left:calc(max(6px, 1.6%) + 8px)">1.6</b></div></div>
 </div></div>
 <div class="why-m"><div class="why-name">SAR-Net</div><div class="why-cats">
-<div class="why-c"><div class="why-cat">bottle</div><div class="bar r"><i><span style="width:98.2%"></span></i><b>98.2</b></div><div class="bar p"><i><span style="width:2.1%"></span></i><b>2.1</b></div></div>
-<div class="why-c"><div class="why-cat">bowl</div><div class="bar r"><i><span style="width:98.2%"></span></i><b>98.2</b></div><div class="bar p"><i><span style="width:0.6%"></span></i><b>0.0</b></div></div>
-<div class="why-c"><div class="why-cat">can</div><div class="bar r"><i><span style="width:97.4%"></span></i><b>97.4</b></div><div class="bar p"><i><span style="width:0.6%"></span></i><b>0.3</b></div></div>
-<div class="why-c"><div class="why-cat">mug</div><div class="bar r"><i><span style="width:70.6%"></span></i><b>70.6</b></div><div class="bar p"><i><span style="width:0.6%"></span></i><b>0.0</b></div></div>
+<div class="why-c"><div class="why-cat">bottle</div><div class="bar r"><span style="width:98.2%"></span><b>98.2</b></div><div class="bar p"><span style="width:2.1%"></span><b style="margin-left:calc(max(6px, 2.1%) + 8px)">2.1</b></div></div>
+<div class="why-c"><div class="why-cat">bowl</div><div class="bar r"><span style="width:98.2%"></span><b>98.2</b></div><div class="bar p"><span style="width:0.0%"></span><b style="margin-left:calc(max(6px, 0.0%) + 8px)">0.0</b></div></div>
+<div class="why-c"><div class="why-cat">can</div><div class="bar r"><span style="width:97.4%"></span><b>97.4</b></div><div class="bar p"><span style="width:0.3%"></span><b style="margin-left:calc(max(6px, 0.3%) + 8px)">0.3</b></div></div>
+<div class="why-c"><div class="why-cat">mug</div><div class="bar r"><span style="width:70.6%"></span><b>70.6</b></div><div class="bar p"><span style="width:0.0%"></span><b style="margin-left:calc(max(6px, 0.0%) + 8px)">0.0</b></div></div>
 </div></div>
 </div>
   </div>
