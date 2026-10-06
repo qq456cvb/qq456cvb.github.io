@@ -1,0 +1,662 @@
+---
+layout: compress
+permalink: /projects/pace
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PACE: A Large-Scale Dataset with Pose Annotations in Cluttered Environments (ECCV 2024)</title>
+  <meta name="description" content="PACE is a large-scale benchmark for object pose estimation and tracking in cluttered real-world scenes: 55K RGB-D frames, 258K pose annotations, 300 videos, 238 objects in 43 categories, plus the PACE-Sim training set. ECCV 2024.">
+  <meta name="keywords" content="PACE, PACE-Sim, object pose estimation, 6D pose, category-level pose, pose tracking, dataset, benchmark, clutter, occlusion, articulated objects, BOP">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/pace">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PACE: A Large-Scale Dataset with Pose Annotations in Cluttered Environments">
+  <meta property="og:description" content="55K real RGB-D frames with 258K pose annotations of 238 objects in cluttered scenes, plus a 100K-frame synthetic training set. ECCV 2024.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/pace">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/pace/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/pace/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b16'/%3E%3Cpath d='M18 24l14-8 14 8v16l-14 8-14-8z' fill='none' stroke='%23facc15' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Dataset",
+        "@id": "https://qq456cvb.github.io/projects/pace#dataset",
+        "name": "PACE",
+        "alternateName": "Pose Annotations in Cluttered Environments",
+        "description": "PACE is a large-scale benchmark for object pose estimation and tracking in cluttered real-world scenes. It contains 55K RGB-D frames with 258K pose annotations across 300 videos, covering 238 objects from 43 categories, both rigid and articulated, captured in ten environments with a calibrated three-camera rig. PACE-Sim adds 100K photo-realistic synthetic frames with 2.4M annotations across 931 objects for training. Data follows the BOP format. Licensed under MIT, except some 3D models from Sketchfab (CC BY 4.0) and GrabCAD.",
+        "url": "https://qq456cvb.github.io/projects/pace",
+        "sameAs": ["https://huggingface.co/datasets/qq456cvb/PACE", "https://github.com/qq456cvb/PACE"],
+        "keywords": ["object pose estimation", "6D pose", "category-level pose estimation", "pose tracking", "RGB-D", "clutter", "occlusion", "articulated objects", "BOP"],
+        "license": "https://opensource.org/licenses/MIT",
+        "isAccessibleForFree": true,
+        "measurementTechnique": "Calibrated three-camera Intel RealSense D415 RGB-D capture with marker-based and BundleTrack-assisted pose annotation",
+        "variableMeasured": ["6D object pose", "3D bounding box", "instance segmentation mask", "depth", "NOCS map"],
+        "creator": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Kai Xiong" }, { "@type": "Person", "name": "Zhening Yang" }, { "@type": "Person", "name": "Zhengxiang Huang" },
+          { "@type": "Person", "name": "Junwei Zhou" }, { "@type": "Person", "name": "Ruoxi Shi" }, { "@type": "Person", "name": "Zhou Fang" },
+          { "@type": "Person", "name": "Adam W. Harley" }, { "@type": "Person", "name": "Leonidas Guibas" }, { "@type": "Person", "name": "Cewu Lu" }
+        ],
+        "distribution": [{ "@type": "DataDownload", "contentUrl": "https://huggingface.co/datasets/qq456cvb/PACE/tree/main", "encodingFormat": "application/x-tar" }],
+        "citation": { "@id": "https://qq456cvb.github.io/projects/pace#article" }
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/pace#article",
+        "headline": "PACE: A Large-Scale Dataset with Pose Annotations in Cluttered Environments",
+        "url": "https://qq456cvb.github.io/projects/pace",
+        "datePublished": "2024",
+        "publication": { "@type": "PublicationEvent", "name": "European Conference on Computer Vision (ECCV) 2024" },
+        "sameAs": ["https://arxiv.org/abs/2312.15130", "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06837.pdf", "https://qq456cvb.github.io/publications/pace"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Kai Xiong" }, { "@type": "Person", "name": "Zhening Yang" }, { "@type": "Person", "name": "Zhengxiang Huang" },
+          { "@type": "Person", "name": "Junwei Zhou" }, { "@type": "Person", "name": "Ruoxi Shi" }, { "@type": "Person", "name": "Zhou Fang" },
+          { "@type": "Person", "name": "Adam W. Harley" }, { "@type": "Person", "name": "Leonidas Guibas" }, { "@type": "Person", "name": "Cewu Lu" }
+        ],
+        "about": { "@id": "https://qq456cvb.github.io/projects/pace#dataset" },
+        "image": "https://qq456cvb.github.io/projects/pace/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/pace#video" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/pace#video",
+        "name": "PACE teaser",
+        "description": "One-minute overview of PACE: the performance gap between NOCS REAL275 and PACE, dataset statistics, the ten capture environments, the annotation layers, the annotation pipeline and benchmark findings.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/pace/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/pace/static/media/teaser.mp4",
+        "uploadDate": "2026-10-06",
+        "duration": "PT59S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f6f7fb; --surface: #ffffff; --ink: #0d1424; --muted: #46526a; --faint: #79849a; --line: #e2e6ee;
+      --accent: #b45309; --accent-ink: #92400e; --accent-soft: rgba(217, 119, 6, .10); --hl: #facc15; --best: #0d1424;
+      --real: #94a3b8; --hero: #070b16; --hero-2: #121a33; --radius: 18px; --shadow: 0 1px 2px rgba(13, 20, 36, .05), 0 8px 28px rgba(13, 20, 36, .06);
+      --yes: #16a34a; --no: #dc2626; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0f1d; --surface: #111a2e; --ink: #e8edf7; --muted: #a8b3c9; --faint: #7d89a3; --line: #22304d;
+        --accent: #fbbf24; --accent-ink: #fcd34d; --accent-soft: rgba(250, 204, 21, .10); --best: #ffffff; --real: #64748b;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); --yes: #4ade80; --no: #f87171; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video, iframe { max-width: 100%; height: auto; display: block; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    /* hero */
+    .hero { background: radial-gradient(1200px 600px at 70% 10%, var(--hero-2), var(--hero) 70%); color: #eef2fa; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #fde68a; border: 1px solid rgba(250, 204, 21, .55); background: rgba(250, 204, 21, .12); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 6px; font-size: clamp(56px, 9vw, 104px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { color: #facc15; text-shadow: 0 0 40px rgba(250, 204, 21, .35); }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.6vw, 30px); line-height: 1.3; color: #dfe6f5; margin: 0 0 22px; max-width: 900px; }
+    .authors { font-size: 18px; font-weight: 500; color: #d4dcee; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #facc15; }
+    .authors sup, .affil sup { color: #fde047; font-weight: 600; margin-left: 1px; }
+    .affil { color: #8f9bb5; font-size: 15px; margin-top: 6px; display: flex; flex-wrap: wrap; gap: 2px 18px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #facc15; border-color: #facc15; color: #1a1403; }
+    .btn.primary:hover { background: #fde047; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(7, 11, 22, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(7, 11, 22, .8); }
+
+    /* nav */
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    /* sections */
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 38px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+    .stat.sim { grid-column: span 2; background: linear-gradient(135deg, var(--surface), color-mix(in srgb, var(--surface) 88%, #facc15)); }
+    .stat.sim .row { display: flex; flex-wrap: wrap; gap: 8px 26px; align-items: baseline; }
+
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card .big { font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: var(--accent-ink); line-height: 1.1; margin-bottom: 6px; }
+    .card p { margin: 0; font-size: 16px; }
+
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+
+    /* video facade */
+
+    /* why pace */
+    .why { display: grid; gap: 14px; margin-top: 26px; }
+    .why-m { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow); display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: center; }
+    .why-name { font-weight: 700; }
+    .why-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .why-cat { font-size: 13px; font-weight: 600; color: var(--faint); margin-bottom: 4px; text-transform: capitalize; }
+    .bar { position: relative; height: 20px; border-radius: 6px; background: color-mix(in srgb, var(--line) 60%, transparent); margin-bottom: 5px; overflow: hidden; }
+    .bar span { position: absolute; inset: 0 auto 0 0; border-radius: 6px; }
+    .bar.r span { background: var(--real); }
+    .bar.p span { background: #facc15; }
+    .bar.p b { padding-left: 16px; }
+    .bar b { position: relative; z-index: 1; font: 600 12px "JetBrains Mono", monospace; padding-left: 7px; line-height: 20px; color: #0d1424; }
+    @media (prefers-color-scheme: dark) { .bar b { color: #f8fafc; text-shadow: 0 0 3px rgba(0, 0, 0, .85); } }
+    .legend { display: flex; gap: 18px; font-size: 14px; color: var(--muted); margin-top: 6px; }
+    .legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 6px; }
+
+    /* annotation viewer */
+    .viewer { display: grid; grid-template-columns: 1fr 230px; gap: 18px; margin-top: 26px; }
+    .stage { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #111; box-shadow: var(--shadow); user-select: none; touch-action: pan-y; }
+    .stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .stage .over { clip-path: inset(0 0 0 50%); }
+    .divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 12px rgba(0, 0, 0, .5); pointer-events: none; }
+    .divider::after { content: "◀ ▶"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; color: #0d1424; font: 700 11px Inter, sans-serif; letter-spacing: 2px; padding: 8px 10px; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 10px rgba(0, 0, 0, .35); }
+    .lab { position: absolute; top: 12px; font-size: 12.5px; font-weight: 700; color: #fff; background: rgba(7, 11, 22, .62); padding: 4px 10px; border-radius: 999px; backdrop-filter: blur(6px); pointer-events: none; }
+    .lab.l { left: 12px; } .lab.r { right: 12px; }
+    .stage input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+    .stage.single .over, .stage.single .divider, .stage.single .lab.r, .stage.single input { display: none; }
+    .side h3 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin: 0 0 10px; }
+    .mods { display: grid; gap: 6px; margin-bottom: 18px; }
+    .mod { text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14.5px Inter, sans-serif; padding: 9px 12px; border-radius: 10px; cursor: pointer; }
+    .mod.on { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .scenes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 12px; grid-column: 1 / -1; }
+    .scene { border: 2px solid transparent; padding: 0; border-radius: 10px; overflow: hidden; cursor: pointer; background: none; opacity: .7; transition: opacity .2s; }
+    .scene.on { border-color: var(--accent); opacity: 1; }
+    .scene:hover { opacity: 1; }
+    .scene img { aspect-ratio: 16 / 9; object-fit: cover; width: 100%; }
+    .vnote { font-size: 14px; color: var(--faint); margin-top: 10px; grid-column: 1 / -1; }
+
+    .envs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 18px; }
+    .envs figure { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 9; background: #111; }
+    .envs img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .envs figure:hover img { transform: scale(1.06); }
+    .envs figcaption { position: absolute; left: 8px; bottom: 8px; margin: 0; font-size: 12px; font-weight: 600; color: #fff; background: rgba(7, 11, 22, .62); padding: 2px 9px; border-radius: 999px; text-transform: capitalize; }
+
+    /* tables */
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 16px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .panel { margin-top: 18px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; text-transform: capitalize; }
+    .chip.on { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13.5px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    thead th.grp { text-align: center; border-bottom: 1px solid var(--line); }
+    th[scope=row], thead tr:first-child th:first-child { text-align: left; color: var(--ink); font-weight: 600; }
+    td.l { text-align: left; color: var(--faint); font-size: 14px; }
+    thead th.l { text-align: left; } thead th.c { text-align: center; }
+    td.c { text-align: center; }
+    td { color: var(--muted); }
+    td.best { color: var(--best); font-weight: 800; }
+    td.na, span.na { color: var(--faint); }
+    td small.drop { display: block; color: var(--no); font-size: 12px; font-weight: 600; }
+    .yes { color: var(--yes); font-weight: 800; }
+    .no { color: var(--no); font-weight: 800; }
+    tr.gstart th, tr.gstart td { border-top: 2px solid var(--line); }
+    tr.ours th, tr.ours td { background: var(--accent-soft); }
+    tr.ours th[scope=row] { color: var(--accent-ink); font-weight: 800; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    .compare td { text-align: center; }
+    .compare th, .compare td { padding: 9px 8px; }
+    .compare thead th { text-align: center; white-space: normal; vertical-align: bottom; line-height: 1.25; min-width: 64px; }
+    .compare thead th:first-child, .compare th[scope=row] { text-align: left; padding-left: 14px; }
+    .tnote { font-size: 14px; color: var(--faint); margin-top: 12px; }
+    .findings { margin-bottom: 30px; }
+
+    .charts { display: grid; gap: 16px; }
+    .charts .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .charts .three { display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 16px; align-items: start; }
+
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 26px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .steps li::before { color: #1a1403; } }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+    .callout { margin-top: 18px; padding: 16px 20px; border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 12px 12px 0; color: var(--ink); }
+
+    .dl { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .dl ul { padding-left: 20px; margin: 0 0 14px; color: var(--muted); }
+    .dl li { margin: 6px 0; }
+    .dl .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .dl .btn { background: var(--ink); color: var(--bg); border: 0; }
+    .dl .btn:hover { background: var(--accent); color: #fff; }
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; }
+    pre.code, .bib { position: relative; background: #0b1020; color: #dbe3f3; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    pre.code .c { color: #8b97b3; }
+
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(5, 8, 16, .88); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .cards, .related, .dl { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .viewer { grid-template-columns: 1fr; }
+      .mods { grid-template-columns: repeat(3, 1fr); }
+      .why-m { grid-template-columns: 1fr; gap: 10px; }
+      .envs { grid-template-columns: repeat(3, 1fr); }
+      .charts .three, .charts .two { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stat .num { font-size: 30px; }
+      .stat.sim { grid-column: 1 / -1; }
+      .steps { grid-template-columns: 1fr; }
+      .mods { grid-template-columns: repeat(2, 1fr); }
+      .why-cats { grid-template-columns: repeat(2, 1fr); }
+      .scenes { gap: 5px; }
+      .envs { grid-template-columns: repeat(2, 1fr); }
+      .lead { font-size: 18.5px; }
+      th, td { padding: 9px 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .envs img, .related a.card { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">ECCV 2024</span>
+    <h1>PACE</h1>
+    <p class="subtitle">A Large-Scale Dataset with Pose Annotations in Cluttered Environments</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a><sup>1</sup></span>
+      <span><a href="https://xiongkai.netlify.app">Kai Xiong</a><sup>2</sup></span>
+      <span>Zhening Yang<sup>3</sup></span>
+      <span><a href="https://github.com/huangzhengxiang">Zhengxiang Huang</a><sup>2</sup></span>
+      <span><a href="https://github.com/Zhou-jw">Junwei Zhou</a><sup>2</sup></span>
+      <span><a href="https://rshi.top">Ruoxi Shi</a><sup>4</sup></span>
+      <span>Zhou Fang<sup>2</sup></span>
+      <span><a href="https://adamharley.com">Adam W. Harley</a><sup>1</sup></span>
+      <span><a href="https://geometry.stanford.edu/member/guibas/">Leonidas Guibas</a><sup>1</sup></span>
+      <span><a href="https://www.mvig.org">Cewu Lu</a><sup>2</sup></span>
+    </div>
+    <div class="affil"><span><sup>1</sup>Stanford University</span><span><sup>2</sup>Shanghai Jiao Tong University</span><span><sup>3</sup>Horizon Robotics</span><span><sup>4</sup>UC San Diego</span></div>
+    <div class="links">
+      <a class="btn primary" href="https://arxiv.org/pdf/2312.15130"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06837.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>ECCV version</a>
+      <a class="btn" href="/files/pace_supp.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14h6"/></svg>Supplementary</a>
+      <a class="btn" href="https://huggingface.co/datasets/qq456cvb/PACE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>Dataset</a>
+      <a class="btn" href="https://github.com/qq456cvb/PACE"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="https://youtu.be/RX1K-xA99ZI"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg>Video</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/pace/static/media/teaser.mp4" poster="/projects/pace/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="PACE one-minute teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#why">Why PACE</a><a href="#explore">Explore</a><a href="#benchmarks">Benchmarks</a><a href="#dataset">Dataset</a><a href="#pipeline">How it was built</a><a href="#download">Download</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>Object pose, in the clutter of the real world.</h2>
+    <p class="lead"><b>PACE (Pose Annotations in Cluttered Environments)</b> is a large-scale benchmark for object pose estimation and tracking in cluttered real-world scenes: everyday objects, rigid and articulated, piled together, occluded and moved by hand. It covers instance-level and category-level pose estimation, model-based and model-free tracking, and comes with <b>PACE-Sim</b>, a photo-realistic synthetic set for training.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">55K</div><p>real RGB-D frames</p></div>
+      <div class="stat"><div class="num">258K</div><p>pose annotations</p></div>
+      <div class="stat"><div class="num">300</div><p>videos, 183 frames each on average</p></div>
+      <div class="stat"><div class="num">238<small>objects</small></div><p>in 43 categories, rigid and articulated</p></div>
+      <div class="stat"><div class="num">10</div><p>environments with different levels of occlusion</p></div>
+      <div class="stat"><div class="num">0.9°<small>/ 2.3 mm</small></div><p>annotation error, measured against NOCS REAL275 ground truth</p></div>
+      <div class="stat sim"><div class="row"><div class="num">100K<small>frames</small></div><div class="num">2.4M<small>annotations</small></div><div class="num">931<small>objects</small></div></div><p><b>PACE-Sim</b>: physically based renders for training instance-level and category-level models.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="kicker">Why PACE</div>
+    <h2>Methods that solve REAL275 fail on PACE</h2>
+    <p>On categories that exist in both datasets, state-of-the-art category-level methods score above 97% AP at 15°/5&nbsp;cm on NOCS REAL275 for bottles, bowls and cans, and 69 to 86% for mugs. On PACE, none of them gets above 8%.</p>
+    <div class="legend"><span><i style="background:var(--real)"></i>NOCS REAL275</span><span><i style="background:#facc15"></i>PACE</span><span>AP (%) at 15° / 5 cm</span></div>
+    <div class="why">
+<div class="why-m"><div class="why-name">HS-Pose</div><div class="why-cats">
+<div class="why-c"><div class="why-cat">bottle</div><div class="bar r"><span style="width:99.8%"></span><b>99.8</b></div><div class="bar p"><span style="width:0.6%"></span><b>0.4</b></div></div>
+<div class="why-c"><div class="why-cat">bowl</div><div class="bar r"><span style="width:99.8%"></span><b>99.8</b></div><div class="bar p"><span style="width:0.6%"></span><b>0.0</b></div></div>
+<div class="why-c"><div class="why-cat">can</div><div class="bar r"><span style="width:99.5%"></span><b>99.5</b></div><div class="bar p"><span style="width:0.8%"></span><b>0.8</b></div></div>
+<div class="why-c"><div class="why-cat">mug</div><div class="bar r"><span style="width:86.2%"></span><b>86.2</b></div><div class="bar p"><span style="width:7.5%"></span><b>7.5</b></div></div>
+</div></div>
+<div class="why-m"><div class="why-name">DualPoseNet</div><div class="why-cats">
+<div class="why-c"><div class="why-cat">bottle</div><div class="bar r"><span style="width:97.5%"></span><b>97.5</b></div><div class="bar p"><span style="width:0.6%"></span><b>0.3</b></div></div>
+<div class="why-c"><div class="why-cat">bowl</div><div class="bar r"><span style="width:99.7%"></span><b>99.7</b></div><div class="bar p"><span style="width:2.0%"></span><b>2.0</b></div></div>
+<div class="why-c"><div class="why-cat">can</div><div class="bar r"><span style="width:97.7%"></span><b>97.7</b></div><div class="bar p"><span style="width:0.6%"></span><b>0.5</b></div></div>
+<div class="why-c"><div class="why-cat">mug</div><div class="bar r"><span style="width:68.7%"></span><b>68.7</b></div><div class="bar p"><span style="width:1.6%"></span><b>1.6</b></div></div>
+</div></div>
+<div class="why-m"><div class="why-name">SAR-Net</div><div class="why-cats">
+<div class="why-c"><div class="why-cat">bottle</div><div class="bar r"><span style="width:98.2%"></span><b>98.2</b></div><div class="bar p"><span style="width:2.1%"></span><b>2.1</b></div></div>
+<div class="why-c"><div class="why-cat">bowl</div><div class="bar r"><span style="width:98.2%"></span><b>98.2</b></div><div class="bar p"><span style="width:0.6%"></span><b>0.0</b></div></div>
+<div class="why-c"><div class="why-cat">can</div><div class="bar r"><span style="width:97.4%"></span><b>97.4</b></div><div class="bar p"><span style="width:0.6%"></span><b>0.3</b></div></div>
+<div class="why-c"><div class="why-cat">mug</div><div class="bar r"><span style="width:70.6%"></span><b>70.6</b></div><div class="bar p"><span style="width:0.6%"></span><b>0.0</b></div></div>
+</div></div>
+</div>
+  </div>
+</section>
+
+<section id="explore">
+  <div class="wrap">
+    <div class="kicker">Explore</div>
+    <h2>Look inside the annotations</h2>
+    <p>Annotations include depth, instance masks, NOCS maps and the 6D pose of every object. Pick one and drag across the image to compare it with the RGB frame.</p>
+    <div class="viewer" id="viewer">
+      <div class="stage" id="stage">
+        <img class="base" id="v-base" src="/projects/pace/static/media/viewer/scene1/rgb.jpg" width="1280" height="720" alt="RGB frame">
+        <img class="over" id="v-over" src="/projects/pace/static/media/viewer/scene1/pose.jpg" width="1280" height="720" alt="Annotation overlay">
+        <div class="divider" id="v-div"></div>
+        <span class="lab l">RGB</span><span class="lab r" id="v-lab">3D pose</span>
+        <input type="range" id="v-range" min="0" max="100" value="50" aria-label="Drag to compare the RGB frame with the selected annotation">
+      </div>
+      <div class="side">
+        <h3>Annotation</h3>
+        <div class="mods" role="group" aria-label="Annotation type">
+          <button class="mod" type="button" data-mod="rgb">RGB</button>
+          <button class="mod on" type="button" data-mod="pose">3D pose</button>
+          <button class="mod" type="button" data-mod="render">Rendered models</button>
+          <button class="mod" type="button" data-mod="mask">Instance masks</button>
+          <button class="mod" type="button" data-mod="nocs">NOCS map</button>
+          <button class="mod" type="button" data-mod="depth">Depth</button>
+        </div>
+      </div>
+      <div class="scenes" role="group" aria-label="Scene">
+        <button class="scene on" type="button" data-scene="1" aria-label="Scene 1"><img src="/projects/pace/static/media/viewer/scene1/thumb.jpg" width="320" height="180" loading="lazy" alt=""></button>
+        <button class="scene" type="button" data-scene="2" aria-label="Scene 2"><img src="/projects/pace/static/media/viewer/scene2/thumb.jpg" width="320" height="180" loading="lazy" alt=""></button>
+        <button class="scene" type="button" data-scene="3" aria-label="Scene 3"><img src="/projects/pace/static/media/viewer/scene3/thumb.jpg" width="320" height="180" loading="lazy" alt=""></button>
+        <button class="scene" type="button" data-scene="4" aria-label="Scene 4"><img src="/projects/pace/static/media/viewer/scene4/thumb.jpg" width="320" height="180" loading="lazy" alt=""></button>
+        <button class="scene" type="button" data-scene="5" aria-label="Scene 5"><img src="/projects/pace/static/media/viewer/scene5/thumb.jpg" width="320" height="180" loading="lazy" alt=""></button>
+      </div>
+      <p class="vnote">Depth is shown with a colour map for visibility; black marks pixels without depth.</p>
+    </div>
+
+    <h3 style="margin-top:48px">Ten environments</h3>
+    <p>Objects were captured in ten environments, each with its own level and kind of occlusion.</p>
+    <div class="envs">
+      <figure><img src="/projects/pace/static/media/env/basket.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects in a plastic basket"><figcaption>basket</figcaption></figure>
+      <figure><img src="/projects/pace/static/media/env/box_top.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects on top of a box"><figcaption>box top</figcaption></figure>
+      <figure><img src="/projects/pace/static/media/env/cabinet.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects in a cabinet"><figcaption>cabinet</figcaption></figure>
+      <figure><img src="/projects/pace/static/media/env/carpet.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects on a carpet"><figcaption>carpet</figcaption></figure>
+      <figure><img src="/projects/pace/static/media/env/chair.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects on a chair"><figcaption>chair</figcaption></figure>
+      <figure><img src="/projects/pace/static/media/env/china_floor.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects on a tiled floor"><figcaption>tiled floor</figcaption></figure>
+      <figure><img src="/projects/pace/static/media/env/desk1.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects on a desk"><figcaption>desk 1</figcaption></figure>
+      <figure><img src="/projects/pace/static/media/env/desk2.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects on another desk"><figcaption>desk 2</figcaption></figure>
+      <figure><img src="/projects/pace/static/media/env/stairs.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects on stairs"><figcaption>stairs</figcaption></figure>
+      <figure><img src="/projects/pace/static/media/env/wooden_floor.jpg" width="640" height="360" loading="lazy" decoding="async" alt="Objects on a wooden floor"><figcaption>wooden floor</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="benchmarks">
+  <div class="wrap">
+    <div class="kicker">Benchmarks</div>
+    <h2>Far from solved</h2>
+    <p>We evaluate state-of-the-art methods on two tracks, pose estimation and pose tracking. Pose estimation assumes ground-truth object detection, so the numbers isolate pose quality.</p>
+    <div class="cards findings">
+      <div class="card"><div class="big">52.2 vs 9.0</div><h3>A classic beats deep learning</h3><p>On instance-level pose, PPF, a point pair feature method that needs no training, reaches 52.2 AR. The best learned method, SurfEmb, reaches 9.0.</p></div>
+      <div class="card"><div class="big">9.9% · 1.1%</div><h3>Category-level pose is wide open</h3><p>The best AP at 0–20° and 0–5 cm is 9.9% on rigid objects and 1.1% on articulated ones.</p></div>
+      <div class="card"><div class="big">−57.2 to −78.5</div><h3>Scale and sim2real both hurt</h3><p>Methods fit one instance or category well with real training data, but trained on all of PACE they drop by 57.2 to 78.5 points. Depth-based HS-Pose, SGPA and DualPoseNet fall to 1.4 or below when trained on synthetic data.</p></div>
+      <div class="card"><div class="big">38.1% · 12.9%</div><h3>Tracking struggles too</h3><p>The best model-based tracker (ICG) reaches 38.1% ADD(-S) on rigid objects and 10.1% on articulated ones. The best model-free tracker stays below 13% at 5°/5&nbsp;cm.</p></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Benchmark">
+      <button role="tab" class="tab on" data-tab="instance" aria-selected="true">Instance-level pose</button>
+      <button role="tab" class="tab" data-tab="category" aria-selected="false">Category-level pose</button>
+      <button role="tab" class="tab" data-tab="mb" aria-selected="false">Model-based tracking</button>
+      <button role="tab" class="tab" data-tab="mf" aria-selected="false">Model-free tracking</button>
+      <button role="tab" class="tab" data-tab="why" aria-selected="false">Why methods fail</button>
+    </div>
+    <div class="panel" data-panel="instance"><div class="tbl"><table><caption>Average recall (%) under the BOP protocol, with ground-truth detections. PPF uses no learned model; the others are trained on synthetic PBR data.</caption><thead><tr><th>Method</th><th class="l">Input</th><th class="l">Detection</th><th>AR<sub>VSD</sub></th><th>AR<sub>MSSD</sub></th><th>AR<sub>MSPD</sub></th><th>AR</th></tr></thead><tbody><tr><th scope="row">PPF</th><td class="l">D</td><td class="l">G.T.</td><td class="best">53.4</td><td class="best">48.1</td><td class="best">55.2</td><td class="best">52.2</td></tr><tr><th scope="row">CosyPose</th><td class="l">RGB</td><td class="l">G.T.</td><td>1.4</td><td>0.3</td><td>11.5</td><td>4.4</td></tr><tr><th scope="row">SurfEmb</th><td class="l">RGB</td><td class="l">G.T.</td><td>6.2</td><td>3.0</td><td>17.8</td><td>9.0</td></tr><tr><th scope="row">GDRNPP</th><td class="l">RGB-D</td><td class="l">G.T.</td><td>3.6</td><td>2.1</td><td>15.4</td><td>7.0</td></tr></tbody></table></div></div>
+    <div class="panel" data-panel="category" hidden><div class="chips"><button class="chip on" data-cat="rigid">Rigid objects</button><button class="chip" data-cat="articulated">Articulated objects</button></div><div data-cat="rigid"><div class="tbl"><table><caption>Category-level pose estimation on PACE, rigid objects. All methods use ground-truth masks except NOCS (Mask R-CNN). Higher is better.</caption><thead><tr><th rowspan="2">Method</th><th rowspan="2" class="l">Detection</th><th rowspan="2">IoU<sub>25</sub></th><th rowspan="2">IoU<sub>50</sub></th><th colspan="6" class="grp">AP (%), averaged over a threshold range</th></tr><tr><th>0–20°</th><th>0–60°</th><th>0–5 cm</th><th>0–15 cm</th><th>0–20°, 0–5 cm</th><th>0–60°, 0–15 cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td class="l">Mask-RCNN</td><td>0.2</td><td>0.0</td><td>1.2</td><td>4.3</td><td>17.0</td><td>33.5</td><td>1.1</td><td>4.2</td></tr><tr><th scope="row">HS-Pose</th><td class="l">G.T.</td><td>36.6</td><td>2.7</td><td>5.3</td><td>8.6</td><td class="best">48.7</td><td class="best">81.0</td><td>3.9</td><td>8.1</td></tr><tr><th scope="row">SGPA</th><td class="l">G.T.</td><td>2.6</td><td>1.2</td><td>5.6</td><td>11.4</td><td>16.1</td><td>50.7</td><td>3.3</td><td>10.1</td></tr><tr><th scope="row">DualPoseNet</th><td class="l">G.T.</td><td>24.2</td><td>0.1</td><td>5.5</td><td>8.1</td><td>18.6</td><td>63.4</td><td>1.8</td><td>6.5</td></tr><tr><th scope="row">SAR-Net</th><td class="l">G.T.</td><td>22.8</td><td>0.2</td><td>5.3</td><td>8.8</td><td>48.6</td><td>79.8</td><td>3.7</td><td>8.2</td></tr><tr><th scope="row">CPPF++</th><td class="l">G.T.</td><td class="best">44.5</td><td class="best">4.4</td><td class="best">15.2</td><td class="best">27.3</td><td>35.3</td><td>74.0</td><td class="best">9.9</td><td class="best">24.9</td></tr><tr><th scope="row">ANCSH</th><td class="l">G.T.</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="na">–</td></tr></tbody></table></div></div><div data-cat="articulated" hidden><div class="tbl"><table><caption>Category-level pose estimation on PACE, articulated objects. All methods use ground-truth masks except NOCS (Mask R-CNN). ANCSH is designed for articulated objects only.</caption><thead><tr><th rowspan="2">Method</th><th rowspan="2" class="l">Detection</th><th rowspan="2">IoU<sub>25</sub></th><th rowspan="2">IoU<sub>50</sub></th><th colspan="6" class="grp">AP (%), averaged over a threshold range</th></tr><tr><th>0–20°</th><th>0–60°</th><th>0–5 cm</th><th>0–15 cm</th><th>0–20°, 0–5 cm</th><th>0–60°, 0–15 cm</th></tr></thead><tbody><tr><th scope="row">NOCS</th><td class="l">Mask-RCNN</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th scope="row">HS-Pose</th><td class="l">G.T.</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.3</td><td>34.1</td><td class="best">75.6</td><td>0.0</td><td>0.3</td></tr><tr><th scope="row">SGPA</th><td class="l">G.T.</td><td>0.0</td><td>0.0</td><td>1.1</td><td class="best">7.3</td><td>6.8</td><td>17.5</td><td>0.9</td><td class="best">7.2</td></tr><tr><th scope="row">DualPoseNet</th><td class="l">G.T.</td><td>0.3</td><td>0.0</td><td>0.0</td><td>0.0</td><td>27.3</td><td>65.2</td><td>0.0</td><td>0.0</td></tr><tr><th scope="row">SAR-Net</th><td class="l">G.T.</td><td>0.1</td><td>0.0</td><td>0.0</td><td>0.8</td><td class="best">38.5</td><td>69.7</td><td>0.0</td><td>0.8</td></tr><tr><th scope="row">CPPF++</th><td class="l">G.T.</td><td class="best">3.6</td><td>0.0</td><td class="best">1.7</td><td>6.2</td><td>31.1</td><td>66.7</td><td class="best">1.1</td><td>5.9</td></tr><tr><th scope="row">ANCSH</th><td class="l">G.T.</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.2</td><td>18.6</td><td>50.4</td><td>0.0</td><td>0.2</td></tr></tbody></table></div></div></div>
+    <div class="panel" data-panel="mb" hidden><div class="chips"><button class="chip on" data-cat="rigid">Rigid objects</button><button class="chip" data-cat="articulated">Articulated objects</button></div><div data-cat="rigid"><div class="tbl"><table><caption>Model-based tracking (3D model given), rigid objects: area under the curve (%) up to 0.1 m. Higher is better.</caption><thead><tr><th>Method</th><th class="l">Input</th><th>ADD</th><th>ADD-S</th><th>ADD(-S)</th></tr></thead><tbody><tr><th scope="row">RBOT</th><td class="l">RGB</td><td>7.1</td><td>10.3</td><td>7.4</td></tr><tr><th scope="row">ICG</th><td class="l">RGB-D</td><td class="best">35.6</td><td class="best">48.1</td><td class="best">38.1</td></tr></tbody></table></div></div><div data-cat="articulated" hidden><div class="tbl"><table><caption>Model-based tracking (3D model given), articulated objects: area under the curve (%) up to 0.1 m. Higher is better.</caption><thead><tr><th>Method</th><th class="l">Input</th><th>ADD</th><th>ADD-S</th><th>ADD(-S)</th></tr></thead><tbody><tr><th scope="row">RBOT</th><td class="l">RGB</td><td>0.5</td><td>0.8</td><td>0.5</td></tr><tr><th scope="row">ICG</th><td class="l">RGB-D</td><td class="best">10.1</td><td class="best">15.2</td><td class="best">10.1</td></tr></tbody></table></div></div></div>
+    <div class="panel" data-panel="mf" hidden><div class="chips"><button class="chip on" data-cat="rigid">Rigid objects</button><button class="chip" data-cat="articulated">Articulated objects</button></div><div data-cat="rigid"><div class="tbl"><table><caption>Model-free tracking (initial pose only), rigid objects. Rotation and translation errors only count frames with IoU > 25%, which can flatter trackers that lose the object.</caption><thead><tr><th>Method</th><th class="c">Training-free</th><th class="l">Input</th><th>5°5cm (%) ↑</th><th>IoU<sub>25</sub> (%) ↑</th><th>R<sub>err</sub> (°) ↓</th><th>T<sub>err</sub> (cm) ↓</th></tr></thead><tbody><tr><th scope="row">BundleTrack</th><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="l">RGB</td><td>6.4</td><td>9.1</td><td class="best">3.2</td><td>2.6</td></tr><tr><th scope="row">CAPTRA</th><td class="c"><span class="no" aria-label="no">✗</span></td><td class="l">D</td><td class="best">12.9</td><td class="best">45.8</td><td>19.2</td><td>2.2</td></tr><tr><th scope="row">6-PACK</th><td class="c"><span class="no" aria-label="no">✗</span></td><td class="l">RGB-D</td><td>9.2</td><td>23.1</td><td>17.7</td><td class="best">2.1</td></tr></tbody></table></div></div><div data-cat="articulated" hidden><div class="tbl"><table><caption>Model-free tracking (initial pose only), articulated objects. Rotation and translation errors only count frames with IoU > 25%, which can flatter trackers that lose the object.</caption><thead><tr><th>Method</th><th class="c">Training-free</th><th class="l">Input</th><th>5°5cm (%) ↑</th><th>IoU<sub>25</sub> (%) ↑</th><th>R<sub>err</sub> (°) ↓</th><th>T<sub>err</sub> (cm) ↓</th></tr></thead><tbody><tr><th scope="row">BundleTrack</th><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="l">RGB</td><td class="best">11.2</td><td>14.1</td><td class="best">5.5</td><td class="best">0.8</td></tr><tr><th scope="row">CAPTRA</th><td class="c"><span class="no" aria-label="no">✗</span></td><td class="l">D</td><td>4.4</td><td class="best">20.6</td><td>40.9</td><td>1.5</td></tr><tr><th scope="row">6-PACK</th><td class="c"><span class="no" aria-label="no">✗</span></td><td class="l">RGB-D</td><td>3.9</td><td>16.7</td><td>33.6</td><td>1.2</td></tr></tbody></table></div></div></div>
+    <div class="panel" data-panel="why" hidden><div class="tbl"><table><caption>Why methods fail on PACE. Small numbers: drop from fitting a single instance or category with real training data.</caption><thead><tr><th rowspan="2">Training setting</th><th colspan="3" class="grp">Instance-level (AR %)</th><th colspan="6" class="grp">Category-level (mean AP %, 0–60°, 0–15 cm)</th></tr><tr><th>CosyPose</th><th>SurfEmb</th><th>GDRNPP</th><th>NOCS</th><th>HS-Pose</th><th>SGPA</th><th>DualPoseNet</th><th>SAR-Net</th><th>CPPF++</th></tr></thead><tbody><tr><th scope="row">Real → real, one instance / category</th><td>76.4</td><td>86.7</td><td>88.2</td><td>76.9</td><td>81.2</td><td>86.7</td><td>58.6</td><td>59.3</td><td>83.4</td></tr><tr><th scope="row">Synthetic → real, one instance / category</th><td>67.1<small class=drop>−9.3</small></td><td>73.7<small class=drop>−13.0</small></td><td>78.1<small class=drop>−10.1</small></td><td>55.8<small class=drop>−21.1</small></td><td>1.1<small class=drop>−80.1</small></td><td>0.3<small class=drop>−86.4</small></td><td>1.4<small class=drop>−57.2</small></td><td>33.2<small class=drop>−26.1</small></td><td>55.8<small class=drop>−27.6</small></td></tr><tr><th scope="row">Real → real, all instances / categories</th><td>8.2<small class=drop>−68.2</small></td><td>11.2<small class=drop>−75.5</small></td><td>9.7<small class=drop>−78.5</small></td><td>0.3<small class=drop>−76.6</small></td><td>5.6<small class=drop>−75.6</small></td><td>9.8<small class=drop>−76.9</small></td><td>1.2<small class=drop>−57.4</small></td><td>2.1<small class=drop>−57.2</small></td><td>13.7<small class=drop>−69.7</small></td></tr></tbody></table></div></div>
+    <p class="tnote"><b>Bold</b>: best in each column, as marked in the paper. Detection “G.T.” means ground-truth masks are given.</p>
+  </div>
+</section>
+
+<section id="dataset">
+  <div class="wrap">
+    <div class="kicker">Dataset</div>
+    <h2>How PACE compares</h2>
+    <p>PACE is the only dataset in this comparison with all six properties: CAD models, moving objects, occlusion, marker-free images, articulated objects and piled clutter.</p>
+    <div class="tbl compare"><table><caption>Instance-level datasets (top), category-level datasets (bottom). Numbers as reported in the paper; “–” where not available.</caption><thead><tr><th>Dataset</th><th>Input</th><th>Categories</th><th>Objects</th><th>Videos</th><th>Images</th><th>Annotations</th><th>CAD models</th><th>Moving objects</th><th>Occlusion</th><th>Marker-free</th><th>Articulated parts</th><th>Piled objects</th></tr></thead><tbody><tr><th scope="row">YCB-Video</th><td>RGBD</td><td class="na">–</td><td>21</td><td>12</td><td>20K</td><td>99K</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td></tr><tr><th scope="row">LINEMOD-O</th><td>RGBD</td><td class="na">–</td><td>8</td><td>1</td><td>1.2K</td><td>9.2K</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td></tr><tr><th scope="row">NAVI</th><td>RGBD</td><td class="na">–</td><td>36</td><td>324</td><td>10K</td><td>10k</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td></tr><tr><th scope="row">StereoObj-1M</th><td>RGBD</td><td class="na">–</td><td>18</td><td>182</td><td>393K</td><td>1.5M</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td></tr><tr class="gstart"><th scope="row">NOCS-REAL275</th><td>RGBD</td><td>6</td><td>42</td><td>18</td><td>8K</td><td class="na">–</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td></tr><tr><th scope="row">Wild6D</th><td>RGBD</td><td>5</td><td>1722</td><td>5166</td><td>1.1M</td><td>1.1M</td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td></tr><tr><th scope="row">Objectron</th><td>RGB</td><td>9</td><td>17k</td><td>14k</td><td>4M</td><td>4M</td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td></tr><tr><th scope="row">Scan2CAD</th><td>RGBD</td><td>9</td><td>3K</td><td>1506</td><td class="na">–</td><td>14K</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td></tr><tr><th scope="row">Pix3D</th><td>RGBD</td><td>9</td><td>395</td><td class="na">–</td><td>10K</td><td>10K</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td></tr><tr><th scope="row">HANDAL</th><td>RGB</td><td>17</td><td>212</td><td>2K</td><td>308K</td><td>308K</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td></tr><tr><th scope="row">HouseCat6D</th><td>RGBD</td><td>10</td><td>192</td><td>41</td><td>24K</td><td>160K</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td></tr><tr><th scope="row">ROPE</th><td>RGBD</td><td>149</td><td>581</td><td>363</td><td>332K</td><td>1.5M</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="no" aria-label="no">✗</span></td><td class="c"><span class="no" aria-label="no">✗</span></td></tr><tr class="ours"><th scope="row">PACE</th><td>RGBD</td><td>43</td><td>238</td><td>300</td><td>55K</td><td>258K</td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td><td class="c"><span class="yes" aria-label="yes">✓</span></td></tr></tbody></table></div>
+    <h3 style="margin-top:44px">What's inside</h3>
+    <div class="charts">
+      <div class="two">
+      <figure class="figure" data-zoom><img src="/projects/pace/static/media/charts/dist-cat.png" width="1600" height="800" loading="lazy" decoding="async" alt="Bar chart of pose annotation counts for the 43 categories, from toys (about 18,000) down to ramen package; articulated categories box, scissor, cutter and clip are marked in red."><figcaption>Pose annotations per category. Articulated categories (box, scissors, cutter, clip) are marked in red.</figcaption></figure>
+      <figure class="figure" data-zoom><img src="/projects/pace/static/media/charts/dist-instance.png" width="1600" height="800" loading="lazy" decoding="async" alt="Stacked bar chart of object instances per category in PACE and PACE-Sim."><figcaption>Object instances per category in PACE (real) and PACE-Sim.</figcaption></figure>
+      </div>
+      <div class="three">
+        <figure class="figure" data-zoom><img src="/projects/pace/static/media/charts/dist-size.png" width="1139" height="856" loading="lazy" decoding="async" alt="Histogram of object sizes, peaking near 0.15 to 0.2 m, up to about 0.6 m."><figcaption>Object sizes (bounding-box diagonal); most are near 0.2&nbsp;m.</figcaption></figure>
+        <figure class="figure" data-zoom><img src="/projects/pace/static/media/charts/dist-pose.png" width="1600" height="595" loading="lazy" decoding="async" alt="Donut charts of azimuth and elevation viewing-angle distributions."><figcaption>Viewing angles: azimuth and elevation.</figcaption></figure>
+        <figure class="figure" data-zoom><img src="/projects/pace/static/media/charts/dist-occ.png" width="1254" height="517" loading="lazy" decoding="async" alt="Donut chart of occlusion levels: minor, moderate and severe."><figcaption>Occlusion levels: minor, moderate and severe.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pipeline">
+  <div class="wrap">
+    <div class="kicker">How it was built</div>
+    <h2>A scalable annotation pipeline</h2>
+    <figure class="figure" data-zoom><img src="/projects/pace/static/media/pipeline.jpg" width="1800" height="747" loading="lazy" decoding="async" alt="Overview of the PACE annotation pipeline: object scanning and alignment, calibrated three-camera capture with markers, marker-based and BundleTrack-assisted pose annotation, marker inpainting and mask generation."></figure>
+    <ol class="steps">
+      <li><b>Scan</b>Every object is scanned with an EinScan Pro 2X, aligned to a shared frame per category, and labelled with its symmetries. Articulated objects come from AKB48.</li>
+      <li><b>Capture</b>Three calibrated Intel RealSense D415 cameras record each scene at 1280×720, from 0.5 to 1.5&nbsp;m away.</li>
+      <li><b>Track static objects</b>A marker drives automatic pose tracking, corrected by hand every 40 frames, and is then inpainted out of the images.</li>
+      <li><b>Track moving objects</b>BundleTrack follows objects moved by hand, with poses corrected every 10 frames.</li>
+      <li><b>Masks</b>Occlusion-aware masks are rendered from the poses; hands are segmented with SAM and removed.</li>
+    </ol>
+    <p class="callout">To check accuracy, we re-annotated Scene 1 of NOCS REAL275 with this pipeline: the average error against its ground truth was <b>0.9°</b> in rotation and <b>2.3&nbsp;mm</b> in translation. The annotation tool is open source.</p>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap dl">
+    <div>
+      <div class="kicker">Download &amp; use</div>
+      <h2>Get the data</h2>
+      <ul>
+        <li><b>Format:</b> <a href="https://github.com/thodan/bop_toolkit/blob/master/docs/bop_datasets_format.md">BOP</a>: RGB, depth, masks, NOCS maps and poses per scene, plus scanned meshes and evaluation point clouds.</li>
+        <li><b>Splits:</b> real data is split 20/80 into validation and test; PACE-Sim provides the training sets.</li>
+        <li><b>Evaluation:</b> instance-level (BOP toolkit) and category-level code, with baseline predictions.</li>
+        <li><b>License:</b> MIT, except some 3D models from Sketchfab (CC BY 4.0) and GrabCAD.</li>
+      </ul>
+      <div class="btns">
+        <a class="btn" href="https://huggingface.co/datasets/qq456cvb/PACE">Hugging Face dataset</a>
+        <a class="btn" href="https://github.com/qq456cvb/PACE">Code &amp; annotation tool</a>
+      </div>
+    </div>
+    <pre class="code"><span class="c"># full dataset is about 870 GB; this fetches the real
+# test set and object models (about 73 GB)</span>
+pip install -U "huggingface_hub[cli]"
+hf download qq456cvb/PACE --repo-type dataset \
+  --local-dir dataset/pace \
+  --include "test_chunk_*" --include "models*.tar.gz" \
+  --include "model_splits/*" --include "test_targets_bop19.json"
+
+cd dataset/pace
+cat test_chunk_* &gt; test.tar.gz
+for f in *.tar.gz; do tar -xzf "$f"; done</pre>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>We introduce <b>PACE</b> (Pose Annotations in Cluttered Environments), a large-scale benchmark designed to advance the development and evaluation of pose estimation methods in cluttered scenarios. PACE provides a large-scale real-world benchmark for both instance-level and category-level settings. The benchmark consists of 55K frames with 258K annotations across 300 videos, covering 238 objects from 43 categories and featuring a mix of rigid and articulated items in cluttered scenes. To annotate the real-world data efficiently, we develop an innovative annotation system with a calibrated 3-camera setup. Additionally, we offer <b>PACE-Sim</b>, which contains 100K photo-realistic simulated frames with 2.4M annotations across 931 objects. We test state-of-the-art algorithms in PACE along two tracks: pose estimation, and object pose tracking, revealing the benchmark's challenges and research opportunities.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/projects/cppf++"><div class="venue">TPAMI 2024</div><h3>CPPF++</h3><p>Sim2real category-level pose estimation, one of the baselines evaluated on PACE.</p></a>
+      <a class="card" href="/keypointnet/"><div class="venue">CVPR 2020</div><h3>KeypointNet</h3><p>A large-scale 3D keypoint dataset aggregated from numerous human annotations.</p></a>
+      <a class="card" href="https://github.com/qq456cvb/PACE/blob/main/annotation_tool/README.md"><div class="venue">Open source</div><h3>Annotation tool</h3><p>The full 3-camera capture and pose annotation pipeline used to build PACE.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@inproceedings{you2024pace,
+  title={PACE: A Large-Scale Dataset with Pose Annotations in Cluttered Environments},
+  author={You, Yang and Xiong, Kai and Yang, Zhening and Huang, Zhengxiang and Zhou, Junwei and Shi, Ruoxi and Fang, Zhou and Harley, Adam W. and Guibas, Leonidas and Lu, Cewu},
+  booktitle={European Conference on Computer Vision (ECCV)},
+  year={2024},
+  organization={Springer}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2024 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script>
+/* Block comments only: this page is HTML-compressed onto one line. */
+(function () {
+  var base = '/projects/pace/static/media/viewer/', scene = 1, mod = 'pose';
+  var names = { rgb: 'RGB', pose: '3D pose', render: 'Rendered models', mask: 'Instance masks', nocs: 'NOCS map', depth: 'Depth' };
+  var stage = document.getElementById('stage'), vb = document.getElementById('v-base'), vo = document.getElementById('v-over');
+  var vd = document.getElementById('v-div'), vl = document.getElementById('v-lab'), vr = document.getElementById('v-range');
+  function setSplit(p) { vo.style.clipPath = 'inset(0 0 0 ' + p + '%)'; vd.style.left = p + '%'; }
+  function render() {
+    vb.src = base + 'scene' + scene + '/rgb.jpg';
+    stage.classList.toggle('single', mod === 'rgb');
+    if (mod !== 'rgb') { vo.src = base + 'scene' + scene + '/' + mod + '.jpg'; vl.textContent = names[mod]; }
+  }
+  vr.addEventListener('input', function () { setSplit(vr.value); });
+  document.querySelectorAll('.mod').forEach(function (b) {
+    b.addEventListener('click', function () {
+      mod = b.dataset.mod;
+      document.querySelectorAll('.mod').forEach(function (x) { x.classList.toggle('on', x === b); });
+      render();
+    });
+  });
+  document.querySelectorAll('.scene').forEach(function (b) {
+    b.addEventListener('click', function () {
+      scene = +b.dataset.scene;
+      document.querySelectorAll('.scene').forEach(function (x) { x.classList.toggle('on', x === b); });
+      render();
+    });
+  });
+
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', String(x === t)); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.hidden = p.dataset.panel !== t.dataset.tab; });
+    });
+  });
+  document.querySelectorAll('.panel').forEach(function (p) {
+    p.querySelectorAll('.chip').forEach(function (c) {
+      c.addEventListener('click', function () {
+        p.querySelectorAll('.chip').forEach(function (x) { x.classList.toggle('on', x === c); });
+        p.querySelectorAll('[data-cat]:not(.chip)').forEach(function (d) { d.hidden = d.dataset.cat !== c.dataset.cat; });
+      });
+    });
+  });
+
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
