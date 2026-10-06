@@ -48,6 +48,6 @@
 
 2021.02: Our paper <a href='https://arxiv.org/abs/2103.10814.pdf'>Skeleton Merger: an Unsupervised Aligned Keypoint Detector</a> is accepted as <i>CVPR</i> 2021 <b>Oral</b>! <a href='https://arxiv.org/abs/2103.10814'>[Paper]</a> <a href='https://github.com/eliphatfs/SkeletonMerger'>[Code]</a>
 
-<!-- 2020.06: Our code and full dataset for <a href='/keypointnet'>KeypointNet</a> are released on <a href='https://github.com/qq456cvb/KeypointNet'>Github</a>! -->
+<!-- 2020.06: Our code and full dataset for <a href='/projects/keypointnet'>KeypointNet</a> are released on <a href='https://github.com/qq456cvb/KeypointNet'>Github</a>! -->
 
-2020.02: Our paper <a href='https://arxiv.org/abs/2002.12687'>KeypointNet: A Large-scale 3D Keypoint Dataset Aggregated from Numerous Human Annotations</a> is accepted to <i>CVPR</i> 2020! <a href='https://arxiv.org/abs/2002.12687'>[Paper]</a> <a href='https://github.com/qq456cvb/KeypointNet'>[Code]</a> <a href='/keypointnet'>[Project Page]</a>
+2020.02: Our paper <a href='https://arxiv.org/abs/2002.12687'>KeypointNet: A Large-scale 3D Keypoint Dataset Aggregated from Numerous Human Annotations</a> is accepted to <i>CVPR</i> 2020! <a href='https://arxiv.org/abs/2002.12687'>[Paper]</a> <a href='https://github.com/qq456cvb/KeypointNet'>[Code]</a> <a href='/projects/keypointnet'>[Project Page]</a>

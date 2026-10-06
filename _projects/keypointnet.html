@@ -1,0 +1,848 @@
+---
+layout: compress
+permalink: /projects/keypointnet
+redirect_from:
+  - /keypointnet/
+  - /keypointnet.html
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KeypointNet: A Large-scale 3D Keypoint Dataset Aggregated from Numerous Human Annotations (CVPR 2020)</title>
+  <meta name="description" content="KeypointNet is a large-scale 3D keypoint dataset: 8,234 ShapeNet models from 16 categories with 103K+ semantic keypoints, aggregated from numerous human annotations. Interactive explorer, benchmarks, downloads and BibTeX. CVPR 2020.">
+  <meta name="keywords" content="KeypointNet, 3D keypoints, keypoint detection, semantic correspondence, ShapeNet, point cloud, dataset, benchmark, CVPR 2020">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/keypointnet">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="KeypointNet: A Large-scale 3D Keypoint Dataset Aggregated from Numerous Human Annotations">
+  <meta property="og:description" content="8,234 3D models, 103K+ semantic keypoints, 16 categories, aggregated from many people's annotations. CVPR 2020.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/keypointnet">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/keypointnet/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/keypointnet/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b16'/%3E%3Ccircle cx='20' cy='22' r='7' fill='%2322d3ee'/%3E%3Ccircle cx='44' cy='24' r='6' fill='%23f472b6'/%3E%3Ccircle cx='31' cy='44' r='7' fill='%23a3e635'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Dataset",
+        "@id": "https://qq456cvb.github.io/projects/keypointnet#dataset",
+        "name": "KeypointNet",
+        "description": "KeypointNet is a large-scale and diverse 3D keypoint dataset of 8,234 ShapeNetCore models from 16 object categories with more than 103K semantic keypoints. Keypoints were aggregated from numerous human annotations by minimizing a fidelity loss, and carry semantic ids that are consistent across the models of a category. The release includes keypoint annotations, 2,048-point coloured point clouds and coloured meshes.",
+        "url": "https://qq456cvb.github.io/projects/keypointnet",
+        "sameAs": ["https://huggingface.co/datasets/qq456cvb/KeypointNet", "https://github.com/qq456cvb/KeypointNet"],
+        "keywords": ["3D keypoints", "keypoint detection", "semantic correspondence", "point cloud", "ShapeNet", "crowdsourced annotation"],
+        "license": "https://opensource.org/licenses/MIT",
+        "isAccessibleForFree": true,
+        "variableMeasured": ["3D keypoint position", "keypoint semantic id", "keypoint symmetry group"],
+        "creator": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Yujing Lou" }, { "@type": "Person", "name": "Chengkun Li" }, { "@type": "Person", "name": "Zhoujun Cheng" },
+          { "@type": "Person", "name": "Liangwei Li" }, { "@type": "Person", "name": "Lizhuang Ma" }, { "@type": "Person", "name": "Cewu Lu" },
+          { "@type": "Person", "name": "Weiming Wang" }
+        ],
+        "distribution": [{ "@type": "DataDownload", "contentUrl": "https://huggingface.co/datasets/qq456cvb/KeypointNet/tree/main", "encodingFormat": "application/json" }],
+        "citation": { "@id": "https://qq456cvb.github.io/projects/keypointnet#article" }
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/keypointnet#article",
+        "headline": "KeypointNet: A Large-scale 3D Keypoint Dataset Aggregated from Numerous Human Annotations",
+        "url": "https://qq456cvb.github.io/projects/keypointnet",
+        "datePublished": "2020",
+        "publication": { "@type": "PublicationEvent", "name": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) 2020" },
+        "pagination": "13647-13656",
+        "sameAs": ["https://arxiv.org/abs/2002.12687", "https://openaccess.thecvf.com/content_CVPR_2020/html/You_KeypointNet_A_Large-Scale_3D_Keypoint_Dataset_Aggregated_From_Numerous_Human_CVPR_2020_paper.html", "https://qq456cvb.github.io/publications/kpnet"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Yujing Lou" }, { "@type": "Person", "name": "Chengkun Li" }, { "@type": "Person", "name": "Zhoujun Cheng" },
+          { "@type": "Person", "name": "Liangwei Li" }, { "@type": "Person", "name": "Lizhuang Ma" }, { "@type": "Person", "name": "Cewu Lu" },
+          { "@type": "Person", "name": "Weiming Wang" }
+        ],
+        "about": { "@id": "https://qq456cvb.github.io/projects/keypointnet#dataset" },
+        "image": "https://qq456cvb.github.io/projects/keypointnet/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/keypointnet#video" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/keypointnet#video",
+        "name": "KeypointNet teaser",
+        "description": "One-minute overview of KeypointNet: many people's clicks aggregated into keypoints, the aggregation pipeline, dataset scale, the 16 categories, keypoint correspondence across models, and benchmark results.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/keypointnet/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/keypointnet/static/media/teaser.mp4",
+        "uploadDate": "2026-10-06",
+        "duration": "PT59S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f6f7fb; --surface: #ffffff; --ink: #0d1424; --muted: #46526a; --faint: #79849a; --line: #e2e6ee;
+      --accent: #0891b2; --accent-ink: #0e7490; --accent-soft: rgba(8, 145, 178, .10); --best: #0d1424;
+      --tile: #f1f4f9; --pt-far: #b4bccb; --pt-near: #3f4a63; --kp-ring: #ffffff;
+      --hero: #070b16; --hero-2: #0f1d33; --radius: 18px; --shadow: 0 1px 2px rgba(13, 20, 36, .05), 0 8px 28px rgba(13, 20, 36, .06);
+      --yes: #16a34a; --no: #dc2626; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0f1d; --surface: #111a2e; --ink: #e8edf7; --muted: #a8b3c9; --faint: #7d89a3; --line: #22304d;
+        --accent: #22d3ee; --accent-ink: #67e8f9; --accent-soft: rgba(34, 211, 238, .10); --best: #ffffff;
+        --tile: #0c1424; --pt-far: #2b3854; --pt-near: #aab6cc; --kp-ring: #0c1424;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); --yes: #4ade80; --no: #f87171; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video, iframe { max-width: 100%; height: auto; display: block; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    /* hero */
+    .hero { background: radial-gradient(1200px 600px at 70% 10%, var(--hero-2), var(--hero) 70%); color: #eef2fa; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #a5f3fc; border: 1px solid rgba(34, 211, 238, .55); background: rgba(34, 211, 238, .12); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 6px; font-size: clamp(52px, 9vw, 104px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { color: #22d3ee; text-shadow: 0 0 40px rgba(34, 211, 238, .35); }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.6vw, 30px); line-height: 1.3; color: #dfe6f5; margin: 0 0 22px; max-width: 900px; }
+    .authors { font-size: 18px; font-weight: 500; color: #d4dcee; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #22d3ee; }
+    .authors sup, .affil sup { color: #67e8f9; font-weight: 600; margin-left: 1px; }
+    .affil { color: #8f9bb5; font-size: 15px; margin-top: 6px; display: flex; flex-wrap: wrap; gap: 2px 18px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #22d3ee; border-color: #22d3ee; color: #04222a; }
+    .btn.primary:hover { background: #67e8f9; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(7, 11, 22, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(7, 11, 22, .8); }
+
+    /* nav */
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    /* sections */
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 38px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .cards.three { grid-template-columns: repeat(3, 1fr); }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card .big { font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: var(--accent-ink); line-height: 1.1; margin-bottom: 6px; }
+    .card p { margin: 0; font-size: 16px; }
+
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+
+    /* explorer */
+    .kx { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 22px; margin-top: 8px; align-items: start; }
+    .kx-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; user-select: none; -webkit-user-select: none; }
+    .tile { position: relative; aspect-ratio: 1; border-radius: 14px; background: var(--tile); border: 1px solid var(--line); overflow: hidden; cursor: grab; touch-action: pan-y; }
+    .tile.drag { cursor: grabbing; }
+    .tile canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .tile .cap { position: absolute; left: 10px; bottom: 7px; font: 600 11.5px/1 "JetBrains Mono", monospace; color: var(--faint); pointer-events: none; }
+    .tile.loading::after { content: ""; position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px; border-radius: 50%; border: 3px solid color-mix(in srgb, var(--faint) 35%, transparent); border-top-color: var(--accent); animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .kx-side { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .kx-side h3 { font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin: 0 0 8px; }
+    .kx-name { font-size: 26px; font-weight: 800; letter-spacing: -.02em; text-transform: capitalize; line-height: 1.1; }
+    .kx-count { font-size: 14.5px; color: var(--muted); margin: 4px 0 16px; }
+    .kx-legend { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+    .sw { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); background: var(--bg); color: var(--muted); font: 600 12px/1 "JetBrains Mono", monospace; padding: 5px 7px 5px 6px; border-radius: 8px; cursor: pointer; }
+    .sw i { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+    .sw.on { border-color: var(--ink); color: var(--ink); }
+    .kx-hint { font-size: 14px; line-height: 1.5; color: var(--muted); min-height: 63px; margin: 0 0 12px; }
+    .kx-hint b { color: var(--ink); }
+    .kx-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .kx-btns button { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 9px 10px; border-radius: 10px; cursor: pointer; }
+    .kx-btns button:hover { border-color: var(--accent); color: var(--accent-ink); }
+    .kx-btns .wide { grid-column: 1 / -1; background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .kx-btns .wide:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .kx-btns [aria-pressed=true] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .kx-src { font-size: 13px; color: var(--faint); margin: 12px 0 0; line-height: 1.5; }
+    .kx-chips { margin-bottom: 14px; }
+
+    /* tables */
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 16px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .panel { margin-top: 18px; }
+    .panel > p { max-width: 860px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; text-transform: capitalize; }
+    .chip.raw { text-transform: none; }
+    .chip.on { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13.5px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    thead th.grp { text-align: center; border-bottom: 1px solid var(--line); }
+    th[scope=row], thead tr:first-child th:first-child { text-align: left; color: var(--ink); font-weight: 600; }
+    th[scope=row] { text-transform: capitalize; }
+    td.l { text-align: left; color: var(--faint); font-size: 14px; }
+    thead th.l { text-align: left; } thead th.c { text-align: center; }
+    td.c { text-align: center; }
+    td { color: var(--muted); }
+    td.best { color: var(--best); font-weight: 800; }
+    td.na, span.na { color: var(--faint); }
+    .yes { color: var(--yes); font-weight: 800; }
+    .no { color: var(--no); font-weight: 800; }
+    tr.gstart th, tr.gstart td { border-top: 2px solid var(--line); }
+    tr.ours th, tr.ours td { background: var(--accent-soft); }
+    tr.ours th[scope=row] { color: var(--accent-ink); font-weight: 800; }
+    tr.avg th, tr.avg td { border-top: 2px solid var(--line); background: color-mix(in srgb, var(--surface) 94%, var(--ink)); }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    .bench th, .bench td { padding: 8px 10px; }
+    .bench thead th { text-align: right; }
+    .bench thead th:first-child { text-align: left; }
+    .compare td { text-align: center; }
+    .compare th, .compare td { padding: 10px 10px; }
+    .compare thead th { text-align: center; white-space: normal; vertical-align: bottom; line-height: 1.25; }
+    .compare thead th:first-child, .compare th[scope=row] { text-align: left; padding-left: 16px; }
+    .compare th[scope=row] { text-transform: none; }
+    .tnote { font-size: 14px; color: var(--faint); margin-top: 12px; }
+    .findings { margin-bottom: 30px; }
+
+    /* statistics table with inline bars */
+    .st td.bc { min-width: 190px; }
+    .bc div { display: flex; align-items: center; gap: 10px; }
+    .bc b { font-weight: 600; color: var(--ink); width: 54px; text-align: right; flex: none; }
+    .bc span { flex: 1; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--line) 70%, transparent); overflow: hidden; }
+    .bc span i { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
+    .bc.k span i { background: color-mix(in srgb, var(--accent) 55%, #a855f7); }
+    .goto { border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer; text-transform: capitalize; }
+    .goto:hover { color: var(--accent-ink); text-decoration: underline; }
+    .st tr.avg th[scope=row] { text-transform: none; }
+
+    .charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .charts .figure { padding: 12px; }
+
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 26px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .steps li::before { color: #04222a; } }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+    .callout { margin-top: 18px; padding: 16px 20px; border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 12px 12px 0; color: var(--ink); }
+    .tool { display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; align-items: center; margin-top: 44px; }
+
+    .dl { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .dl ul { padding-left: 20px; margin: 0 0 14px; color: var(--muted); }
+    .dl li { margin: 6px 0; }
+    .dl code, .panel code { font: 500 .88em "JetBrains Mono", monospace; background: var(--accent-soft); color: var(--ink); padding: 1px 5px; border-radius: 5px; }
+    .dl .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .dl .btn { background: var(--ink); color: var(--bg); border: 0; }
+    .dl .btn:hover { background: var(--accent); color: #fff; }
+    .dl .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .dl .btn.ghost:hover { border-color: var(--accent); color: var(--accent-ink); background: transparent; }
+    .codes { display: grid; gap: 12px; }
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; }
+    pre.code, .bib { position: relative; background: #0b1020; color: #dbe3f3; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    pre.code .c { color: #8b97b3; }
+
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(5, 8, 16, .88); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .cards, .cards.three, .related, .dl, .tool { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .kx { grid-template-columns: 1fr; }
+      .kx-hint { min-height: 0; }
+      .kx-btns { grid-template-columns: 1fr 1fr 1fr; }
+      .kx-btns .wide { grid-column: auto; }
+      .charts { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stat .num { font-size: 30px; }
+      .steps, .charts { grid-template-columns: 1fr; }
+      .kx-grid { gap: 5px; }
+      .kx-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: -20px; padding-right: 20px; }
+      .kx-chips .chip { flex: none; }
+      .bib { padding-top: 54px; }
+      .tile { border-radius: 10px; }
+      .tile .cap { left: 7px; bottom: 5px; font-size: 10px; }
+      .kx-btns { grid-template-columns: 1fr 1fr; }
+      .kx-btns .wide { grid-column: 1 / -1; }
+      .lead { font-size: 18.5px; }
+      th, td { padding: 9px 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">CVPR 2020</span>
+    <h1>Keypoint<span>Net</span></h1>
+    <p class="subtitle">A Large-scale 3D Keypoint Dataset Aggregated from Numerous Human Annotations</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a><sup>*</sup></span>
+      <span>Yujing Lou<sup>*</sup></span>
+      <span>Chengkun Li<sup>*</sup></span>
+      <span>Zhoujun Cheng</span>
+      <span>Liangwei Li</span>
+      <span>Lizhuang Ma</span>
+      <span><a href="https://www.mvig.org">Cewu Lu</a></span>
+      <span>Weiming Wang<sup>†</sup></span>
+    </div>
+    <div class="affil"><span>Shanghai Jiao Tong University</span><span><sup>*</sup>Equal contribution</span><span><sup>†</sup>Corresponding author</span></div>
+    <div class="links">
+      <a class="btn primary" href="https://arxiv.org/pdf/2002.12687"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://openaccess.thecvf.com/content_CVPR_2020/html/You_KeypointNet_A_Large-Scale_3D_Keypoint_Dataset_Aggregated_From_Numerous_Human_CVPR_2020_paper.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>CVPR version</a>
+      <a class="btn" href="https://huggingface.co/datasets/qq456cvb/KeypointNet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>Dataset</a>
+      <a class="btn" href="https://github.com/qq456cvb/KeypointNet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="https://www.youtube.com/watch?v=_xy8h1M8Ejs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg>Video</a>
+      <a class="btn" href="#explore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>Explore</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/keypointnet/static/media/teaser.mp4" poster="/projects/keypointnet/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="KeypointNet teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#explore">Explore</a><a href="#why">Why KeypointNet</a><a href="#method">How it was built</a><a href="#statistics">Statistics</a><a href="#benchmarks">Benchmarks</a><a href="#download">Download</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>Keypoints that many people agree on</h2>
+    <p class="lead"><b>KeypointNet</b> is a large-scale, diverse 3D keypoint dataset built on ShapeNetCore. Instead of one expert's template, many annotators clicked the points they found important, and a new aggregation method turned their noisy, independent clicks into keypoints with <b>semantic ids that are consistent across every model of a category</b>. We also benchmark deep networks and hand-crafted detectors on two tasks: keypoint saliency and keypoint correspondence.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">8,234</div><p>3D models from ShapeNetCore</p></div>
+      <div class="stat"><div class="num">103K+</div><p>semantic keypoints (103,447 in the release)</p></div>
+      <div class="stat"><div class="num">16</div><p>object categories, from airplanes to mugs</p></div>
+      <div class="stat"><div class="num">4–24</div><p>keypoints per model, with symmetry groups</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="explore">
+  <div class="wrap">
+    <div class="kicker">Explore</div>
+    <h2>Same colour, same keypoint</h2>
+    <p>Every keypoint has a semantic id shared by all models of its category, so the same colour marks the same part on every object. Drag to rotate all nine models together, and hover a keypoint to find its counterparts.</p>
+    <div class="chips kx-chips" id="kx-cats" role="group" aria-label="Category"><button class="chip on" type="button" data-kx="airplane" aria-pressed="true">airplane</button><button class="chip" type="button" data-kx="bathtub" aria-pressed="false">bathtub</button><button class="chip" type="button" data-kx="bed" aria-pressed="false">bed</button><button class="chip" type="button" data-kx="bottle" aria-pressed="false">bottle</button><button class="chip" type="button" data-kx="cap" aria-pressed="false">cap</button><button class="chip" type="button" data-kx="car" aria-pressed="false">car</button><button class="chip" type="button" data-kx="chair" aria-pressed="false">chair</button><button class="chip" type="button" data-kx="guitar" aria-pressed="false">guitar</button><button class="chip" type="button" data-kx="helmet" aria-pressed="false">helmet</button><button class="chip" type="button" data-kx="knife" aria-pressed="false">knife</button><button class="chip" type="button" data-kx="laptop" aria-pressed="false">laptop</button><button class="chip" type="button" data-kx="motorcycle" aria-pressed="false">motorcycle</button><button class="chip" type="button" data-kx="mug" aria-pressed="false">mug</button><button class="chip" type="button" data-kx="skateboard" aria-pressed="false">skateboard</button><button class="chip" type="button" data-kx="table" aria-pressed="false">table</button><button class="chip" type="button" data-kx="vessel" aria-pressed="false">vessel</button></div>
+    <div class="kx">
+      <div class="kx-grid" id="kx-grid" aria-label="Nine annotated point clouds of the selected category"></div>
+      <div class="kx-side">
+        <h3>Category</h3>
+        <div class="kx-name" id="kx-name">airplane</div>
+        <div class="kx-count" id="kx-count"></div>
+        <h3>Semantic ids</h3>
+        <div class="kx-legend" id="kx-legend" role="group" aria-label="Semantic ids"></div>
+        <p class="kx-hint" id="kx-hint" aria-live="polite"></p>
+        <div class="kx-btns">
+          <button type="button" class="wide" id="kx-shuffle">Shuffle models</button>
+          <button type="button" id="kx-spin" aria-pressed="true">Auto-rotate</button>
+          <button type="button" id="kx-reset">Reset view</button>
+        </div>
+        <p class="kx-src">Shuffle streams random models of the category from the <a href="https://huggingface.co/datasets/qq456cvb/KeypointNet">Hugging Face dataset</a>: 2,048-point clouds as released.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="kicker">Why KeypointNet</div>
+    <h2>Large, template-free and in correspondence</h2>
+    <div class="cards three">
+      <div class="card"><div class="big">No template</div><h3>Annotators choose the keypoints</h3><p>Earlier 3D datasets label a fixed template designed by an expert, which is biased and often incomplete. Here, many annotators each chose their own keypoints.</p></div>
+      <div class="card"><div class="big">Consistent ids</div><h3>Keypoints correspond</h3><p>Each keypoint has a semantic id shared across the category, so the data supports both keypoint detection and semantic correspondence.</p></div>
+      <div class="card"><div class="big">16 categories</div><h3>General objects, at scale</h3><p>The only earlier template-free dataset in the table below has 43 models. KeypointNet has 8,234, from 16 categories.</p></div>
+    </div>
+    <h3 style="margin-top:40px">How KeypointNet compares</h3>
+    <div class="tbl compare"><table><caption>Comparison of 3D keypoint datasets, from the paper. <b>Correspondence</b>: keypoints are indexed consistently across models. <b>Template-free</b>: no hard-coded keypoint template.</caption><thead><tr><th>Dataset</th><th>Domain</th><th>Correspondence</th><th>Template-free</th><th>Instances</th><th>Categories</th><th>Keypoints</th><th>Format</th></tr></thead><tbody><tr><th scope="row">FAUST</th><td>human</td><td><span class="yes" aria-label="yes">✓</span></td><td><span class="no" aria-label="no">✗</span></td><td>100</td><td>1</td><td>689K</td><td>mesh</td></tr><tr><th scope="row">SyncSpecCNN</th><td>chair</td><td><span class="yes" aria-label="yes">✓</span></td><td><span class="no" aria-label="no">✗</span></td><td>6,243</td><td>1</td><td>~60K</td><td>point cloud</td></tr><tr><th scope="row">Dutagaci et al.</th><td>general</td><td><span class="no" aria-label="no">✗</span></td><td><span class="yes" aria-label="yes">✓</span></td><td>43</td><td>16</td><td>&lt;1K</td><td>mesh</td></tr><tr><th scope="row">Kim et al.</th><td>general</td><td><span class="yes" aria-label="yes">✓</span></td><td><span class="no" aria-label="no">✗</span></td><td>404</td><td>4</td><td>~3K</td><td>mesh</td></tr><tr><th scope="row">PASCAL 3D+</th><td>general</td><td><span class="no" aria-label="no">✗</span></td><td><span class="no" aria-label="no">✗</span></td><td>36,292</td><td>12</td><td>150K+</td><td>RGB with 3D model</td></tr><tr class=ours><th scope="row">KeypointNet (ours)</th><td>general</td><td><span class="yes" aria-label="yes">✓</span></td><td><span class="yes" aria-label="yes">✓</span></td><td>8,234</td><td>16</td><td>103K+</td><td>point cloud &amp; mesh</td></tr></tbody></table></div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="kicker">How it was built</div>
+    <h2>From noisy clicks to consistent keypoints</h2>
+    <p>Different people click different points, and their clicks are never exact. KeypointNet aggregates them by minimizing a <b>fidelity loss</b>: it learns an embedding of every point together with a set of ground-truth keypoints that stay close, in that embedding, to what people annotated.</p>
+    <figure class="figure" data-zoom><img src="/projects/keypointnet/static/media/pipeline.jpg" width="1800" height="695" loading="lazy" decoding="async" alt="Keypoint aggregation pipeline on caps: raw annotations, embedding space, fidelity error map, potential keypoints after NMS, t-SNE clustering, and aggregated keypoints after human verification."><figcaption>The aggregation pipeline, from raw annotations (top left) to aggregated keypoints (bottom left).</figcaption></figure>
+    <ol class="steps">
+      <li><b>Annotate</b>In a web tool, each annotator clicks up to 24 points per model. Keypoints must be shared by the category, spread over the object and distinct in meaning.</li>
+      <li><b>Embed</b>A PointConv network maps every point to an embedding. Each click is modelled as a Gaussian, because people make small mistakes.</li>
+      <li><b>Fidelity error</b>For every point, the embedding distances to the matching clicks on the other models of the category are summed into an error map.</li>
+      <li><b>Non-minimum suppression</b>Local minima of the error map become candidate keypoints on each model.</li>
+      <li><b>Cluster</b>Candidates are projected to 2D with t-SNE and grouped by embedding, which gives the semantic ids shared across models.</li>
+      <li><b>Verify</b>Experts check the result with simple priors such as rotational symmetry and centrosymmetry, and fix keypoints the method missed.</li>
+    </ol>
+    <p class="callout"><b>Why not cluster the clicks directly?</b> Clustering needs a distance threshold, cannot separate closely spaced keypoints such as the four on an airplane's tail, and gives no labels that match across models. Distances in the learned embedding are also less sensitive to mis-clicks than geodesic distances.</p>
+    <div class="tool">
+      <div>
+        <h3>The annotation tool</h3>
+        <p>Annotators work in a browser. The model to label is on the right; models they have already labelled stay on the left, which helps them keep their own keypoint indices consistent.</p>
+        <p>Keypoints are clicked on meshes and then transferred to point clouds of 2,048 points, so both forms are released.</p>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/keypointnet/static/media/tool.jpg" width="1200" height="856" loading="lazy" decoding="async" alt="Screenshot of the web annotation tool: five labelled airplanes with a keypoint on the nose on the left, the next airplane on the right, and keypoint indices 01 to 20 in a column."><figcaption>The web annotation tool.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="statistics">
+  <div class="wrap">
+    <div class="kicker">Statistics</div>
+    <h2>What's inside</h2>
+    <p>Counts per category, from the released annotations. Splits are train, validation and test at 7:1:2. Click a category to open it in the explorer.</p>
+    <div class="tbl st"><table><caption>Models, keypoints, semantic ids and keypoints per model are counted from the released <code>annotations/all.json</code>; splits and the number of annotators per category are from the paper.</caption><thead><tr><th>Category</th><th class="l">Models</th><th class="l">Keypoints</th><th>Semantic ids</th><th>Per model</th><th>Train / val / test</th><th>Annotators</th></tr></thead><tbody><tr><th scope="row"><button class="goto" type="button" data-goto="airplane">airplane</button></th><td class="bc"><div><b>1,022</b><span><i style="width:90.9%"></i></span></div></td><td class="bc k"><div><b>13,830</b><span><i style="width:64.6%"></i></span></div></td><td>19</td><td>5–17</td><td>715 / 102 / 205</td><td>26</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="bathtub">bathtub</button></th><td class="bc"><div><b>492</b><span><i style="width:43.8%"></i></span></div></td><td class="bc k"><div><b>7,880</b><span><i style="width:36.8%"></i></span></div></td><td>24</td><td>8–24</td><td>344 / 49 / 99</td><td>15</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="bed">bed</button></th><td class="bc"><div><b>146</b><span><i style="width:13.0%"></i></span></div></td><td class="bc k"><div><b>1,841</b><span><i style="width:8.6%"></i></span></div></td><td>20</td><td>8–16</td><td>102 / 14 / 30</td><td>8</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="bottle">bottle</button></th><td class="bc"><div><b>380</b><span><i style="width:33.8%"></i></span></div></td><td class="bc k"><div><b>6,260</b><span><i style="width:29.2%"></i></span></div></td><td>18</td><td>4–18</td><td>266 / 38 / 76</td><td>9</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="cap">cap</button></th><td class="bc"><div><b>38</b><span><i style="width:3.4%"></i></span></div></td><td class="bc k"><div><b>226</b><span><i style="width:1.1%"></i></span></div></td><td>6</td><td>5–6</td><td>26 / 4 / 8</td><td>6</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="car">car</button></th><td class="bc"><div><b>1,002</b><span><i style="width:89.1%"></i></span></div></td><td class="bc k"><div><b>21,403</b><span><i style="width:100.0%"></i></span></div></td><td>22</td><td>14–22</td><td>701 / 100 / 201</td><td>17</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="chair">chair</button></th><td class="bc"><div><b>999</b><span><i style="width:88.9%"></i></span></div></td><td class="bc k"><div><b>12,060</b><span><i style="width:56.3%"></i></span></div></td><td>21</td><td>8–17</td><td>699 / 100 / 200</td><td>15</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="guitar">guitar</button></th><td class="bc"><div><b>697</b><span><i style="width:62.0%"></i></span></div></td><td class="bc k"><div><b>5,900</b><span><i style="width:27.6%"></i></span></div></td><td>9</td><td>4–9</td><td>487 / 70 / 140</td><td>13</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="helmet">helmet</button></th><td class="bc"><div><b>90</b><span><i style="width:8.0%"></i></span></div></td><td class="bc k"><div><b>776</b><span><i style="width:3.6%"></i></span></div></td><td>9</td><td>5–9</td><td>62 / 10 / 18</td><td>8</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="knife">knife</button></th><td class="bc"><div><b>270</b><span><i style="width:24.0%"></i></span></div></td><td class="bc k"><div><b>1,358</b><span><i style="width:6.3%"></i></span></div></td><td>6</td><td>4–6</td><td>189 / 27 / 54</td><td>5</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="laptop">laptop</button></th><td class="bc"><div><b>439</b><span><i style="width:39.1%"></i></span></div></td><td class="bc k"><div><b>2,634</b><span><i style="width:12.3%"></i></span></div></td><td>6</td><td>6–6</td><td>307 / 44 / 88</td><td>12</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="motorcycle">motorcycle</button></th><td class="bc"><div><b>298</b><span><i style="width:26.5%"></i></span></div></td><td class="bc k"><div><b>3,878</b><span><i style="width:18.1%"></i></span></div></td><td>14</td><td>7–14</td><td>208 / 30 / 60</td><td>7</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="mug">mug</button></th><td class="bc"><div><b>186</b><span><i style="width:16.5%"></i></span></div></td><td class="bc k"><div><b>2,043</b><span><i style="width:9.5%"></i></span></div></td><td>11</td><td>10–11</td><td>130 / 18 / 38</td><td>9</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="skateboard">skateboard</button></th><td class="bc"><div><b>141</b><span><i style="width:12.5%"></i></span></div></td><td class="bc k"><div><b>1,323</b><span><i style="width:6.2%"></i></span></div></td><td>10</td><td>6–10</td><td>98 / 14 / 29</td><td>9</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="table">table</button></th><td class="bc"><div><b>1,124</b><span><i style="width:100.0%"></i></span></div></td><td class="bc k"><div><b>9,047</b><span><i style="width:42.3%"></i></span></div></td><td>12</td><td>7–12</td><td>786 / 113 / 225</td><td>17</td></tr><tr><th scope="row"><button class="goto" type="button" data-goto="vessel">vessel</button></th><td class="bc"><div><b>910</b><span><i style="width:81.0%"></i></span></div></td><td class="bc k"><div><b>12,988</b><span><i style="width:60.7%"></i></span></div></td><td>24</td><td>5–21</td><td>637 / 91 / 182</td><td>18</td></tr><tr class="avg"><th scope="row">Total</th><td class="bc"><div><b>8,234</b><span></span></div></td><td class="bc k"><div><b>103,447</b><span></span></div></td><td class="na">–</td><td>4–24</td><td>5,757 / 824 / 1,653</td><td class="na">–</td></tr></tbody></table></div>
+  </div>
+</section>
+
+<section id="benchmarks">
+  <div class="wrap">
+    <div class="kicker">Benchmarks</div>
+    <h2>Semantic keypoints are hard to detect</h2>
+    <p>We benchmark eight deep networks and three hand-crafted detectors on two tasks. <b>Keypoint saliency</b> asks which points are keypoints. <b>Keypoint correspondence</b> also asks which semantic id each one has. All numbers use a strict distance threshold of 0.01.</p>
+    <div class="cards findings">
+      <div class="card"><div class="big">≤ 0.9</div><h3>Hand-crafted detectors miss them</h3><p>Harris3D, SIFT3D and ISS3D reach at most 0.9 average mIoU: their interest points are geometric, not semantic.</p></div>
+      <div class="card"><div class="big">28.5 · 40.9</div><h3>Best saliency, still low</h3><p>DGCNN has the best average saliency of the 8 networks: 28.5 mIoU and 40.9 mAP.</p></div>
+      <div class="card"><div class="big">61.7%</div><h3>Correspondence: best PCK</h3><p>RSNet has the best average PCK and is best on 8 of 16 categories, but no method gives fully consistent keypoints at 0.01.</p></div>
+      <div class="card"><div class="big">5 of 8</div><h3>Small categories are hardest</h3><p>On caps, the smallest category (38 models), 5 of the 8 networks score 0.0 saliency mIoU.</p></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Benchmark">
+      <button role="tab" class="tab on" data-tab="saliency" aria-selected="true">Keypoint saliency</button>
+      <button role="tab" class="tab" data-tab="corr" aria-selected="false">Keypoint correspondence</button>
+      <button role="tab" class="tab" data-tab="curves" aria-selected="false">Threshold curves</button>
+      <button role="tab" class="tab" data-tab="examples" aria-selected="false">Examples</button>
+    </div>
+    <div class="panel" data-panel="saliency">
+      <p>Predict whether each point is a keypoint, without semantic labels. Scored by mean IoU, and by mean average precision for methods that output keypoint probabilities.</p>
+      <div class="chips"><button class="chip raw on" data-cat="miou">mIoU</button><button class="chip raw" data-cat="map">mAP</button></div>
+      <div data-cat="miou"><div class="tbl bench"><table><caption>Keypoint saliency mIoU (%) at distance threshold 0.01, per category.</caption><thead><tr><th rowspan="2">Category</th><th colspan="8" class="grp">Deep networks</th><th colspan="3" class="grp">Hand-crafted</th></tr><tr><th>PointNet</th><th>PointNet++</th><th>RSNet</th><th>SpiderCNN</th><th>PointConv</th><th>RSCNN</th><th>DGCNN</th><th>GraphCNN</th><th>Harris3D</th><th>SIFT3D</th><th>ISS3D</th></tr></thead><tbody><tr><th scope="row">airplane</th><td>10.4</td><td>33.5</td><td>33.7</td><td>24.6</td><td class="best">40.0</td><td>31.1</td><td>39.2</td><td>0.7</td><td>1.6</td><td>1.2</td><td>1.1</td></tr><tr><th scope="row">bathtub</th><td>0.8</td><td>18.5</td><td>23.1</td><td>13.0</td><td class="best">29.0</td><td>20.4</td><td>25.5</td><td>17.0</td><td>0.3</td><td>1.0</td><td>1.4</td></tr><tr><th scope="row">bed</th><td>3.0</td><td>16.4</td><td>28.4</td><td>16.4</td><td>25.1</td><td>26.2</td><td class="best">32.4</td><td>22.2</td><td>0.9</td><td>0.5</td><td>0.9</td></tr><tr><th scope="row">bottle</th><td>0.5</td><td>22.1</td><td>29.4</td><td>3.6</td><td>33.6</td><td>25.6</td><td class="best">40.3</td><td>23.3</td><td>0.5</td><td>1.1</td><td>1.8</td></tr><tr><th scope="row">cap</th><td>0.0</td><td>13.2</td><td class="best">26.7</td><td>0.0</td><td>0.0</td><td>7.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.4</td><td>0.6</td></tr><tr><th scope="row">car</th><td>7.3</td><td>24.0</td><td>30.4</td><td>11.8</td><td class="best">35.9</td><td>25.4</td><td>27.0</td><td>23.0</td><td>0.9</td><td>1.0</td><td>1.7</td></tr><tr><th scope="row">chair</th><td>7.7</td><td>18.2</td><td>22.7</td><td>18.2</td><td class="best">25.5</td><td>22.0</td><td>24.9</td><td>0.6</td><td>0.7</td><td>0.7</td><td>0.7</td></tr><tr><th scope="row">guitar</th><td>0.1</td><td>24.3</td><td>30.5</td><td>7.4</td><td>28.0</td><td>27.3</td><td class="best">31.9</td><td>17.0</td><td>1.2</td><td>0.7</td><td>0.7</td></tr><tr><th scope="row">helmet</th><td>0.0</td><td>7.0</td><td>15.8</td><td>0.0</td><td>7.7</td><td>8.9</td><td class="best">17.1</td><td>9.7</td><td>0.0</td><td>0.4</td><td>0.8</td></tr><tr><th scope="row">knife</th><td>0.0</td><td>19.0</td><td>21.7</td><td>14.9</td><td>26.6</td><td>21.1</td><td class="best">31.5</td><td>18.7</td><td>1.9</td><td>0.6</td><td>0.4</td></tr><tr><th scope="row">laptop</th><td>23.6</td><td>30.9</td><td>39.8</td><td>25.6</td><td>43.1</td><td>35.2</td><td class="best">44.8</td><td>33.3</td><td>0.3</td><td>0.2</td><td>0.1</td></tr><tr><th scope="row">motorcycle</th><td>0.1</td><td>21.9</td><td>31.5</td><td>12.0</td><td class="best">35.9</td><td>23.6</td><td>30.3</td><td>0.6</td><td>0.7</td><td>0.8</td><td>0.8</td></tr><tr><th scope="row">mug</th><td>0.2</td><td>16.3</td><td class="best">24.1</td><td>2.2</td><td>19.8</td><td>15.9</td><td>23.9</td><td>0.5</td><td>0.0</td><td>0.5</td><td>0.9</td></tr><tr><th scope="row">skateboard</th><td>0.0</td><td>13.7</td><td>21.6</td><td>1.8</td><td>9.3</td><td>21.9</td><td class="best">22.6</td><td>11.7</td><td>1.0</td><td>0.7</td><td>0.8</td></tr><tr><th scope="row">table</th><td>20.9</td><td>29.3</td><td>39.7</td><td>27.9</td><td class="best">44.1</td><td>27.4</td><td>41.0</td><td>24.5</td><td>0.4</td><td>0.3</td><td>0.3</td></tr><tr><th scope="row">vessel</th><td>7.1</td><td>16.7</td><td>18.3</td><td>12.9</td><td>21.7</td><td>18.1</td><td class="best">24.4</td><td>15.1</td><td>1.2</td><td>1.0</td><td>1.1</td></tr><tr class="avg"><th scope="row">Average</th><td>5.1</td><td>20.3</td><td>27.3</td><td>12.0</td><td>26.6</td><td>22.3</td><td class="best">28.5</td><td>13.6</td><td>0.7</td><td>0.7</td><td>0.9</td></tr></tbody></table></div></div><div data-cat="map" hidden><div class="tbl bench"><table><caption>Keypoint saliency mAP (%) at distance threshold 0.01, per category.</caption><thead><tr><th>Category</th><th>PointNet</th><th>PointNet++</th><th>RSNet</th><th>SpiderCNN</th><th>PointConv</th><th>RSCNN</th><th>DGCNN</th><th>GraphCNN</th></tr></thead><tbody><tr><th scope="row">airplane</th><td>9.3</td><td>44.6</td><td>38.8</td><td>24.7</td><td>51.2</td><td>45.0</td><td class="best">52.0</td><td>0.7</td></tr><tr><th scope="row">bathtub</th><td>6.3</td><td>32.3</td><td>36.0</td><td>16.4</td><td class="best">44.7</td><td>34.9</td><td>40.6</td><td>23.7</td></tr><tr><th scope="row">bed</th><td>9.4</td><td>23.4</td><td>42.5</td><td>17.1</td><td class="best">43.7</td><td>40.1</td><td>42.8</td><td>31.5</td></tr><tr><th scope="row">bottle</th><td>8.2</td><td>38.2</td><td>44.3</td><td>8.2</td><td>46.5</td><td>40.1</td><td class="best">61.6</td><td>42.6</td></tr><tr><th scope="row">cap</th><td>0.3</td><td>12.1</td><td class="best">26.9</td><td>0.5</td><td>7.0</td><td>8.9</td><td>2.0</td><td>4.1</td></tr><tr><th scope="row">car</th><td>9.2</td><td>41.0</td><td>42.3</td><td>17.2</td><td class="best">55.6</td><td>44.7</td><td>48.6</td><td>36.5</td></tr><tr><th scope="row">chair</th><td>6.5</td><td>29.4</td><td>26.2</td><td>20.4</td><td class="best">39.8</td><td>33.0</td><td>34.6</td><td>0.6</td></tr><tr><th scope="row">guitar</th><td>1.4</td><td>27.7</td><td>34.2</td><td>9.9</td><td>39.3</td><td>34.1</td><td class="best">44.1</td><td>21.6</td></tr><tr><th scope="row">helmet</th><td>1.3</td><td>7.4</td><td class="best">21.3</td><td>0.5</td><td>8.3</td><td>10.8</td><td>19.9</td><td>12.5</td></tr><tr><th scope="row">knife</th><td>0.9</td><td>22.1</td><td>31.5</td><td>18.7</td><td>38.1</td><td>27.2</td><td class="best">39.9</td><td>23.3</td></tr><tr><th scope="row">laptop</th><td>32.0</td><td>60.0</td><td>62.0</td><td>40.0</td><td>63.5</td><td>58.8</td><td class="best">69.6</td><td>49.7</td></tr><tr><th scope="row">motorcycle</th><td>4.0</td><td>36.0</td><td>43.2</td><td>13.3</td><td class="best">50.6</td><td>37.0</td><td>41.4</td><td>0.7</td></tr><tr><th scope="row">mug</th><td>3.9</td><td>21.4</td><td class="best">35.2</td><td>4.0</td><td>32.0</td><td>18.6</td><td>33.2</td><td>0.6</td></tr><tr><th scope="row">skateboard</th><td>2.9</td><td>16.1</td><td>25.9</td><td>3.3</td><td>10.1</td><td class="best">30.1</td><td>29.8</td><td>12.8</td></tr><tr><th scope="row">table</th><td>23.1</td><td>47.4</td><td>54.6</td><td>40.5</td><td class="best">64.0</td><td>49.8</td><td>59.0</td><td>34.7</td></tr><tr><th scope="row">vessel</th><td>9.1</td><td>26.9</td><td>22.3</td><td>14.6</td><td>31.8</td><td>28.9</td><td class="best">35.6</td><td>19.3</td></tr><tr class="avg"><th scope="row">Average</th><td>8.0</td><td>30.4</td><td>36.7</td><td>15.6</td><td>39.1</td><td>33.9</td><td class="best">40.9</td><td>19.7</td></tr></tbody></table></div></div>
+    </div>
+    <div class="panel" data-panel="corr" hidden>
+      <p>Predict a fixed set of keypoints together with their semantic ids. Scored by the percentage of correct keypoints (PCK).</p>
+      <div class="tbl bench"><table><caption>Keypoint correspondence PCK (%) at distance threshold 0.01, per category.</caption><thead><tr><th>Category</th><th>PointNet</th><th>PointNet++</th><th>RSNet</th><th>SpiderCNN</th><th>PointConv</th><th>RSCNN</th><th>DGCNN</th><th>GraphCNN</th></tr></thead><tbody><tr><th scope="row">airplane</th><td>65.4</td><td>64.1</td><td>68.9</td><td>54.9</td><td class="best">70.3</td><td>66.8</td><td>66.8</td><td>41.8</td></tr><tr><th scope="row">bathtub</th><td class="best">57.2</td><td>45.4</td><td>56.0</td><td>36.8</td><td>54.4</td><td>47.9</td><td>51.5</td><td>19.5</td></tr><tr><th scope="row">bed</th><td>55.4</td><td>44.2</td><td class="best">69.2</td><td>43.9</td><td>58.6</td><td>52.4</td><td>56.3</td><td>35.4</td></tr><tr><th scope="row">bottle</th><td class="best">78.9</td><td>10.2</td><td>78.2</td><td>50.4</td><td>64.6</td><td>59.4</td><td>8.9</td><td>32.1</td></tr><tr><th scope="row">cap</th><td>16.7</td><td>18.8</td><td class="best">47.9</td><td>0.0</td><td>25.0</td><td>18.8</td><td>39.6</td><td>8.3</td></tr><tr><th scope="row">car</th><td class="best">66.6</td><td>55.1</td><td>65.7</td><td>47.1</td><td>65.7</td><td>56.5</td><td>58.6</td><td>36.9</td></tr><tr><th scope="row">chair</th><td>43.2</td><td>38.0</td><td>49.4</td><td>36.9</td><td class="best">51.1</td><td>45.0</td><td>46.0</td><td>27.0</td></tr><tr><th scope="row">guitar</th><td class="best">65.4</td><td>55.4</td><td>63.7</td><td>37.7</td><td>62.6</td><td>60.0</td><td>62.4</td><td>28.9</td></tr><tr><th scope="row">helmet</th><td class="best">42.6</td><td>23.6</td><td>33.8</td><td>5.6</td><td>16.2</td><td>21.3</td><td>36.1</td><td>8.8</td></tr><tr><th scope="row">knife</th><td>32.6</td><td>43.8</td><td class="best">56.9</td><td>32.2</td><td>47.4</td><td>51.4</td><td>52.1</td><td>20.0</td></tr><tr><th scope="row">laptop</th><td>76.1</td><td>64.6</td><td class="best">80.3</td><td>63.4</td><td>74.2</td><td>66.9</td><td>73.9</td><td>65.9</td></tr><tr><th scope="row">motorcycle</th><td>62.1</td><td>49.9</td><td class="best">67.4</td><td>36.6</td><td>61.7</td><td>52.8</td><td>57.7</td><td>34.4</td></tr><tr><th scope="row">mug</th><td>60.7</td><td>36.4</td><td class="best">61.7</td><td>16.4</td><td>51.2</td><td>29.5</td><td>51.4</td><td>15.6</td></tr><tr><th scope="row">skateboard</th><td>50.4</td><td>42.3</td><td class="best">69.2</td><td>15.8</td><td>51.8</td><td>51.7</td><td>52.3</td><td>26.2</td></tr><tr><th scope="row">table</th><td>63.8</td><td>57.1</td><td class="best">72.3</td><td>61.0</td><td>69.5</td><td>64.8</td><td>70.5</td><td>17.3</td></tr><tr><th scope="row">vessel</th><td>42.5</td><td>37.9</td><td>46.7</td><td>36.8</td><td>46.7</td><td>41.2</td><td class="best">46.8</td><td>22.1</td></tr><tr class="avg"><th scope="row">Average</th><td>55.0</td><td>42.9</td><td class="best">61.7</td><td>36.0</td><td>54.4</td><td>49.2</td><td>51.9</td><td>27.5</td></tr></tbody></table></div>
+    </div>
+    <div class="panel" data-panel="curves" hidden>
+      <p>The same metrics as the distance threshold grows from 0 to 0.1. RSNet leads on correspondence at every threshold.</p>
+      <div class="charts">
+        <figure class="figure" data-zoom><img src="/projects/keypointnet/static/media/curve_miou.png" width="772" height="717" loading="lazy" decoding="async" alt="Keypoint saliency mIoU against distance threshold from 0 to 0.1 for eleven methods; DGCNN, RSNet and PointConv are highest, the hand-crafted detectors lowest."><figcaption>Saliency mIoU against distance threshold.</figcaption></figure>
+        <figure class="figure" data-zoom><img src="/projects/keypointnet/static/media/curve_map.png" width="779" height="699" loading="lazy" decoding="async" alt="Keypoint saliency mAP against distance threshold for eight deep networks."><figcaption>Saliency mAP against distance threshold.</figcaption></figure>
+        <figure class="figure" data-zoom><img src="/projects/keypointnet/static/media/curve_pck.png" width="783" height="699" loading="lazy" decoding="async" alt="Keypoint correspondence PCK against distance threshold for eight deep networks; RSNet is highest."><figcaption>Correspondence PCK against distance threshold.</figcaption></figure>
+      </div>
+    </div>
+    <div class="panel" data-panel="examples" hidden>
+      <figure class="figure" data-zoom><img src="/projects/keypointnet/static/media/detect.jpg" width="1800" height="731" loading="lazy" decoding="async" alt="Keypoint saliency predictions on a table, a chair and a mug: ground truth, RSNet, RSCNN, DGCNN, GraphCNN, ISS3D and Harris3D; the hand-crafted detectors scatter many points over the surface."><figcaption>Keypoint saliency. Networks find some of the ground-truth keypoints; hand-crafted detectors (ISS3D, Harris3D) fire all over the surface, with no notion of semantics.</figcaption></figure>
+      <figure class="figure" data-zoom style="margin-top:16px"><img src="/projects/keypointnet/static/media/corr.jpg" width="1800" height="662" loading="lazy" decoding="async" alt="Keypoint correspondence predictions on a bathtub, a helmet and a motorbike: ground truth and six networks, with semantic ids shown as colours."><figcaption>Keypoint correspondence. Same colour, same semantic id. Most networks place some keypoints well, but miss or misplace others.</figcaption></figure>
+    </div>
+    <p class="tnote"><b>Bold</b>: best in each row, as marked in the paper. Hand-crafted detectors output no probabilities, so they have no mAP.</p>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap dl">
+    <div>
+      <div class="kicker">Download &amp; use</div>
+      <h2>Get the data</h2>
+      <ul>
+        <li><code>annotations/</code>: one JSON file per category, plus <code>all.json</code>. Each keypoint has its 3D position, semantic id, point index in the point cloud, mesh face and barycentric coordinates, and symmetry groups.</li>
+        <li><code>pcds/</code>: coloured point clouds of 2,048 points, one <code>.pcd</code> per model.</li>
+        <li><code>ShapeNetCore.v2.ply/</code>: coloured triangle meshes, with vertex colours from the diffuse textures.</li>
+        <li><b>Code:</b> train/val/test splits, visualization and benchmark scripts on GitHub.</li>
+        <li><b>License:</b> MIT. Models come from ShapeNetCore.</li>
+      </ul>
+      <div class="btns">
+        <a class="btn" href="https://huggingface.co/datasets/qq456cvb/KeypointNet">Hugging Face</a>
+        <a class="btn" href="https://github.com/qq456cvb/KeypointNet">GitHub</a>
+        <a class="btn ghost" href="https://drive.google.com/drive/folders/1_d1TzZEF25Wy5kRj5ZugrgGeyf7xxu8F?usp=sharing">Google Drive</a>
+        <a class="btn ghost" href="https://1drv.ms/u/s!Aj0NuSsDz6hDyF3LT3xaPkXK9DXC?e=kcrfSg">OneDrive</a>
+      </div>
+    </div>
+    <div class="codes">
+<pre class="code"><span class="c"># annotations and point clouds (about 650 MB)</span>
+pip install -U "huggingface_hub[cli]"
+hf download qq456cvb/KeypointNet --repo-type dataset \
+  --local-dir KeypointNet \
+  --include "annotations/*" --include "pcds/*"</pre>
+<pre class="code">import json, numpy as np
+
+anns = json.load(open("KeypointNet/annotations/chair.json"))
+a = anns[0]
+pts = np.loadtxt(
+    f"KeypointNet/pcds/{a['class_id']}/{a['model_id']}.pcd",
+    skiprows=10)[:, :3]                   <span class="c"># (2048, 3) xyz</span>
+kps = [(k["pcd_info"]["point_index"], k["semantic_id"])
+       for k in a["keypoints"]]</pre>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>Detecting 3D objects keypoints is of great interest to the areas of both graphics and computer vision. There have been several 2D and 3D keypoint datasets aiming to address this problem in a data-driven way. These datasets, however, either lack scalability or bring ambiguity to the definition of keypoints. Therefore, we present <b>KeypointNet</b>: the first large-scale and diverse 3D keypoint dataset that contains 103,450 keypoints and 8,234 3D models from 16 object categories, by leveraging numerous human annotations. To handle the inconsistency between annotations from different people, we propose a novel method to aggregate these keypoints automatically, through minimization of a fidelity loss. Finally, ten state-of-the-art methods are benchmarked on our proposed dataset.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/publications/knowledge"><div class="venue">TPAMI</div><h3>3D Keypoint Knowledge Engine</h3><p>Uses KeypointNet as a 3D keypoint knowledge engine to understand pixel-level semantics in 2D images.</p></a>
+      <a class="card" href="/projects/ukpgan"><div class="venue">CVPR 2022</div><h3>UKPGAN</h3><p>A self-supervised 3D keypoint detector whose keypoints align well with human-annotated keypoint and part labels.</p></a>
+      <a class="card" href="/publications/skeleton"><div class="venue">CVPR 2021</div><h3>Skeleton Merger</h3><p>An unsupervised aligned keypoint detector that reconstructs objects from keypoint skeletons.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@inproceedings{you2020keypointnet,
+  title={KeypointNet: A Large-Scale 3D Keypoint Dataset Aggregated From Numerous Human Annotations},
+  author={You, Yang and Lou, Yujing and Li, Chengkun and Cheng, Zhoujun and Li, Liangwei and Ma, Lizhuang and Lu, Cewu and Wang, Weiming},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={13647--13656},
+  year={2020}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2020 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script>
+/* Block comments only: this page is HTML-compressed onto one line. */
+(function () {
+  /* ---------- keypoint explorer: nine point clouds drawn on 2D canvases, rotated together ---------- */
+  var DATA = '/projects/keypointnet/static/explore/', HF = 'https://huggingface.co/datasets/qq456cvb/KeypointNet/resolve/main/pcds/';
+  var N = 2048, YAW = 2.5, PITCH = 0.42;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var grid = document.getElementById('kx-grid'), hint = document.getElementById('kx-hint'), legend = document.getElementById('kx-legend');
+  var spinBtn = document.getElementById('kx-spin'), shuffleBtn = document.getElementById('kx-shuffle');
+  var cache = {}, cat = null, info = null, tiles = [], yaw = YAW, pitch = PITCH, spin = !reduce, held = false, idleAt = 0;
+  var hl = -1, pinned = -1, dirty = true, visible = true, token = 0, colors = null;
+
+  function kpColor(id, a) { return 'hsla(' + ((id * 137.508 + 200) % 360).toFixed(1) + ',78%,' + [54, 44, 64][id % 3] + '%,' + a + ')'; }
+  function readColors() {
+    var cs = getComputedStyle(document.documentElement), f = cs.getPropertyValue('--pt-far').trim(), n = cs.getPropertyValue('--pt-near').trim();
+    function rgb(h) { h = h.replace('#', ''); return [0, 2, 4].map(function (i) { return parseInt(h.substr(i, 2), 16); }); }
+    var a = rgb(f), b = rgb(n), out = [];
+    for (var i = 0; i < 16; i++) { var t = i / 15; out.push('rgb(' + [0, 1, 2].map(function (k) { return Math.round(a[k] + (b[k] - a[k]) * t); }).join(',') + ')'); }
+    colors = { pts: out, ring: cs.getPropertyValue('--kp-ring').trim() };
+  }
+
+  function makeModel(mid, xyz, flat) {
+    var lo = [1e9, 1e9, 1e9], hi = [-1e9, -1e9, -1e9], i, k;
+    for (i = 0; i < N; i++) for (k = 0; k < 3; k++) { lo[k] = Math.min(lo[k], xyz[i * 3 + k]); hi[k] = Math.max(hi[k], xyz[i * 3 + k]); }
+    var c = [(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2], r = 0;
+    for (i = 0; i < N; i++) { var dx = xyz[i * 3] - c[0], dy = xyz[i * 3 + 1] - c[1], dz = xyz[i * 3 + 2] - c[2]; r = Math.max(r, dx * dx + dy * dy + dz * dz); }
+    r = Math.sqrt(r) || 1;
+    var p = new Float32Array(N * 3);
+    for (i = 0; i < N; i++) for (k = 0; k < 3; k++) p[i * 3 + k] = (xyz[i * 3 + k] - c[k]) / r;
+    var kind = new Int8Array(N).fill(-1);
+    for (i = 0; i < flat.length; i += 2) kind[flat[i]] = flat[i + 1];
+    var order = new Uint16Array(N);
+    for (i = 0; i < N; i++) order[i] = i;
+    return { mid: mid, p: p, kind: kind, nk: flat.length / 2, order: order, depth: new Float32Array(N), sx: new Float32Array(N), sy: new Float32Array(N) };
+  }
+
+  function parsePcd(text) {
+    var lines = text.split('\n'), i = 0, out = new Float32Array(N * 3), n = 0;
+    while (i < lines.length && lines[i].indexOf('DATA') !== 0) i++;
+    for (i++; i < lines.length && n < N; i++) {
+      var t = lines[i].trim().split(/\s+/);
+      if (t.length < 3) continue;
+      out[n * 3] = +t[0]; out[n * 3 + 1] = +t[1]; out[n * 3 + 2] = +t[2]; n++;
+    }
+    if (n !== N) throw new Error('bad pcd');
+    return out;
+  }
+
+  function buildTiles() {
+    for (var j = 0; j < 9; j++) {
+      var el = document.createElement('div'), cv = document.createElement('canvas'), cap = document.createElement('span');
+      el.className = 'tile'; cap.className = 'cap'; el.appendChild(cv); el.appendChild(cap); grid.appendChild(el);
+      tiles.push({ el: el, cv: cv, ctx: cv.getContext('2d'), cap: cap, model: null, w: 0, h: 0 });
+    }
+    var ro = new ResizeObserver(function () { sizeTiles(); });
+    ro.observe(grid);
+  }
+  function sizeTiles() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    tiles.forEach(function (t) { var w = t.el.clientWidth, h = t.el.clientHeight; t.cv.width = Math.round(w * dpr); t.cv.height = Math.round(h * dpr); t.w = w; t.h = h; t.dpr = dpr; });
+    /* resizing a canvas clears it: redraw now, even if the explorer is off screen */
+    if (colors) draw();
+  }
+
+  function setModel(t, m) {
+    t.model = m;
+    t.cap.textContent = m.mid.slice(0, 8) + ' · ' + m.nk + ' kp';
+    t.el.title = 'ShapeNet model ' + m.mid;
+    dirty = true;
+  }
+
+  function draw() {
+    var cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+    tiles.forEach(function (t) {
+      var ctx = t.ctx, m = t.model, W = t.w, H = t.h, d = t.dpr;
+      ctx.setTransform(d, 0, 0, d, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      if (!m) return;
+      var R = Math.min(W, H) * 0.45, ps = Math.max(1.5, W / 125), kr = Math.max(3.2, W / 46), i, j;
+      var p = m.p, dep = m.depth, sx = m.sx, syy = m.sy, o = m.order;
+      for (i = 0; i < N; i++) {
+        var x = p[i * 3], y = p[i * 3 + 1], z = p[i * 3 + 2];
+        var x1 = cy * x + sy * z, z1 = -sy * x + cy * z;
+        var y2 = cp * y - sp * z1, z2 = sp * y + cp * z1, f = 1 + 0.12 * z2;
+        sx[i] = W / 2 + x1 * R * f; syy[i] = H / 2 - y2 * R * f; dep[i] = z2;
+      }
+      /* the previous frame's order is almost sorted, so insertion sort is close to linear */
+      for (i = 1; i < N; i++) { var v = o[i], dv = dep[v]; j = i - 1; while (j >= 0 && dep[o[j]] > dv) { o[j + 1] = o[j]; j--; } o[j + 1] = v; }
+      var bucket = -1;
+      for (i = 0; i < N; i++) {
+        var q = o[i], k = m.kind[q];
+        if (k >= 0) {
+          var on = hl < 0 || hl === k, r = kr * (hl === k ? 1.45 : 1) * (1 + 0.1 * dep[q]);
+          ctx.beginPath(); ctx.arc(sx[q], syy[q], r, 0, 6.2832);
+          ctx.fillStyle = kpColor(k, on ? 1 : 0.22); ctx.fill();
+          ctx.lineWidth = hl === k ? 2.4 : 1.4; ctx.strokeStyle = on ? colors.ring : 'rgba(0,0,0,0)'; ctx.stroke();
+          if (hl === k) { ctx.beginPath(); ctx.arc(sx[q], syy[q], r + 4.5, 0, 6.2832); ctx.lineWidth = 1.5; ctx.strokeStyle = kpColor(k, 0.9); ctx.stroke(); }
+          bucket = -1;
+          continue;
+        }
+        var b = Math.max(0, Math.min(15, Math.round((dep[q] + 1) * 7.5)));
+        if (b !== bucket) { ctx.fillStyle = colors.pts[b]; bucket = b; }
+        ctx.fillRect(sx[q] - ps / 2, syy[q] - ps / 2, ps, ps);
+      }
+    });
+  }
+
+  function loop(ts) {
+    if (visible && !document.hidden) {
+      if (spin && !held && ts > idleAt) { yaw += 0.006; dirty = true; }
+      if (dirty) { draw(); dirty = false; }
+    }
+    requestAnimationFrame(loop);
+  }
+
+  function fmt(n) { return n.toLocaleString('en-US'); }
+  function setHint() {
+    if (!info) return;
+    if (hl < 0) { hint.innerHTML = 'Hover a keypoint, or a semantic id above, to see it on every model.'; return; }
+    var shown = tiles.filter(function (t) { return t.model && Array.prototype.indexOf.call(t.model.kind, hl) >= 0; }).length;
+    hint.innerHTML = '<b>Semantic id ' + hl + '</b> appears on ' + shown + ' of the 9 models shown, and on ' + fmt(info.idCount[hl] || 0) + ' of ' + fmt(info.m.length) + ' models in the category.';
+  }
+  function setHl(id) {
+    if (id === hl) return;
+    hl = id; dirty = true; setHint();
+    legend.querySelectorAll('.sw').forEach(function (s) { s.classList.toggle('on', +s.dataset.id === hl); });
+  }
+
+  function loadCat(name) {
+    var my = ++token;
+    cat = name;
+    document.querySelectorAll('#kx-cats .chip').forEach(function (c) { var on = c.dataset.kx === name; c.classList.toggle('on', on); c.setAttribute('aria-pressed', String(on)); });
+    tiles.forEach(function (t) { t.el.classList.add('loading'); });
+    var c = cache[name] || (cache[name] = Promise.all([
+      fetch(DATA + name + '.json').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch(DATA + name + '.bin').then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+    ]).then(function (res) {
+      var ix = res[0], raw = new Int16Array(res[1]), ids = {};
+      ix.k.forEach(function (f) { var seen = {}; for (var i = 1; i < f.length; i += 2) { if (!seen[f[i]]) { seen[f[i]] = 1; ids[f[i]] = (ids[f[i]] || 0) + 1; } } });
+      ix.idCount = ids;
+      ix.ids = Object.keys(ids).map(Number).sort(function (a, b) { return a - b; });
+      ix.nk = ix.k.reduce(function (s, f) { return s + f.length / 2; }, 0);
+      ix.models = [];
+      for (var j = 0; j < ix.sample; j++) {
+        var xyz = new Float32Array(N * 3);
+        for (var i = 0; i < N * 3; i++) xyz[i] = raw[j * N * 3 + i] / 32767;
+        ix.models.push(makeModel(ix.m[j], xyz, ix.k[j]));
+      }
+      return ix;
+    }));
+    c.then(function (ix) {
+      if (my !== token) return;
+      info = ix; pinned = -1; hl = -2; setHl(-1);
+      document.getElementById('kx-name').textContent = name;
+      document.getElementById('kx-count').textContent = fmt(ix.m.length) + ' models · ' + fmt(ix.nk) + ' keypoints · ' + ix.ids.length + ' semantic ids';
+      legend.innerHTML = ix.ids.map(function (id) { return '<button type="button" class="sw" data-id="' + id + '" aria-label="Semantic id ' + id + '"><i style="background:' + kpColor(id, 1) + '"></i>' + id + '</button>'; }).join('');
+      tiles.forEach(function (t, j) { t.el.classList.remove('loading'); setModel(t, ix.models[j]); });
+    }).catch(function () {
+      delete cache[name];
+      if (my !== token) return;
+      tiles.forEach(function (t) { t.el.classList.remove('loading'); });
+      hint.textContent = 'Could not load this category. Please try again.';
+    });
+  }
+
+  function shuffle() {
+    if (!info) return;
+    var my = token, ix = info, picks = [], shown = tiles.map(function (t) { return t.model && t.model.mid; });
+    var pool = ix.m.length > 18 ? ix.m.length : 0;
+    while (picks.length < 9) {
+      var r = Math.floor(Math.random() * ix.m.length);
+      if (picks.indexOf(r) < 0 && (!pool || shown.indexOf(ix.m[r]) < 0)) picks.push(r);
+    }
+    var failed = 0;
+    picks.forEach(function (r, j) {
+      var t = tiles[j];
+      t.el.classList.add('loading');
+      fetch(HF + ix.id + '/' + ix.m[r] + '.pcd').then(function (res) { if (!res.ok) throw new Error(res.status); return res.text(); }).then(function (txt) {
+        if (my !== token) return;
+        setModel(t, makeModel(ix.m[r], parsePcd(txt), ix.k[r]));
+        setHint();
+      }).catch(function () {
+        failed++;
+        if (my === token) hint.textContent = 'Could not reach Hugging Face for ' + failed + ' model' + (failed > 1 ? 's' : '') + '; the previous ones are kept.';
+      }).then(function () { t.el.classList.remove('loading'); });
+    });
+  }
+
+  function pick(t, ev) {
+    if (!t.model) return -1;
+    var rc = t.el.getBoundingClientRect(), x = ev.clientX - rc.left, y = ev.clientY - rc.top, best = -1, bd = Math.pow(Math.max(10, t.w / 26), 2), m = t.model;
+    for (var i = 0; i < N; i++) { if (m.kind[i] < 0) continue; var d = (m.sx[i] - x) * (m.sx[i] - x) + (m.sy[i] - y) * (m.sy[i] - y); if (d < bd) { bd = d; best = m.kind[i]; } }
+    return best;
+  }
+
+  function wire() {
+    var last = null;
+    tiles.forEach(function (t) {
+      t.el.addEventListener('pointerdown', function (e) { if (e.button !== 0) return; held = true; last = [e.clientX, e.clientY]; try { t.el.setPointerCapture(e.pointerId); } catch (err) {} t.el.classList.add('drag'); });
+      t.el.addEventListener('pointermove', function (e) {
+        if (held && last) {
+          yaw += (e.clientX - last[0]) * 0.01;
+          if (e.pointerType === 'mouse') pitch = Math.max(-1.45, Math.min(1.45, pitch + (e.clientY - last[1]) * 0.01));
+          last = [e.clientX, e.clientY]; dirty = true; return;
+        }
+        if (e.pointerType === 'mouse') { var k = pick(t, e); setHl(k >= 0 ? k : pinned); }
+      });
+      function up() { if (!held) return; held = false; last = null; idleAt = performance.now() + 1500; t.el.classList.remove('drag'); }
+      t.el.addEventListener('pointerup', up);
+      t.el.addEventListener('pointercancel', up);
+      t.el.addEventListener('pointerleave', function (e) { if (!held && e.pointerType === 'mouse') setHl(pinned); });
+      t.el.addEventListener('click', function (e) { if (e.pointerType === 'mouse') return; var k = pick(t, e); pinned = k; setHl(k); });
+    });
+    legend.addEventListener('mouseover', function (e) { var s = e.target.closest('.sw'); if (s) setHl(+s.dataset.id); });
+    legend.addEventListener('mouseleave', function () { setHl(pinned); });
+    legend.addEventListener('click', function (e) { var s = e.target.closest('.sw'); if (!s) return; var id = +s.dataset.id; pinned = pinned === id ? -1 : id; setHl(pinned); });
+    document.getElementById('kx-cats').addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (c && c.dataset.kx !== cat) loadCat(c.dataset.kx); });
+    shuffleBtn.addEventListener('click', shuffle);
+    spinBtn.setAttribute('aria-pressed', String(spin));
+    spinBtn.addEventListener('click', function () { spin = !spin; spinBtn.setAttribute('aria-pressed', String(spin)); });
+    document.getElementById('kx-reset').addEventListener('click', function () { yaw = YAW; pitch = PITCH; dirty = true; });
+    document.querySelectorAll('.goto').forEach(function (b) { b.addEventListener('click', function () { loadCat(b.dataset.goto); document.getElementById('explore').scrollIntoView(); }); });
+    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) dirty = true; }).observe(grid);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { readColors(); dirty = true; });
+  }
+
+  readColors(); buildTiles(); sizeTiles(); wire(); loadCat('airplane'); requestAnimationFrame(loop);
+  window.__kx = { tiles: tiles, load: loadCat, shuffle: shuffle, setHl: setHl, state: function () { return { cat: cat, yaw: yaw, pitch: pitch, hl: hl, spin: spin, models: tiles.map(function (t) { return t.model && t.model.mid; }) }; } };
+
+  /* ---------- teaser, tabs, chips, BibTeX, lightbox ---------- */
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', String(x === t)); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.hidden = p.dataset.panel !== t.dataset.tab; });
+    });
+  });
+  document.querySelectorAll('.panel').forEach(function (p) {
+    p.querySelectorAll('.chip').forEach(function (c) {
+      c.addEventListener('click', function () {
+        p.querySelectorAll('.chip').forEach(function (x) { x.classList.toggle('on', x === c); });
+        p.querySelectorAll('[data-cat]:not(.chip)').forEach(function (d) { d.hidden = d.dataset.cat !== c.dataset.cat; });
+      });
+    });
+  });
+
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
