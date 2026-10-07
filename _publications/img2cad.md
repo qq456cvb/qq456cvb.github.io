@@ -2,7 +2,7 @@
 title: "Img2CAD: Reverse Engineering 3D CAD Models from Images through VLM-Assisted Conditional Factorization"
 collection: publications
 permalink: /publications/img2cad
-excerpt: 'Img2CAD introduces a novel approach for reconstructing 3D CAD models from single-view images. Leveraging large vision-language models (VLMs) like GPT-4V for semantic guidance, and TrAssembler, a transformer-based network, for continuous attribute prediction, our method achieves accurate and editable CAD outputs from common image inputs. We also provide a newly curated dataset, CAD-ified from ShapeNet, covering diverse everyday objects.'
+excerpt: 'Img2CAD reverse engineers editable 3D CAD programs from single images. A finetuned vision-language model (Llama 3.2) predicts the discrete program structure with semantic part labels, and TrAssembler, a transformer flow-matching model with symmetry guidance, predicts the continuous attributes. We also release a dataset of 4,574 ShapeNet chairs, tables and cabinets turned into sketch-and-extrude CAD programs.'
 date: '2025-09-20'
 venue: 'SIGGRAPH Asia'
 image: '/images/img2cad.gif'

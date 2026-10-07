@@ -1,0 +1,1159 @@
+---
+layout: compress
+permalink: /projects/img2cad
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Img2CAD: Reverse Engineering 3D CAD Models from Images (SIGGRAPH Asia 2025)</title>
+  <meta name="description" content="Img2CAD turns a single image of a chair, table or cabinet into an editable CAD program. A finetuned Llama 3.2 predicts the program's parts and commands, and TrAssembler, a transformer flow-matching model, predicts the numbers. SIGGRAPH Asia 2025.">
+  <meta name="keywords" content="Img2CAD, image to CAD, CAD reverse engineering, sketch and extrude, vision language model, Llama 3.2, flow matching, TrAssembler, ShapeNet, SIGGRAPH Asia 2025">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/img2cad">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Img2CAD: Reverse Engineering 3D CAD Models from Images">
+  <meta property="og:description" content="From one image to an editable CAD program: a VLM writes the structure, a flow-matching transformer fills in the numbers. SIGGRAPH Asia 2025.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/img2cad">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/img2cad/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/img2cad/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050a16'/%3E%3Cpath d='M16 46V30a16 16 0 0 1 32 0v16z' fill='none' stroke='%2360a5fa' stroke-width='5' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='31' r='6' fill='%23bfdbfe'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/img2cad#article",
+        "headline": "Img2CAD: Reverse Engineering 3D CAD Models from Images through VLM-Assisted Conditional Factorization",
+        "url": "https://qq456cvb.github.io/projects/img2cad",
+        "datePublished": "2025-12",
+        "identifier": { "@type": "PropertyValue", "propertyID": "DOI", "value": "10.1145/3757377.3763891" },
+        "publication": { "@type": "PublicationEvent", "name": "SIGGRAPH Asia 2025 Conference Papers" },
+        "sameAs": ["https://doi.org/10.1145/3757377.3763891", "https://arxiv.org/abs/2408.01437", "https://qq456cvb.github.io/publications/img2cad"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Mikaela Angelina Uy" }, { "@type": "Person", "name": "Jiaqi Han" }, { "@type": "Person", "name": "Rahul Thomas" },
+          { "@type": "Person", "name": "Haotong Zhang" }, { "@type": "Person", "name": "Yi Du" }, { "@type": "Person", "name": "Hansheng Chen" },
+          { "@type": "Person", "name": "Francis Engelmann" }, { "@type": "Person", "name": "Suya You" }, { "@type": "Person", "name": "Leonidas Guibas" }
+        ],
+        "keywords": ["image to CAD", "CAD reverse engineering", "sketch and extrude", "vision language models", "flow matching"],
+        "image": "https://qq456cvb.github.io/projects/img2cad/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/img2cad#video" }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Img2CAD",
+        "codeRepository": "https://github.com/qq456cvb/Img2CAD",
+        "programmingLanguage": "Python",
+        "license": "https://opensource.org/licenses/MIT",
+        "sameAs": ["https://huggingface.co/qq456cvb/img2cad"],
+        "citation": { "@id": "https://qq456cvb.github.io/projects/img2cad#article" }
+      },
+      {
+        "@type": "Dataset",
+        "name": "Img2CAD CAD-ified ShapeNet dataset",
+        "description": "CAD programs in a sketch-extrude language, with semantic part labels, for 1,026 chairs, 3,243 tables and 305 cabinets from ShapeNet, with renders, train and test splits and symmetry labels.",
+        "url": "https://huggingface.co/datasets/qq456cvb/img2cad-dataset",
+        "license": "https://opensource.org/licenses/MIT",
+        "creator": { "@id": "https://qq456cvb.github.io/#person" },
+        "isBasedOn": "https://shapenet.org",
+        "citation": { "@id": "https://qq456cvb.github.io/projects/img2cad#article" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/img2cad#video",
+        "name": "Img2CAD teaser",
+        "description": "One-minute overview: CAD models as sketch-and-extrude programs, why predicting them from images is hard, Img2CAD's two stages (a finetuned Llama 3.2 for the structure, TrAssembler for the numbers), real flow-matching samples, the CAD-ified ShapeNet dataset, results, real photos, and editing with GPT-4o.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/img2cad/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/img2cad/static/media/teaser.mp4",
+        "uploadDate": "2026-10-07",
+        "duration": "PT66S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f6f8fb; --surface: #ffffff; --ink: #0b1324; --muted: #445067; --faint: #78839a; --line: #e2e8f0;
+      --accent: #2563eb; --accent-ink: #1d4ed8; --accent-soft: rgba(37, 99, 235, .08); --best: #0b1324; --pre: #94a3b8;
+      --hero: #050a16; --hero-2: #0d1f45; --radius: 18px; --shadow: 0 1px 2px rgba(11, 19, 36, .05), 0 8px 28px rgba(11, 19, 36, .06);
+      --stage: linear-gradient(180deg, #ffffff, #edf1f7); --part: #16a34a; --chg: #ea580c;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #080c14; --surface: #111827; --ink: #eef2f8; --muted: #b4bfd0; --faint: #8592a8; --line: #232d3f;
+        --accent: #60a5fa; --accent-ink: #93c5fd; --accent-soft: rgba(96, 165, 250, .12); --best: #ffffff; --pre: #5b6b84;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25);
+        --stage: linear-gradient(180deg, #1a2333, #0f1622); --part: #4ade80; --chg: #fb923c; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    code { font: 500 .88em "JetBrains Mono", ui-monospace, monospace; background: var(--accent-soft); color: var(--ink); padding: 1px 6px; border-radius: 6px; white-space: nowrap; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    /* hero: a faint blueprint grid behind the title */
+    .hero { position: relative; background: radial-gradient(1200px 600px at 70% 10%, var(--hero-2), var(--hero) 70%); color: #eef3fb; padding: 64px 0 56px; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(96, 165, 250, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(96, 165, 250, .07) 1px, transparent 1px), linear-gradient(rgba(96, 165, 250, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(96, 165, 250, .035) 1px, transparent 1px); background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px; mask-image: linear-gradient(180deg, #000, transparent 75%); -webkit-mask-image: linear-gradient(180deg, #000, transparent 75%); pointer-events: none; }
+    .hero .wrap { position: relative; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #bfdbfe; border: 1px solid rgba(96, 165, 250, .55); background: rgba(96, 165, 250, .13); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 8px; font-size: clamp(46px, 8.4vw, 96px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { color: #60a5fa; text-shadow: 0 0 40px rgba(96, 165, 250, .35); }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e2e9f5; margin: 0 0 22px; max-width: 940px; }
+    .authors { font-size: 18px; font-weight: 500; color: #d3dcea; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #60a5fa; }
+    .authors sup, .affil sup { color: #93c5fd; font-weight: 600; margin-left: 1px; }
+    .affil { color: #95a3ba; font-size: 15px; margin-top: 6px; display: flex; flex-wrap: wrap; gap: 2px 18px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #60a5fa; border-color: #60a5fa; color: #061226; }
+    .btn.primary:hover { background: #93c5fd; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(5, 10, 22, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(5, 10, 22, .8); }
+
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b, p b, li b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+    .sub { margin-top: 44px; }
+    .note { font-size: 14px; color: var(--faint); margin: 10px 2px 0; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 38px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+    .stats.three { grid-template-columns: repeat(3, 1fr); margin-top: 18px; }
+    .stats.three .num { font-size: 28px; }
+
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card p { margin: 0; font-size: 15.5px; }
+
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .grid-side { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; align-items: start; }
+    .stack { display: grid; gap: 16px; }
+    .mt { margin-top: 16px; }
+
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 26px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .steps.three { grid-template-columns: repeat(3, 1fr); }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .steps li::before { color: #061226; } }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+
+    /* chips and tabs */
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip.on, .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .chip:disabled { opacity: .45; cursor: not-allowed; }
+
+    /* interactive CAD program */
+    .cad { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-top: 22px; }
+    .stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .stage canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; }
+    .stage canvas:active { cursor: grabbing; }
+    .stage .hint { position: absolute; left: 14px; bottom: 12px; font-size: 12.5px; font-weight: 600; color: var(--faint); pointer-events: none; }
+    .stage .fallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--faint); font-size: 14px; }
+    .cad .stage { aspect-ratio: 1 / 1; }
+    .cad-side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
+    .ctl h4 { margin: 0 0 8px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; gap: 10px; }
+    .ctl h4 span { text-transform: none; letter-spacing: 0; font-weight: 500; }
+    .ctl + .ctl { margin-top: 0; }
+    .ctl .chip { font-size: 13.5px; padding: 5px 12px; }
+    .ctl .chip small { font: 500 11.5px "JetBrains Mono", monospace; color: var(--faint); margin-left: 4px; }
+    .slider { display: grid; grid-template-columns: 118px 1fr 44px; gap: 10px; align-items: center; font-size: 14px; color: var(--muted); font-weight: 600; }
+    .slider + .slider { margin-top: 2px; }
+    .slider input { width: 100%; accent-color: var(--accent); }
+    .slider output { font: 600 13px "JetBrains Mono", monospace; text-align: right; color: var(--ink); }
+    .reset { border: 0; background: none; color: var(--accent-ink); font: 600 13px Inter, sans-serif; cursor: pointer; padding: 0; }
+    .prog { position: relative; flex: 1 1 auto; min-height: 220px; max-height: 330px; overflow: auto; margin: 0; background: #0b1220; color: #dbe4f0; border-radius: var(--radius); padding: 14px 0; font: 500 13px/1.6 "JetBrains Mono", ui-monospace, monospace; }
+    @media (prefers-color-scheme: dark) { .prog { border: 1px solid var(--line); } }
+    .prog .blk { display: block; padding: 0 16px; border-left: 3px solid transparent; transition: background .15s; }
+    .prog .blk:hover, .prog .blk.hl { background: rgba(96, 165, 250, .12); border-left-color: #60a5fa; }
+    .prog .ln { display: block; white-space: pre; }
+    .prog .cm { color: #4ade80; font-weight: 600; }
+    .prog .k { color: #60a5fa; font-weight: 600; }
+    .prog .kw { color: #c4b5fd; }
+    .prog .chg { color: #fb923c; animation: flash 1.8s ease-out; border-radius: 3px; }
+    @keyframes flash { from { background: rgba(251, 146, 60, .35); } to { background: transparent; } }
+
+    /* flow-matching steps */
+    .dn { margin-top: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; }
+    .dn-head { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .dn-ex { display: flex; gap: 8px; }
+    .dn-ex button { padding: 0; width: 56px; height: 56px; border-radius: 12px; overflow: hidden; border: 2px solid var(--line); background: #404040; cursor: pointer; }
+    .dn-ex button[aria-pressed="true"] { border-color: var(--accent); }
+    .dn-ex img { width: 100%; height: 100%; object-fit: cover; }
+    .dn-stage { display: grid; grid-template-columns: 1fr 56px 1fr; gap: 8px; align-items: center; max-width: 760px; margin: 0 auto; }
+    .dn-stage figure { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 1 / 1; }
+    .dn-stage .in { background: #404040; }
+    .dn-stage .out { background: #fff; border: 1px solid var(--line); }
+    .dn-stage .lab { position: absolute; left: 8px; top: 8px; font-size: 12px; font-weight: 700; color: #fff; background: rgba(5, 10, 22, .6); padding: 3px 10px; border-radius: 999px; }
+    .dn-stage .out .lab { background: rgba(5, 10, 22, .72); }
+    .dn-sprite { position: absolute; inset: 0; background-repeat: no-repeat; background-size: 1900% 100%; }
+    .dn-arrow { color: var(--faint); text-align: center; font-size: 26px; }
+    .dn-ctl { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; max-width: 760px; margin: 16px auto 0; }
+    .dn-ctl input { width: 100%; accent-color: var(--accent); }
+    .dn-ctl output { font: 600 13px "JetBrains Mono", monospace; color: var(--muted); min-width: 92px; text-align: right; }
+    .play { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--ink); color: var(--bg); cursor: pointer; display: grid; place-items: center; }
+    .play svg { width: 16px; height: 16px; }
+
+    /* bar explorers */
+    .rx { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px 16px; }
+    .rx-top { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .rx-row { display: grid; grid-template-columns: 230px 1fr; gap: 14px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .rx-row:last-child { border-bottom: 0; }
+    .rx-name { font-weight: 700; font-size: 15px; line-height: 1.3; }
+    .rx-name small { display: block; font-weight: 500; font-size: 12.5px; color: var(--faint); }
+    .rx-row.ours .rx-name { color: var(--accent-ink); }
+    .rx-bar { position: relative; height: 22px; border-radius: 6px; background: color-mix(in srgb, var(--line) 55%, transparent); }
+    .rx-bar span { position: absolute; inset: 0 auto 0 0; border-radius: 6px; background: var(--pre); transition: width .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar span { background: var(--accent); }
+    .rx-bar b { position: absolute; top: 50%; transform: translateY(-50%); font: 600 12.5px/1 "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; transition: left .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar b { color: var(--accent-ink); }
+    .rx-foot { margin-top: 12px; font-size: 14px; color: var(--faint); }
+
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { border-collapse: collapse; width: 100%; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 9px 12px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    thead th.grp { text-align: center; }
+    th[scope=row], thead tr:first-child th:first-child { text-align: left; color: var(--ink); font-weight: 600; }
+    td { color: var(--muted); }
+    td.best { color: var(--best); font-weight: 800; }
+    tr.ours th, tr.ours td { background: var(--accent-soft); }
+    tr.ours th[scope=row] { color: var(--accent-ink); font-weight: 800; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    details.more { margin-top: 14px; }
+    details.more summary { cursor: pointer; font-weight: 600; color: var(--accent-ink); font-size: 15px; margin-bottom: 10px; }
+
+    /* 3D gallery */
+    .gal { margin-top: 18px; }
+    .gal-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; margin-top: 14px; }
+    .gal-in { position: relative; border-radius: var(--radius); overflow: hidden; background: #404040; aspect-ratio: 1 / 1; box-shadow: var(--shadow); }
+    .gal-in.white { background: #fff; border: 1px solid var(--line); }
+    .gal-in img { width: 100%; height: 100%; object-fit: contain; }
+    .gal-in .lab, .gal .stage .lab { position: absolute; left: 12px; top: 12px; font-size: 12.5px; font-weight: 700; color: #fff; background: rgba(5, 10, 22, .62); padding: 3px 10px; border-radius: 999px; pointer-events: none; }
+    .gal .stage { aspect-ratio: 5 / 4; }
+    .thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .thumbs button { width: 64px; height: 64px; padding: 0; border-radius: 12px; overflow: hidden; border: 2px solid var(--line); background: #404040; cursor: pointer; transition: transform .15s; }
+    .thumbs button.white { background: #fff; }
+    .thumbs button:hover { transform: translateY(-2px); }
+    .thumbs button[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .thumbs img { width: 100%; height: 100%; object-fit: cover; }
+
+    .list { margin: 0; padding-left: 20px; color: var(--muted); }
+    .list li { margin: 8px 0; }
+    .dl { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: start; }
+    .dl ul { padding-left: 20px; margin: 0 0 14px; color: var(--muted); }
+    .dl li { margin: 6px 0; }
+    .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .btns .btn { background: var(--ink); color: var(--bg); border: 0; }
+    .btns .btn:hover { background: var(--accent); color: #fff; }
+    .codes { display: grid; gap: 12px; }
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; }
+    pre.code, .bib { position: relative; background: #0b1220; color: #e2e9f5; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    @media (prefers-color-scheme: dark) { pre.code, .bib { border: 1px solid var(--line); } }
+    pre.code .c { color: #8b9ab3; }
+
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(5, 10, 22, .9); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .cards, .related, .dl, .grid2, .grid-side, .cad, .gal-main { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .steps.three { grid-template-columns: 1fr; }
+      .cad .stage { max-height: 520px; aspect-ratio: auto; height: min(92vw, 520px); }
+      /* the input becomes a picture-in-picture inset of the 3D view */
+      .gal-main { position: relative; display: block; }
+      .gal-in { position: absolute; z-index: 2; left: 10px; top: 10px; width: 30%; max-width: 200px; border: 2px solid #fff; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, .25); }
+      .gal-in .lab { display: none; }
+      .gal .stage .lab { left: auto; right: 12px; }
+      .prog { max-height: 300px; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stat .num { font-size: 30px; }
+      .stats.three { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .lead { font-size: 18.5px; }
+      .rx { padding: 16px 14px 12px; }
+      .tab { padding: 8px 10px; font-size: 14px; }
+      .rx-row { grid-template-columns: 1fr; gap: 6px; }
+      .slider { grid-template-columns: 100px 1fr 40px; font-size: 13px; }
+      .dn { padding: 12px; }
+      .dn-stage { grid-template-columns: 1fr 26px 1fr; gap: 4px; }
+      .dn-arrow { font-size: 18px; }
+      .thumbs button { width: 52px; height: 52px; }
+      th, td { padding: 8px 9px; }
+      .bib { padding-top: 54px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b { transition: none; } .prog .chg { animation: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">SIGGRAPH ASIA 2025</span>
+    <h1>Img2<span>CAD</span></h1>
+    <p class="subtitle">Reverse Engineering 3D CAD Models from Images through VLM-Assisted Conditional Factorization</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a><sup>1</sup></span>
+      <span><a href="https://mikacuy.github.io/">Mikaela Angelina Uy</a><sup>1,2</sup></span>
+      <span><a href="https://hanjq17.github.io/">Jiaqi Han</a><sup>1</sup></span>
+      <span><a href="https://scholar.google.com/citations?user=dXOWqeYAAAAJ&amp;hl=en">Rahul Thomas</a><sup>1</sup></span>
+      <span><a href="https://pku.ai/author/haotong-zhang/">Haotong Zhang</a><sup>3</sup></span>
+      <span><a href="https://profiles.stanford.edu/yi-du">Yi Du</a><sup>1</sup></span>
+      <span><a href="https://hanshengchen.com/">Hansheng Chen</a><sup>1</sup></span>
+      <span><a href="https://francisengelmann.github.io/">Francis Engelmann</a><sup>1</sup></span>
+      <span><a href="https://scholar.google.com/citations?user=LkpA-L0AAAAJ&amp;hl=en">Suya You</a><sup>4</sup></span>
+      <span><a href="https://geometry.stanford.edu/">Leonidas Guibas</a><sup>1</sup></span>
+    </div>
+    <div class="affil"><span><sup>1</sup>Stanford University</span><span><sup>2</sup>NVIDIA</span><span><sup>3</sup>Peking University</span><span><sup>4</sup>DEVCOM Army Research Laboratory</span></div>
+    <div class="links">
+      <a class="btn primary" href="https://doi.org/10.1145/3757377.3763891"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://arxiv.org/abs/2408.01437"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>arXiv</a>
+      <a class="btn" href="https://github.com/qq456cvb/Img2CAD"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="https://huggingface.co/qq456cvb/img2cad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>Models</a>
+      <a class="btn" href="https://huggingface.co/datasets/qq456cvb/img2cad-dataset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>Dataset</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/img2cad/static/media/teaser.mp4" poster="/projects/img2cad/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Img2CAD teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#program">CAD programs</a><a href="#method">Method</a><a href="#results">Results</a><a href="#viewer">3D viewer</a><a href="#ablations">Ablations</a><a href="#wild">Generalization</a><a href="#editing">Editing</a><a href="#dataset">Dataset</a><a href="#limitations">Limitations</a><a href="#code">Code &amp; data</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>From a single image to an editable CAD program</h2>
+    <p class="lead">A CAD model is a program: a sequence of <b>discrete commands</b> (lines, arcs, circles, extrusions), each with <b>continuous numbers</b> (coordinates, angles, distances). Predicting both from pixels at once is hard. Img2CAD splits the job: a finetuned <b>Llama 3.2</b> vision-language model writes the program's structure, naming each part, and <b>TrAssembler</b>, a transformer flow-matching model, fills in the numbers.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">0.117</div><p>average Chamfer distance over chairs, tables and cabinets, 2.6× lower than the best baseline (0.311)</p></div>
+      <div class="stat"><div class="num">+17.9<small>points</small></div><p>part-segmentation accuracy of the output over the best baseline, DeepCAD trained end to end</p></div>
+      <div class="stat"><div class="num">+19.0<small>points</small></div><p>part-segmentation mIoU over the same baseline: the parts land where they should</p></div>
+      <div class="stat"><div class="num">4,574</div><p>ShapeNet chairs, tables and cabinets turned into CAD programs, released as a dataset</p></div>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/img2cad/static/media/overview.jpg" width="2000" height="503" decoding="async" alt="Img2CAD overview: a chair image goes to Llama, which writes a program skeleton for the backrest and legs with placeholder values; TrAssembler predicts the values by flow matching; OpenCascade builds the CAD model, which users can edit by asking GPT to add a curve to the backrest or make the legs taller."><figcaption>Llama 3.2 predicts the parts and their command types; TrAssembler predicts the numbers; OpenCascade turns the program into a 3D model, which stays editable: ask for a curved backrest or taller legs and the program changes.</figcaption></figure>
+  </div>
+</section>
+
+<section id="program">
+  <div class="wrap">
+    <div class="kicker">CAD programs</div>
+    <h2>A CAD model is a short program</h2>
+    <p>Img2CAD uses the <b>sketch-and-extrude</b> language of tools such as Fusion 360 and OpenCascade. A sketch is a closed loop of lines <code>L: (x, y)</code>, arcs <code>A: (x, y, α)</code> and circles <code>R: (x, y, r)</code>. An extrusion <code>E</code> turns it into a solid: three angles and an origin place the sketch, the last number is the distance, and the extrusion either joins the model or cuts it. Try it on a chair: the buttons change the program's <b>structure</b>, the sliders only change <b>numbers</b>.</p>
+    <div class="cad" id="cad">
+      <div class="stage">
+        <canvas id="cad-canvas" role="img" aria-label="3D view of the chair built from the program"></canvas>
+        <span class="hint">Drag to rotate · hover a part in the program</span>
+        <div class="fallback" id="cad-fallback" hidden>3D view needs WebGL, which this browser does not provide.</div>
+      </div>
+      <div class="cad-side">
+        <div class="ctl">
+          <h4>Structure <span>which commands</span></h4>
+          <div class="chips" role="group" aria-label="Structure">
+            <button class="chip" type="button" data-s="arch" aria-pressed="false">Curved backrest<small>L→A</small></button>
+            <button class="chip" type="button" data-s="hole" aria-pressed="false">Hole in backrest<small>+R, cut</small></button>
+            <button class="chip" type="button" data-s="round" aria-pressed="false">Round legs<small>4L→R</small></button>
+            <button class="chip" type="button" data-s="arms" aria-pressed="false">Armrests<small>+2 parts</small></button>
+          </div>
+        </div>
+        <div class="ctl">
+          <h4>Attributes <span>the numbers · <button class="reset" type="button" id="cad-reset">reset</button></span></h4>
+          <label class="slider">Leg height<input type="range" id="s-leg" min="0.3" max="0.7" step="0.01" value="0.45"><output id="o-leg">0.45</output></label>
+          <label class="slider">Seat width<input type="range" id="s-wid" min="0.36" max="0.62" step="0.01" value="0.46"><output id="o-wid">0.46</output></label>
+          <label class="slider">Backrest height<input type="range" id="s-back" min="0.25" max="0.6" step="0.01" value="0.42"><output id="o-back">0.42</output></label>
+        </div>
+        <pre class="prog" id="cad-prog" aria-label="CAD program" tabindex="0"></pre>
+      </div>
+    </div>
+    <p class="note">A hand-written program in the paper's CAD language, built into a mesh in your browser (simple extrusion code, not OpenCascade). As in Img2CAD's programs, a comment names each part; changed numbers light up in orange.</p>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="kicker">Method</div>
+    <h2>Structure from a VLM, numbers from a flow model</h2>
+    <p>One model predicting a whole program mixes a combinatorial problem (which parts, which commands) with a continuous one (where, how big). Img2CAD <b>conditionally factorizes</b> it: the structure comes first, and the numbers are predicted given the structure.</p>
+    <ol class="steps">
+      <li><b>Structure</b>A finetuned Llama 3.2 reads the image and writes each part's name and command types, with placeholders instead of numbers.</li>
+      <li><b>Shared part names</b>Names such as <i>backrest</i> or <i>leg</i> stay consistent across shapes, so numbers can be learned across chairs whose structures differ.</li>
+      <li><b>TrAssembler</b>Part transformers read DINOv2 image features; a global transformer relates the parts, with CLIP embeddings of their names; decoders output every number.</li>
+      <li><b>Flow matching + symmetry</b>Numbers are sampled from noise with GMFlow. At test time each step is nudged toward the mirror or rotational symmetry that GPT-4o reads off the image.</li>
+    </ol>
+    <div class="grid-side">
+      <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/pipeline.jpg" width="1500" height="912" loading="lazy" decoding="async" alt="Two-stage pipeline: from a prompt and an input chair image, Llama writes the seat and backrest blocks with noise placeholders; TrAssembler, conditioned on the image, predicts the flow of the values over T steps, giving the output CAD model."><figcaption>Llama 3.2 writes the structure; TrAssembler denoises the numbers in T flow-matching steps, conditioned on the image.</figcaption></figure>
+      <div class="stack">
+        <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/semantics.jpg" width="1300" height="356" loading="lazy" decoding="async" alt="Two different chairs whose backrest blocks have almost the same numbers: lines at plus or minus 0.42 and 0.45 versus 0.34 and 0.43, and similar extrusion angles."><figcaption>Different chairs, same part name, similar numbers: shared semantics make the numbers easier to learn.</figcaption></figure>
+        <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/vlm_failure.jpg" width="1500" height="370" loading="lazy" decoding="async" alt="A chair turned into a CAD model by Llama finetuned on full programs, with scattered parts, and by GPT-4V, with legs pointing up from a slab."><figcaption>A VLM alone gets the parts but not the numbers: Llama 3.2 finetuned on full programs (left) and GPT-4V (right).</figcaption></figure>
+      </div>
+    </div>
+
+    <h3 class="sub">Watch TrAssembler sample a CAD model</h3>
+    <p>Llama 3.2 fixes the structure, so the set of parts never changes; TrAssembler moves their numbers from random noise to the final shape. Real sampling runs on three ShapeNet test images.</p>
+    <div class="dn" id="dn">
+      <div class="dn-head">
+        <div class="dn-ex" id="dn-ex" role="group" aria-label="Example"></div>
+        <span class="note" style="margin:0">Drag the slider or press play</span>
+      </div>
+      <div class="dn-stage">
+        <figure class="in"><img id="dn-in" src="/projects/img2cad/static/media/inputs/19167.jpg" width="400" height="400" alt="Input image" loading="lazy"><span class="lab">Input</span></figure>
+        <div class="dn-arrow" aria-hidden="true">→</div>
+        <figure class="out"><div class="dn-sprite" id="dn-sprite" role="img" aria-label="TrAssembler output at the selected sampling step"></div><span class="lab" id="dn-lab">Noise</span></figure>
+      </div>
+      <div class="dn-ctl">
+        <button class="play" id="dn-play" type="button" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></button>
+        <input type="range" id="dn-range" min="0" max="18" value="0" aria-label="Sampling step">
+        <output id="dn-out">step 0 / 18</output>
+      </div>
+    </div>
+
+    <figure class="figure mt" data-zoom><img src="/projects/img2cad/static/media/trassembler.jpg" width="2000" height="733" loading="lazy" decoding="async" alt="TrAssembler architecture: noisy attributes of each part (leg 1, leg 2, backrest) go through part transformer encoders with shared weights and cross-attention to DINOv2 image patch tokens; part tokens plus text embeddings of the semantic labels go through a global transformer encoder; part transformer decoders and MLPs predict the flow for every attribute."><figcaption>TrAssembler: part encoders cross-attend to DINOv2 patch tokens; a global transformer relates the part tokens, which carry text embeddings of the part names; part decoders predict a flow for every number.</figcaption></figure>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="kicker">Results</div>
+    <h2>More accurate shapes, with the right parts</h2>
+    <p>Baselines: <b>GPT-4o</b> writing the whole program; <b>Image-3D-CAD</b>, an image-to-mesh model (LRM) followed by mesh-to-CAD (SECAD-Net); and <b>DeepCAD</b> finetuned on our data, with an image encoder aligned afterwards or trained <b>end to end</b>. Chamfer distance (CD) measures geometry; part segmentation of the output (accuracy and mIoU, %) checks that parts are where they should be.</p>
+    <div class="rx" id="res">
+      <div class="rx-top">
+        <div class="tabs" role="tablist" aria-label="Category" data-role="cats"></div>
+        <div class="chips" role="group" aria-label="Metric" data-role="metrics"></div>
+      </div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <details class="more"><summary>All numbers</summary><div class="tbl"><table><caption>Image-to-CAD on the CAD-ified ShapeNet test sets. CD: Chamfer distance; Seg Acc and Seg mIoU (%): part segmentation of the output, compared with the ground-truth parts. Img2CAD is best on every column.</caption><thead><tr><th rowspan="2">Method</th><th colspan="3" class="grp">Chair</th><th colspan="3" class="grp">Table</th><th colspan="3" class="grp">Cabinet</th></tr><tr><th>CD ↓</th><th>Seg Acc ↑</th><th>Seg mIoU ↑</th><th>CD ↓</th><th>Seg Acc ↑</th><th>Seg mIoU ↑</th><th>CD ↓</th><th>Seg Acc ↑</th><th>Seg mIoU ↑</th></tr></thead><tbody><tr><th scope="row">GPT-4o</th><td>0.3806</td><td>50.49</td><td>34.96</td><td>0.3676</td><td>62.16</td><td>41.99</td><td>0.3807</td><td>54.66</td><td>47.65</td></tr><tr><th scope="row">Image-3D-CAD</th><td>0.3266</td><td>49.03</td><td>40.73</td><td>0.3828</td><td>33.72</td><td>28.34</td><td>0.4775</td><td>59.61</td><td>49.80</td></tr><tr><th scope="row">DeepCAD</th><td>0.2914</td><td>70.44</td><td>54.86</td><td>0.3633</td><td>60.20</td><td>46.50</td><td>0.3310</td><td>62.70</td><td>54.95</td></tr><tr><th scope="row">DeepCAD-End2End</th><td>0.2346</td><td>77.01</td><td>65.06</td><td>0.3698</td><td>67.37</td><td>52.21</td><td>0.3279</td><td>60.55</td><td>53.23</td></tr><tr class=ours><th scope="row">Img2CAD (ours)</th><td class=best>0.0984</td><td class=best>91.86</td><td class=best>87.88</td><td class=best>0.0966</td><td class=best>93.81</td><td class=best>82.13</td><td class=best>0.1573</td><td class=best>73.08</td><td class=best>57.59</td></tr></tbody></table></div></details>
+    <figure class="figure mt" data-zoom><img src="/projects/img2cad/static/media/qual_shapenet.jpg" width="2200" height="1131" loading="lazy" decoding="async" alt="Qualitative comparison on eleven ShapeNet test images of chairs, tables and a bookshelf: GPT-4o, Image-3D-CAD, DeepCAD and DeepCAD-End2End give scattered or wrong parts, while Img2CAD gives complete, recognizable CAD models."><figcaption>Test images (top) and the CAD models from each method. Img2CAD's are complete and match the input.</figcaption></figure>
+  </div>
+</section>
+
+<section id="viewer">
+  <div class="wrap">
+    <div class="kicker">3D viewer</div>
+    <h2>Turn the results around</h2>
+    <p>Img2CAD's CAD models for ShapeNet test images, and for images rendered from random viewpoints. Pick an input and drag the model.</p>
+    <div class="gal" id="gal">
+      <div class="tabs" role="tablist" aria-label="Inputs">
+        <button class="tab on" type="button" role="tab" aria-selected="true" data-set="shapenet">Test images</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-set="arbitrary">Random viewpoints</button>
+      </div>
+      <div class="gal-main">
+        <figure class="gal-in" id="gal-inbox"><img id="gal-in" src="/projects/img2cad/static/media/inputs/42569.jpg" width="400" height="400" alt="Input image" loading="lazy"><span class="lab">Input image</span></figure>
+        <div class="stage">
+          <canvas id="gal-canvas" role="img" aria-label="Img2CAD's CAD model for the selected input"></canvas>
+          <span class="lab">Img2CAD output</span>
+          <span class="hint">Drag to rotate</span>
+          <div class="fallback" id="gal-fallback" hidden>3D view needs WebGL, which this browser does not provide.</div>
+        </div>
+      </div>
+      <div class="thumbs" id="gal-thumbs" role="group" aria-label="Choose an input"></div>
+    </div>
+  </div>
+</section>
+
+<section id="ablations">
+  <div class="wrap">
+    <div class="kicker">Ablations</div>
+    <h2>What each part of the design adds</h2>
+    <p>Starting from Llama 3.2 predicting the full program, we add components one at a time; all variants after (i) use the VLM's structure. <b>Semantic part labels</b> and <b>flow matching</b> bring the largest gains; <b>symmetry guidance</b> mostly improves connectivity (fewer disconnected pieces, #SCC) and symmetry (SymChamfer), reported averaged over categories.</p>
+    <div class="rx" id="abl">
+      <div class="rx-top">
+        <div class="tabs" role="tablist" aria-label="Category" data-role="cats"></div>
+        <div class="chips" role="group" aria-label="Metric" data-role="metrics"></div>
+      </div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/img2cad/static/media/qual_ablation.jpg" width="2200" height="1319" loading="lazy" decoding="async" alt="Ablation results on eleven test images: Llama end-to-end, flat TrAssembler and the hierarchical design without labels give broken shapes; adding semantic part info, flow matching and symmetry guidance gives progressively cleaner, more symmetric chairs, tables and a cabinet."><figcaption>From top: input, then variants (i) to (vi). Each component makes the shapes more complete; symmetry guidance straightens the last details.</figcaption></figure>
+  </div>
+</section>
+
+<section id="wild">
+  <div class="wrap">
+    <div class="kicker">Generalization</div>
+    <h2>Any viewpoint, and real photos</h2>
+    <p>Trained on renders from a frontal viewpoint, Img2CAD stays accurate on renders from <b>random viewpoints</b>, thanks to the view-robust features of Llama, DINOv2 and CLIP. Averaged over the three categories, frontal → random view:</p>
+    <div class="stats three">
+      <div class="stat"><div class="num">0.1174 → 0.1396</div><p>Chamfer distance</p></div>
+      <div class="stat"><div class="num">86.25 → 84.41</div><p>part-segmentation accuracy (%)</p></div>
+      <div class="stat"><div class="num">75.87 → 73.53</div><p>part-segmentation mIoU (%)</p></div>
+    </div>
+    <p class="note">The CAD models of the same object from a frontal and from a random view are only 0.0282 apart in Chamfer distance.</p>
+    <div class="grid2 mt">
+      <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/views_pairs.jpg" width="1600" height="605" loading="lazy" decoding="async" alt="Three objects, an armchair, a chair and a table, each seen from a normal and a random view, with Img2CAD's nearly identical CAD models below."><figcaption>The same object from a normal and a random view gives nearly the same CAD model.</figcaption></figure>
+      <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/views_arbitrary.jpg" width="1500" height="527" loading="lazy" decoding="async" alt="Chairs and tables seen from unusual angles, including from behind, and Img2CAD's CAD models."><figcaption>More random-view inputs, including views from behind.</figcaption></figure>
+    </div>
+    <h3 class="sub">Real photos</h3>
+    <p>Although TrAssembler is trained only on synthetic, CAD-ified ShapeNet models, Img2CAD also handles <b>real images</b>: indoor photos from Pix3D and product photos of furniture found online.</p>
+    <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/wild_pix3d.jpg" width="2200" height="916" loading="lazy" decoding="async" alt="Eighteen Pix3D photos of armchairs, chairs, tables, a round table and bookcases, cluttered and partly occluded, with Img2CAD's CAD models below each."><figcaption>Pix3D photos and Img2CAD's CAD models.</figcaption></figure>
+    <div class="grid2 mt">
+      <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/wild_google.jpg" width="1400" height="613" loading="lazy" decoding="async" alt="Online product photos of a leather lounge chair, two upholstered armchairs and a rustic console table, with Img2CAD's CAD models."><figcaption>Product photos of furniture found online.</figcaption></figure>
+      <div class="card"><h3>Why it transfers</h3><p>The structure comes from a VLM trained on web-scale data, and TrAssembler sees the image through DINOv2 and the part names through CLIP. None of these depend on ShapeNet's rendering style, so real photos, with clutter, lighting and occlusion, still produce clean CAD programs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="editing">
+  <div class="wrap">
+    <div class="kicker">Editing</div>
+    <h2>Edit the CAD model with words</h2>
+    <p>The output is a readable program with named parts, so a language model can edit it. Img2CAD recovers the program from a photo; GPT-4o is then asked for a change. <b>“Turn it into a round table”</b> changes the structure: the tabletop and shelf sketches go from lines to circles. <b>“Make it longer”</b> changes numbers, and GPT-4o moves the legs along with the tabletop. Try similar edits on the <a href="#program">chair above</a>.</p>
+    <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/editing.jpg" width="2200" height="750" loading="lazy" decoding="async" alt="Editing example: a photo of a coffee table becomes a CAD program with Img2CAD; GPT-4o, asked to turn it into a round table, replaces line commands with circles; asked to make it longer, it changes the x coordinates of the tabletop, shelf and legs, giving tables of length 1.0 to 2.0."><figcaption>From one photo, several table variants: a structural edit (round table) and a continuous one (length from 1.0 to 2.0).</figcaption></figure>
+  </div>
+</section>
+
+<section id="dataset">
+  <div class="wrap">
+    <div class="kicker">Dataset</div>
+    <h2>Everyday objects as CAD programs</h2>
+    <p>CAD datasets such as ABC are mostly mechanical parts. To train TrAssembler, we turned ShapeNet <b>chairs, tables and cabinets</b> (the categories with PartNet part labels) into sketch-and-extrude programs, semi-automatically:</p>
+    <div class="grid-side">
+      <div>
+        <ol class="steps three" style="margin-top:6px">
+          <li><b>GPT-4V drafts</b>For a render with one part highlighted, GPT-4V writes the part's name and its lines, arcs and circles.</li>
+          <li><b>Matched and fixed</b>Its parts are matched to PartNet's (linear assignment), and their scale and position are corrected.</li>
+          <li><b>Checked by hand</b>Every model is reviewed; about 30% are kept. Splits follow PartNet.</li>
+        </ol>
+        <div class="stats three">
+          <div class="stat"><div class="num">1,026</div><p>chairs</p></div>
+          <div class="stat"><div class="num">3,243</div><p>tables</p></div>
+          <div class="stat"><div class="num">305</div><p>cabinets</p></div>
+        </div>
+        <div class="btns" style="margin-top:18px"><a class="btn" href="https://huggingface.co/datasets/qq456cvb/img2cad-dataset">Dataset on Hugging Face</a></div>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/dataset.jpg" width="1300" height="876" loading="lazy" decoding="async" alt="Pairs of ShapeNet models and their CAD versions: chairs with a round hole and with slats, a trestle table and a round pedestal table, an open bookcase and a cabinet with a handle."><figcaption>Each pair: the ShapeNet model (left) and its CAD program, rendered (right).</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="limitations">
+  <div class="wrap">
+    <div class="kicker">Limitations</div>
+    <h2>Where it still fails</h2>
+    <div class="grid-side">
+      <figure class="figure" data-zoom><img src="/projects/img2cad/static/media/failures.jpg" width="1500" height="527" loading="lazy" decoding="async" alt="Failure cases: an armchair with a slatted side, a spindle-back chair and a bar stool lose or gain parts; a bench is mostly right; a table with crossed legs gets misplaced legs."><figcaption>Failure cases: missing or invented parts, and misplaced parts on a rare, complex shape (right).</figcaption></figure>
+      <ul class="list">
+        <li><b>Structure errors.</b> Llama 3.2 sometimes misses or invents parts. With the ground-truth structure instead, Chamfer distance drops from 0.1174 to 0.1032.</li>
+        <li><b>Rare shapes.</b> TrAssembler can misplace parts on complex, long-tail designs.</li>
+        <li><b>Soft symmetry.</b> Symmetry guidance nudges the numbers, so symmetry and connectivity improve but are not guaranteed.</li>
+        <li><b>Speed.</b> Sampling with 32 Euler steps takes about 5 seconds per shape.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap dl">
+    <div>
+      <div class="kicker">Code &amp; data</div>
+      <h2>Run it, train it</h2>
+      <ul>
+        <li><b>Code:</b> finetuning and inference for Llama 3.2 (structure), training and evaluation for TrAssembler.</li>
+        <li><b>Models:</b> Llama adapters, TrAssembler and part-segmentation checkpoints for chairs, tables and storage furniture.</li>
+        <li><b>Dataset:</b> the CAD programs, renders, splits and symmetry labels (also on Google Drive, see the README).</li>
+      </ul>
+      <div class="btns">
+        <a class="btn" href="https://github.com/qq456cvb/Img2CAD">GitHub</a>
+        <a class="btn" href="https://huggingface.co/qq456cvb/img2cad">Models</a>
+        <a class="btn" href="https://huggingface.co/datasets/qq456cvb/img2cad-dataset">Dataset</a>
+      </div>
+    </div>
+    <div class="codes">
+<pre class="code">git clone --recursive https://github.com/qq456cvb/Img2CAD.git
+hf download qq456cvb/img2cad --local-dir data/ckpts/hf
+hf download qq456cvb/img2cad-dataset --repo-type dataset --local-dir data</pre>
+<pre class="code"><span class="c"># stage 1: structure from images, with the finetuned Llama</span>
+python LlamaFT/infer.py --category chair --split test \
+    --out_dir data/output/llamaft_h5/chair
+<span class="c"># stage 2: numbers with TrAssembler, then the metrics</span>
+python TrAssembler/eval.py --model_dir data/ckpts/trassembler/chair --text_emb_retrieval</pre>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>Reverse engineering 3D computer-aided design (CAD) models from images is an important task for many downstream applications including interactive editing, manufacturing, architecture, robotics, etc. The difficulty of the task lies in vast representational disparities between the CAD output and the image input. CAD models are precise, programmatic constructs that involves sequential operations combining discrete command structure with continuous attributes – making it challenging to learn and optimize in an end-to-end fashion. Concurrently, input images introduce inherent challenges such as photometric variability and sensor noise, complicating the reverse engineering process. In this work, we introduce a novel approach that conditionally factorizes the task into two sub-problems. First, we leverage vision-language foundation models (VLMs), a finetuned Llama3.2, to predict the global <i>discrete base structure</i> with semantic information. Second, we propose TrAssembler that conditioned on the discrete structure with semantics predicts the <i>continuous attribute</i> values. To support the training of our TrAssembler, we further constructed an annotated CAD dataset of common objects from ShapeNet. Putting all together, our approach and data demonstrate significant first steps towards CAD-ifying images in the wild.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="https://mvig-rhos.com/p3haoi"><div class="venue">AAAI 2024</div><h3>Primitive-based HOI</h3><p>Humans and articulated objects as programs of 3D primitives, recovered from images.</p></a>
+      <a class="card" href="/publications/och3r"><div class="venue">CVPR 2026 Workshop</div><h3>OCH3R</h3><p>Object-centric holistic 3D reconstruction of every object in a scene from one image.</p></a>
+      <a class="card" href="/projects/keypointnet"><div class="venue">CVPR 2020</div><h3>KeypointNet</h3><p>Semantic keypoints shared across ShapeNet objects of a category.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@inproceedings{you2025img2cad,
+  title={Img2CAD: Reverse Engineering 3D CAD Models from Images through VLM-Assisted Conditional Factorization},
+  author={You, Yang and Uy, Mikaela Angelina and Han, Jiaqi and Thomas, Rahul and Zhang, Haotong and Du, Yi and Chen, Hansheng and Engelmann, Francis and You, Suya and Guibas, Leonidas},
+  booktitle={Proceedings of the SIGGRAPH Asia 2025 Conference Papers},
+  pages={1--12},
+  year={2025},
+  doi={10.1145/3757377.3763891}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2025 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script id="page-data" type="application/json">{"results":[{"name":"GPT-4o","ours":false,"v":{"Chair":[0.3806,50.49,34.96],"Table":[0.3676,62.16,41.99],"Cabinet":[0.3807,54.66,47.65],"Average":[0.3763,55.77,41.53]}},{"name":"Image-3D-CAD","ours":false,"v":{"Chair":[0.3266,49.03,40.73],"Table":[0.3828,33.72,28.34],"Cabinet":[0.4775,59.61,49.8],"Average":[0.3956,47.45,39.62]}},{"name":"DeepCAD","ours":false,"v":{"Chair":[0.2914,70.44,54.86],"Table":[0.3633,60.2,46.5],"Cabinet":[0.331,62.7,54.95],"Average":[0.3286,64.45,52.1]}},{"name":"DeepCAD-End2End","ours":false,"v":{"Chair":[0.2346,77.01,65.06],"Table":[0.3698,67.37,52.21],"Cabinet":[0.3279,60.55,53.23],"Average":[0.3108,68.31,56.83]}},{"name":"Img2CAD (ours)","ours":true,"v":{"Chair":[0.0984,91.86,87.88],"Table":[0.0966,93.81,82.13],"Cabinet":[0.1573,73.08,57.59],"Average":[0.1174,86.25,75.87]}}],"ablations":[{"id":"i","name":"Llama 3.2 end-to-end","desc":"one finetuned VLM predicts structure and numbers","ours":false,"v":{"Chair":[0.2568,62.98,50.12],"Table":[0.2432,72.87,61.49],"Cabinet":[0.3707,59.18,55.11],"Average":[0.2902,65.01,55.57,2.06,0.1268]}},{"id":"ii","name":"+ Flat TrAssembler","desc":"VLM structure, one flat transformer over all commands","ours":false,"v":{"Chair":[0.3282,64.64,49.9],"Table":[0.267,76.53,56.07],"Cabinet":[0.3013,62.99,54.77],"Average":[0.2988,68.05,53.58,1.79,0.1502]}},{"id":"iii","name":"+ Hierarchical design","desc":"part and global transformers, no part labels","ours":false,"v":{"Chair":[0.2847,63.14,44.06],"Table":[0.2645,49.1,32.17],"Cabinet":[0.2947,59.78,50.21],"Average":[0.2813,57.34,42.15,1.9,0.2748]}},{"id":"iv","name":"+ Semantic part labels","desc":"text embeddings of the VLM's part names","ours":false,"v":{"Chair":[0.1685,81.79,73.32],"Table":[0.1655,83.75,69.55],"Cabinet":[0.2327,66.32,57.33],"Average":[0.1889,77.29,66.73,1.49,0.1176]}},{"id":"v","name":"+ Flow matching","desc":"GMFlow instead of direct regression","ours":false,"v":{"Chair":[0.0992,91.45,86.82],"Table":[0.0993,94.33,82.49],"Cabinet":[0.1554,71.81,59.03],"Average":[0.118,85.86,76.11,1.16,0.0827]}},{"id":"vi","name":"+ Symmetry guidance","desc":"the full model","ours":true,"v":{"Chair":[0.0984,91.86,87.88],"Table":[0.0966,93.81,82.13],"Cabinet":[0.1573,73.08,57.59],"Average":[0.1174,86.25,75.87,1.11,0.0756]}}],"shapenet":["42569","44319","40338","43477","37874","40783","31105","3271","29373","19167","27248","29518","37464","40984"],"arbitrary":["2360","19416","21700","25940","26150","2858","37821","41067","43149"],"denoise":["19167","29373","37874"],"steps":19}</script>
+<script>
+(function () {
+  var MEDIA = '/projects/img2cad/static/media/';
+  var D = JSON.parse(document.getElementById('page-data').textContent);
+  var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ================= a small WebGL viewer: wood-textured meshes, outlines and a soft ground shadow ================= */
+  var VS = 'attribute vec3 aP; attribute vec3 aN; attribute vec2 aT; uniform mat4 uVP; uniform mat4 uM; uniform mat3 uR; varying vec3 vN; varying vec3 vW; varying vec2 vT; void main() { vec4 w = uM * vec4(aP, 1.0); vW = aP; vN = uR * aN; vT = aT; gl_Position = uVP * w; }';
+  var FS = 'precision mediump float; uniform sampler2D uTex; uniform float uMode; uniform float uTri; uniform vec3 uColor; uniform float uAlpha; uniform vec3 uTint; uniform float uTintAmt; uniform vec3 uL; varying vec3 vN; varying vec3 vW; varying vec2 vT; void main() { if (uMode > 1.5) { float d = length(vT - 0.5) * 2.0; float a = 1.0 - smoothstep(0.0, 1.0, d); gl_FragColor = vec4(0.0, 0.0, 0.0, a * a * uAlpha); return; } if (uMode > 0.5) { gl_FragColor = vec4(uColor * uAlpha, uAlpha); return; } vec3 n = normalize(vN); vec3 c; if (uTri > 0.5) { vec3 b = abs(normalize(vN)); b = b * b; b = b / (b.x + b.y + b.z); c = texture2D(uTex, vW.zy * vec2(0.9, 2.2)).rgb * b.x + texture2D(uTex, vW.xz * vec2(2.2, 0.9)).rgb * b.y + texture2D(uTex, vW.xy * vec2(2.2, 0.9)).rgb * b.z; } else { c = texture2D(uTex, vT).rgb; } c = mix(c, uTint, uTintAmt); float d = max(dot(n, uL), 0.0); float h = 0.5 + 0.5 * n.y; gl_FragColor = vec4(c * (0.40 + 0.22 * h + 0.58 * d), 1.0); }';
+
+  function m4mul(a, b) {
+    var o = new Float32Array(16), i, j, k, s;
+    for (i = 0; i < 4; i++) for (j = 0; j < 4; j++) { s = 0; for (k = 0; k < 4; k++) s += a[k * 4 + j] * b[i * 4 + k]; o[i * 4 + j] = s; }
+    return o;
+  }
+  function persp(fov, asp, n, f) { var t = 1 / Math.tan(fov / 2); return new Float32Array([t / asp, 0, 0, 0, 0, t, 0, 0, 0, 0, (f + n) / (n - f), -1, 0, 0, 2 * f * n / (n - f), 0]); }
+  function norm(v) { var l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; }
+  function crossv(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+  function dotv(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+  function lookAt(e, c, up) {
+    var f = norm([c[0] - e[0], c[1] - e[1], c[2] - e[2]]), s = norm(crossv(f, up)), u = crossv(s, f);
+    return { m: new Float32Array([s[0], u[0], -f[0], 0, s[1], u[1], -f[1], 0, s[2], u[2], -f[2], 0, -dotv(s, e), -dotv(u, e), dotv(f, e), 1]), s: s, u: u, f: f };
+  }
+
+  function Viewer(canvas, o) {
+    var gl = null, self = this;
+    try { gl = canvas.getContext('webgl', { antialias: true, alpha: true, premultipliedAlpha: true }); } catch (e) { gl = null; }
+    this.ok = !!gl;
+    if (!gl) return;
+    this.gl = gl; this.canvas = canvas; this.items = []; this.yaw = o.yaw || 0.6; this.pitch = o.pitch || 0.42; this.dist = o.dist || 2.4;
+    this.target = o.target || [0, 0, 0]; this.fov = o.fov || 0.62; this.scale = o.scale || 1; this.offset = o.offset || [0, 0, 0];
+    this.auto = !REDUCED; this.visible = true; this.dirty = true; this.drag = null; this.idleUntil = 0; this.groundY = -0.5;
+    function sh(type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+    var p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+    this.p = p; gl.useProgram(p);
+    var U = {}; ['uVP', 'uM', 'uR', 'uTex', 'uMode', 'uTri', 'uColor', 'uAlpha', 'uTint', 'uTintAmt', 'uL'].forEach(function (n) { U[n] = gl.getUniformLocation(p, n); });
+    this.U = U; this.A = { p: gl.getAttribLocation(p, 'aP'), n: gl.getAttribLocation(p, 'aN'), t: gl.getAttribLocation(p, 'aT') };
+    var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([196, 160, 118, 255]));
+    var img = new Image(); img.onload = function () {
+      gl.bindTexture(gl.TEXTURE_2D, tex); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      gl.generateMipmap(gl.TEXTURE_2D); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT); self.dirty = true;
+    };
+    img.src = MEDIA + 'models/wood.jpg';
+    var sq = new Float32Array([-1, 0, -1, 0, 1, 0, 0, 0, 1, 0, -1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, -1, 0, 1, 0, 1, 0, 0, 1]);
+    this.shadow = { vbo: this.buf(gl.ARRAY_BUFFER, sq), ibo: this.buf(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3])), n: 6 };
+    canvas.addEventListener('pointerdown', function (e) { self.drag = { x: e.clientX, y: e.clientY, id: e.pointerId, type: e.pointerType }; try { canvas.setPointerCapture(e.pointerId); } catch (err) {} });
+    canvas.addEventListener('pointermove', function (e) {
+      var d = self.drag; if (!d || d.id !== e.pointerId) return;
+      self.yaw += (e.clientX - d.x) * 0.01;
+      if (d.type === 'mouse') self.pitch = Math.max(-0.15, Math.min(1.25, self.pitch + (e.clientY - d.y) * 0.008));
+      d.x = e.clientX; d.y = e.clientY; self.idleUntil = performance.now() + 3000; self.dirty = true;
+    });
+    function up() { self.drag = null; self.idleUntil = performance.now() + 3000; }
+    canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { self.visible = es[0].isIntersecting; if (self.visible) self.dirty = true; }).observe(canvas);
+    var last = performance.now();
+    (function loop(now) {
+      requestAnimationFrame(loop);
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      if (!self.visible) return;
+      if (self.auto && !self.drag && now > self.idleUntil) { self.yaw += dt * 0.32; self.dirty = true; }
+      if (self.dirty) { self.dirty = false; self.draw(); }
+    })(last);
+  }
+  Viewer.prototype.buf = function (kind, data) { var gl = this.gl, b = gl.createBuffer(); gl.bindBuffer(kind, b); gl.bufferData(kind, data, gl.STATIC_DRAW); return b; };
+  /* item: interleaved vertices [x y z nx ny nz u v], uint16 triangles, line segments as plain xyz pairs */
+  Viewer.prototype.make = function (verts, idx, lines, tri) {
+    var lv = new Float32Array(lines.length / 3 * 8);
+    for (var i = 0, k = 0; i < lines.length; i += 3, k += 8) { lv[k] = lines[i]; lv[k + 1] = lines[i + 1]; lv[k + 2] = lines[i + 2]; }
+    return { vbo: this.buf(this.gl.ARRAY_BUFFER, verts), ibo: this.buf(this.gl.ELEMENT_ARRAY_BUFFER, idx), n: idx.length, lbo: this.buf(this.gl.ARRAY_BUFFER, lv), nl: lines.length / 3, tri: tri ? 1 : 0, tint: 0 };
+  };
+  Viewer.prototype.set = function (items, groundY) {
+    var gl = this.gl;
+    this.items.forEach(function (it) { gl.deleteBuffer(it.vbo); gl.deleteBuffer(it.ibo); gl.deleteBuffer(it.lbo); });
+    this.items = items; this.groundY = groundY; this.dirty = true;
+  };
+  Viewer.prototype.attribs = function (vbo) {
+    var gl = this.gl, A = this.A; gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+    gl.enableVertexAttribArray(A.p); gl.vertexAttribPointer(A.p, 3, gl.FLOAT, false, 32, 0);
+    gl.enableVertexAttribArray(A.n); gl.vertexAttribPointer(A.n, 3, gl.FLOAT, false, 32, 12);
+    gl.enableVertexAttribArray(A.t); gl.vertexAttribPointer(A.t, 2, gl.FLOAT, false, 32, 24);
+  };
+  Viewer.prototype.draw = function () {
+    var gl = this.gl, U = this.U, c = this.canvas, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = Math.max(1, Math.round(c.clientWidth * dpr)), h = Math.max(1, Math.round(c.clientHeight * dpr));
+    if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+    gl.viewport(0, 0, w, h); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.useProgram(this.p); gl.enable(gl.DEPTH_TEST);
+    var t = this.target, cp = Math.cos(this.pitch), eye = [t[0], t[1] + this.dist * Math.sin(this.pitch), t[2] + this.dist * cp];
+    var cam = lookAt(eye, t, [0, 1, 0]), vp = m4mul(persp(this.fov, w / h, 0.05, 50), cam.m);
+    var cy = Math.cos(this.yaw), sy = Math.sin(this.yaw), s = this.scale, of = this.offset;
+    /* model: scale, then rotate about the vertical axis; offset applied before rotation so the object turns about its centre */
+    var M = new Float32Array([cy * s, 0, -sy * s, 0, 0, s, 0, 0, sy * s, 0, cy * s, 0, 0, 0, 0, 1]);
+    M[12] = (cy * of[0] + sy * of[2]) * s; M[13] = of[1] * s; M[14] = (-sy * of[0] + cy * of[2]) * s;
+    var L = norm([-0.45 * cam.s[0] + 0.75 * cam.u[0] - 0.5 * cam.f[0], -0.45 * cam.s[1] + 0.75 * cam.u[1] - 0.5 * cam.f[1], -0.45 * cam.s[2] + 0.75 * cam.u[2] - 0.5 * cam.f[2]]);
+    gl.uniformMatrix4fv(U.uVP, false, vp); gl.uniformMatrix4fv(U.uM, false, M);
+    gl.uniformMatrix3fv(U.uR, false, new Float32Array([cy, 0, -sy, 0, 1, 0, sy, 0, cy])); gl.uniform3fv(U.uL, L); gl.uniform1i(U.uTex, 0);
+    gl.disable(gl.BLEND); gl.depthMask(true); gl.enable(gl.POLYGON_OFFSET_FILL); gl.polygonOffset(1, 1);
+    var self = this, tint = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    var tc = /^#([0-9a-f]{6})$/i.test(tint) ? [parseInt(tint.slice(1, 3), 16) / 255, parseInt(tint.slice(3, 5), 16) / 255, parseInt(tint.slice(5, 7), 16) / 255] : [0.15, 0.4, 0.92];
+    gl.uniform1f(U.uMode, 0); gl.uniform3fv(U.uTint, tc);
+    this.items.forEach(function (it) {
+      self.attribs(it.vbo); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, it.ibo);
+      gl.uniform1f(U.uTri, it.tri); gl.uniform1f(U.uTintAmt, it.tint || 0);
+      gl.drawElements(gl.TRIANGLES, it.n, gl.UNSIGNED_SHORT, 0);
+    });
+    gl.disable(gl.POLYGON_OFFSET_FILL); gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
+    gl.uniform1f(U.uMode, 1); gl.uniform3fv(U.uColor, [0.16, 0.1, 0.05]); gl.uniform1f(U.uAlpha, 0.55);
+    this.items.forEach(function (it) { if (!it.nl) return; self.attribs(it.lbo); gl.drawArrays(gl.LINES, 0, it.nl); });
+    /* soft shadow: a quad on the ground under the object, in model space but not rotated */
+    var g = this.groundY, R = 0.62;
+    var MS = new Float32Array([R * s, 0, 0, 0, 0, s, 0, 0, 0, 0, R * s, 0, 0, (g + of[1]) * s - 0.002, 0, 1]);
+    gl.uniformMatrix4fv(U.uM, false, MS); gl.uniform1f(U.uMode, 2); gl.uniform1f(U.uAlpha, 0.34);
+    this.attribs(this.shadow.vbo); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.shadow.ibo); gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+    gl.depthMask(true);
+  };
+
+  /* ================= CAD program -> mesh: sketch loops, ear clipping with a bridged hole, extrusion ================= */
+  function arcPts(p0, p1, a, n) {
+    var mx = (p0[0] + p1[0]) / 2, my = (p0[1] + p1[1]) / 2, dx = p1[0] - p0[0], dy = p1[1] - p0[1], c = Math.hypot(dx, dy);
+    var r = c / (2 * Math.sin(a / 2)), d = r * Math.cos(a / 2), cx = mx - dy / c * d, cy = my + dx / c * d, out = [];
+    var a0 = Math.atan2(p0[1] - cy, p0[0] - cx);
+    for (var i = 1; i < n; i++) out.push([cx + r * Math.cos(a0 + a * i / n), cy + r * Math.sin(a0 + a * i / n), 1]);
+    return out;
+  }
+  /* a sketch (list of commands) as a counter-clockwise loop of [x, y, isCurve] */
+  function loopOf(cmds) {
+    var i, out = [];
+    if (cmds[0].t === 'R') { var v = cmds[0].v; for (i = 0; i < 40; i++) out.push([v[0] + v[2] * Math.cos(i / 40 * 2 * Math.PI), v[1] + v[2] * Math.sin(i / 40 * 2 * Math.PI), 1]); return out; }
+    var cur = cmds[cmds.length - 1].v;
+    cmds.forEach(function (c) {
+      if (c.t === 'A') out = out.concat(arcPts(cur, c.v, c.v[2], 14));
+      out.push([c.v[0], c.v[1], 0]); cur = c.v;
+    });
+    return out;
+  }
+  function cross3(a, b, c) { return (b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0]); }
+  function inTri(p, a, b, c) {
+    var d1 = (p[0] - b[0]) * (a[1] - b[1]) - (a[0] - b[0]) * (p[1] - b[1]), d2 = (p[0] - c[0]) * (b[1] - c[1]) - (b[0] - c[0]) * (p[1] - c[1]), d3 = (p[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (p[1] - a[1]);
+    return (d1 < -1e-12 && d2 < -1e-12 && d3 < -1e-12) || (d1 > 1e-12 && d2 > 1e-12 && d3 > 1e-12);
+  }
+  function same(a, b) { return Math.abs(a[0] - b[0]) < 1e-9 && Math.abs(a[1] - b[1]) < 1e-9; }
+  /* outer loop counter-clockwise, holes clockwise; each hole is bridged from its rightmost point to the outer's rightmost point (valid for a convex outer loop) */
+  function triangulate(outer, holes) {
+    var poly = outer.slice();
+    holes.forEach(function (h) {
+      var m = 0, p = 0, i;
+      for (i = 1; i < h.length; i++) if (h[i][0] > h[m][0]) m = i;
+      for (i = 1; i < poly.length; i++) if (poly[i][0] > poly[p][0] + 1e-9 || (Math.abs(poly[i][0] - poly[p][0]) < 1e-9 && Math.abs(poly[i][1] - h[m][1]) < Math.abs(poly[p][1] - h[m][1]))) p = i;
+      var ring = h.slice(m).concat(h.slice(0, m + 1));
+      poly = poly.slice(0, p + 1).concat(ring, [poly[p]], poly.slice(p + 1));
+    });
+    var idx = poly.map(function (_, i) { return i; }), tris = [], guard = 0;
+    while (idx.length > 3 && guard++ < 5000) {
+      var found = false, n = idx.length;
+      for (var i = 0; i < n && !found; i++) {
+        var a = poly[idx[(i + n - 1) % n]], b = poly[idx[i]], c = poly[idx[(i + 1) % n]];
+        if (cross3(a, b, c) <= 1e-12) continue;
+        var bad = false;
+        for (var j = 0; j < n && !bad; j++) { var q = poly[idx[j]]; if (same(q, a) || same(q, b) || same(q, c)) continue; if (inTri(q, a, b, c)) bad = true; }
+        if (bad) continue;
+        tris.push([a, b, c]); idx.splice(i, 1); found = true;
+      }
+      if (!found) break;
+    }
+    if (idx.length === 3) tris.push([poly[idx[0]], poly[idx[1]], poly[idx[2]]]);
+    return tris;
+  }
+  function frameOf(E) {
+    var rx = E[0], ry = E[1], rz = E[2], a = Math.cos(rx), b = Math.sin(rx), c = Math.cos(ry), d = Math.sin(ry), e = Math.cos(rz), f = Math.sin(rz);
+    /* R = Rz * Ry * Rx; columns are the sketch's x, y and extrusion axes */
+    var R = [[e * c, e * d * b - f * a, e * d * a + f * b], [f * c, f * d * b + e * a, f * d * a - e * b], [-d, c * b, c * a]];
+    return { o: [E[3], E[4], E[5]], x: [R[0][0], R[1][0], R[2][0]], y: [R[0][1], R[1][1], R[2][1]], z: [R[0][2], R[1][2], R[2][2]] };
+  }
+  /* extrude one profile (outer loop + holes) by e along the frame's z axis; append to geometry g */
+  function extrude(g, outer, holes, F, e) {
+    function W(u, v, w) { return [F.o[0] + u * F.x[0] + v * F.y[0] + w * F.z[0], F.o[1] + u * F.x[1] + v * F.y[1] + w * F.z[1], F.o[2] + u * F.x[2] + v * F.y[2] + w * F.z[2]]; }
+    function D(u, v, w) { return norm([u * F.x[0] + v * F.y[0] + w * F.z[0], u * F.x[1] + v * F.y[1] + w * F.z[1], u * F.x[2] + v * F.y[2] + w * F.z[2]]); }
+    function vert(p, n) { g.v.push(p[0], p[1], p[2], n[0], n[1], n[2], 0, 0); return g.v.length / 8 - 1; }
+    function line(a, b) { g.l.push(a[0], a[1], a[2], b[0], b[1], b[2]); }
+    triangulate(outer, holes).forEach(function (t) {
+      var nb = D(0, 0, -1), nt = D(0, 0, 1);
+      var i0 = vert(W(t[0][0], t[0][1], 0), nb), i1 = vert(W(t[2][0], t[2][1], 0), nb), i2 = vert(W(t[1][0], t[1][1], 0), nb);
+      g.i.push(i0, i1, i2);
+      i0 = vert(W(t[0][0], t[0][1], e), nt); i1 = vert(W(t[1][0], t[1][1], e), nt); i2 = vert(W(t[2][0], t[2][1], e), nt);
+      g.i.push(i0, i1, i2);
+    });
+    [outer].concat(holes).forEach(function (L) {
+      var n = L.length, en = [], k;
+      for (k = 0; k < n; k++) { var p = L[k], q = L[(k + 1) % n], dx = q[0] - p[0], dy = q[1] - p[1], l = Math.hypot(dx, dy) || 1; en.push([dy / l, -dx / l]); }
+      for (k = 0; k < n; k++) {
+        var P = L[k], Q = L[(k + 1) % n], ne = en[k];
+        var np = P[2] ? norm([en[(k + n - 1) % n][0] + ne[0], en[(k + n - 1) % n][1] + ne[1], 0]) : [ne[0], ne[1], 0];
+        var nq = Q[2] ? norm([en[(k + 1) % n][0] + ne[0], en[(k + 1) % n][1] + ne[1], 0]) : [ne[0], ne[1], 0];
+        var a = vert(W(P[0], P[1], 0), D(np[0], np[1], 0)), b = vert(W(Q[0], Q[1], 0), D(nq[0], nq[1], 0));
+        var c = vert(W(Q[0], Q[1], e), D(nq[0], nq[1], 0)), d = vert(W(P[0], P[1], e), D(np[0], np[1], 0));
+        g.i.push(a, b, c, a, c, d);
+        line(W(P[0], P[1], 0), W(Q[0], Q[1], 0)); line(W(P[0], P[1], e), W(Q[0], Q[1], e));
+        if (!P[2]) line(W(P[0], P[1], 0), W(P[0], P[1], e));
+      }
+    });
+  }
+  /* geometry of one part: join blocks become solids; a cut block's circle becomes a hole in the join block sharing its frame */
+  function partGeometry(part) {
+    var g = { v: [], i: [], l: [] };
+    part.blocks.forEach(function (b, k) {
+      if (b.op === 'cut') return;
+      var holes = part.blocks.filter(function (c, j) { return j > k && c.op === 'cut' && c.E.slice(0, 6).join() === b.E.slice(0, 6).join(); })
+        .map(function (c) { return loopOf(c.sketch).reverse(); });
+      extrude(g, loopOf(b.sketch), holes, frameOf(b.E), b.E[6]);
+    });
+    return g;
+  }
+
+  /* ================= the chair program ================= */
+  var DEF = { leg: 0.45, wid: 0.46, back: 0.42, arch: false, hole: false, round: false, arms: false };
+  var S = JSON.parse(JSON.stringify(DEF)), T = 0.05, DEP = 0.44, PI2 = 1.5708;
+  function r2(x) { return Math.round(x * 100) / 100; }
+  function rect(w, h0, h1) { return [{ t: 'L', v: [r2(w / 2), r2(h0)] }, { t: 'L', v: [r2(w / 2), r2(h1)] }, { t: 'L', v: [r2(-w / 2), r2(h1)] }, { t: 'L', v: [r2(-w / 2), r2(h0)] }]; }
+  function program(s) {
+    var W = s.wid, top = s.leg + T, parts = [];
+    parts.push({ name: 'Seat', blocks: [{ sketch: rect(W, -DEP / 2, DEP / 2), E: [-PI2, 0, 0, 0, r2(s.leg), 0, T], op: 'join' }] });
+    var back = rect(W, 0, s.back);
+    if (s.arch) back[2] = { t: 'A', v: [r2(-W / 2), r2(s.back), 1.05] };
+    var bE = [0, 0, 0, 0, r2(top), r2(-DEP / 2), T], blocks = [{ sketch: back, E: bE, op: 'join' }];
+    if (s.hole) blocks.push({ sketch: [{ t: 'R', v: [0, r2(s.back * 0.55), r2(Math.min(W, s.back) * 0.17)] }], E: bE.slice(), op: 'cut' });
+    parts.push({ name: 'Backrest', blocks: blocks });
+    var lx = r2(W / 2 - 0.05), lz = r2(DEP / 2 - 0.05);
+    [[-lx, lz], [lx, lz], [lx, -lz], [-lx, -lz]].forEach(function (p, k) {
+      var sk = s.round ? [{ t: 'R', v: [0, 0, 0.03] }] : rect(0.06, -0.03, 0.03);
+      parts.push({ name: 'Leg ' + (k + 1), blocks: [{ sketch: sk, E: [-PI2, 0, 0, p[0], 0, p[1], r2(s.leg)], op: 'join' }] });
+    });
+    if (s.arms) [[-W / 2], [W / 2 - T]].forEach(function (p, k) {
+      parts.push({ name: 'Armrest ' + (k + 1), blocks: [{ sketch: rect(DEP, 0, 0.2), E: [0, PI2, 0, r2(p[0]), r2(top), 0, T], op: 'join' }] });
+    });
+    return parts;
+  }
+  function fmt(x) { return (Math.abs(x) < 0.005 ? 0 : x).toFixed(2); }
+  /* program text, one array of tokens per line, keyed by part and line number for change highlighting */
+  function lines(parts) {
+    var out = [];
+    parts.forEach(function (p) {
+      var ls = [['# ' + p.name]];
+      p.blocks.forEach(function (b) {
+        b.sketch.forEach(function (c) { ls.push([c.t].concat(c.v.map(fmt))); });
+        ls.push(['E'].concat(b.E.map(fmt), [b.op]));
+      });
+      out.push({ part: p.name, lines: ls });
+    });
+    return out;
+  }
+  var cadEl = document.getElementById('cad'), progEl = document.getElementById('cad-prog');
+  var prev = {}, cadView = null, hlPart = null, parts = [];
+  try { cadView = new Viewer(document.getElementById('cad-canvas'), { yaw: 0.65, pitch: 0.36, dist: 2.75, fov: 0.6, target: [0, 0, 0], offset: [0, -0.46, 0.02] }); } catch (e) { cadView = null; }
+  if (!cadView || !cadView.ok) { cadView = null; document.getElementById('cad-fallback').hidden = false; }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function renderProgram() {
+    parts = program(S);
+    var txt = lines(parts), html = '', next = {};
+    txt.forEach(function (blk) {
+      html += '<span class="blk" data-part="' + esc(blk.part) + '">';
+      blk.lines.forEach(function (tok, k) {
+        var key = blk.part + '|' + k, old = prev[key]; next[key] = tok;
+        if (tok[0].charAt(0) === '#') { html += '<span class="ln"><span class="cm">' + esc(tok[0]) + '</span></span>'; return; }
+        var args = tok.slice(1).map(function (a, i) {
+          var ch = !old || old[0] !== tok[0] || old[i + 1] !== a;
+          var cls = (a === 'join' || a === 'cut') ? 'kw' : '';
+          if (ch && Object.keys(prev).length) cls += ' chg';
+          return cls ? '<span class="' + cls.trim() + '">' + a + '</span>' : a;
+        });
+        html += '<span class="ln"><span class="k">' + tok[0] + '</span>: (' + args.join(', ') + ')</span>';
+      });
+      html += '</span>';
+    });
+    progEl.innerHTML = html; prev = next;
+    var first = progEl.querySelector('.chg');
+    if (first) { var ln = first.closest('.ln'), top = ln.offsetTop; if (top < progEl.scrollTop || top > progEl.scrollTop + progEl.clientHeight - 30) progEl.scrollTop = Math.max(0, top - 60); }
+    if (cadView) {
+      /* keep the chair vertically centred whatever its height */
+      var H = S.leg + T + S.back + (S.arch ? 0.06 : 0);
+      cadView.offset = [0, -H / 2, 0.02]; cadView.dist = 2.75 + Math.max(0, H - 0.95) * 3;
+      cadView.set(parts.map(function (p) {
+        var g = partGeometry(p), it = cadView.make(new Float32Array(g.v), new Uint16Array(g.i), g.l, true);
+        it.part = p.name; it.tint = p.name === hlPart ? 0.45 : 0; return it;
+      }), 0);
+    }
+  }
+  function setHL(name) {
+    hlPart = name;
+    progEl.querySelectorAll('.blk').forEach(function (b) { b.classList.toggle('hl', b.dataset.part === name); });
+    if (cadView) { cadView.items.forEach(function (it) { it.tint = it.part === name ? 0.45 : 0; }); cadView.dirty = true; }
+  }
+  progEl.addEventListener('mouseover', function (e) { var b = e.target.closest('.blk'); setHL(b ? b.dataset.part : null); });
+  progEl.addEventListener('mouseleave', function () { setHL(null); });
+  cadEl.querySelectorAll('[data-s]').forEach(function (b) {
+    b.addEventListener('click', function () { var k = b.dataset.s; S[k] = !S[k]; b.setAttribute('aria-pressed', String(S[k])); renderProgram(); });
+  });
+  var SL = { leg: ['s-leg', 'o-leg'], wid: ['s-wid', 'o-wid'], back: ['s-back', 'o-back'] };
+  Object.keys(SL).forEach(function (k) {
+    var inp = document.getElementById(SL[k][0]), out = document.getElementById(SL[k][1]);
+    inp.addEventListener('input', function () { S[k] = +inp.value; out.textContent = (+inp.value).toFixed(2); renderProgram(); });
+  });
+  document.getElementById('cad-reset').addEventListener('click', function () {
+    S = JSON.parse(JSON.stringify(DEF));
+    cadEl.querySelectorAll('[data-s]').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+    Object.keys(SL).forEach(function (k) { document.getElementById(SL[k][0]).value = DEF[k]; document.getElementById(SL[k][1]).textContent = DEF[k].toFixed(2); });
+    renderProgram();
+  });
+  renderProgram();
+
+  /* ================= flow-matching steps: real sampling frames ================= */
+  var dnEx = document.getElementById('dn-ex'), dnSprite = document.getElementById('dn-sprite'), dnIn = document.getElementById('dn-in');
+  var dnRange = document.getElementById('dn-range'), dnOut = document.getElementById('dn-out'), dnLab = document.getElementById('dn-lab'), dnPlay = document.getElementById('dn-play');
+  var NS = D.steps - 1, dnTimer = null, dnId = D.denoise[0];
+  dnRange.max = NS; dnSprite.style.backgroundSize = (D.steps * 100) + '% 100%';
+  D.denoise.forEach(function (id, i) {
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(!i)); b.setAttribute('aria-label', 'Example ' + (i + 1));
+    b.innerHTML = '<img src="' + MEDIA + 'thumbs/' + id + '.jpg" alt="" width="144" height="144" loading="lazy">';
+    b.addEventListener('click', function () { dnEx.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); dnId = id; dnShow(0); dnStart(); });
+    dnEx.appendChild(b);
+  });
+  function dnShow(k) {
+    dnRange.value = k; dnIn.src = MEDIA + 'inputs/' + dnId + '.jpg';
+    dnSprite.style.backgroundImage = 'url(' + MEDIA + 'denoise_' + dnId + '.jpg)';
+    dnSprite.style.backgroundPosition = (k / NS * 100) + '% 0';
+    dnOut.textContent = 'step ' + k + ' / ' + NS; dnLab.textContent = k === 0 ? 'Noise' : k === NS ? 'CAD model' : 'Sampling…';
+  }
+  function dnIcon(play) { dnPlay.innerHTML = play ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg>' : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>'; dnPlay.setAttribute('aria-label', play ? 'Play' : 'Pause'); }
+  function dnStop() { clearInterval(dnTimer); dnTimer = null; dnIcon(true); }
+  function dnStart() {
+    dnStop(); var k = +dnRange.value >= NS ? 0 : +dnRange.value; dnShow(k); dnIcon(false);
+    dnTimer = setInterval(function () { if (k >= NS) { dnStop(); return; } k++; dnShow(k); }, 260);
+  }
+  dnPlay.addEventListener('click', function () { if (dnTimer) dnStop(); else dnStart(); });
+  dnRange.addEventListener('input', function () { dnStop(); dnShow(+dnRange.value); });
+  dnShow(0);
+  if ('IntersectionObserver' in window && !REDUCED) {
+    var dnSeen = false;
+    new IntersectionObserver(function (es) { if (es[0].isIntersecting && !dnSeen) { dnSeen = true; dnStart(); } }, { threshold: 0.6 }).observe(document.getElementById('dn'));
+  } else { dnShow(NS); }
+
+  /* ================= bar explorers (main results, ablations) ================= */
+  function explorer(root, rows, cats, metricsFor, foot, start) {
+    var catsEl = root.querySelector('[data-role=cats]'), metEl = root.querySelector('[data-role=metrics]'), rowsEl = root.querySelector('[data-role=rows]'), footEl = root.querySelector('[data-role=foot]');
+    var cat = start[0], met = start[1];
+    cats.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'tab' + (c === cat ? ' on' : ''); b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', String(c === cat)); b.textContent = c; b.dataset.cat = c;
+      catsEl.appendChild(b);
+    });
+    function render() {
+      var ms = metricsFor(cat); if (met >= ms.length) met = 0;
+      metEl.innerHTML = ms.map(function (m, i) { return '<button type="button" class="chip' + (i === met ? ' on' : '') + '" data-m="' + i + '">' + m.name + (m.lower ? ' ↓' : ' ↑') + '</button>'; }).join('');
+      var m = ms[met], vals = rows.map(function (r) { return r.v[cat][m.i]; });
+      var best = m.lower ? Math.min.apply(null, vals) : Math.max.apply(null, vals);
+      var mx = Math.max.apply(null, vals) * (rowsEl.clientWidth < 520 ? 1.25 : 1.12);
+      rowsEl.innerHTML = rows.map(function (r, k) {
+        var v = vals[k], w = v / mx * 100;
+        return '<div class="rx-row' + (r.ours ? ' ours' : '') + '"><div class="rx-name">' + r.name + (r.desc ? '<small>' + r.desc + '</small>' : '') + '</div>' +
+          '<div class="rx-bar"><span style="width:' + w + '%"></span><b style="left:calc(' + w + '% + 8px)">' + v.toFixed(m.dec) + (v === best ? '  ★' : '') + '</b></div></div>';
+      }).join('');
+      footEl.textContent = foot(cat, m);
+    }
+    catsEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.tab'); if (!b) return; cat = b.dataset.cat;
+      catsEl.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', String(x === b)); });
+      render();
+    });
+    metEl.addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (!c) return; met = +c.dataset.m; render(); });
+    render();
+    return { state: function () { return { cat: cat, metric: metricsFor(cat)[met].name, rows: rowsEl.children.length, values: [].map.call(rowsEl.querySelectorAll('.rx-bar b'), function (b) { return b.textContent; }) }; } };
+  }
+  var BASE_M = [{ name: 'CD', i: 0, lower: true, dec: 4 }, { name: 'Seg Acc', i: 1, dec: 2 }, { name: 'Seg mIoU', i: 2, dec: 2 }];
+  var CATS = ['Average', 'Chair', 'Table', 'Cabinet'];
+  var resX = explorer(document.getElementById('res'), D.results, CATS, function () { return BASE_M; }, function (cat, m) {
+    return (m.lower ? 'Lower is better. ' : 'Higher is better (%). ') + (cat === 'Average' ? 'Mean over chairs, tables and cabinets.' : 'CAD-ified ShapeNet ' + cat.toLowerCase() + ' test set.') + ' ★ best.';
+  }, ['Average', 0]);
+  var ablX = explorer(document.getElementById('abl'), D.ablations.map(function (a) { return { name: '(' + a.id + ') ' + a.name, desc: a.desc, ours: a.ours, v: a.v }; }), CATS, function (cat) {
+    return cat === 'Average' ? BASE_M.concat([{ name: '#SCC', i: 3, lower: true, dec: 2 }, { name: 'SymChamfer', i: 4, lower: true, dec: 4 }]) : BASE_M;
+  }, function (cat, m) {
+    return (m.name === '#SCC' ? 'Number of disconnected pieces in the output; lower is better. ' : m.name === 'SymChamfer' ? 'Chamfer distance between the output and its mirror image; lower is better. ' : (m.lower ? 'Lower is better. ' : 'Higher is better (%). ')) +
+      (cat === 'Average' ? 'Mean over chairs, tables and cabinets.' : cat + ' test set.') + ' ★ best.';
+  }, ['Average', 0]);
+
+  /* ================= 3D gallery of Img2CAD outputs ================= */
+  var galView = null, galSet = 'shapenet', galId = null, cache = {}, req = 0;
+  try { galView = new Viewer(document.getElementById('gal-canvas'), { yaw: 0.55, pitch: 0.42, dist: 2.75, fov: 0.6, target: [0, -0.02, 0] }); } catch (e) { galView = null; }
+  if (!galView || !galView.ok) { galView = null; document.getElementById('gal-fallback').hidden = false; }
+  function parseModel(buf) {
+    var h = new Uint32Array(buf, 0, 3), nv = h[0], ni = h[1], ne = h[2], o = 12;
+    var pos = new Float32Array(buf, o, nv * 3); o += nv * 12;
+    var nrm = new Float32Array(buf, o, nv * 3); o += nv * 12;
+    var uv = new Float32Array(buf, o, nv * 2); o += nv * 8;
+    var idx = new Uint16Array(buf, o, ni); o += ni * 2; o += (4 - o % 4) % 4;
+    var edges = new Float32Array(buf, o, ne * 6), v = new Float32Array(nv * 8), miny = 1e9;
+    for (var i = 0; i < nv; i++) {
+      v.set([pos[3 * i], pos[3 * i + 1], pos[3 * i + 2], nrm[3 * i], nrm[3 * i + 1], nrm[3 * i + 2], uv[2 * i], uv[2 * i + 1]], 8 * i);
+      if (pos[3 * i + 1] < miny) miny = pos[3 * i + 1];
+    }
+    return { v: v, i: new Uint16Array(idx), l: Array.prototype.slice.call(edges), miny: miny };
+  }
+  function galShow(id) {
+    galId = id; var white = D.arbitrary.indexOf(id) >= 0;
+    document.getElementById('gal-in').src = MEDIA + 'inputs/' + id + '.jpg';
+    document.getElementById('gal-inbox').classList.toggle('white', white);
+    document.querySelectorAll('#gal-thumbs button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.id === id)); });
+    if (!galView) return;
+    var my = ++req;
+    (cache[id] ? Promise.resolve(cache[id]) : fetch(MEDIA + 'models/' + id + '.bin').then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).then(function (b) { cache[id] = parseModel(b); return cache[id]; }))
+      .then(function (m) { if (my !== req) return; galView.set([galView.make(m.v, m.i, m.l, false)], m.miny); galView.loaded = id; })
+      .catch(function () { document.getElementById('gal-fallback').hidden = false; });
+  }
+  function galThumbs() {
+    var ids = galSet === 'shapenet' ? D.shapenet : D.arbitrary, th = document.getElementById('gal-thumbs');
+    th.innerHTML = ids.map(function (id) { return '<button type="button" data-id="' + id + '" aria-pressed="false" aria-label="Input ' + id + '"' + (galSet === 'arbitrary' ? ' class="white"' : '') + '><img src="' + MEDIA + 'thumbs/' + id + '.jpg" alt="" width="144" height="144" loading="lazy"></button>'; }).join('');
+    galShow(ids[0]);
+  }
+  document.getElementById('gal-thumbs').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) galShow(b.dataset.id); });
+  document.querySelectorAll('#gal [data-set]').forEach(function (t) {
+    t.addEventListener('click', function () {
+      galSet = t.dataset.set;
+      document.querySelectorAll('#gal [data-set]').forEach(function (x) { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', String(x === t)); });
+      galThumbs();
+    });
+  });
+  /* load the first model when the viewer gets close to the screen */
+  if ('IntersectionObserver' in window) {
+    var galIO = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { galIO.disconnect(); galThumbs(); } }, { rootMargin: '600px' });
+    galIO.observe(document.getElementById('gal'));
+  } else galThumbs();
+
+  window.__img2cad = {
+    cad: function () { return { parts: parts.map(function (p) { return p.name; }), lines: progEl.querySelectorAll('.ln').length, changed: progEl.querySelectorAll('.chg').length, gl: !!cadView, tris: cadView ? cadView.items.reduce(function (a, it) { return a + it.n / 3; }, 0) : 0 }; },
+    gallery: function () { return { set: galSet, id: galId, loaded: galView && galView.loaded, thumbs: document.querySelectorAll('#gal-thumbs button').length, gl: !!galView }; },
+    denoise: function () { return { id: dnId, step: +dnRange.value, bg: dnSprite.style.backgroundImage }; },
+    res: resX.state, abl: ablX.state
+  };
+
+  /* ================= teaser, BibTeX, lightbox ================= */
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
