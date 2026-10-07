@@ -1,0 +1,1222 @@
+---
+layout: compress
+permalink: /projects/canonical-voting
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canonical Voting: Towards Robust Oriented Bounding Box Detection in 3D Scenes (CVPR 2022)</title>
+  <meta name="description" content="Canonical Voting detects oriented 3D bounding boxes in indoor scans. Instead of regressing offsets and headings that change with rotation, every point regresses its Local Canonical Coordinates and box size, votes for the box centre under every possible heading, and an LCC back-projection check removes false peaks. State of the art on ScanNet, SceneNN and SUN RGB-D. CVPR 2022.">
+  <meta name="keywords" content="Canonical Voting, 3D object detection, oriented bounding boxes, Hough voting, Local Canonical Coordinates, point clouds, ScanNet, Scan2CAD, SceneNN, SUN RGB-D, CVPR 2022">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/canonical-voting">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Canonical Voting: Towards Robust Oriented Bounding Box Detection in 3D Scenes">
+  <meta property="og:description" content="Regress what does not change with rotation, vote under every heading, keep only boxes that check out. CVPR 2022.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/canonical-voting">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/canonical-voting/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/canonical-voting/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23170b2b'/%3E%3Cg fill='none' stroke='%237c3aed' stroke-width='3'%3E%3Ccircle cx='24' cy='26' r='13'/%3E%3Ccircle cx='40' cy='26' r='13'/%3E%3Ccircle cx='32' cy='40' r='13'/%3E%3C/g%3E%3Ccircle cx='32' cy='31' r='5' fill='%23bef264'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/canonical-voting#article",
+        "headline": "Canonical Voting: Towards Robust Oriented Bounding Box Detection in 3D Scenes",
+        "url": "https://qq456cvb.github.io/projects/canonical-voting",
+        "datePublished": "2022-06",
+        "pagination": "1193-1202",
+        "publication": { "@type": "PublicationEvent", "name": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) 2022" },
+        "sameAs": ["https://openaccess.thecvf.com/content/CVPR2022/html/You_Canonical_Voting_Towards_Robust_Oriented_Bounding_Box_Detection_in_3D_CVPR_2022_paper.html", "https://arxiv.org/abs/2011.12001", "https://qq456cvb.github.io/publications/canonical"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Zelin Ye" }, { "@type": "Person", "name": "Yujing Lou" }, { "@type": "Person", "name": "Chengkun Li" },
+          { "@type": "Person", "name": "Yong-Lu Li" }, { "@type": "Person", "name": "Lizhuang Ma" }, { "@type": "Person", "name": "Weiming Wang" }, { "@type": "Person", "name": "Cewu Lu" }
+        ],
+        "keywords": ["3D object detection", "oriented bounding boxes", "Hough voting", "point clouds", "indoor scenes"],
+        "image": "https://qq456cvb.github.io/projects/canonical-voting/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/canonical-voting#video" }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Canonical Voting",
+        "codeRepository": "https://github.com/qq456cvb/CanonicalVoting",
+        "programmingLanguage": "Python",
+        "citation": { "@id": "https://qq456cvb.github.io/projects/canonical-voting#article" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/canonical-voting#video",
+        "name": "Canonical Voting teaser",
+        "description": "Canonical Voting (CVPR 2022) in 53 seconds: why per-point offsets and headings fail, Local Canonical Coordinates, voting for the centre under every heading, the back-projection check, predicted boxes in ScanNet and SceneNN scans, and the results.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/canonical-voting/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/canonical-voting/static/media/teaser.mp4",
+        "uploadDate": "2026-10-07",
+        "duration": "PT53S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f8f7fb; --surface: #ffffff; --ink: #15111f; --muted: #4a4458; --faint: #7a748a; --line: #e6e2ee;
+      --accent: #65a30d; --accent-ink: #4d7c0f; --accent-soft: rgba(101, 163, 13, .09); --best: #15111f; --pre: #b9b3c6;
+      --stage: linear-gradient(180deg, #ffffff, #f1eff6); --gl-bg: #f4f2f8;
+      --hero: #0c0716; --hero-2: #2a1048; --radius: 18px; --shadow: 0 1px 2px rgba(21, 17, 31, .05), 0 8px 28px rgba(21, 17, 31, .06);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0912; --surface: #141120; --ink: #f1eef8; --muted: #bdb6cc; --faint: #8f88a0; --line: #2a2538;
+        --accent: #a3e635; --accent-ink: #bef264; --accent-soft: rgba(163, 230, 53, .12); --best: #ffffff; --pre: #5d5670;
+        --stage: linear-gradient(180deg, #1b1729, #110e1b); --gl-bg: #15111f;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    code { font: 500 .88em "JetBrains Mono", ui-monospace, monospace; background: var(--accent-soft); color: var(--ink); padding: 1px 6px; border-radius: 6px; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    .hero { background: radial-gradient(1200px 600px at 72% 8%, var(--hero-2), var(--hero) 70%); color: #f1edf8; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #d9f99d; border: 1px solid rgba(190, 242, 100, .5); background: rgba(190, 242, 100, .1); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 8px; font-size: clamp(44px, 8vw, 92px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { color: #bef264; text-shadow: 0 0 40px rgba(190, 242, 100, .3); }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e7e1f2; margin: 0 0 22px; max-width: 940px; }
+    .authors { font-size: 18px; font-weight: 500; color: #d6cfe3; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #bef264; }
+    .authors sup { color: #d9f99d; font-weight: 600; margin-left: 1px; }
+    .affil { color: #a198b3; font-size: 15px; margin-top: 6px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #bef264; border-color: #bef264; color: #1a2e05; }
+    .btn.primary:hover { background: #d9f99d; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(12, 7, 22, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(12, 7, 22, .8); }
+
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b, p b, li b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+    .note { font-size: 14px; color: var(--faint); margin: 10px 2px 0; }
+    .mt { margin-top: 16px; }
+    .sub { margin-top: 48px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 36px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card p { margin: 0; font-size: 15.5px; }
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .grid-side { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; align-items: start; }
+    .grid-fig { display: grid; grid-template-columns: 1.9fr 1fr; gap: 16px; align-items: stretch; }
+    .grid-fig .figure { display: flex; flex-direction: column; justify-content: center; }
+    .grid2 > *, .grid-side > *, .grid-fig > *, .sv > *, .vd > * { min-width: 0; }
+
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 26px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .steps li::before { color: #1a2e05; } }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip.on, .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .chip:disabled { opacity: .45; cursor: not-allowed; }
+    .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
+    .ctl h4 { margin: 0 0 10px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; gap: 8px; }
+    .ctl h4 output { font: 600 13px "JetBrains Mono", monospace; letter-spacing: 0; color: var(--accent-ink); text-transform: none; }
+    .ctl p { font-size: 14px; margin: 10px 0 0; }
+    .ctl + .ctl { margin-top: 12px; }
+    input[type=range] { width: 100%; accent-color: var(--accent); margin: 2px 0; }
+
+    /* scene viewer */
+    .sv { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 16px; margin-top: 18px; }
+    .stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .sv .stage { aspect-ratio: 4 / 3; }
+    .stage canvas { display: block; width: 100%; height: 100%; }
+    #sv-canvas { cursor: grab; touch-action: pan-y; }
+    #sv-canvas:active { cursor: grabbing; }
+    .stage .hint { position: absolute; left: 14px; bottom: 12px; font-size: 12.5px; font-weight: 600; color: var(--faint); pointer-events: none; }
+    .stage .count { position: absolute; left: 14px; top: 12px; font: 600 12.5px "JetBrains Mono", monospace; color: var(--muted); background: color-mix(in srgb, var(--surface) 80%, transparent); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+    .stage .msg { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--faint); font-weight: 600; pointer-events: none; }
+    .zoom { position: absolute; right: 12px; top: 12px; display: flex; flex-direction: column; gap: 6px; }
+    .zoom button { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 88%, transparent); color: var(--ink); font: 700 17px Inter, sans-serif; cursor: pointer; display: grid; place-items: center; }
+    .zoom button:hover { border-color: var(--accent); color: var(--accent-ink); }
+    .zoom button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .scenes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .scenes button { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 9px 12px; cursor: pointer; font: 600 14px/1.3 Inter, sans-serif; color: var(--ink); }
+    .scenes button small { display: block; font-weight: 500; font-size: 12.5px; color: var(--faint); margin-top: 2px; }
+    .scenes button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px var(--accent-soft); }
+    .cls { display: inline-flex; align-items: center; gap: 7px; }
+    .cls i { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+    .cls[aria-pressed="false"] { opacity: .5; }
+    .cls[aria-pressed="false"] i { background: transparent !important; outline: 2px solid var(--pre); outline-offset: -2px; }
+    .cls span { font: 600 12px "JetBrains Mono", monospace; color: var(--faint); }
+
+    /* LCC vs offset demo */
+    .lccd { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+    .lccd > * { min-width: 0; }
+    .lccd .stage { aspect-ratio: 1 / 1; }
+    .lccd h3 { margin: 12px 4px 4px; font-size: 17px; }
+    .lccd p { font-size: 14.5px; margin: 0 4px; }
+    .lcc-ctl { display: flex; align-items: center; gap: 16px; margin-top: 14px; }
+    .lcc-ctl label { font-weight: 700; font-size: 14px; white-space: nowrap; }
+    .lcc-ctl output { font: 600 13px "JetBrains Mono", monospace; color: var(--accent-ink); min-width: 42px; }
+    .mae { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 22px; }
+    .mae .card { padding: 18px 20px; }
+    .mae h4 { margin: 0 0 10px; font-size: 14px; color: var(--ink); }
+    .mae-row { display: grid; grid-template-columns: 130px 1fr 54px; gap: 10px; align-items: center; font-size: 14px; color: var(--muted); padding: 4px 0; }
+    .mae-row b { font: 600 13px "JetBrains Mono", monospace; color: var(--ink); text-align: right; }
+    .mae-bar { height: 12px; border-radius: 6px; background: color-mix(in srgb, var(--line) 60%, transparent); position: relative; overflow: hidden; }
+    .mae-bar span { position: absolute; inset: 0 auto 0 0; background: var(--pre); border-radius: 6px; }
+    .mae-row.dir .mae-bar span { background: #f87171; }
+
+    /* voting demo */
+    .vd { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 16px; margin-top: 18px; }
+    .vd .stage { background: #440154; aspect-ratio: 70 / 46; }
+    #vd-canvas { cursor: crosshair; }
+    .vd .stage .count { color: #ece6f7; background: rgba(12, 7, 22, .55); }
+    .vd .scale { position: absolute; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 8px; font: 600 12px Inter, sans-serif; color: #ece6f7; background: rgba(12, 7, 22, .55); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+    .vd .scale i { width: 70px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #440154, #3b528b, #21918c, #5ec962, #fde725); }
+    .vd-run { display: flex; gap: 8px; flex-wrap: wrap; }
+    .vd-run button { border: 0; border-radius: 999px; padding: 9px 16px; font: 700 14px Inter, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
+    .vd-run button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+    .vd-run button:hover { background: var(--accent); color: #fff; }
+    .vd-run button.ghost:hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .vd-log { list-style: none; padding: 0; margin: 12px 0 0; max-height: 190px; overflow-y: auto; font-size: 13px; line-height: 1.45; }
+    .vd-log li { padding: 6px 0 6px 12px; border-left: 3px solid var(--pre); margin-bottom: 4px; color: var(--muted); }
+    .vd-log li.ok { border-color: #65a30d; }
+    .vd-log li.no { border-color: #ef4444; }
+    .vd-log li.fp { border-color: #f59e0b; }
+    .vd-log b { color: var(--ink); }
+    .vd-sum { font-size: 14px; font-weight: 600; color: var(--ink); margin: 10px 0 0; min-height: 1.4em; }
+    .keys { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); margin-top: 10px; }
+    .keys i { display: inline-block; width: 16px; height: 0; border-top: 3px solid; vertical-align: 4px; margin-right: 6px; }
+
+    /* bar explorers */
+    .rx { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px 16px; }
+    .rx-top { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .rx-row { display: grid; grid-template-columns: 220px 1fr; gap: 14px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .rx-row:last-child { border-bottom: 0; }
+    .rx-name { font-weight: 700; font-size: 15px; line-height: 1.3; }
+    .rx-row.ours .rx-name { color: var(--accent-ink); }
+    .rx-bar { position: relative; height: 22px; border-radius: 6px; background: color-mix(in srgb, var(--line) 55%, transparent); }
+    .rx-bar span { position: absolute; inset: 0 auto 0 0; border-radius: 6px; background: var(--pre); transition: width .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar span { background: var(--accent); }
+    .rx-bar b { position: absolute; top: 50%; transform: translateY(-50%); font: 600 12.5px/1 "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; transition: left .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar b { color: var(--accent-ink); }
+    .rx-bar.na b { color: var(--faint); font-weight: 500; }
+    .rx-foot { margin-top: 12px; font-size: 14px; color: var(--faint); }
+
+    .dl { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .btns .btn { background: var(--ink); color: var(--bg); border: 0; }
+    .btns .btn:hover { background: var(--accent); color: #fff; }
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .bib { position: relative; background: #120d1e; color: #ebe5f5; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    @media (prefers-color-scheme: dark) { .bib { border: 1px solid var(--line); } }
+    details.more { margin-top: 14px; }
+    details.more summary { cursor: pointer; font-weight: 600; color: var(--accent-ink); font-size: 15px; margin-bottom: 10px; }
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(12, 7, 22, .9); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .related, .grid2, .grid-side, .grid-fig, .sv, .vd, .dl { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stat .num { font-size: 28px; }
+      .lead { font-size: 18.5px; }
+      .rx { padding: 16px 14px 12px; }
+      .rx-row { grid-template-columns: 1fr; gap: 6px; }
+      .tab { padding: 8px 10px; font-size: 14px; }
+      .lccd, .mae { grid-template-columns: 1fr; }
+      .mae-row { grid-template-columns: 110px 1fr 48px; }
+      .bib { padding-top: 54px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">CVPR 2022</span>
+    <h1>Canonical <span>Voting</span></h1>
+    <p class="subtitle">Towards Robust Oriented Bounding Box Detection in 3D Scenes</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a></span><span>Zelin Ye</span><span>Yujing Lou</span><span>Chengkun Li</span><span>Yong-Lu Li</span><span>Lizhuang Ma</span><span>Weiming Wang<sup>✉</sup></span><span>Cewu Lu<sup>✉</sup></span>
+    </div>
+    <div class="affil">Shanghai Jiao Tong University · ✉ corresponding authors</div>
+    <div class="links">
+      <a class="btn primary" href="https://openaccess.thecvf.com/content/CVPR2022/papers/You_Canonical_Voting_Towards_Robust_Oriented_Bounding_Box_Detection_in_3D_CVPR_2022_paper.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://arxiv.org/abs/2011.12001"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>arXiv</a>
+      <a class="btn" href="https://openaccess.thecvf.com/content/CVPR2022/supplemental/You_Canonical_Voting_Towards_CVPR_2022_supplemental.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14h6"/></svg>Supplementary</a>
+      <a class="btn" href="https://github.com/qq456cvb/CanonicalVoting"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="https://www.youtube.com/watch?v=W7ZYEES5cLY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg>Video</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/canonical-voting/static/media/teaser.mp4" poster="/projects/canonical-voting/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Canonical Voting teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#explore">Explore in 3D</a><a href="#problem">The problem</a><a href="#voting">Canonical voting</a><a href="#method">Method</a><a href="#results">Results</a><a href="#analysis">Analysis</a><a href="#code">Code</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>Regress what does not turn, vote for what does</h2>
+    <p class="lead">To find oriented 3D boxes, voting detectors such as VoteNet ask every point for the offset to its object's centre and for the box heading. Both change whenever the object turns, and per point they are barely better than a guess. Canonical Voting regresses only what stays fixed: each point's <b>Local Canonical Coordinates</b> (where it sits in its object's own frame) and the box size. Every point then <b>votes for the centre under every possible heading</b>; votes pile up at real centres, and an <b>LCC back-projection check</b> removes the peaks that do not agree with the predicted coordinates.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">10.8<small>°</small></div><p>heading error of the boxes detected on ScanNet, vs 62.5° to 79.1° for the other detectors</p></div>
+      <div class="stat"><div class="num">+9.8<small>mAP</small></div><p>on ScanNet with one model per category: 21.7 vs 11.9 for the next best method (AP at IoU 0.5)</p></div>
+      <div class="stat"><div class="num">26.8<small>mAP</small></div><p>on SceneNN with the ScanNet models, no retraining, vs 21.7 for the next best</p></div>
+      <div class="stat"><div class="num">44.3<small>mAP</small></div><p>at IoU 0.5 on single-view SUN RGB-D, vs 43.7 for BRNet</p></div>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/canonical-voting/static/media/overview.jpg" width="1500" height="1308" decoding="async" alt="Overview: an input point cloud of a room; Local Canonical Coordinates predicted on the chairs, shown as colours; canonical voting, where each point's candidate centres lie on a circle; the vote map with candidate boxes; back-projection validation that rejects a box whose back-projected coordinates do not match the predicted ones and accepts one that does; and the output oriented boxes."><figcaption>From the input scan to oriented boxes: per-point Local Canonical Coordinates (colours), canonical voting, the vote map, and back-projection validation, which keeps a box (✓) only if the coordinates it implies match the predicted ones.</figcaption></figure>
+  </div>
+</section>
+
+<section id="explore">
+  <div class="wrap">
+    <div class="kicker">Explore in 3D</div>
+    <h2>Predicted boxes in real scans</h2>
+    <p>Boxes predicted by Canonical Voting in two ScanNet scans, and in two SceneNN scans with the model trained on ScanNet. Drag to orbit, use the buttons or pinch to zoom, and click a class to hide or show its boxes.</p>
+    <div class="sv" id="sv">
+      <div class="stage">
+        <canvas id="sv-canvas" role="img" aria-label="Colour point cloud of an indoor scan with the predicted oriented boxes"></canvas>
+        <span class="count" id="sv-count"></span>
+        <div class="msg" id="sv-msg">Loading…</div>
+        <div class="zoom">
+          <button type="button" id="sv-in" aria-label="Zoom in">+</button>
+          <button type="button" id="sv-out" aria-label="Zoom out">−</button>
+          <button type="button" id="sv-top" aria-pressed="false" aria-label="Top view" title="Top view"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg></button>
+        </div>
+        <span class="hint">Drag to orbit</span>
+      </div>
+      <div>
+        <div class="ctl">
+          <h4>Scan</h4>
+          <div class="scenes" id="sv-scenes" role="group" aria-label="Scan"></div>
+        </div>
+        <div class="ctl">
+          <h4>Classes</h4>
+          <div class="chips" id="sv-classes" role="group" aria-label="Box classes"></div>
+          <p>Boxes are coloured by predicted class. The few classes we could not name with confidence from these scans are grouped as “other”.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="kicker">The problem</div>
+    <h2>Offsets and headings turn with the object</h2>
+    <p>A VoteNet-style detector regresses, for every point, the offset to its object's centre and the box heading. Both depend on how the object is turned: the same backrest has to point somewhere else for every orientation of the chair, so the network must memorise each local pattern under every rotation. On ScanNet, these per-point predictions are barely better than a random guess, and the heading is even slightly worse:</p>
+    <div class="mae" id="mae">
+      <div class="card"><h4>Offset to the centre (mean abs. error)</h4>
+        <div class="mae-row dir"><span>Direct regression</span><div class="mae-bar"><span style="width:0"></span></div><b>0.197</b></div>
+        <div class="mae-row"><span>Random guess</span><div class="mae-bar"><span style="width:0"></span></div><b>0.228</b></div>
+      </div>
+      <div class="card"><h4>Heading vector (mean abs. error)</h4>
+        <div class="mae-row dir"><span>Direct regression</span><div class="mae-bar"><span style="width:0"></span></div><b>0.806</b></div>
+        <div class="mae-row"><span>Random guess</span><div class="mae-bar"><span style="width:0"></span></div><b>0.801</b></div>
+      </div>
+    </div>
+    <p class="sub">Local Canonical Coordinates (LCCs) place each point in its object's own box, scaled to [−1, 1]: the backrest is always at the back, whatever the heading. Turn the chair below. Each colour is the value the network has to output for that point.</p>
+    <div class="lccd">
+      <div>
+        <div class="stage"><canvas id="lcc-off" role="img" aria-label="Chair seen from above, points coloured by the direction of their offset to the centre"></canvas></div>
+        <h3>Direct offset to the centre</h3>
+        <p>The target of each part changes as the chair turns: point 1 must output a different offset for every heading.</p>
+      </div>
+      <div>
+        <div class="stage"><canvas id="lcc-can" role="img" aria-label="The same chair, points coloured by their Local Canonical Coordinates"></canvas></div>
+        <h3>Local Canonical Coordinates</h3>
+        <p>The target stays with the part, so the network only has to recognise parts, much like part segmentation.</p>
+      </div>
+    </div>
+    <div class="lcc-ctl"><label for="lcc-rot">Heading</label><input type="range" id="lcc-rot" min="0" max="359" value="35" aria-label="Chair heading in degrees"><output id="lcc-rot-v">35°</output></div>
+    <figure class="figure sub" data-zoom><img src="/projects/canonical-voting/static/media/why_lcc.jpg" width="2200" height="428" loading="lazy" decoding="async" alt="Left: with direct offset regression, the same output offset must come from different input patterns as a duck image rotates. Right: with LCC regression, the same part, such as the beak, always maps to the same output, whatever the rotation."><figcaption>The paper's illustration: with direct offsets, one output corresponds to many differently rotated input patterns (left); with LCCs, each part keeps its output under rotation (right).</figcaption></figure>
+  </div>
+</section>
+
+<section id="voting">
+  <div class="wrap">
+    <div class="kicker">Canonical voting</div>
+    <h2>Vote under every heading, keep what checks out</h2>
+    <p>A point knows its LCC <b>p̃</b> and box size <b>s</b>, but not the heading. So it votes for every heading <i>r</i> it could have: the centre would be at <b>p − R(r)(s ∘ p̃)</b>. These candidate centres trace a circle; circles from the points of one object cross at its centre, each weighted by the point's objectness. A peak in the vote map proposes a box, with the heading and size averaged from the votes there. The box is kept only if its points, <b>back-projected</b> into the box's own frame, land where the network said they would.</p>
+    <div class="vd" id="vd">
+      <div>
+        <div class="stage">
+          <canvas id="vd-canvas" role="img" aria-label="Top view of a toy room: vote map with the points of six objects and the boxes found"></canvas>
+          <span class="count" id="vd-count"></span>
+          <span class="scale">votes <i></i></span>
+        </div>
+        <div class="keys"><span><i style="border-color:#e9e3f5;border-top-style:dashed"></i>objects</span><span><i style="border-color:#a3e635"></i>kept box</span><span><i style="border-color:#ef4444;border-top-style:dashed"></i>rejected peak</span><span><i style="border-color:#f59e0b"></i>kept, but no object there</span></div>
+        <p class="note">A toy room seen from above, not network output: the “predicted” LCCs and sizes are the true ones plus noise, and floor and wall points get random predictions with low objectness. Click any point to see its votes.</p>
+      </div>
+      <div>
+        <div class="ctl">
+          <h4>Headings tried, K <output id="vd-k-v">120</output></h4>
+          <input type="range" id="vd-k" min="4" max="120" step="4" value="120" aria-label="Number of headings K">
+          <h4 class="mt">Noise in predicted LCCs, σ <output id="vd-s-v">0.05</output></h4>
+          <input type="range" id="vd-s" min="0" max="0.3" step="0.01" value="0.05" aria-label="LCC noise">
+          <div class="chips mt">
+            <button class="chip" type="button" id="vd-obj" aria-pressed="true">Objectness</button>
+            <button class="chip" type="button" id="vd-chk" aria-pressed="true">Back-projection check</button>
+            <button class="chip" type="button" id="vd-pts" aria-pressed="true">Points</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="vd-run"><button type="button" id="vd-go">Find boxes</button><button type="button" class="ghost" id="vd-clear">Clear</button></div>
+          <p class="vd-sum" id="vd-sum"></p>
+          <ol class="vd-log" id="vd-log"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="kicker">Method</div>
+    <h2>Three stages</h2>
+    <ol class="steps">
+      <li><b>Regress LCCs, sizes and objectness</b>A sparse-convolution U-Net predicts, for every point, its Local Canonical Coordinates, its object's box size, an objectness score and a class. For symmetric objects the loss takes the minimum over the symmetric versions.</li>
+      <li><b>Canonical voting</b>Each point votes for its box centre under K = 120 headings, weighted by objectness, into a 3D grid that also collects the voted heading and size. The voting is linear in the number of points and runs in about 30 ms on a GPU.</li>
+      <li><b>LCC check by back projection</b>Peaks become box candidates one at a time, highest first. The points inside a candidate are mapped back to LCCs; a candidate stays only if enough of them are object points and they agree with the predicted LCCs.</li>
+    </ol>
+    <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/pipeline.jpg" width="1900" height="939" loading="lazy" decoding="async" alt="Pipeline: a coloured point cloud goes through a U-Net with sparse convolution, which outputs Local Canonical Coordinates, bounding box scales and objectness for every point; canonical voting with objectness fills a 3D vote map; LCC checking with back projection turns peaks into bounding box predictions, rejecting a candidate whose LCCs do not match."><figcaption>LCCs, box sizes and objectness come from one network; voting and the back-projection check have no learned parameters.</figcaption></figure>
+    <div class="grid-fig mt">
+      <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/lcc.jpg" width="1200" height="481" loading="lazy" decoding="async" alt="Two chairs in a scan and their Local Canonical Coordinates shown as RGB colours: matching parts of both chairs have matching colours."><figcaption>The LCC space: colour is the (x, y, z) position in the object's box. Parts of different chairs share their LCCs.</figcaption></figure>
+      <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/voting.jpg" width="737" height="752" loading="lazy" decoding="async" alt="Three points, each with a circle of candidate centres for every heading; the three circles meet at the box centre."><figcaption>Canonical voting in bird's-eye view: for each heading r<sub>j</sub>, a point votes at p − R(r<sub>j</sub>)·s∘p̃; the circles of one object's points meet at its centre.</figcaption></figure>
+    </div>
+    <div class="grid-side mt">
+      <div>
+        <h3>Why the check matters</h3>
+        <p>Trying every heading also makes circles from different objects cross by chance, and some of these crossings become peaks. A false box has the wrong centre or heading, so the coordinates it implies for its points disagree with the network's LCCs, and the check removes it. In the paper's run on the right, iteration 3 accepts three chairs; iteration 4 rejects a box on the edge of a table.</p>
+        <p>The thresholds come from 5-fold cross-validation on the training set: a candidate needs more than 20% object points among those inside it (β = 0.2) and an objectness-weighted LCC error below 0.3 (γ = 0.3), and the search stops when the highest peak drops below δ = 60 votes.</p>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/back_projection.jpg" width="1100" height="1234" loading="lazy" decoding="async" alt="Vote maps at iterations 3 and 4 of box generation. At iteration 3, back-projected LCCs of a chair match the predicted ones and the box is kept; at iteration 4, a false box beside a table has back-projected LCCs that do not match and is rejected."><figcaption>Back-projected vs predicted LCCs: a match keeps the box (left), a mismatch rejects it (right).</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="kicker">Results</div>
+    <h2>Three indoor benchmarks</h2>
+    <p><b>ScanNet</b> with the oriented boxes of Scan2CAD (14K+ boxes in 1,506 scans, 9 categories). Canonical Voting has the best mAP with one model per category (21.7 vs 11.9) and with one joint model (15.4 vs 12.1 for H3DNet). Per-category training helps it much more than the baselines, since LCCs are consistent within a category; it is not the best in every category.</p>
+    <div class="rx" id="rx-scannet">
+      <div class="rx-top"><div class="tabs" role="tablist" aria-label="Training" data-role="tabs"></div><div class="chips" role="group" aria-label="Category" data-role="chips"></div></div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <p class="sub"><b>SceneNN</b>, 76 scans with oriented boxes, evaluated with the models trained on ScanNet and no retraining. With per-category models Canonical Voting leads (26.8 vs 21.7); with one joint model, VoteNet is slightly ahead (21.5 vs 21.1).</p>
+    <div class="rx" id="rx-scenenn">
+      <div class="rx-top"><div class="tabs" role="tablist" aria-label="Training" data-role="tabs"></div><div class="chips" role="group" aria-label="Category" data-role="chips"></div></div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/canonical-voting/static/media/qualitative.jpg" width="1600" height="1029" loading="lazy" decoding="async" alt="Predicted and ground-truth boxes on a ScanNet scan and a SceneNN scan, side by side; predicted boxes closely match the ground truth for chairs, tables and sofas."><figcaption>Predictions (left) and ground truth (right) on ScanNet and SceneNN.</figcaption></figure>
+    <div class="grid2 sub">
+      <div>
+        <h3>SUN RGB-D</h3>
+        <p>Single RGB-D frames rather than full scans, with about 5K training images. Here the vote map is sampled for 512 box proposals that a BRNet-style module refines; proposals from the vote map work better than farthest point sampling of votes.</p>
+        <div class="rx" id="rx-sun">
+          <div class="rx-top"><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+      <div>
+        <h3>Heading, position and speed</h3>
+        <p>Errors of the boxes detected at IoU 0.5 on ScanNet. The heading error drops by a factor of six; centres are as accurate as the other methods'; one scan takes 0.32 s.</p>
+        <div class="rx" id="rx-analy">
+          <div class="rx-top"><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+    </div>
+    <details class="more"><summary>The SUN RGB-D variant</summary>
+      <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/sunrgbd_pipeline.jpg" width="1900" height="1161" loading="lazy" decoding="async" alt="SUN RGB-D architecture: the vote map from canonical voting is sampled into box proposals, which a refinement module with back-traced representative points turns into final boxes."><figcaption>On SUN RGB-D, box proposals are sampled from the vote map and refined (supplementary).</figcaption></figure>
+    </details>
+  </div>
+</section>
+
+<section id="analysis">
+  <div class="wrap">
+    <div class="kicker">Analysis</div>
+    <h2>What each part does</h2>
+    <p>Replacing LCCs with direct offsets, with the same voting, gives no correct boxes at all: the offsets do not agree, so votes never pile up. Without the back-projection check, false peaks become boxes; without objectness, every floor and wall point votes too.</p>
+    <div class="grid-side">
+      <div class="rx" id="rx-abl" style="margin-top:0">
+        <div class="rx-top"><div class="tabs" role="tablist" aria-label="Dataset" data-role="tabs"></div></div>
+        <div data-role="rows"></div>
+        <p class="rx-foot" data-role="foot"></p>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/lcc_vs_offset.jpg" width="1300" height="1305" loading="lazy" decoding="async" alt="Top: LCC predictions on the chairs of a scan and a vote map with sharp peaks. Bottom: direct offset predictions, which are hard to tell apart, and a vote map where object centres do not accumulate."><figcaption>LCC predictions give sharp peaks (top); direct offsets do not accumulate (bottom).</figcaption></figure>
+    </div>
+    <div class="grid-side sub">
+      <div>
+        <h3>Every point votes</h3>
+        <p>VoteNet clusters or subsamples its votes into proposals, which can miss objects with few visible points. Here every point casts its own votes. Grouping objects by a <b>partial index</b>, the number of points per unit of box volume, Canonical Voting has a higher recall for partial and occluded objects (indices 1 to 8); for the most complete ones (9 and 10), VoteNet is ahead.</p>
+        <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/partial.jpg" width="1222" height="392" loading="lazy" decoding="async" alt="ScanNet chairs with partial indices from low to high: low indices are fragments of chairs, high indices are complete chairs."><figcaption>Chairs from low to high partial index (“completion index” in the figure, supplementary).</figcaption></figure>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/occlusion.jpg" width="900" height="689" loading="lazy" decoding="async" alt="Average recall at IoU 0.5 against partial index from 1 to 10: Canonical Voting is above VoteNet for indices 1 to 8 and below for 9 and 10."><figcaption>Average recall at IoU 0.5 by partial index, against VoteNet.</figcaption></figure>
+    </div>
+    <div class="grid2 sub">
+      <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/ablation_k.jpg" width="856" height="538" loading="lazy" decoding="async" alt="mAP and average inference time against the number of headings K from 30 to 240: mAP rises to about 15.4 at K equals 120 and then levels off, while time grows linearly."><figcaption>More headings K: accuracy saturates at K = 120 while time grows linearly (joint model on ScanNet, supplementary).</figcaption></figure>
+      <figure class="figure" data-zoom><img src="/projects/canonical-voting/static/media/ablation_delta.jpg" width="900" height="689" loading="lazy" decoding="async" alt="mAP against the stopping threshold delta from 20 to 180 for the joint and the per-category models, both highest around 60."><figcaption>The stopping threshold δ trades recall for precision; around 60 is best (supplementary).</figcaption></figure>
+    </div>
+    <div class="card sub">
+      <h3>Beyond headings: full 3D rotations</h3>
+      <p>The same scheme handles full 3D rotations: each pixel of an RGB-D frame votes over directions on the sphere instead of headings on a circle, and each object's rotation is then solved in closed form from its points' LCCs with the Umeyama algorithm. On the NOCS REAL275 pose benchmark this reaches 17.0, 40.7 and 45.8 mAP at (5°, 5 cm), (10°, 5 cm) and (10°, 10 cm), well above the NOCS baseline (supplementary). The idea continues in <a href="/projects/cppf">CPPF</a>, which votes with point pairs for category-level 9D poses.</p>
+    </div>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap dl">
+    <div>
+      <div class="kicker">Code</div>
+      <h2>Run it</h2>
+      <p>The repository has the training and evaluation scripts for per-category and joint models on ScanNet with Scan2CAD labels, the CUDA kernel for canonical voting, and the SUN RGB-D variant.</p>
+      <div class="btns"><a class="btn" href="https://github.com/qq456cvb/CanonicalVoting">GitHub</a><a class="btn" href="https://openaccess.thecvf.com/content/CVPR2022/supplemental/You_Canonical_Voting_Towards_CVPR_2022_supplemental.pdf">Supplementary</a></div>
+    </div>
+    <div class="card">
+      <h3>At a glance</h3>
+      <p>Input: a coloured point cloud, voxelized at 3 cm. Backbone: a ResNet34-like U-Net of 3D Minkowski convolutions. Training: Adam, learning rate 0.001, batch size 3, scenes rotated about the vertical axis in 90° steps with 20° jitter. Inference: canonical voting with K = 120, the back-projection check with β = 0.2, γ = 0.3, δ = 60, then NMS at IoU 0.3.</p>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>3D object detection has attracted much attention thanks to the advances in sensors and deep learning methods for point clouds. Current state-of-the-art methods like VoteNet regress direct offset towards object centers and box orientations with an additional Multi-Layer-Perceptron network. Both their offset and orientation predictions are not accurate due to the fundamental difficulty in rotation classification. In the work, we disentangle the direct offset into Local Canonical Coordinates (LCC), box scales and box orientations. Only LCC and box scales are regressed, while box orientations are generated by a canonical voting scheme. Finally, an LCC-aware back-projection checking algorithm iteratively cuts out bounding boxes from the generated vote maps, with the elimination of false positives. Our model achieves state-of-the-art performance on three standard real-world benchmarks: ScanNet, SceneNN and SUN RGB-D.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/projects/cppf"><div class="venue">CVPR 2022</div><h3>CPPF</h3><p>Category-level 9D pose estimation in the wild by voting with point pairs, trained only on synthetic models.</p></a>
+      <a class="card" href="/projects/cppf++"><div class="venue">TPAMI 2024</div><h3>CPPF++</h3><p>Uncertainty-aware vote aggregation for sim-to-real object pose estimation.</p></a>
+      <a class="card" href="/projects/ukpgan"><div class="venue">CVPR 2022</div><h3>UKPGAN</h3><p>A self-supervised 3D keypoint detector whose keypoints are the points that can rebuild the shape.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@inproceedings{you2022canonical,
+  title={Canonical Voting: Towards Robust Oriented Bounding Box Detection in 3D Scenes},
+  author={You, Yang and Ye, Zelin and Lou, Yujing and Li, Chengkun and Li, Yong-Lu and Ma, Lizhuang and Wang, Weiming and Lu, Cewu},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={1193--1202},
+  year={2022}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2022 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script id="page-data" type="application/json">{"scannet":[{"name":"PointFusion","ours":false,"v":{"Trash bin":[4.5,null],"Bathtub":[6.2,null],"Bookshelf":[4.6,null],"Cabinet":[5.3,null],"Chair":[25.1,null],"Display":[0.6,null],"Sofa":[3.8,null],"Table & desk":[3.1,null],"Others":[6.6,null],"mAP":[6.6,null]}},{"name":"GSPN","ours":false,"v":{"Trash bin":[0.9,null],"Bathtub":[5.4,null],"Bookshelf":[0.0,null],"Cabinet":[0.5,null],"Chair":[16.8,null],"Display":[0.2,null],"Sofa":[14.2,null],"Table & desk":[5.1,null],"Others":[0.1,null],"mAP":[4.8,null]}},{"name":"F-PointNet","ours":false,"v":{"Trash bin":[0.0,2.3],"Bathtub":[7.9,9.2],"Bookshelf":[3.8,6.9],"Cabinet":[12.8,14.7],"Chair":[39.3,34.1],"Display":[0.0,1.2],"Sofa":[16.9,15.6],"Table & desk":[9.9,11.7],"Others":[4.4,6.6],"mAP":[10.6,11.4]}},{"name":"VoteNet","ours":false,"v":{"Trash bin":[2.3,5.2],"Bathtub":[7.4,9.8],"Bookshelf":[0.0,0.1],"Cabinet":[1.9,4.4],"Chair":[52.1,71.0],"Display":[1.4,0.1],"Sofa":[2.5,0.5],"Table & desk":[17.0,10.2],"Others":[8.5,6.4],"mAP":[10.3,11.9]}},{"name":"H3DNet","ours":false,"v":{"Trash bin":[2.4,1.5],"Bathtub":[10.5,3.2],"Bookshelf":[1.1,0.5],"Cabinet":[9.8,4.4],"Chair":[23.7,28.7],"Display":[0.2,0.0],"Sofa":[23.7,3.2],"Table & desk":[31.5,5.8],"Others":[6.0,3.6],"mAP":[12.1,5.7]}},{"name":"BRNet","ours":false,"v":{"Trash bin":[0.9,0.1],"Bathtub":[1.4,0.0],"Bookshelf":[0.2,0.0],"Cabinet":[1.8,0.1],"Chair":[48.5,10.3],"Display":[0.0,0.0],"Sofa":[1.5,0.2],"Table & desk":[10.5,3.4],"Others":[10.1,2.7],"mAP":[8.3,1.9]}},{"name":"Canonical Voting (ours)","ours":true,"v":{"Trash bin":[0.5,32.6],"Bathtub":[0.5,6.9],"Bookshelf":[14.2,8.9],"Cabinet":[17.0,15.2],"Chair":[57.6,75.5],"Display":[0.1,0.0],"Sofa":[39.5,31.3],"Table & desk":[3.2,23.9],"Others":[6.4,0.3],"mAP":[15.4,21.7]}}],"scenenn":[{"name":"GSPN","ours":false,"v":{"Table & desk":[8.4,null],"Chair":[34.6,null],"Cabinet":[0.2,null],"Sofa":[9.8,null],"Display":[0.0,null],"mAP":[10.6,null]}},{"name":"VoteNet","ours":false,"v":{"Table & desk":[24.8,27.3],"Chair":[65.2,78.0],"Cabinet":[1.5,1.0],"Sofa":[15.4,2.4],"Display":[0.7,0.0],"mAP":[21.5,21.7]}},{"name":"H3DNet","ours":false,"v":{"Table & desk":[12.1,7.4],"Chair":[29.4,38.2],"Cabinet":[0.8,0.7],"Sofa":[10.5,14.8],"Display":[0.0,0.0],"mAP":[10.6,12.2]}},{"name":"BRNet","ours":false,"v":{"Table & desk":[17.3,5.2],"Chair":[58.3,13.3],"Cabinet":[0.4,0.0],"Sofa":[0.8,0.1],"Display":[0.0,0.0],"mAP":[15.4,3.7]}},{"name":"Canonical Voting (ours)","ours":true,"v":{"Table & desk":[11.9,43.4],"Chair":[68.1,79.6],"Cabinet":[2.5,2.2],"Sofa":[22.8,8.8],"Display":[0.0,0.0],"mAP":[21.1,26.8]}}],"sunrgbd":[{"name":"DSS","ours":false,"v":{"all":[42.1,null]}},{"name":"COG","ours":false,"v":{"all":[47.6,null]}},{"name":"F-PointNet","ours":false,"v":{"all":[54.0,null]}},{"name":"VoteNet","ours":false,"v":{"all":[57.7,32.9]}},{"name":"H3DNet","ours":false,"v":{"all":[60.1,39.0]}},{"name":"BRNet","ours":false,"v":{"all":[61.1,43.7]}},{"name":"Canonical Voting (ours)","ours":true,"v":{"all":[61.3,44.3]}}],"analy":[{"name":"PointFusion","ours":false,"v":{"all":[77.3,0.07,0.23,6.6]}},{"name":"F-PointNet","ours":false,"v":{"all":[62.5,0.09,0.46,10.6]}},{"name":"VoteNet","ours":false,"v":{"all":[76.2,0.05,0.43,10.3]}},{"name":"H3DNet","ours":false,"v":{"all":[65.4,0.03,0.78,12.1]}},{"name":"BRNet","ours":false,"v":{"all":[79.1,0.05,0.47,8.3]}},{"name":"Canonical Voting (ours)","ours":true,"v":{"all":[10.8,0.05,0.32,15.4]}}],"ablation":[{"name":"Full model","ours":true,"v":{"ScanNet":[21.7],"SceneNN":[26.8]}},{"name":"Direct offsets instead of LCC","ours":false,"v":{"ScanNet":[0.0],"SceneNN":[0.0]}},{"name":"No back-projection check","ours":false,"v":{"ScanNet":[8.1],"SceneNN":[10.0]}},{"name":"No objectness","ours":false,"v":{"ScanNet":[12.2],"SceneNN":[21.4]}}],"intro":{"direct":[0.197,0.806],"random":[0.228,0.801]},"scenes":[{"id":"scannet_0329","label":"ScanNet \u00b7 lounge","dataset":"ScanNet","boxes":[[-4.053,0.881,-0.984,0.547,0.745,1.162,0.646,1],[-1.923,0.641,1.416,1.866,0.778,0.914,0.768,2],[-1.713,0.521,-3.564,0.329,0.313,0.239,0.428,4],[-1.263,0.341,0.486,0.808,0.385,0.931,0.842,1],[-1.623,0.521,2.706,0.155,0.28,0.239,0.768,4],[-1.533,0.521,2.736,0.231,0.277,0.153,1.292,4],[-0.333,0.491,0.126,1.792,0.79,0.882,0.886,2],[-0.663,0.461,-4.674,0.285,0.301,0.225,1.562,4],[-0.093,0.521,-2.034,0.626,0.869,0.631,0.702,0],[0.837,0.911,-2.394,0.532,0.441,0.159,1.121,3],[0.957,0.911,-2.304,0.522,0.416,0.161,1.252,3],[1.677,1.121,-2.394,1.424,0.888,0.307,0.332,5],[1.857,0.341,-1.494,1.605,0.739,0.784,0.367,1],[1.617,0.431,-1.104,0.553,0.909,0.48,0.724,0],[2.067,0.371,-0.354,0.54,0.882,0.432,0.292,0],[1.947,0.911,-1.614,0.508,0.431,0.168,1.174,3],[2.187,0.671,-1.044,0.458,0.692,0.418,0.109,5],[2.457,1.001,-1.374,0.154,0.469,0.562,0.476,3],[2.577,1.001,-1.344,0.516,0.438,0.151,0.196,3]],"n":50800,"size":[9.54,3.25,11.12]},{"id":"scannet_0500","label":"ScanNet \u00b7 classroom","dataset":"ScanNet","boxes":[[-2.546,0.336,-4.832,0.794,0.412,1.43,0.223,5],[-2.636,0.576,-1.562,0.567,0.791,0.464,0.013,0],[-2.606,0.576,-0.302,0.525,0.813,0.584,1.492,0],[-2.606,0.576,-2.132,0.53,0.778,0.497,0.196,0],[-2.636,0.576,-0.932,0.527,0.82,0.493,0.026,0],[-2.546,0.576,0.358,0.499,0.816,0.563,1.418,0],[-2.516,0.546,-2.762,0.491,0.796,0.493,0.24,0],[-2.456,0.576,1.018,0.486,0.728,0.573,1.462,0],[-2.396,0.546,-3.302,0.557,0.819,0.497,0.279,0],[-2.336,0.546,1.228,0.552,0.468,0.159,0.611,3],[-2.216,0.546,-3.872,0.51,0.804,0.467,0.336,0],[-2.006,0.336,-4.712,0.773,0.408,1.422,0.135,5],[-2.186,0.366,1.198,0.167,0.417,0.514,0.388,3],[-1.886,0.606,-5.162,0.554,0.843,0.524,0.532,0],[-2.126,0.756,-5.072,0.159,0.44,0.532,0.157,3],[-1.886,0.516,3.088,0.469,0.785,0.535,0.576,0],[-1.466,0.516,3.688,0.497,0.843,0.542,0.428,0],[-1.466,0.576,0.478,0.547,0.843,0.497,0.144,0],[-1.346,0.516,-5.012,0.476,0.781,0.51,0.707,0],[-1.376,0.546,1.258,0.53,0.872,0.478,0.079,0],[-1.286,0.516,2.278,0.532,0.835,0.51,1.366,0],[-1.256,0.486,4.348,0.543,0.807,0.544,0.231,0],[-1.016,0.546,-0.752,0.505,0.834,0.45,0.192,0],[-0.866,0.516,1.888,0.513,0.858,0.531,0.253,0],[-0.866,0.516,-1.532,0.517,0.844,0.473,0.24,0],[-0.746,0.516,-2.102,0.48,0.835,0.439,0.319,0],[-0.686,0.246,4.378,0.449,0.455,0.523,1.44,1],[-0.716,0.486,-3.482,0.465,0.755,0.438,0.079,0],[-0.716,0.456,4.498,0.425,0.853,0.483,0.148,0],[-0.656,0.516,-2.852,0.47,0.817,0.424,0.017,0],[0.064,0.546,-5.132,0.474,0.942,1.148,1.514,5],[-0.116,0.486,4.618,0.484,0.8,0.465,0.109,0],[-0.026,0.456,2.278,0.441,0.821,0.49,0.449,0],[0.094,0.516,3.688,0.587,0.821,0.552,0.253,0],[0.874,0.546,-4.952,1.246,0.903,0.536,0.284,5],[0.544,0.666,0.268,0.463,0.85,0.447,0.17,0],[0.664,0.666,-0.302,0.527,0.879,0.498,0.305,0],[0.754,0.546,3.838,0.494,0.805,0.545,0.044,0],[0.814,0.576,-1.022,0.438,0.74,0.411,0.24,0],[0.844,0.636,1.138,0.467,0.857,0.44,1.553,0],[1.204,0.576,-2.852,0.515,0.893,0.527,0.105,0],[1.324,0.606,-2.192,0.509,0.847,0.505,0.218,0],[1.354,1.056,3.238,0.368,1.112,0.842,0.279,5],[1.834,0.516,-4.352,0.786,0.896,0.515,0.454,5],[1.894,0.516,-4.712,0.773,0.894,0.522,0.833,5],[2.404,0.606,-2.132,0.511,0.848,0.517,0.218,0],[2.704,0.456,-3.632,0.727,0.73,1.397,0.183,1],[2.674,0.606,-1.412,0.455,0.941,0.754,0.218,5]],"n":57243,"size":[6.75,3.52,11.53]},{"id":"scenenn_084","label":"SceneNN \u00b7 office","dataset":"SceneNN","boxes":[[-1.695,0.6,1.215,0.742,1.026,0.545,0.022,5],[-2.715,0.57,-0.495,0.6,0.94,0.865,0.039,5],[2.205,0.6,-0.345,0.656,1.035,0.627,1.492,0],[1.605,0.57,0.435,0.625,0.97,0.626,0.332,0],[-0.195,0.45,-0.165,0.524,0.812,0.56,0.026,0],[-0.705,0.45,-0.825,0.734,0.732,1.671,0.109,1],[1.275,0.45,-0.555,0.654,0.726,1.63,0.118,1]],"n":60229,"size":[6.21,1.95,3.21]},{"id":"scenenn_251","label":"SceneNN \u00b7 meeting room","dataset":"SceneNN","boxes":[[-0.172,0.48,-1.665,0.464,0.913,0.815,1.475,5],[-0.832,0.48,1.515,0.539,0.802,0.42,1.492,0],[-1.642,0.51,0.645,0.467,0.838,0.566,1.2,0],[-0.322,0.48,0.135,0.436,0.83,0.521,0.231,0],[-0.172,0.48,1.425,0.507,0.775,0.427,1.361,0],[-0.982,0.48,0.225,0.581,0.742,0.392,0.846,0],[-0.473,0.45,0.615,0.763,0.724,1.557,1.523,1],[0.457,0.3,0.435,0.501,0.424,0.64,0.463,1],[-0.952,0.18,-0.315,0.455,0.494,0.53,0.964,1]],"n":57452,"size":[5.82,1.94,4.41]}],"classes":["chair","table","sofa","display","trash bin","other"]}</script>
+<script>
+/* Canonical voting on a toy top-view room, in 2D (x, z): the scene with "predicted" LCCs (ground truth plus noise),
+   canonical voting (the paper's Algorithm 1) and box generation with the LCC back-projection check (Algorithm 2).
+   Shared by the project page and the teaser; keep to ES5 with block comments (the page is minified onto one line). */
+var VoteCore = (function () {
+  function rng(seed) {
+    var s = seed >>> 0;
+    return function () { s = (s + 0x6D2B79F5) >>> 0; var t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+  function gauss(r) { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(6.283185307 * v); }
+
+  var ROOM = { w: 7, h: 4.6 }, CELL = 0.04, GW = Math.ceil(ROOM.w / CELL), GH = Math.ceil(ROOM.h / CELL);
+  var OBJECTS = [
+    { kind: 'chair', t: [1.3, 1.2], a: 0.6, s: [0.28, 0.28] },
+    { kind: 'chair', t: [2.35, 1.0], a: -0.35, s: [0.28, 0.28] },
+    { kind: 'table', t: [2.05, 2.5], a: 0.08, s: [0.75, 0.42] },
+    { kind: 'chair', t: [1.9, 3.55], a: 3.34, s: [0.28, 0.28] },
+    { kind: 'sofa', t: [5.15, 3.85], a: -0.05, s: [1.05, 0.45] },
+    { kind: 'chair', t: [5.55, 1.45], a: 2.2, s: [0.28, 0.28] }
+  ];
+  var COUNT = { chair: 140, table: 220, sofa: 260 };
+
+  /* s is the box half-size, as in the paper (LCCs lie in [-1, 1]). Canonical top-view shapes in [-1, 1]^2; the back of
+     chairs and sofas is at z = +1 */
+  function shape(kind, r) {
+    var u = r();
+    if (kind === 'chair') return u < 0.4 ? [r() * 2 - 1, 0.72 + r() * 0.28] : [r() * 1.8 - 0.9, r() * 1.55 - 0.9];
+    if (kind === 'sofa') {
+      if (u < 0.45) return [r() * 2 - 1, 0.55 + r() * 0.45];
+      if (u < 0.7) return [(r() < 0.5 ? -1 : 0.75) + r() * 0.25, r() * 1.55 - 1];
+      return [r() * 1.5 - 0.75, r() * 1.55 - 1];
+    }
+    return [r() * 2 - 1, r() * 2 - 1];
+  }
+  function toWorld(o, q) {
+    var x = o.s[0] * q[0], z = o.s[1] * q[1], c = Math.cos(o.a), s = Math.sin(o.a);
+    return [o.t[0] + c * x - s * z, o.t[1] + s * x + c * z];
+  }
+  function toLocal(t, a, sc, p) {
+    var dx = p[0] - t[0], dz = p[1] - t[1], c = Math.cos(a), s = Math.sin(a);
+    return [(c * dx + s * dz) / sc[0], (-s * dx + c * dz) / sc[1]];
+  }
+  function inside(o, p, m) { var q = toLocal(o.t, o.a, o.s, p); return Math.abs(q[0]) < 1 + m && Math.abs(q[1]) < 1 + m; }
+
+  /* points: x, z, gt lcc, unit noise draws, objectness; fixed by the seed so the sliders only rescale the noise */
+  function makeScene(seed) {
+    var r = rng(seed || 7), pts = [], i, k;
+    OBJECTS.forEach(function (o, oi) {
+      for (i = 0; i < COUNT[o.kind]; i++) {
+        var q = shape(o.kind, r), p = toWorld(o, q);
+        pts.push({ p: p, gt: q, obj: oi, n: [gauss(r), gauss(r), gauss(r), gauss(r)], o: 0.9 + 0.08 * r() });
+      }
+    });
+    var bg = [];
+    for (i = 0; i < 420; i++) {   /* walls */
+      var side = Math.floor(r() * 4), f = r(), d = r() * 0.08;
+      bg.push(side === 0 ? [f * ROOM.w, d] : side === 1 ? [f * ROOM.w, ROOM.h - d] : side === 2 ? [d, f * ROOM.h] : [ROOM.w - d, f * ROOM.h]);
+    }
+    for (i = 0; i < 1500; i++) {   /* floor that is not under an object */
+      var p = [0.1 + r() * (ROOM.w - 0.2), 0.1 + r() * (ROOM.h - 0.2)], hit = false;
+      for (k = 0; k < OBJECTS.length; k++) if (inside(OBJECTS[k], p, 0.05)) { hit = true; break; }
+      if (!hit) bg.push(p);
+    }
+    bg.forEach(function (p) {
+      var o = OBJECTS[Math.floor(r() * OBJECTS.length)];
+      pts.push({ p: p, gt: null, obj: -1, bgL: [r() * 2 - 1, r() * 2 - 1], bgS: [o.s[0], o.s[1]], n: [0, 0, gauss(r), gauss(r)], o: 0.03 + 0.07 * r() });
+    });
+    return { pts: pts, objects: OBJECTS };
+  }
+
+  /* the network's outputs for a noise level: lcc, scale, objectness */
+  function predict(scene, sigma, useObj) {
+    return scene.pts.map(function (q) {
+      var l, s;
+      if (q.gt) {
+        l = [Math.max(-1.3, Math.min(1.3, q.gt[0] + sigma * q.n[0])), Math.max(-1.3, Math.min(1.3, q.gt[1] + sigma * q.n[1]))];
+        var o = scene.objects[q.obj];
+        s = [o.s[0] * (1 + 0.25 * sigma * q.n[2]), o.s[1] * (1 + 0.25 * sigma * q.n[3])];
+      } else { l = q.bgL; s = q.bgS; }
+      return { p: q.p, l: l, s: s, o: useObj ? q.o : 1, obj: q.obj };
+    });
+  }
+
+  /* Algorithm 1. Each point spreads the same total weight over its K votes, so maps for different K compare. */
+  function vote(pred, K) {
+    var n = GW * GH, G = new Float32Array(n), Gc = new Float32Array(n), Gs = new Float32Array(n), Gx = new Float32Array(n), Gz = new Float32Array(n);
+    var cs = [], sn = [], j;
+    for (j = 0; j < K; j++) { cs.push(Math.cos(6.283185307 * j / K)); sn.push(Math.sin(6.283185307 * j / K)); }
+    var unit = 120 / K;
+    pred.forEach(function (q) {
+      var vx = q.s[0] * q.l[0], vz = q.s[1] * q.l[1], w = q.o * unit;
+      for (j = 0; j < K; j++) {
+        var cx = q.p[0] - (cs[j] * vx - sn[j] * vz), cz = q.p[1] - (sn[j] * vx + cs[j] * vz);
+        var gx = cx / CELL - 0.5, gz = cz / CELL - 0.5, ix = Math.floor(gx), iz = Math.floor(gz), fx = gx - ix, fz = gz - iz;
+        for (var dz = 0; dz < 2; dz++) for (var dx = 0; dx < 2; dx++) {
+          var X = ix + dx, Z = iz + dz;
+          if (X < 0 || Z < 0 || X >= GW || Z >= GH) continue;
+          var ww = w * (dx ? fx : 1 - fx) * (dz ? fz : 1 - fz), k = Z * GW + X;
+          G[k] += ww; Gc[k] += ww * cs[j]; Gs[k] += ww * sn[j]; Gx[k] += ww * q.s[0]; Gz[k] += ww * q.s[1];
+        }
+      }
+    });
+    return { G: G, Gc: Gc, Gs: Gs, Gx: Gx, Gz: Gz };
+  }
+
+  /* Algorithm 2: take the highest peak, read heading and size there, clear its votes, keep the box only if enough
+     points inside are objects and their back-projected LCCs match the predicted ones. */
+  function detect(pred, maps, opt) {
+    opt = opt || {};
+    var beta = opt.beta || 0.2, gamma = opt.gamma || 0.3, delta = opt.delta || 60, G = new Float32Array(maps.G), steps = [];
+    for (var it = 0; it < 24; it++) {
+      var best = 0, bi = -1, k;
+      for (k = 0; k < G.length; k++) if (G[k] > best) { best = G[k]; bi = k; }
+      if (best < delta) break;
+      var t = [((bi % GW) + 0.5) * CELL, (Math.floor(bi / GW) + 0.5) * CELL];
+      var a = Math.atan2(maps.Gs[bi], maps.Gc[bi]), sc = [maps.Gx[bi] / maps.G[bi], maps.Gz[bi] / maps.G[bi]];
+      var cnt = 0, pos = 0, osum = 0, err = 0;
+      pred.forEach(function (q) {
+        var b = toLocal(t, a, sc, q.p);
+        if (Math.abs(b[0]) >= 1 || Math.abs(b[1]) >= 1) return;
+        cnt++;
+        if (q.o > 0.3) { pos++; osum += q.o; err += q.o * Math.hypot(q.l[0] - b[0], q.l[1] - b[1]); }
+      });
+      /* clear the votes inside the candidate box (and around the peak) so it is never proposed again */
+      var c = Math.cos(a), s = Math.sin(a), rx = sc[0] + 0.08, rz = sc[1] + 0.08, R = Math.ceil(Math.hypot(rx, rz) / CELL) + 1;
+      var px = bi % GW, pz = Math.floor(bi / GW);
+      for (var z = Math.max(0, pz - R); z < Math.min(GH, pz + R + 1); z++) for (var x = Math.max(0, px - R); x < Math.min(GW, px + R + 1); x++) {
+        var dx = (x - px) * CELL, dz = (z - pz) * CELL, lx = c * dx + s * dz, lz = -s * dx + c * dz;
+        if ((Math.abs(lx) < rx && Math.abs(lz) < rz) || (dx * dx + dz * dz < 0.0225)) G[z * GW + x] = 0;
+      }
+      var e = osum ? err / osum : Infinity, ok = opt.check === false || (cnt > 0 && pos > beta * cnt && e < gamma);
+      steps.push({ t: t, a: a, s: sc, peak: best, cnt: cnt, pos: pos, err: e, ok: ok, map: opt.snapshots ? new Float32Array(G) : null });
+    }
+    return steps;
+  }
+
+  /* which ground-truth object a kept box matches (centre within 25 cm, heading within 30 degrees, tables mod 180) */
+  function match(step, objects) {
+    for (var i = 0; i < objects.length; i++) {
+      var o = objects[i], d = Math.hypot(step.t[0] - o.t[0], step.t[1] - o.t[1]);
+      var per = o.kind === 'table' ? Math.PI : 2 * Math.PI, da = Math.abs(((step.a - o.a) % per + per * 1.5) % per - per / 2);
+      if (d < 0.25 && da < 0.52) return i;
+    }
+    return -1;
+  }
+
+  return { ROOM: ROOM, CELL: CELL, GW: GW, GH: GH, rng: rng, shape: shape, makeScene: makeScene, predict: predict, vote: vote, detect: detect, match: match, toWorld: toWorld };
+})();
+</script>
+<script>
+(function () {
+  var MEDIA = '/projects/canonical-voting/static/media/';
+  var D = JSON.parse(document.getElementById('page-data').textContent);
+  var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  function hexRgb(h) { h = h.replace('#', ''); return [parseInt(h.substr(0, 2), 16) / 255, parseInt(h.substr(2, 2), 16) / 255, parseInt(h.substr(4, 2), 16) / 255]; }
+  function watch(el, cb, margin) { if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { cb(es[0].isIntersecting); }, { rootMargin: margin || '0px' }).observe(el); else cb(true); }
+  function sizeCanvas(cv) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
+    if (w && h && (cv.width !== w || cv.height !== h)) { cv.width = w; cv.height = h; }
+    return dpr;
+  }
+  var CLASS_COL = { chair: '#ff6b6b', table: '#a855f7', sofa: '#22d3ee', display: '#facc15', 'trash bin': '#3b82f6', other: '#94a3b8' };
+
+  /* ================= scene viewer: WebGL points and thick box edges ================= */
+  var SV = (function () {
+    var cv = document.getElementById('sv-canvas'), msg = document.getElementById('sv-msg'), gl = null;
+    try { gl = cv.getContext('webgl', { antialias: true }) || cv.getContext('experimental-webgl'); } catch (e) { gl = null; }
+    var scenesEl = document.getElementById('sv-scenes'), clsEl = document.getElementById('sv-classes');
+    if (!gl) { msg.textContent = 'This browser cannot show WebGL. The paper’s qualitative results are under Results.'; return { state: function () { return { gl: false }; } }; }
+    function shader(type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+    function program(vs, fs, names) {
+      var p = gl.createProgram(); gl.attachShader(p, shader(gl.VERTEX_SHADER, vs)); gl.attachShader(p, shader(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p);
+      var o = { p: p, a: {}, u: {} };
+      names.a.forEach(function (n) { o.a[n] = gl.getAttribLocation(p, n); });
+      names.u.forEach(function (n) { o.u[n] = gl.getUniformLocation(p, n); });
+      return o;
+    }
+    var PT = program('attribute vec3 aP; attribute vec3 aC; uniform mat4 uVP; uniform float uS; uniform float uMax; varying vec3 vC; void main() { gl_Position = uVP * vec4(aP, 1.0); gl_PointSize = clamp(uS / gl_Position.w, 1.0, uMax); vC = aC; }',
+      'precision mediump float; varying vec3 vC; void main() { vec2 d = gl_PointCoord - 0.5; if (dot(d, d) > 0.25) discard; gl_FragColor = vec4(vC, 1.0); }', { a: ['aP', 'aC'], u: ['uVP', 'uS', 'uMax'] });
+    var LN = program('attribute vec3 aA; attribute vec3 aB; attribute float aSide; attribute vec3 aCol; uniform mat4 uVP; uniform vec2 uHalf; uniform float uW; varying vec3 vC; void main() { vec4 a = uVP * vec4(aA, 1.0); vec4 b = uVP * vec4(aB, 1.0); vec2 d = normalize(b.xy / b.w * uHalf - a.xy / a.w * uHalf); vec2 n = vec2(-d.y, d.x); a.xy += n * aSide * uW / uHalf * a.w; gl_Position = a; vC = aCol; }',
+      'precision mediump float; varying vec3 vC; uniform float uA; void main() { gl_FragColor = vec4(vC, uA); }', { a: ['aA', 'aB', 'aSide', 'aCol'], u: ['uVP', 'uHalf', 'uW', 'uA'] });
+    var cur = null, data = {}, hidden = {}, lineBuf = gl.createBuffer(), lineN = 0, dirty = true, visible = true, idleUntil = 0;
+    var view = { yaw: 0.55, pitch: 0.85, zoom: 1, top: false }, ptrs = {}, pinch0 = null;
+
+    function persp(f, asp, n, fa) { var t = 1 / Math.tan(f / 2); return [t / asp, 0, 0, 0, 0, t, 0, 0, 0, 0, (fa + n) / (n - fa), -1, 0, 0, 2 * fa * n / (n - fa), 0]; }
+    function sub(a, b) { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
+    function cross(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+    function norm(a) { var l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; }
+    function dot(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+    function lookAt(e, c, u) { var z = norm(sub(e, c)), x = norm(cross(u, z)), y = cross(z, x); return [x[0], y[0], z[0], 0, x[1], y[1], z[1], 0, x[2], y[2], z[2], 0, -dot(x, e), -dot(y, e), -dot(z, e), 1]; }
+    function mul(a, b) { var r = new Array(16); for (var i = 0; i < 4; i++) for (var j = 0; j < 4; j++) { var s = 0; for (var k = 0; k < 4; k++) s += a[k * 4 + j] * b[i * 4 + k]; r[i * 4 + j] = s; } return r; }
+
+    function load(sc) {
+      if (data[sc.id]) return data[sc.id];
+      data[sc.id] = fetch(MEDIA + 'scenes/' + sc.id + '.bin').then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).then(function (b) {
+        var n = new Uint32Array(b, 0, 1)[0], lh = new Float32Array(b, 4, 6), q = new Int16Array(b, 28, n * 3), off = 28 + n * 6;
+        off += (4 - off % 4) % 4;
+        var rgb = new Uint8Array(b, off, n * 3), pos = new Float32Array(n * 3);
+        for (var i = 0; i < n * 3; i++) { var k = i % 3; pos[i] = lh[k] + (q[i] + 32768) / 65535 * (lh[k + 3] - lh[k]); }
+        var pb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, pb); gl.bufferData(gl.ARRAY_BUFFER, pos, gl.STATIC_DRAW);
+        var cb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, cb); gl.bufferData(gl.ARRAY_BUFFER, rgb, gl.STATIC_DRAW);
+        sc.buf = { n: n, pb: pb, cb: cb };
+        return sc.buf;
+      });
+      return data[sc.id];
+    }
+    function buildLines() {
+      var v = [], nb = 0;
+      cur.boxes.forEach(function (b) {
+        var cls = D.classes[b[7]]; if (hidden[cls]) return; nb++;
+        var col = hexRgb(CLASS_COL[cls]), c = Math.cos(b[6]), s = Math.sin(b[6]), P = [];
+        for (var i = 0; i < 8; i++) {
+          var x = (i & 1 ? 0.5 : -0.5) * b[3], y = (i & 2 ? 0.5 : -0.5) * b[4], z = (i & 4 ? 0.5 : -0.5) * b[5];
+          P.push([b[0] + c * x - s * z, b[1] + y, b[2] + s * x + c * z]);
+        }
+        [[0, 1], [2, 3], [4, 5], [6, 7], [0, 2], [1, 3], [4, 6], [5, 7], [0, 4], [1, 5], [2, 6], [3, 7]].forEach(function (e) {
+          var A = P[e[0]], B = P[e[1]];
+          [[A, B, 1], [A, B, -1], [B, A, 1], [A, B, 1], [B, A, 1], [B, A, -1]].forEach(function (t) { v.push(t[0][0], t[0][1], t[0][2], t[1][0], t[1][1], t[1][2], t[2], col[0], col[1], col[2]); });
+        });
+      });
+      gl.bindBuffer(gl.ARRAY_BUFFER, lineBuf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(v), gl.STATIC_DRAW);
+      lineN = v.length / 10; dirty = true;
+      return nb;
+    }
+    function updateCount() {
+      var d = cur && cur.loaded, nb = cur ? cur.boxes.filter(function (b) { return !hidden[D.classes[b[7]]]; }).length : 0;
+      document.getElementById('sv-count').textContent = d ? cur.n.toLocaleString('en-US') + ' points · ' + nb + ' boxes' : '';
+    }
+    function legend() {
+      var counts = {};
+      cur.boxes.forEach(function (b) { var c = D.classes[b[7]]; counts[c] = (counts[c] || 0) + 1; });
+      clsEl.innerHTML = D.classes.filter(function (c) { return counts[c]; }).map(function (c) {
+        return '<button class="chip cls" type="button" data-cls="' + c + '" aria-pressed="' + !hidden[c] + '"><i style="background:' + CLASS_COL[c] + '"></i>' + c + ' <span>' + counts[c] + '</span></button>';
+      }).join('');
+    }
+    function show(id) {
+      cur = D.scenes.filter(function (s) { return s.id === id; })[0];
+      scenesEl.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.id === id)); });
+      legend(); buildLines(); msg.textContent = 'Loading…'; msg.hidden = false; updateCount();
+      var my = cur;
+      load(cur).then(function () { if (cur !== my) return; cur.loaded = true; msg.hidden = true; updateCount(); dirty = true; }, function () { msg.textContent = 'Could not load the scan.'; });
+    }
+    scenesEl.innerHTML = D.scenes.map(function (s, i) {
+      return '<button type="button" data-id="' + s.id + '" aria-pressed="' + !i + '">' + s.label + '<small>' + s.boxes.length + ' boxes</small></button>';
+    }).join('');
+    scenesEl.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { started = true; show(b.dataset.id); } });
+    clsEl.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-cls]'); if (!b) return;
+      var c = b.dataset.cls; hidden[c] = !hidden[c]; b.setAttribute('aria-pressed', String(!hidden[c])); buildLines(); updateCount();
+    });
+
+    function draw() {
+      var dpr = sizeCanvas(cv), w = cv.width, h = cv.height;
+      gl.viewport(0, 0, w, h);
+      var bg = hexRgb(cssVar('--gl-bg') || '#f4f2f8'); gl.clearColor(bg[0], bg[1], bg[2], 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      if (!cur || !cur.loaded || !cur.buf) return;
+      var d = cur.buf;
+      var S = cur.size, R = Math.max(9.5, Math.hypot(S[0], S[2]) * 0.85 + 1.2) / view.zoom, tgt = [0, Math.min(0.9, S[1] * 0.3), 0];
+      var p = view.top ? 1.5 : view.pitch, eye = [R * Math.cos(p) * Math.sin(view.yaw), tgt[1] + R * Math.sin(p), R * Math.cos(p) * Math.cos(view.yaw)];
+      var fov = 0.72, VP = mul(persp(fov, w / h, 0.1, 200), lookAt(eye, tgt, [0, 1, 0]));
+      gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL); gl.disable(gl.BLEND);
+      gl.useProgram(PT.p);
+      gl.uniformMatrix4fv(PT.u.uVP, false, new Float32Array(VP));
+      gl.uniform1f(PT.u.uS, 0.06 * (h / 2) / Math.tan(fov / 2)); gl.uniform1f(PT.u.uMax, 9 * dpr);
+      gl.bindBuffer(gl.ARRAY_BUFFER, d.pb); gl.enableVertexAttribArray(PT.a.aP); gl.vertexAttribPointer(PT.a.aP, 3, gl.FLOAT, false, 0, 0);
+      gl.bindBuffer(gl.ARRAY_BUFFER, d.cb); gl.enableVertexAttribArray(PT.a.aC); gl.vertexAttribPointer(PT.a.aC, 3, gl.UNSIGNED_BYTE, true, 0, 0);
+      gl.drawArrays(gl.POINTS, 0, d.n);
+      gl.disableVertexAttribArray(PT.a.aP); gl.disableVertexAttribArray(PT.a.aC);
+      if (!lineN) return;
+      gl.useProgram(LN.p);
+      gl.uniformMatrix4fv(LN.u.uVP, false, new Float32Array(VP));
+      gl.uniform2f(LN.u.uHalf, w / 2, h / 2); gl.uniform1f(LN.u.uW, 1.5 * dpr);
+      gl.bindBuffer(gl.ARRAY_BUFFER, lineBuf);
+      [['aA', 3, 0], ['aB', 3, 12], ['aSide', 1, 24], ['aCol', 3, 28]].forEach(function (t) { gl.enableVertexAttribArray(LN.a[t[0]]); gl.vertexAttribPointer(LN.a[t[0]], t[1], gl.FLOAT, false, 40, t[2]); });
+      gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      gl.disable(gl.DEPTH_TEST); gl.uniform1f(LN.u.uA, 0.3); gl.drawArrays(gl.TRIANGLES, 0, lineN);
+      gl.enable(gl.DEPTH_TEST); gl.uniform1f(LN.u.uA, 1); gl.drawArrays(gl.TRIANGLES, 0, lineN);
+      ['aA', 'aB', 'aSide', 'aCol'].forEach(function (n) { gl.disableVertexAttribArray(LN.a[n]); });
+    }
+
+    function zoomBy(f) { view.zoom = Math.max(0.6, Math.min(3.5, view.zoom * f)); idleUntil = performance.now() + 4000; dirty = true; }
+    document.getElementById('sv-in').addEventListener('click', function () { zoomBy(1.25); });
+    document.getElementById('sv-out').addEventListener('click', function () { zoomBy(0.8); });
+    var topBtn = document.getElementById('sv-top');
+    topBtn.addEventListener('click', function () { view.top = !view.top; topBtn.setAttribute('aria-pressed', String(view.top)); idleUntil = performance.now() + 4000; dirty = true; });
+    cv.addEventListener('wheel', function (e) { if (!e.ctrlKey) return; e.preventDefault(); zoomBy(Math.exp(-e.deltaY * 0.01)); }, { passive: false });
+    cv.addEventListener('pointerdown', function (e) {
+      ptrs[e.pointerId] = { x: e.clientX, y: e.clientY, type: e.pointerType };
+      try { cv.setPointerCapture(e.pointerId); } catch (err) {}
+      var ids = Object.keys(ptrs); if (ids.length === 2) pinch0 = { d: Math.hypot(ptrs[ids[0]].x - ptrs[ids[1]].x, ptrs[ids[0]].y - ptrs[ids[1]].y), z: view.zoom };
+    });
+    cv.addEventListener('pointermove', function (e) {
+      var p = ptrs[e.pointerId]; if (!p) return;
+      var ids = Object.keys(ptrs);
+      if (ids.length === 2 && pinch0) {
+        p.x = e.clientX; p.y = e.clientY;
+        var dd = Math.hypot(ptrs[ids[0]].x - ptrs[ids[1]].x, ptrs[ids[0]].y - ptrs[ids[1]].y);
+        view.zoom = Math.max(0.6, Math.min(3.5, pinch0.z * dd / pinch0.d));
+      } else {
+        view.yaw -= (e.clientX - p.x) * 0.008;
+        if (p.type === 'mouse' && !view.top) view.pitch = Math.max(0.15, Math.min(1.45, view.pitch + (e.clientY - p.y) * 0.006));
+        p.x = e.clientX; p.y = e.clientY;
+      }
+      idleUntil = performance.now() + 4000; dirty = true;
+    });
+    function up(e) { delete ptrs[e.pointerId]; pinch0 = null; idleUntil = performance.now() + 4000; }
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    cv.addEventListener('dblclick', function () { view.yaw = 0.55; view.pitch = 0.85; view.zoom = 1; dirty = true; });
+    /* the first scan loads when the viewer comes near the viewport */
+    var started = false;
+    watch(cv, function (v) { if (v && !started) { started = true; show(D.scenes[0].id); } }, '300px');
+    watch(cv, function (v) { visible = v; dirty = true; });
+    window.addEventListener('resize', function () { dirty = true; });
+    var last = performance.now();
+    (function loop(now) {
+      requestAnimationFrame(loop);
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      if (!visible) return;
+      if (!REDUCED && !Object.keys(ptrs).length && now > idleUntil && cur && cur.loaded) { view.yaw += dt * 0.12; dirty = true; }
+      if (dirty) { dirty = false; draw(); }
+    })(last);
+    return { state: function () { return { gl: true, scene: cur && cur.id, loaded: !!(cur && cur.loaded), n: cur && cur.n, boxes: lineN / 72, classes: clsEl.children.length }; } };
+  })();
+
+  /* ================= offsets vs LCCs on a turning chair ================= */
+  var V = window.VoteCore;
+  function lccColor(x, z, a) {
+    var r = Math.max(0, Math.min(1, (x + 1) / 2)), b = Math.max(0, Math.min(1, (z + 1) / 2)), g = 1 - (r + b) / 2;
+    return 'rgba(' + Math.round(40 + 215 * r) + ',' + Math.round(40 + 200 * g) + ',' + Math.round(40 + 215 * b) + ',' + (a === undefined ? 1 : a) + ')';
+  }
+  var LCC = (function () {
+    var cvO = document.getElementById('lcc-off'), cvL = document.getElementById('lcc-can'), slider = document.getElementById('lcc-rot'), out = document.getElementById('lcc-rot-v');
+    var r = V.rng(11), pts = [], i, ang = 35, visible = true, holdUntil = 0, dirty = true;
+    for (i = 0; i < 520; i++) pts.push(V.shape('chair', r));
+    var TRACK = [[-0.85, 0.88], [-0.82, -0.82], [0.1, 0.86]];
+    function rot(q, a) { var c = Math.cos(a), s = Math.sin(a); return [c * q[0] - s * q[1], s * q[0] + c * q[1]]; }
+    function arrow(c, x0, y0, x1, y1, col, w) {
+      var a = Math.atan2(y1 - y0, x1 - x0), h = 7 * w;
+      c.strokeStyle = col; c.fillStyle = col; c.lineWidth = 1.6 * w;
+      c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1 - Math.cos(a) * h * 0.8, y1 - Math.sin(a) * h * 0.8); c.stroke();
+      c.beginPath(); c.moveTo(x1, y1); c.lineTo(x1 - Math.cos(a - 0.45) * h, y1 - Math.sin(a - 0.45) * h); c.lineTo(x1 - Math.cos(a + 0.45) * h, y1 - Math.sin(a + 0.45) * h); c.closePath(); c.fill();
+    }
+    function label(c, x, y, t, w, ink) {
+      c.fillStyle = ink; c.beginPath(); c.arc(x, y, 8.5 * w, 0, 6.2832); c.fill();
+      c.fillStyle = cssVar('--bg') || '#fff'; c.font = '700 ' + Math.round(10.5 * w) + 'px Inter, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(t, x, y + 0.5);
+    }
+    function draw(cv, mode) {
+      var w = sizeCanvas(cv), W = cv.width, H = cv.height, c = cv.getContext('2d'), a = ang * Math.PI / 180, ink = cssVar('--ink') || '#15111f';
+      c.clearRect(0, 0, W, H);
+      var S = Math.min(W, H) * 0.3, cx = W * 0.5, cy = H * 0.54;
+      function P(q) { var p = rot(q, a); return [cx + p[0] * S, cy - p[1] * S]; }
+      pts.forEach(function (q) {
+        var p = P(q), col;
+        if (mode === 'off') { var d = rot([-q[0], -q[1]], a), hue = Math.atan2(-d[1], d[0]) * 180 / Math.PI; col = 'hsl(' + hue.toFixed(0) + ',78%,' + (42 + 18 * Math.min(1, Math.hypot(d[0], d[1]) / 1.3)).toFixed(0) + '%)'; }
+        else col = lccColor(q[0], q[1]);
+        c.fillStyle = col; c.beginPath(); c.arc(p[0], p[1], 3.1 * w, 0, 6.2832); c.fill();
+      });
+      c.strokeStyle = ink; c.lineWidth = 1.5 * w; c.beginPath(); c.moveTo(cx - 6 * w, cy); c.lineTo(cx + 6 * w, cy); c.moveTo(cx, cy - 6 * w); c.lineTo(cx, cy + 6 * w); c.stroke();
+      TRACK.forEach(function (q, k) {
+        var p = P(q);
+        if (mode === 'off') arrow(c, p[0], p[1], cx, cy, ink, w);
+        c.strokeStyle = cssVar('--bg') || '#fff'; c.lineWidth = 2.5 * w; c.beginPath(); c.arc(p[0], p[1], 6 * w, 0, 6.2832); c.stroke();
+        label(c, p[0] + 12 * w, p[1] - 12 * w, String(k + 1), w, ink);
+      });
+      /* inset: the regression target of the three points */
+      var bs = Math.min(W, H) * 0.2, bx = W - bs - 14 * w, by = 14 * w, bc = [bx + bs / 2, by + bs / 2];
+      c.fillStyle = cssVar('--surface') || '#fff'; c.strokeStyle = cssVar('--line') || '#ddd'; c.lineWidth = w;
+      c.beginPath(); c.rect(bx, by, bs, bs); c.fill(); c.stroke();
+      c.fillStyle = cssVar('--faint') || '#888'; c.font = '600 ' + Math.round(10.5 * w) + 'px Inter, sans-serif'; c.textAlign = 'left'; c.textBaseline = 'top';
+      c.fillText(mode === 'off' ? 'target: offset' : 'target: LCC', bx + 6 * w, by + bs + 6 * w);
+      TRACK.forEach(function (q, k) {
+        var t = mode === 'off' ? rot([-q[0], -q[1]], a) : q, m = bs * (mode === 'off' ? 0.34 : 0.4);
+        var x = bc[0] + t[0] * m, y = bc[1] - t[1] * m;
+        if (mode === 'off') arrow(c, bc[0], bc[1], x, y, ink, w * 0.8);
+        label(c, x, y, String(k + 1), w * 0.8, ink);
+      });
+    }
+    function render() { draw(cvO, 'off'); draw(cvL, 'lcc'); out.textContent = Math.round(ang) + '°'; }
+    slider.addEventListener('input', function () { ang = +slider.value; holdUntil = performance.now() + 5000; dirty = true; });
+    watch(cvO, function (v) { visible = v; dirty = true; });
+    window.addEventListener('resize', function () { dirty = true; });
+    var last = performance.now();
+    (function loop(now) {
+      requestAnimationFrame(loop);
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      if (!visible) return;
+      if (!REDUCED && now > holdUntil) { ang = (ang + dt * 24) % 360; slider.value = Math.round(ang); dirty = true; }
+      if (dirty) { dirty = false; render(); }
+    })(last);
+    return { state: function () { return { angle: Math.round(ang), points: pts.length }; } };
+  })();
+
+  /* MAE bars */
+  (function () {
+    var it = D.intro;
+    [[it.direct[0], it.random[0]], [it.direct[1], it.random[1]]].forEach(function (pair, k) {
+      var card = document.querySelectorAll('#mae .card')[k], mx = Math.max(pair[0], pair[1]) * 1.05;
+      card.querySelectorAll('.mae-bar span').forEach(function (s, j) { s.style.width = (pair[j] / mx * 100) + '%'; });
+    });
+  })();
+
+  /* ================= canonical voting demo ================= */
+  var VIRIDIS = [[68, 1, 84], [72, 36, 117], [65, 68, 135], [53, 95, 141], [42, 120, 142], [33, 145, 140], [34, 168, 132], [68, 191, 112], [122, 209, 81], [189, 223, 38], [253, 231, 37]];
+  function viridis(t) { t = Math.max(0, Math.min(1, t)) * 10; var i = Math.min(9, Math.floor(t)), f = t - i, a = VIRIDIS[i], b = VIRIDIS[i + 1]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; }
+  var VD = (function () {
+    var cv = document.getElementById('vd-canvas'), scene = V.makeScene(7), st = { K: 120, sigma: 0.05, obj: true, check: true, pts: true };
+    var pred, maps, mapMax = 1, steps = null, shown = -1, phase = 0, timer = null, dirty = true, need = false, img = document.createElement('canvas');
+    var sel = scene.pts.findIndex(function (q) { return q.obj === 0 && q.gt[1] > 0.8 && Math.abs(q.gt[0]) > 0.6; });
+    img.width = V.GW; img.height = V.GH;
+    var logEl = document.getElementById('vd-log'), sumEl = document.getElementById('vd-sum'), KIND = scene.objects.map(function (o) { return o.kind; });
+    function recompute() {
+      pred = V.predict(scene, st.sigma, st.obj); maps = V.vote(pred, st.K);
+      mapMax = 0; for (var i = 0; i < maps.G.length; i++) if (maps.G[i] > mapMax) mapMax = maps.G[i];
+      clearRun(); paintMap(maps.G); dirty = true;
+    }
+    function paintMap(G) {
+      var c = img.getContext('2d'), im = c.createImageData(V.GW, V.GH);
+      for (var z = 0; z < V.GH; z++) for (var x = 0; x < V.GW; x++) {
+        var v = viridis(Math.sqrt(G[z * V.GW + x] / mapMax)), k = ((V.GH - 1 - z) * V.GW + x) * 4;
+        im.data[k] = v[0]; im.data[k + 1] = v[1]; im.data[k + 2] = v[2]; im.data[k + 3] = 255;
+      }
+      c.putImageData(im, 0, 0);
+    }
+    function clearRun() { if (timer) clearTimeout(timer); timer = null; steps = null; shown = -1; logEl.innerHTML = ''; sumEl.textContent = ''; }
+    function box(c, X, Y, t, a, s, col, wd, dash) {
+      var cs = Math.cos(a), sn = Math.sin(a), P = [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(function (q) { var x = q[0] * s[0], z = q[1] * s[1]; return [X(t[0] + cs * x - sn * z), Y(t[1] + sn * x + cs * z)]; });
+      c.strokeStyle = col; c.lineWidth = wd; c.setLineDash(dash || []);
+      c.beginPath(); P.forEach(function (p, i) { if (i) c.lineTo(p[0], p[1]); else c.moveTo(p[0], p[1]); }); c.closePath(); c.stroke();
+      var f = [X(t[0] + sn * s[1]), Y(t[1] - cs * s[1])];
+      c.setLineDash([]); c.beginPath(); c.moveTo(X(t[0]), Y(t[1])); c.lineTo(f[0], f[1]); c.stroke();
+    }
+    function draw() {
+      var w = sizeCanvas(cv), W = cv.width, H = cv.height, c = cv.getContext('2d'), sc = W / V.ROOM.w;
+      function X(x) { return x * sc; } function Y(z) { return H - z * sc; }
+      c.imageSmoothingEnabled = true; c.drawImage(img, 0, 0, W, H);
+      scene.objects.forEach(function (o) { box(c, X, Y, o.t, o.a, o.s, 'rgba(233,227,245,.55)', 1.2 * w, [5 * w, 4 * w]); });
+      if (st.pts) pred.forEach(function (q) {
+        if (q.obj < 0) { c.fillStyle = 'rgba(236,230,247,.22)'; c.fillRect(X(q.p[0]) - w, Y(q.p[1]) - w, 2 * w, 2 * w); return; }
+        c.fillStyle = lccColor(q.l[0], q.l[1], 0.95); c.beginPath(); c.arc(X(q.p[0]), Y(q.p[1]), 2.1 * w, 0, 6.2832); c.fill();
+      });
+      if (sel >= 0 && shown < 0) {
+        var q = pred[sel], vx = q.s[0] * q.l[0], vz = q.s[1] * q.l[1], o = scene.objects[scene.pts[sel].obj], best = null, bd = 9;
+        c.fillStyle = '#fde725';
+        for (var j = 0; j < st.K; j++) {
+          var r = 6.283185307 * j / st.K, cs = Math.cos(r), sn = Math.sin(r), px = q.p[0] - (cs * vx - sn * vz), pz = q.p[1] - (sn * vx + cs * vz);
+          c.beginPath(); c.arc(X(px), Y(pz), 1.8 * w, 0, 6.2832); c.fill();
+          if (o) { var dd = Math.abs(((r - o.a) % 6.283185307 + 9.42477796) % 6.283185307 - 3.14159265); if (dd < bd) { bd = dd; best = [px, pz]; } }
+        }
+        c.strokeStyle = '#fff'; c.lineWidth = 2 * w; c.beginPath(); c.arc(X(q.p[0]), Y(q.p[1]), 6 * w, 0, 6.2832); c.stroke();
+        if (best) { c.beginPath(); c.moveTo(X(q.p[0]), Y(q.p[1])); c.lineTo(X(best[0]), Y(best[1])); c.stroke(); c.fillStyle = '#fff'; c.beginPath(); c.arc(X(best[0]), Y(best[1]), 4 * w, 0, 6.2832); c.fill(); }
+      }
+      if (steps) steps.forEach(function (s, i) {
+        if (i > shown || (i === shown && phase === 0)) { if (i === shown) box(c, X, Y, s.t, s.a, s.s, '#ffffff', 2.4 * w); return; }
+        var m = V.match(s, scene.objects);
+        if (s.ok) box(c, X, Y, s.t, s.a, s.s, m >= 0 ? '#a3e635' : '#f59e0b', 2.8 * w);
+        else box(c, X, Y, s.t, s.a, s.s, 'rgba(239,68,68,.9)', 2 * w, [6 * w, 4 * w]);
+      });
+      document.getElementById('vd-count').textContent = pred.length.toLocaleString('en-US') + ' points × ' + st.K + ' headings';
+    }
+    function logStep(s, i) {
+      var m = V.match(s, scene.objects), li = document.createElement('li');
+      li.className = s.ok ? (m >= 0 ? 'ok' : 'fp') : 'no';
+      var what = m >= 0 ? KIND[m] : 'no object';
+      li.innerHTML = '<b>Peak ' + (i + 1) + '</b> (' + what + '): ' + s.cnt + ' points inside, ' + (s.cnt ? Math.round(100 * s.pos / s.cnt) : 0) + '% objects, LCC error ' + (isFinite(s.err) ? s.err.toFixed(2) : '–') + ' → <b>' + (s.ok ? 'kept' : 'rejected') + '</b>';
+      logEl.appendChild(li); logEl.scrollTop = logEl.scrollHeight;
+    }
+    function summary() {
+      var kept = steps.filter(function (s) { return s.ok; }), found = {}, fp = 0, rejTrue = 0;
+      kept.forEach(function (s) { var m = V.match(s, scene.objects); if (m >= 0) found[m] = 1; else fp++; });
+      steps.forEach(function (s) { if (!s.ok && V.match(s, scene.objects) >= 0) rejTrue++; });
+      var nf = Object.keys(found).length, rej = steps.length - kept.length;
+      sumEl.textContent = 'Found ' + nf + ' of ' + scene.objects.length + ' objects' + (fp ? ', plus ' + fp + ' false box' + (fp > 1 ? 'es' : '') : '') + '. ' +
+        (rej ? 'Rejected ' + rej + ' peak' + (rej > 1 ? 's' : '') + (rejTrue ? ' (' + rejTrue + ' on a real object)' : '') + '.' : 'No peak rejected.');
+      return { candidates: steps.length, kept: kept.length, found: nf, falseKept: fp, rejected: rej };
+    }
+    var result = null;
+    function run() {
+      if (need) { need = false; recompute(); }
+      clearRun();
+      steps = V.detect(pred, maps, { snapshots: true, check: st.check });
+      if (REDUCED || !steps.length) { shown = steps.length; phase = 1; steps.forEach(logStep); if (steps.length) paintMap(steps[steps.length - 1].map); result = summary(); dirty = true; return; }
+      shown = 0; phase = 0; dirty = true;
+      (function next() {
+        timer = setTimeout(function () {
+          if (phase === 0) { phase = 1; logStep(steps[shown], shown); paintMap(steps[shown].map); dirty = true; timer = setTimeout(next, 0); return; }
+          if (shown + 1 >= steps.length) { shown = steps.length; result = summary(); timer = null; dirty = true; return; }
+          shown++; phase = 0; dirty = true; next();
+        }, phase === 0 ? 520 : 340);
+      })();
+    }
+    document.getElementById('vd-go').addEventListener('click', run);
+    document.getElementById('vd-clear').addEventListener('click', function () { clearRun(); result = null; paintMap(maps.G); dirty = true; });
+    function bindRange(id, key, fmt) {
+      var el = document.getElementById(id), out = document.getElementById(id + '-v');
+      el.addEventListener('input', function () { st[key] = +el.value; out.textContent = fmt(st[key]); need = true; });
+    }
+    bindRange('vd-k', 'K', function (v) { return String(v); });
+    bindRange('vd-s', 'sigma', function (v) { return v.toFixed(2); });
+    [['vd-obj', 'obj', true], ['vd-chk', 'check', false], ['vd-pts', 'pts', false]].forEach(function (t) {
+      var b = document.getElementById(t[0]);
+      b.addEventListener('click', function () { st[t[1]] = !st[t[1]]; b.setAttribute('aria-pressed', String(st[t[1]])); if (t[2]) need = true; else if (t[1] === 'check') { clearRun(); paintMap(maps.G); dirty = true; } else dirty = true; });
+    });
+    cv.addEventListener('click', function (e) {
+      var rc = cv.getBoundingClientRect(), x = (e.clientX - rc.left) / rc.width * V.ROOM.w, z = (1 - (e.clientY - rc.top) / rc.height) * V.ROOM.h, bi = -1, bd = 0.15;
+      scene.pts.forEach(function (q, i) { if (q.obj < 0) return; var d = Math.hypot(q.p[0] - x, q.p[1] - z); if (d < bd) { bd = d; bi = i; } });
+      if (bi >= 0) { sel = bi; if (steps) { clearRun(); paintMap(maps.G); } dirty = true; }
+    });
+    var visible = true;
+    recompute();
+    watch(cv, function (v) { visible = v; dirty = true; });
+    window.addEventListener('resize', function () { dirty = true; });
+    (function loop() {
+      requestAnimationFrame(loop);
+      if (!visible) return;
+      if (need) { need = false; recompute(); }
+      if (dirty) { dirty = false; draw(); }
+    })();
+    return { state: function () { return { K: st.K, sigma: st.sigma, obj: st.obj, check: st.check, running: !!timer, result: result }; }, run: run };
+  })();
+
+  /* ================= bar explorers ================= */
+  function explorer(root, rows, cfg) {
+    var tabsEl = root.querySelector('[data-role=tabs]'), chipsEl = root.querySelector('[data-role=chips]'), rowsEl = root.querySelector('[data-role=rows]'), footEl = root.querySelector('[data-role=foot]');
+    var tab = cfg.tabs ? cfg.tabs[0].k : null, chip = cfg.chips ? cfg.chips[0].k : null;
+    if (tabsEl) tabsEl.innerHTML = cfg.tabs.map(function (t, i) { return '<button type="button" role="tab" class="tab' + (i ? '' : ' on') + '" aria-selected="' + !i + '" data-k="' + t.k + '">' + t.label + '</button>'; }).join('');
+    if (chipsEl) chipsEl.innerHTML = cfg.chips.map(function (t, i) { return '<button type="button" class="chip' + (i ? '' : ' on') + '" data-k="' + t.k + '">' + t.label + '</button>'; }).join('');
+    function render() {
+      var lower = cfg.lower ? cfg.lower(tab, chip) : false, vals = rows.map(function (r) { return cfg.value(r, tab, chip); });
+      var ok = vals.filter(function (v) { return v !== null && v !== undefined; }), best = lower ? Math.min.apply(null, ok) : Math.max.apply(null, ok);
+      var mx = Math.max.apply(null, ok) * (rowsEl.clientWidth < 520 ? 1.3 : 1.15) || 1;
+      rowsEl.innerHTML = rows.map(function (r, k) {
+        var v = vals[k];
+        if (v === null || v === undefined) return '<div class="rx-row' + (r.ours ? ' ours' : '') + '"><div class="rx-name">' + r.name + '</div><div class="rx-bar na"><b style="left:8px">not reported</b></div></div>';
+        var w = v / mx * 100;
+        return '<div class="rx-row' + (r.ours ? ' ours' : '') + '"><div class="rx-name">' + r.name + '</div><div class="rx-bar"><span style="width:' + w + '%"></span><b style="left:calc(' + w + '% + 8px)">' + (cfg.fmt ? cfg.fmt(v, tab, chip) : v.toFixed(1)) + (v === best ? '  ★' : '') + '</b></div></div>';
+      }).join('');
+      footEl.textContent = cfg.foot(tab, chip);
+    }
+    function bind(el, set) {
+      if (!el) return;
+      el.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-k]'); if (!b) return; set(b.dataset.k);
+        el.querySelectorAll('[data-k]').forEach(function (x) { var on = x === b; x.classList.toggle('on', on); if (x.classList.contains('tab')) x.setAttribute('aria-selected', String(on)); });
+        render();
+      });
+    }
+    bind(tabsEl, function (k) { tab = k; }); bind(chipsEl, function (k) { chip = k; });
+    render();
+    return { state: function () { return { tab: tab, chip: chip, rows: rowsEl.children.length, values: [].map.call(rowsEl.querySelectorAll('.rx-bar b'), function (b) { return b.textContent; }) }; } };
+  }
+  var TRAIN = [{ k: '1', label: 'One model per category' }, { k: '0', label: 'One joint model' }];
+  function cats(list) { return list.map(function (c) { return { k: c, label: c === 'mAP' ? 'mAP (all)' : c }; }); }
+  var rxScanNet = explorer(document.getElementById('rx-scannet'), D.scannet, {
+    tabs: TRAIN, chips: cats(['mAP', 'Chair', 'Sofa', 'Table & desk', 'Cabinet', 'Bookshelf', 'Trash bin', 'Bathtub', 'Display', 'Others']),
+    value: function (r, t, c) { return r.v[c][+t]; },
+    foot: function (t) { return 'AP at IoU 0.5 (%) on the ScanNet validation set with Scan2CAD boxes.' + (t === '1' ? ' PointFusion and GSPN report joint training only.' : '') + ' ★ best.'; }
+  });
+  var rxSceneNN = explorer(document.getElementById('rx-scenenn'), D.scenenn, {
+    tabs: TRAIN, chips: cats(['mAP', 'Chair', 'Table & desk', 'Sofa', 'Cabinet', 'Display']),
+    value: function (r, t, c) { return r.v[c][+t]; },
+    foot: function (t) { return 'AP at IoU 0.5 (%) on SceneNN, models trained on ScanNet.' + (t === '1' ? ' GSPN reports joint training only.' : '') + ' ★ best.'; }
+  });
+  var rxSun = explorer(document.getElementById('rx-sun'), D.sunrgbd, {
+    chips: [{ k: '1', label: 'mAP at IoU 0.5' }, { k: '0', label: 'mAP at IoU 0.25' }],
+    value: function (r, t, c) { return r.v.all[+c]; },
+    foot: function () { return 'SUN RGB-D, 10 most common categories, one joint model for every method. ★ best.'; }
+  });
+  var AN = [{ k: '0', label: 'Heading error (°) ↓' }, { k: '1', label: 'Centre error (m) ↓' }, { k: '2', label: 'Time per scan (s) ↓' }, { k: '3', label: 'mAP ↑' }];
+  var rxAnaly = explorer(document.getElementById('rx-analy'), D.analy, {
+    chips: AN, value: function (r, t, c) { return r.v.all[+c]; }, lower: function (t, c) { return c !== '3'; },
+    fmt: function (v, t, c) { return c === '1' || c === '2' ? v.toFixed(2) : v.toFixed(1); },
+    foot: function (t, c) { return c === '2' ? 'ScanNet, joint models; i9-7900X CPU and GTX 1080 Ti GPU. ★ best.' : 'ScanNet, joint models; errors of the boxes detected at IoU 0.5. ★ best.'; }
+  });
+  var rxAbl = explorer(document.getElementById('rx-abl'), D.ablation, {
+    tabs: [{ k: 'ScanNet', label: 'ScanNet' }, { k: 'SceneNN', label: 'SceneNN' }],
+    value: function (r, t) { return r.v[t][0]; },
+    foot: function () { return 'mAP at IoU 0.5 (%), models trained per category. ★ best.'; }
+  });
+
+  window.__canon = {
+    sv: SV.state, lcc: LCC.state, vd: VD.state, vdRun: VD.run,
+    rx: { scannet: rxScanNet.state, scenenn: rxSceneNN.state, sun: rxSun.state, analy: rxAnaly.state, abl: rxAbl.state }
+  };
+
+  /* ================= teaser, BibTeX, lightbox ================= */
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
