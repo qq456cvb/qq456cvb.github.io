@@ -236,3 +236,49 @@ h2.h1-style {
     display: none;
   }
 }
+
+/* Visitor globe (_includes/visitor-globe.html): collapsed until the widget has drawn. */
+.visitor-globe {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(84, 94, 102, 0.12);
+  text-align: center;
+
+  &:not(.is-ready) {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}
+
+.visitor-globe__label {
+  margin: 0 0 0.55rem;
+  color: var(--academic-muted);
+  font-size: $type-size-7;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visitor-globe__slot {
+  width: 140px;
+  max-width: 100%;
+  margin: 0 auto;
+  line-height: 0;
+}
+
+/* below the page content when the sidebar is collapsed */
+.visitor-globe--inline {
+  margin-top: 2.5rem;
+
+  .visitor-globe__slot {
+    width: 170px;
+  }
+}
+
+.sidebar.sticky.sidebar--static {
+  position: static;
+}

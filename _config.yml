@@ -77,6 +77,10 @@ analytics:
   google:
     tracking_id          :
 
+# Visitor globe in the home page sidebar: the d= value of the globe widget code from https://mapmyvisitors.com
+# (leave empty to show no globe)
+visitor_globe            :
+
 
 # Site Author
 author:

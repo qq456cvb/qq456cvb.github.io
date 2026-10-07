@@ -1,0 +1,33 @@
+<div class="visitor-globe" id="visitor-globe">
+  <p class="visitor-globe__label">Visitors</p>
+  <div class="visitor-globe__slot" id="visitor-globe-slot" role="img" aria-label="Globe with a dot for each place this site has been visited from"></div>
+  <script>
+    (function () {
+      /* MapMyVisitors globe (site.visitor_globe). It sits in the sidebar on wide screens; on narrower ones the sidebar
+         is collapsed, so it moves below the page content. The widget script is added once the page is parsed (it must
+         still load before the window load event, which starts its animation) and the block stays collapsed until the
+         globe is drawn, so an ad blocker or a wrong token leaves nothing behind. */
+      var box = document.getElementById('visitor-globe'), slot = document.getElementById('visitor-globe-slot');
+      var sidebar = box.parentNode, wide = false, top = 0;
+      function fit() {
+        /* a sticky sidebar taller than the window would keep the globe out of view, so let it scroll with the page */
+        if (wide) { sidebar.classList.toggle('sidebar--static', sidebar.offsetHeight + top > window.innerHeight); }
+      }
+      function start() {
+        var content = document.querySelector('.page__content'), s = document.createElement('script'), tries = 0, timer;
+        wide = getComputedStyle(sidebar).position === 'sticky';
+        top = parseFloat(getComputedStyle(sidebar).top) || 0;
+        if (!wide && content) { content.appendChild(box); box.classList.add('visitor-globe--inline'); }
+        s.id = 'mmvst_globe';
+        s.src = 'https://mapmyvisitors.com/globe.js?d={{ site.visitor_globe | url_encode }}';
+        slot.appendChild(s);
+        timer = setInterval(function () {
+          var g = slot.querySelector('.mmvst_outer');
+          if (g && g.offsetHeight) { clearInterval(timer); box.classList.add('is-ready'); fit(); window.addEventListener('resize', fit); }
+          else if (++tries > 600) { clearInterval(timer); }
+        }, 100);
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
+    })();
+  </script>
+</div>
