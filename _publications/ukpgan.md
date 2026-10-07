@@ -10,6 +10,6 @@ arxiv: 'https://arxiv.org/abs/2011.11974'
 code: 'https://github.com/qq456cvb/UKPGAN'
 site: '/projects/ukpgan'
 weight: 200
-citation: 'You, Y., Liu, W., Ze, Y., Li, Y. L., Wang, W., & Lu, C. (2022). UKPGAN: A General Self-Supervised Keypoint Detector. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR).'
+citation: 'You, Y., Liu, W., Ze, Y., Li, Y. L., Wang, W., & Lu, C. (2022). UKPGAN: A General Self-Supervised Keypoint Detector. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) (pp. 17042–17051).'
 authors: '<b>Yang You</b>, Wenhai Liu, Yanjie Ze, Yong-Lu Li, Weiming Wang, Cewu Lu'
 ---

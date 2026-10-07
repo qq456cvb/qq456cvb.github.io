@@ -1,0 +1,779 @@
+---
+layout: compress
+permalink: /projects/ukpgan
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UKPGAN: A General Self-Supervised Keypoint Detector (CVPR 2022)</title>
+  <meta name="description" content="UKPGAN detects 3D keypoints without labels: keypoints are the few points from which the whole shape can be reconstructed. GAN-based sparsity control and salient information distillation give keypoints that match human annotations, track human bodies across poses, survive rotations, and transfer to real scans. CVPR 2022.">
+  <meta name="keywords" content="UKPGAN, 3D keypoint detection, self-supervised, unsupervised keypoints, point clouds, GAN, rotation invariance, local reference frame, SMPL, 3DMatch, registration, KeypointNet, CVPR 2022">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/ukpgan">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UKPGAN: A General Self-Supervised Keypoint Detector">
+  <meta property="og:description" content="Self-supervised 3D keypoints: the few points that can rebuild the shape. CVPR 2022.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/ukpgan">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/ukpgan/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/ukpgan/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2303100b'/%3E%3Cg fill='%2394a3b8'%3E%3Ccircle cx='20' cy='22' r='3'/%3E%3Ccircle cx='32' cy='18' r='3'/%3E%3Ccircle cx='26' cy='34' r='3'/%3E%3Ccircle cx='40' cy='40' r='3'/%3E%3Ccircle cx='22' cy='46' r='3'/%3E%3C/g%3E%3Cg fill='%23f87171'%3E%3Ccircle cx='46' cy='20' r='5'/%3E%3Ccircle cx='44' cy='50' r='5'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/ukpgan#article",
+        "headline": "UKPGAN: A General Self-Supervised Keypoint Detector",
+        "url": "https://qq456cvb.github.io/projects/ukpgan",
+        "datePublished": "2022-06",
+        "pagination": "17042-17051",
+        "publication": { "@type": "PublicationEvent", "name": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) 2022" },
+        "sameAs": ["https://openaccess.thecvf.com/content/CVPR2022/html/You_UKPGAN_A_General_Self-Supervised_Keypoint_Detector_CVPR_2022_paper.html", "https://arxiv.org/abs/2011.11974", "https://qq456cvb.github.io/publications/ukpgan"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Wenhai Liu" }, { "@type": "Person", "name": "Yanjie Ze" }, { "@type": "Person", "name": "Yong-Lu Li" },
+          { "@type": "Person", "name": "Weiming Wang" }, { "@type": "Person", "name": "Cewu Lu" }
+        ],
+        "keywords": ["3D keypoint detection", "self-supervised learning", "point clouds", "rotation invariance", "registration"],
+        "image": "https://qq456cvb.github.io/projects/ukpgan/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/ukpgan#video" }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "UKPGAN",
+        "codeRepository": "https://github.com/qq456cvb/UKPGAN",
+        "programmingLanguage": "Python",
+        "sameAs": ["https://huggingface.co/qq456cvb/UKPGAN"],
+        "citation": { "@id": "https://qq456cvb.github.io/projects/ukpgan#article" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/ukpgan#video",
+        "name": "UKPGAN teaser",
+        "description": "One-minute overview: keypoints as information compression, the self-supervised detector with GAN sparsity control and salient information distillation, keypoints on ShapeNet objects and SMPL human bodies, rotation repeatability, and registration on real 3DMatch scans.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/ukpgan/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/ukpgan/static/media/teaser.mp4",
+        "uploadDate": "2026-10-07",
+        "duration": "PT54S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f6f9f7; --surface: #ffffff; --ink: #0c1712; --muted: #435249; --faint: #7a8a81; --line: #e1e9e4;
+      --accent: #059669; --accent-ink: #047857; --accent-soft: rgba(5, 150, 105, .08); --best: #0c1712; --pre: #a7b4ad;
+      --kp: #ef4444; --pt: #8b9a92; --stage: linear-gradient(180deg, #ffffff, #edf3ef);
+      --hero: #03100b; --hero-2: #0b2e22; --radius: 18px; --shadow: 0 1px 2px rgba(12, 23, 18, .05), 0 8px 28px rgba(12, 23, 18, .06);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #070c0a; --surface: #101814; --ink: #ecf4ef; --muted: #b3c2b9; --faint: #85958c; --line: #22302a;
+        --accent: #34d399; --accent-ink: #6ee7b7; --accent-soft: rgba(52, 211, 153, .12); --best: #ffffff; --pre: #55665d;
+        --kp: #f87171; --pt: #7d8e85; --stage: linear-gradient(180deg, #17211c, #0d1411);
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    code { font: 500 .88em "JetBrains Mono", ui-monospace, monospace; background: var(--accent-soft); color: var(--ink); padding: 1px 6px; border-radius: 6px; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    .hero { background: radial-gradient(1200px 600px at 72% 8%, var(--hero-2), var(--hero) 70%); color: #edf5f0; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #a7f3d0; border: 1px solid rgba(52, 211, 153, .55); background: rgba(52, 211, 153, .12); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 8px; font-size: clamp(46px, 8.4vw, 96px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { color: #34d399; text-shadow: 0 0 40px rgba(52, 211, 153, .35); }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #dfece5; margin: 0 0 22px; max-width: 940px; }
+    .authors { font-size: 18px; font-weight: 500; color: #cfdcd5; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #34d399; }
+    .authors sup { color: #6ee7b7; font-weight: 600; margin-left: 1px; }
+    .affil { color: #93a69b; font-size: 15px; margin-top: 6px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #34d399; border-color: #34d399; color: #022c1e; }
+    .btn.primary:hover { background: #6ee7b7; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(3, 16, 11, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(3, 16, 11, .8); }
+
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b, p b, li b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+    .sub { margin-top: 44px; }
+    .note { font-size: 14px; color: var(--faint); margin: 10px 2px 0; }
+    .mt { margin-top: 16px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 36px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card p { margin: 0; font-size: 15.5px; }
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    .figure.dark { background: #000; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+    .grid-side { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; align-items: start; }
+    .grid2 > *, .grid3 > *, .grid-side > *, .kv > * { min-width: 0; }
+
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 26px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .steps li::before { color: #022c1e; } }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip.on, .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .chip:disabled { opacity: .45; cursor: not-allowed; }
+
+    /* keypoint viewer */
+    .kv { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 16px; margin-top: 18px; }
+    .kv-stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; aspect-ratio: 4 / 3; }
+    .kv-stage canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
+    .kv-stage canvas:active { cursor: grabbing; }
+    .kv-stage .hint { position: absolute; left: 14px; bottom: 12px; font-size: 12.5px; font-weight: 600; color: var(--faint); pointer-events: none; }
+    .kv-stage .count { position: absolute; right: 14px; top: 12px; font: 600 12.5px "JetBrains Mono", monospace; color: var(--muted); background: color-mix(in srgb, var(--surface) 80%, transparent); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+    .kv-stage .count b { color: var(--kp); }
+    .kv-side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
+    .ctl h4 { margin: 0 0 10px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+    .ctl p { font-size: 14px; margin: 10px 0 0; }
+    .thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .thumbs button { aspect-ratio: 1 / 1; padding: 0; border-radius: 12px; border: 2px solid var(--line); background: var(--stage); cursor: pointer; overflow: hidden; }
+    .thumbs button[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .thumbs canvas { width: 100%; height: 100%; display: block; }
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13.5px; color: var(--muted); margin-top: 10px; }
+    .legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; vertical-align: -1px; margin-right: 6px; }
+
+    /* bar explorers */
+    .rx { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px 16px; }
+    .rx-top { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .rx-row { display: grid; grid-template-columns: 250px 1fr; gap: 14px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .rx-row:last-child { border-bottom: 0; }
+    .rx-name { font-weight: 700; font-size: 15px; line-height: 1.3; }
+    .rx-row.ours .rx-name { color: var(--accent-ink); }
+    .rx-bar { position: relative; height: 22px; border-radius: 6px; background: color-mix(in srgb, var(--line) 55%, transparent); }
+    .rx-bar span { position: absolute; inset: 0 auto 0 0; border-radius: 6px; background: var(--pre); transition: width .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar span { background: var(--accent); }
+    .rx-bar b { position: absolute; top: 50%; transform: translateY(-50%); font: 600 12.5px/1 "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; transition: left .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar b { color: var(--accent-ink); }
+    .rx-foot { margin-top: 12px; font-size: 14px; color: var(--faint); }
+
+    /* registration chart */
+    .lc { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px 14px; }
+    .lc-top { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .lc svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .lc .axis { stroke: var(--line); stroke-width: 1; }
+    .lc .tick { fill: var(--faint); font: 500 12px "JetBrains Mono", monospace; }
+    .lc .ttl { fill: var(--faint); font: 600 12.5px Inter, sans-serif; }
+    .lc .ln { fill: none; stroke: var(--pre); stroke-width: 2; transition: d .5s; }
+    .lc .ln.ours { stroke: var(--accent); stroke-width: 3.5; }
+    .lc .ln.d3 { stroke: var(--muted); stroke-dasharray: 6 5; stroke-width: 2.2; }
+    .lc .dot { fill: var(--surface); stroke: var(--pre); stroke-width: 2; }
+    .lc .dot.ours { stroke: var(--accent); fill: var(--accent); }
+    .lc .dot.d3 { stroke: var(--muted); }
+    .lc .lab { font: 600 12.5px Inter, sans-serif; fill: var(--muted); }
+    .lc .lab.ours { fill: var(--accent-ink); font-weight: 800; }
+
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { border-collapse: collapse; width: 100%; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 9px 12px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    thead th.grp { text-align: center; }
+    th[scope=row], thead tr:first-child th:first-child { text-align: left; color: var(--ink); font-weight: 600; }
+    td { color: var(--muted); }
+    td.best { color: var(--best); font-weight: 800; }
+    tr.ours th, tr.ours td { background: var(--accent-soft); }
+    tr.ours th[scope=row] { color: var(--accent-ink); font-weight: 800; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    details.more { margin-top: 14px; }
+    details.more summary { cursor: pointer; font-weight: 600; color: var(--accent-ink); font-size: 15px; margin-bottom: 10px; }
+
+    .dl { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: start; }
+    .dl ul { padding-left: 20px; margin: 0 0 14px; color: var(--muted); }
+    .dl li { margin: 6px 0; }
+    .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .btns .btn { background: var(--ink); color: var(--bg); border: 0; }
+    .btns .btn:hover { background: var(--accent); color: #fff; }
+    .codes { display: grid; gap: 12px; }
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; }
+    pre.code, .bib { position: relative; background: #0b1410; color: #e3efe8; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    @media (prefers-color-scheme: dark) { pre.code, .bib { border: 1px solid var(--line); } }
+    pre.code .c { color: #8aa197; }
+
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(3, 16, 11, .9); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .related, .grid2, .grid-side, .kv, .dl { grid-template-columns: 1fr; }
+      .grid3 { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stat .num { font-size: 28px; }
+      .steps, .grid3 { grid-template-columns: 1fr; }
+      .lead { font-size: 18.5px; }
+      .rx, .lc { padding: 16px 14px 12px; }
+      .rx-row { grid-template-columns: 1fr; gap: 6px; }
+      .tab { padding: 8px 10px; font-size: 14px; }
+      th, td { padding: 8px 9px; }
+      .bib { padding-top: 54px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">CVPR 2022</span>
+    <h1>UKP<span>GAN</span></h1>
+    <p class="subtitle">A General Self-Supervised Keypoint Detector</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a></span><span>Wenhai Liu</span><span>Yanjie Ze</span><span>Yong-Lu Li</span><span>Weiming Wang<sup>✉</sup></span><span>Cewu Lu<sup>✉</sup></span>
+    </div>
+    <div class="affil">Shanghai Jiao Tong University · ✉ corresponding authors</div>
+    <div class="links">
+      <a class="btn primary" href="https://openaccess.thecvf.com/content/CVPR2022/papers/You_UKPGAN_A_General_Self-Supervised_Keypoint_Detector_CVPR_2022_paper.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://arxiv.org/abs/2011.11974"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>arXiv</a>
+      <a class="btn" href="https://github.com/qq456cvb/UKPGAN"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="https://huggingface.co/qq456cvb/UKPGAN"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>Models</a>
+      <a class="btn" href="https://www.youtube.com/watch?v=IyGzkdR5MLU"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg>Video</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/ukpgan/static/media/teaser.mp4" poster="/projects/ukpgan/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="UKPGAN teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#explore">Explore in 3D</a><a href="#method">Method</a><a href="#human">Human labels</a><a href="#bodies">Human bodies</a><a href="#scans">Real scans</a><a href="#rotation">Rotations</a><a href="#ablations">Ablations</a><a href="#code">Code</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>Keypoints are the points that rebuild the shape</h2>
+    <p class="lead">What makes a point a keypoint? UKPGAN treats it as <b>information compression</b>: a good set of keypoints should be enough to reconstruct the whole object. The detector scores every point, a <b>GAN keeps the scores sparse</b>, and a decoder has to rebuild the point cloud from what the high-scoring points carry. No labels are used, yet the keypoints match human annotations, follow human bodies through poses, survive arbitrary rotations, and carry over from synthetic shapes to real scans.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">66.6<small>% IoU</small></div><p>keypoint consistency on SMPL bodies across poses, vs 23.9% for USIP, the next best detector</p></div>
+      <div class="stat"><div class="num">&gt;90%</div><p>repeatability under arbitrary rotations with only four keypoints, near 100% with more</p></div>
+      <div class="stat"><div class="num">74.2<small>%</small></div><p>feature-matching recall on real 3DMatch scans with only 100 keypoints, vs at most 53.5% for ISS, SIFT-3D and random</p></div>
+      <div class="stat"><div class="num">0<small>labels</small></div><p>self-supervised, and trained on synthetic shapes only</p></div>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/ukpgan/static/media/overview.jpg" width="1600" height="608" decoding="async" alt="Left: UKPGAN keypoints in red on office chairs and on a human body in three poses. Right: keypoints on two partial scans of a real room, used for geometric registration."><figcaption>Keypoints (red) on chairs and on a human body in different poses, and on real room scans, where they serve geometric registration.</figcaption></figure>
+  </div>
+</section>
+
+<section id="explore">
+  <div class="wrap">
+    <div class="kicker">Explore in 3D</div>
+    <h2>Look at the keypoints yourself</h2>
+    <p>UKPGAN's keypoints on ShapeNet objects, SMPL human bodies and real 3DMatch scans. Each object has 2,048 points; the detector gives each one a keypoint probability. Switch between the keypoints left after <b>non-maximum suppression</b> and <b>every point with probability above 0.5</b>, and drag to turn the object.</p>
+    <div class="kv" id="kv">
+      <div class="kv-stage">
+        <canvas id="kv-canvas" role="img" aria-label="Point cloud with UKPGAN keypoints in red"></canvas>
+        <span class="count" id="kv-count"></span>
+        <span class="hint">Drag to rotate</span>
+      </div>
+      <div class="kv-side">
+        <div class="ctl">
+          <h4>Data</h4>
+          <div class="chips" role="group" aria-label="Category" id="kv-sets"></div>
+        </div>
+        <div class="ctl">
+          <h4>Object</h4>
+          <div class="thumbs" id="kv-thumbs" role="group" aria-label="Object"></div>
+        </div>
+        <div class="ctl">
+          <h4>Keypoints</h4>
+          <div class="chips" role="group" aria-label="Keypoints">
+            <button class="chip" type="button" data-mode="nms" aria-pressed="true">After NMS</button>
+            <button class="chip" type="button" data-mode="all" aria-pressed="false" id="kv-all">All with p &gt; 0.5</button>
+          </div>
+          <div class="legend"><span><i style="background:var(--kp)"></i>keypoint</span><span><i style="background:var(--pt)"></i>other point</span></div>
+          <p id="kv-note">NMS keeps the most probable point within a radius, which leaves the sparse, distinct corners and tips.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="kicker">Method</div>
+    <h2>Compress the shape into a few points</h2>
+    <p>A rectangle can be rebuilt from its four corners; the points between them add little. UKPGAN learns this trade-off with an encoder that scores points and a decoder that reconstructs the shape from the scored points.</p>
+    <ol class="steps">
+      <li><b>Rotation-invariant local features</b>Each point's neighbourhood is aligned to a local reference frame and voxelized into a smoothed density grid, then refined by 3D convolutions.</li>
+      <li><b>Probability and embedding</b>Two heads give every point a keypoint probability Φ(x) and a 128-d embedding h(x).</li>
+      <li><b>GAN sparsity control</b>A WGAN-GP critic pushes each object's probabilities toward a U-shaped Beta prior: most near 0, a few near 1.</li>
+      <li><b>Salient information distillation</b>A channel-wise max over Φ(x)·h(x) feeds a TopNet decoder that must reconstruct the point cloud (Chamfer loss).</li>
+    </ol>
+    <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/pipeline.jpg" width="1800" height="821" loading="lazy" decoding="async" alt="Pipeline: from the input point cloud, local volumetric descriptors and point-wise 3D convolutions give point-wise features; MLPs output embeddings h(x) and keypoint probabilities Phi(x); GAN-based sparsity control matches Phi to a Beta distribution; salient information distillation takes the max of Phi times h; a tree decoder reconstructs the point cloud; a reconstruction loss and an optional symmetry regularization train the model."><figcaption>Probabilities and embeddings are computed from rotation-invariant local features; the GAN keeps probabilities sparse, and the max over Φ·h is all the decoder gets to rebuild the shape. A symmetry regularizer is used in training only.</figcaption></figure>
+    <div class="grid-side mt">
+      <div>
+        <h3>Why the max, and why a GAN</h3>
+        <p>The decoder only sees the channel-wise maximum of Φ(x)·h(x), so a point contributes only if it is both <b>probable</b> and <b>distinctive</b>; points with ordinary, repeated context get suppressed. An L1 penalty on Φ would just push all scores down; matching a <b>Beta prior</b> through the GAN instead lets scores pile up at both 0 and 1, and its two parameters set how many keypoints come out.</p>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/beta_control.jpg" width="900" height="480" loading="lazy" decoding="async" alt="The same sofa with keypoints at p greater than 0.5 for two Beta priors: with alpha 0.1 and beta 0.01 only corners and feet are red; with alpha 0.03 and beta 0.01 edges are red too."><figcaption>Changing the Beta prior changes the keypoint budget: corners first, then edges (supplementary).</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="human">
+  <div class="wrap">
+    <div class="kicker">Human labels</div>
+    <h2>Close to what people mark</h2>
+    <p>On ShapeNet chairs with expert keypoints and on airplanes, chairs and tables from <a href="/projects/keypointnet">KeypointNet</a>, a detected keypoint counts as correct if it lies within a geodesic distance of a human-marked one. Above the smallest thresholds, UKPGAN's keypoints overlap human annotations more than those of the learned detectors USIP and D3Feat and the hand-crafted Harris-3D, ISS and SIFT-3D.</p>
+    <div class="grid2">
+      <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/iou_shapenet_chair.jpg" width="900" height="729" loading="lazy" decoding="async" alt="Plot of IoU against geodesic threshold on ShapeNet chairs: UKPGAN's curve is highest, reaching about 23% at 0.1, ahead of D3Feat, USIP and the hand-crafted detectors."><figcaption>ShapeNet chairs (expert keypoints).</figcaption></figure>
+      <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/iou_keypointnet.jpg" width="900" height="729" loading="lazy" decoding="async" alt="Plot of IoU against geodesic threshold on KeypointNet: UKPGAN's curve is highest, reaching about 47% at 0.1, ahead of D3Feat, USIP and the hand-crafted detectors."><figcaption>KeypointNet (airplanes, chairs, tables).</figcaption></figure>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/ukpgan/static/media/vs_baselines.jpg" width="1700" height="1307" loading="lazy" decoding="async" alt="Keypoints from UKPGAN, USIP, D3Feat, Harris-3D, ISS and SIFT-3D and human annotations on two airplanes, two chairs and two tables: UKPGAN's sit on wing tips, legs and corners like the human ones."><figcaption>Keypoints from six detectors and from people. UKPGAN's land on wing tips, leg ends and corners, like the human ones.</figcaption></figure>
+    <details class="more"><summary>A single model for 11 more categories</summary>
+      <div class="grid2">
+        <figure class="figure dark" data-zoom><img src="/projects/ukpgan/static/media/more_categories.jpg" width="1400" height="1007" loading="lazy" decoding="async" alt="Keypoints from one universal model on a motorbike, a car, a gun, a guitar, a knife and a mug."><figcaption>One universal model trained on many ShapeNet categories.</figcaption></figure>
+        <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/more_categories_iou.jpg" width="900" height="716" loading="lazy" decoding="async" alt="IoU against geodesic threshold for 11 ShapeNet categories with the universal model."><figcaption>IoU with KeypointNet labels for 11 categories.</figcaption></figure>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="bodies">
+  <div class="wrap">
+    <div class="kicker">Human bodies</div>
+    <h2>The same keypoints as the body moves</h2>
+    <p>SMPL gives point-to-point correspondences between human bodies in different poses, so we can check whether a keypoint on one pose is also detected at the same place on another (IoU), and how far apart the corresponding detections are (consistency loss). UKPGAN finds hands, feet and the head in every pose.</p>
+    <div class="rx" id="smpl-rx">
+      <div class="rx-top">
+        <div class="chips" role="group" aria-label="Metric" data-role="metrics"></div>
+      </div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <div class="grid-side mt">
+      <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/smpl.jpg" width="1400" height="1168" loading="lazy" decoding="async" alt="Keypoints on SMPL bodies in three poses from UKPGAN, USIP, ISS and Harris-3D: UKPGAN marks hands, feet and arms consistently; the others scatter points over the torso."><figcaption>Keypoints with p &gt; 0.5 in three poses. Other detectors scatter points over the torso.</figcaption></figure>
+      <div>
+        <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/smpl_nms.jpg" width="1300" height="485" loading="lazy" decoding="async" alt="Ten keypoints after NMS on three SMPL poses: head, hands, elbows, feet and knees."><figcaption>With NMS and a budget of 10: head, hands, elbows, knees and feet.</figcaption></figure>
+        <details class="more"><summary>Fixed budgets of 10, 20 and 40 keypoints</summary><div class="tbl"><table><caption>SMPL bodies with a fixed budget of 10, 20 or 40 keypoints after NMS (supplementary). UKPGAN is best in every column.</caption><thead><tr><th rowspan="2">Detector</th><th colspan="3" class="grp">IoU (%) ↑</th><th colspan="3" class="grp">Consistency loss (×10⁻²) ↓</th></tr><tr><th>10</th><th>20</th><th>40</th><th>10</th><th>20</th><th>40</th></tr></thead><tbody><tr><th scope="row">USIP</th><td>2.0</td><td>2.4</td><td>2.1</td><td>13.9</td><td>12.5</td><td>12.7</td></tr><tr><th scope="row">D3Feat</th><td>1.6</td><td>1.8</td><td>1.9</td><td>15.8</td><td>14.1</td><td>11.6</td></tr><tr><th scope="row">HARRIS-3D</th><td>0.4</td><td>0.5</td><td>0.9</td><td>21.5</td><td>15.1</td><td>10.4</td></tr><tr><th scope="row">ISS</th><td>1.0</td><td>0.9</td><td>1.2</td><td>20.8</td><td>14.8</td><td>10.3</td></tr><tr><th scope="row">SIFT-3D</th><td>0.1</td><td>0.4</td><td>1.0</td><td>21.9</td><td>14.9</td><td>10.4</td></tr><tr class=ours><th scope="row">UKPGAN (ours)</th><td class=best>7.2</td><td class=best>7.5</td><td class=best>9.2</td><td class=best>9.2</td><td class=best>7.9</td><td class=best>5.9</td></tr></tbody></table></div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="scans">
+  <div class="wrap">
+    <div class="kicker">Real scans</div>
+    <h2>Trained on shapes, used on real scans</h2>
+    <p>Registration first picks keypoints, then matches their descriptors. We keep two state-of-the-art descriptors, PerfectMatch and D3Feat, and swap the detector, giving each a budget from 2,500 down to 100 points per fragment. UKPGAN is trained only on synthetic ShapeNet models; the scans come from 3DMatch (indoor) and ETH (outdoor).</p>
+    <div class="lc" id="lc">
+      <div class="lc-top">
+        <div class="tabs" role="tablist" aria-label="Dataset" id="lc-data"></div>
+        <div class="chips" role="group" aria-label="Descriptor" id="lc-desc"></div>
+        <div class="chips" role="group" aria-label="Metric" id="lc-metric"></div>
+      </div>
+      <svg id="lc-svg" viewBox="0 0 760 300" role="img" aria-label="Registration metric against the number of keypoints for each detector"></svg>
+      <p class="rx-foot" id="lc-foot"></p>
+    </div>
+    <p class="note">With few keypoints, where a detector matters most, UKPGAN with PerfectMatch beats ISS, SIFT-3D and random sampling by a wide margin. With the D3Feat descriptor, D3Feat's own detector, trained jointly with the descriptor on real scans, stays best, and UKPGAN is second.</p>
+    <figure class="figure mt" data-zoom><img src="/projects/ukpgan/static/media/registration.jpg" width="2000" height="447" loading="lazy" decoding="async" alt="Keypoints on the same 3DMatch scan from UKPGAN, D3Feat, random sampling and ISS: UKPGAN's concentrate on corners and object edges."><figcaption>Keypoints on a 3DMatch scan: UKPGAN, D3Feat, random sampling and ISS.</figcaption></figure>
+  </div>
+</section>
+
+<section id="rotation">
+  <div class="wrap">
+    <div class="kicker">Rotations</div>
+    <h2>Rotate the object, keep the keypoints</h2>
+    <p>Orientations are usually unknown, so a detector should find the same points however the object is turned. Thanks to the local reference frames, UKPGAN's keypoints are repeatable under arbitrary rotations: a keypoint counts as repeated if another rotated copy has one within 0.1 of it. With just four keypoints, more than 90% repeat; from 16 on, nearly all do.</p>
+    <div class="grid-side">
+      <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/rotations.jpg" width="1600" height="1184" loading="lazy" decoding="async" alt="Tables, chairs and airplanes each shown in four random rotations, with the same keypoints in orange on each copy."><figcaption>Each object in four random rotations; keypoints (orange) stay on the same parts.</figcaption></figure>
+      <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/repeatability.jpg" width="900" height="718" loading="lazy" decoding="async" alt="Relative repeatability against the number of keypoints from 4 to 512 on KeypointNet: UKPGAN starts above 90% at four keypoints and approaches 100%, while USIP, D3Feat and the hand-crafted detectors start between about 5% and 58%."><figcaption>Repeatability under rotations on KeypointNet, from 4 to 512 keypoints.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="ablations">
+  <div class="wrap">
+    <div class="kicker">Ablations</div>
+    <h2>What each piece does</h2>
+    <p>Without the local rotation-invariant features, keypoints stop being repeatable under rotation. Without GAN sparsity control, scores no longer single out meaningful points and agreement with human labels drops, even though the remaining keypoints repeat slightly more. Salient information distillation and symmetric regularization both raise agreement with human labels.</p>
+    <div class="rx" id="abl">
+      <div class="rx-top">
+        <div class="tabs" role="tablist" aria-label="Category" data-role="cats"></div>
+        <div class="chips" role="group" aria-label="Metric" data-role="metrics"></div>
+      </div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/ukpgan/static/media/ablation.jpg" width="2000" height="355" loading="lazy" decoding="async" alt="Keypoint probabilities on a table for the full model and four ablations, red high and blue low: without GAN sparsity control the table is almost all blue."><figcaption>Keypoint probability on a table (red high, blue low): complete model, then without GAN sparsity control, salient information distillation, rotation-invariant input features and symmetric regularization.</figcaption></figure>
+    <div class="grid-side mt">
+      <div>
+        <h3>Beyond 3D</h3>
+        <p>The same idea works on 2D binary images. Treating each MNIST pixel as a point, UKPGAN finds the strokes' skeleton points and, without class labels, learns embeddings that are consistent within each digit.</p>
+      </div>
+      <div class="grid2">
+        <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/mnist_keypoints.jpg" width="700" height="1298" loading="lazy" decoding="async" alt="MNIST digits with keypoint probability heat maps: high probability on stroke ends and junctions."><figcaption>Keypoint heat maps.</figcaption></figure>
+        <figure class="figure" data-zoom><img src="/projects/ukpgan/static/media/mnist_embeddings.jpg" width="700" height="1304" loading="lazy" decoding="async" alt="MNIST digits coloured by learned embeddings; digits of the same class share colour patterns."><figcaption>Learned embeddings.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap dl">
+    <div>
+      <div class="kicker">Code</div>
+      <h2>Train and run it</h2>
+      <ul>
+        <li><b>TensorFlow</b> (main branch): training on ShapeNet and SMPL, IoU evaluation with KeypointNet, visualization on ShapeNet, SMPL and 3DMatch.</li>
+        <li><b>PyTorch</b> (<code>pytorch</code> branch): with SHOT descriptors, much faster than PerfectMatch's.</li>
+        <li><b>Pretrained models</b> on Hugging Face: airplane, chair, table, SMPL and a universal model.</li>
+      </ul>
+      <div class="btns">
+        <a class="btn" href="https://github.com/qq456cvb/UKPGAN">GitHub</a>
+        <a class="btn" href="https://huggingface.co/qq456cvb/UKPGAN">Models</a>
+        <a class="btn" href="https://huggingface.co/datasets/qq456cvb/KeypointNet">KeypointNet data</a>
+      </div>
+    </div>
+    <div class="codes">
+<pre class="code">hf download qq456cvb/UKPGAN --local-dir .        <span class="c"># checkpoints into outputs/</span>
+python visualize.py --type shapenet --nms --nms_radius 0.1
+python visualize.py --type smpl --nms --nms_radius 0.2 --kp_num 10</pre>
+<pre class="code">python train.py cat_name=chair                    <span class="c"># ShapeNet category</span>
+python eval_iou.py --kpnet_root /your/kpnet/root    <span class="c"># IoU with KeypointNet</span></pre>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>Keypoint detection is an essential component for the object registration and alignment. In this work, we reckon keypoint detection as information compression, and force the model to distill out irrelevant points of an object. Based on this, we propose UKPGAN, a general self-supervised 3D keypoint detector where keypoints are detected so that they could reconstruct the original object shape. Two modules: GAN-based keypoint sparsity control and salient information distillation modules are proposed to locate those important keypoints. Extensive experiments show that our keypoints align well with human annotated keypoint labels, and can be applied to SMPL human bodies under various non-rigid deformations. Furthermore, our keypoint detector trained on clean object collections generalizes well to real-world scenarios, thus further improves geometric registration when combined with off-the-shelf point descriptors. Repeatability experiments show that our model is stable under both rigid and non-rigid transformations, with local reference frame estimation.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/projects/keypointnet"><div class="venue">CVPR 2020</div><h3>KeypointNet</h3><p>A large 3D keypoint dataset from many human annotations, used here for evaluation.</p></a>
+      <a class="card" href="/publications/skeleton"><div class="venue">CVPR 2021</div><h3>Skeleton Merger</h3><p>An unsupervised detector of aligned keypoints, built from a skeleton of the shape.</p></a>
+      <a class="card" href="/publications/sprin"><div class="venue">TPAMI 2022</div><h3>PRIN / SPRIN</h3><p>Point-wise rotation-invariant features for point clouds.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@inproceedings{you2022ukpgan,
+  title={UKPGAN: A General Self-Supervised Keypoint Detector},
+  author={You, Yang and Liu, Wenhai and Ze, Yanjie and Li, Yong-Lu and Wang, Weiming and Lu, Cewu},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={17042--17051},
+  year={2022}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2022 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script id="page-data" type="application/json">{"smpl":[{"name":"USIP","ours":false,"v":{"all":[23.9,4.6]}},{"name":"D3Feat","ours":false,"v":{"all":[20.3,3.8]}},{"name":"Harris-3D","ours":false,"v":{"all":[8.1,3.2]}},{"name":"ISS","ours":false,"v":{"all":[8.1,3.3]}},{"name":"SIFT-3D","ours":false,"v":{"all":[8.2,3.3]}},{"name":"UKPGAN (ours)","ours":true,"v":{"all":[66.6,1.2]}}],"registration":{"3DMatch":[{"det":"ISS","desc":"PerfectMatch","ours":false,"fmr":[90.3,87.9,82.7,71.9,51.7],"rr":[75.5,68.6,55.4,37.9,14.0],"ir":[28.1,22.6,18.7,15.7,12.9]},{"det":"SIFT","desc":"PerfectMatch","ours":false,"fmr":[90.3,87.7,82.5,74.5,52.7],"rr":[77.4,68.1,56.4,35.8,11.7],"ir":[28.0,22.6,18.5,15.1,12.4]},{"det":"Random","desc":"PerfectMatch","ours":false,"fmr":[90.4,86.8,82.3,71.2,53.5],"rr":[76.8,68.9,54.8,36.2,16.1],"ir":[28.2,22.8,18.5,15.1,12.3]},{"det":"UKPGAN (ours)","desc":"PerfectMatch","ours":true,"fmr":[90.1,87.8,85.6,83.1,74.2],"rr":[76.1,72.5,70.0,63.6,37.6],"ir":[28.5,25.4,25.7,24.5,18.8]},{"det":"ISS","desc":"D3Feat","ours":false,"fmr":[95.2,94.4,93.4,90.1,81.0],"rr":[83.5,79.2,76.0,64.3,37.2],"ir":[38.2,33.5,28.8,23.9,17.4]},{"det":"SIFT","desc":"D3Feat","ours":false,"fmr":[94.9,94.0,93.0,91.2,81.3],"rr":[84.0,79.9,76.1,60.9,38.6],"ir":[38.4,33.6,28.8,23.3,17.4]},{"det":"Random","desc":"D3Feat","ours":false,"fmr":[95.1,94.5,92.8,90.0,81.2],"rr":[83.0,80.0,77.0,65.5,38.8],"ir":[38.6,33.6,28.9,23.6,17.3]},{"det":"D3Feat","desc":"D3Feat","ours":false,"fmr":[95.5,94.5,94.1,93.1,90.6],"rr":[84.3,83.6,82.5,78.1,67.2],"ir":[40.5,42.6,44.0,44.7,45.6]},{"det":"UKPGAN (ours)","desc":"D3Feat","ours":true,"fmr":[94.7,94.2,93.5,92.6,85.9],"rr":[82.8,81.4,77.1,69.7,47.4],"ir":[38.8,35.5,34.0,33.1,27.7]}],"ETH":[{"det":"ISS","desc":"PerfectMatch","ours":false,"fmr":[59.1,41.3,23.1,11.3,6.3],"rr":[48.8,28.1,12.8,5.2,1.3],"ir":[11.4,9.0,8.0,6.8,6.8]},{"det":"SIFT","desc":"PerfectMatch","ours":false,"fmr":[58.5,39.4,23.9,10.8,6.2],"rr":[45.5,26.9,12.9,6.0,0.9],"ir":[11.3,9.0,7.5,6.8,6.5]},{"det":"Random","desc":"PerfectMatch","ours":false,"fmr":[60.8,39.7,22.2,13.7,4.4],"rr":[50.1,30.7,16.6,4.3,0.4],"ir":[11.3,9.1,7.6,6.8,6.4]},{"det":"UKPGAN (ours)","desc":"PerfectMatch","ours":true,"fmr":[68.1,62.4,53.6,44.8,29.6],"rr":[58.2,45.5,32.3,19.1,6.1],"ir":[18.7,16.2,14.2,11.8,10.0]},{"det":"ISS","desc":"D3Feat","ours":false,"fmr":[37.9,24.4,16.3,10.8,6.2],"rr":[25.6,18.1,8.9,4.7,1.7],"ir":[8.8,7.7,7.2,6.6,7.5]},{"det":"SIFT","desc":"D3Feat","ours":false,"fmr":[36.8,24.6,14.9,10.2,5.5],"rr":[28.4,16.7,9.0,3.0,1.1],"ir":[8.7,7.7,7.0,7.2,6.7]},{"det":"Random","desc":"D3Feat","ours":false,"fmr":[27.7,16.7,7.7,3.6,2.1],"rr":[20.4,11.0,7.0,1.5,1.5],"ir":[8.1,6.7,6.5,6.3,6.3]},{"det":"D3Feat","desc":"D3Feat","ours":false,"fmr":[48.5,54.5,57.0,57.3,49.9],"rr":[29.2,28.7,29.5,22.8,11.2],"ir":[10.9,12.0,13.0,13.5,13.9]},{"det":"UKPGAN (ours)","desc":"D3Feat","ours":true,"fmr":[47.5,43.1,37.4,33.0,21.5],"rr":[28.3,22.0,14.2,10.9,3.9],"ir":[12.4,11.6,10.9,9.9,9.2]}]},"ablation":[{"name":"Full model","ours":true,"v":{"Airplane":[68.8,98.3],"Chair":[36.2,88.3],"Table":[34.7,90.6]}},{"name":"w/o GAN sparsity control","ours":false,"v":{"Airplane":[36.3,99.8],"Chair":[27.2,95.9],"Table":[23.1,99.6]}},{"name":"w/o salient information distillation","ours":false,"v":{"Airplane":[51.8,94.1],"Chair":[33.3,87.5],"Table":[19.0,99.9]}},{"name":"w/o local rotation-invariant features","ours":false,"v":{"Airplane":[22.4,15.4],"Chair":[16.0,4.9],"Table":[21.2,0.7]}},{"name":"w/o symmetric regularization","ours":false,"v":{"Airplane":[54.9,85.1],"Chair":[20.0,77.0],"Table":[22.3,73.0]}}],"sets":{"chair":{"label":"Chairs","ids":["130","2","140","193","1"],"all":true},"table":{"label":"Tables","ids":["12","13","116","122","148"],"all":true},"airplane":{"label":"Airplanes","ids":["11","103","105","113","140"],"all":true},"smpl":{"label":"Human bodies","ids":["1","6","9","12","15"],"all":true},"scene":{"label":"Real scans","ids":["0","10"],"all":false}}}</script>
+<script>
+(function () {
+  var MEDIA = '/projects/ukpgan/static/media/';
+  var D = JSON.parse(document.getElementById('page-data').textContent);
+  var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+
+  /* ================= point clouds: fetch, parse, draw (canvas 2D, depth-sorted discs) ================= */
+  var cache = {};
+  function loadPC(id) {
+    if (cache[id]) return cache[id];
+    cache[id] = fetch(MEDIA + 'points/' + id + '.bin').then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).then(function (b) {
+      var h = new Uint32Array(b, 0, 3), n = h[0], q = new Int16Array(b, 12, n * 3), o = 12 + n * 6;
+      var kn = new Uint16Array(b, o, h[1]); o += h[1] * 2;
+      var ka = new Uint16Array(b, o, h[2]);
+      var xyz = new Float32Array(n * 3); for (var i = 0; i < n * 3; i++) xyz[i] = q[i] / 32767;
+      var fn = new Uint8Array(n), fa = new Uint8Array(n);
+      for (i = 0; i < kn.length; i++) fn[kn[i]] = 1;
+      for (i = 0; i < ka.length; i++) fa[ka[i]] = 1;
+      return { n: n, xyz: xyz, nms: fn, all: fa, kn: kn.length, ka: ka.length };
+    });
+    return cache[id];
+  }
+  function drawPC(cv, pc, o) {
+    var c = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2), w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
+    if (!w || !h) return;
+    if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+    c.clearRect(0, 0, w, h);
+    if (!pc) return;
+    var cy = Math.cos(o.yaw), sy = Math.sin(o.yaw), cp = Math.cos(o.pitch), sp = Math.sin(o.pitch), n = pc.n, X = pc.xyz;
+    var sx = new Float32Array(n), syy = new Float32Array(n), dz = new Float32Array(n), order = new Uint32Array(n);
+    var f = Math.min(w, h) * (o.zoom || 0.42), D0 = 3.2;
+    for (var i = 0; i < n; i++) {
+      var x = X[3 * i], y = X[3 * i + 1], z = X[3 * i + 2];
+      var x1 = cy * x + sy * z, z1 = -sy * x + cy * z;
+      var y2 = cp * y - sp * z1, z2 = sp * y + cp * z1;
+      var s = D0 / (D0 - z2);
+      sx[i] = w / 2 + x1 * f * s; syy[i] = h / 2 - y2 * f * s; dz[i] = z2; order[i] = i;
+    }
+    order.sort(function (a, b) { return dz[a] - dz[b]; });
+    var flags = o.mode === 'all' ? pc.all : pc.nms, base = (o.size || 1) * Math.max(1.6, Math.min(w, h) / 230) * (n > 4000 ? 0.62 : 1);
+    var pt = o.ptColor, kp = o.kpColor;
+    for (var k = 0; k < n; k++) {
+      var j = order[k], t = (dz[j] + 1) / 2, kpt = flags[j];
+      var r = base * (kpt ? 1.9 : 1) * (0.7 + 0.6 * t);
+      c.globalAlpha = kpt ? 1 : 0.22 + 0.78 * t * t;
+      c.fillStyle = kpt ? kp : pt;
+      c.beginPath(); c.arc(sx[j], syy[j], r, 0, 6.2832); c.fill();
+    }
+    c.globalAlpha = 1;
+  }
+
+  /* ================= keypoint viewer ================= */
+  var kvCanvas = document.getElementById('kv-canvas'), kvSet = 'chair', kvId = null, kvPC = null, kvMode = 'nms';
+  var view = { yaw: 0.7, pitch: 0.38, zoom: 0.42 }, dragging = null, idleUntil = 0, kvVisible = true, dirty = true;
+  var SET_ORDER = ['chair', 'table', 'airplane', 'smpl', 'scene'];
+  document.getElementById('kv-sets').innerHTML = SET_ORDER.map(function (s, i) { return '<button class="chip" type="button" data-set="' + s + '" aria-pressed="' + !i + '">' + D.sets[s].label + '</button>'; }).join('');
+  function colors() { return { ptColor: cssVar('--pt') || '#8b9a92', kpColor: cssVar('--kp') || '#ef4444' }; }
+  function render() {
+    var cl = colors();
+    drawPC(kvCanvas, kvPC, { yaw: view.yaw, pitch: view.pitch, zoom: kvSet === 'scene' ? 0.46 : 0.34, mode: kvMode, ptColor: cl.ptColor, kpColor: cl.kpColor });
+    if (kvPC) document.getElementById('kv-count').innerHTML = kvPC.n.toLocaleString('en-US') + ' points · <b>' + (kvMode === 'all' ? kvPC.ka : kvPC.kn) + ' keypoints</b>';
+  }
+  function showObject(id) {
+    kvId = id; var my = id;
+    document.querySelectorAll('#kv-thumbs button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.id === id)); });
+    loadPC(id).then(function (pc) { if (kvId !== my) return; kvPC = pc; dirty = true; });
+  }
+  function showSet(s) {
+    kvSet = s; var info = D.sets[s];
+    document.querySelectorAll('#kv-sets .chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.set === s)); });
+    var allBtn = document.getElementById('kv-all'); allBtn.disabled = !info.all;
+    if (!info.all && kvMode === 'all') setMode('nms');
+    document.getElementById('kv-note').textContent = s === 'scene' ? 'Real 3DMatch scans; the detector was trained on synthetic ShapeNet models only.' :
+      s === 'smpl' ? 'SMPL human bodies in different poses; NMS keeps 10 keypoints.' : 'NMS keeps the most probable point within a radius, which leaves the sparse, distinct corners and tips.';
+    var th = document.getElementById('kv-thumbs');
+    th.innerHTML = info.ids.map(function (i) { return '<button type="button" data-id="' + s + '_' + i + '" aria-pressed="false" aria-label="' + info.label + ' ' + i + '"><canvas></canvas></button>'; }).join('');
+    th.querySelectorAll('button').forEach(function (b) {
+      loadPC(b.dataset.id).then(function (pc) { var cl = colors(); drawPC(b.querySelector('canvas'), pc, { yaw: 0.7, pitch: 0.38, zoom: s === 'scene' ? 0.46 : 0.34, mode: 'nms', size: 0.55, ptColor: cl.ptColor, kpColor: cl.kpColor }); });
+    });
+    showObject(s + '_' + info.ids[0]);
+  }
+  function setMode(m) {
+    kvMode = m; dirty = true;
+    document.querySelectorAll('[data-mode]').forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.mode === m)); });
+  }
+  document.getElementById('kv-sets').addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (c) showSet(c.dataset.set); });
+  document.getElementById('kv-thumbs').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) showObject(b.dataset.id); });
+  document.querySelectorAll('[data-mode]').forEach(function (c) { c.addEventListener('click', function () { if (!c.disabled) setMode(c.dataset.mode); }); });
+  kvCanvas.addEventListener('pointerdown', function (e) { dragging = { x: e.clientX, y: e.clientY, id: e.pointerId, type: e.pointerType }; try { kvCanvas.setPointerCapture(e.pointerId); } catch (err) {} });
+  kvCanvas.addEventListener('pointermove', function (e) {
+    if (!dragging || dragging.id !== e.pointerId) return;
+    view.yaw += (e.clientX - dragging.x) * 0.01;
+    if (dragging.type === 'mouse') view.pitch = Math.max(-1.2, Math.min(1.4, view.pitch + (e.clientY - dragging.y) * 0.008));
+    dragging.x = e.clientX; dragging.y = e.clientY; idleUntil = performance.now() + 3000; dirty = true;
+  });
+  function endDrag() { dragging = null; idleUntil = performance.now() + 3000; }
+  kvCanvas.addEventListener('pointerup', endDrag); kvCanvas.addEventListener('pointercancel', endDrag);
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { kvVisible = es[0].isIntersecting; dirty = true; }).observe(kvCanvas);
+  window.addEventListener('resize', function () { dirty = true; });
+  var last = performance.now();
+  (function loop(now) {
+    requestAnimationFrame(loop);
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (!kvVisible) return;
+    if (!REDUCED && !dragging && now > idleUntil) { view.yaw += dt * 0.35; dirty = true; }
+    if (dirty) { dirty = false; render(); }
+  })(last);
+  showSet('chair');
+
+  /* ================= bar explorers (SMPL, ablations) ================= */
+  function explorer(root, rows, cats, metrics, foot, start) {
+    var catsEl = root.querySelector('[data-role=cats]'), metEl = root.querySelector('[data-role=metrics]'), rowsEl = root.querySelector('[data-role=rows]'), footEl = root.querySelector('[data-role=foot]');
+    var cat = start[0], met = start[1];
+    if (catsEl) catsEl.innerHTML = cats.map(function (c) { return '<button type="button" role="tab" class="tab' + (c === cat ? ' on' : '') + '" aria-selected="' + (c === cat) + '" data-cat="' + c + '">' + c + '</button>'; }).join('');
+    function render() {
+      metEl.innerHTML = metrics.map(function (m, i) { return '<button type="button" class="chip' + (i === met ? ' on' : '') + '" data-m="' + i + '">' + m.name + (m.lower ? ' ↓' : ' ↑') + '</button>'; }).join('');
+      var m = metrics[met], vals = rows.map(function (r) { return r.v[cat][m.i]; });
+      var best = m.lower ? Math.min.apply(null, vals) : Math.max.apply(null, vals), mx = Math.max.apply(null, vals) * (rowsEl.clientWidth < 520 ? 1.3 : 1.15);
+      rowsEl.innerHTML = rows.map(function (r, k) {
+        var v = vals[k], w = v / mx * 100;
+        return '<div class="rx-row' + (r.ours ? ' ours' : '') + '"><div class="rx-name">' + r.name + '</div><div class="rx-bar"><span style="width:' + w + '%"></span><b style="left:calc(' + w + '% + 8px)">' + v.toFixed(1) + (v === best ? '  ★' : '') + '</b></div></div>';
+      }).join('');
+      footEl.textContent = foot(cat, m);
+    }
+    if (catsEl) catsEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.tab'); if (!b) return; cat = b.dataset.cat;
+      catsEl.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', String(x === b)); });
+      render();
+    });
+    metEl.addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (!c) return; met = +c.dataset.m; render(); });
+    render();
+    return { state: function () { return { cat: cat, metric: metrics[met].name, rows: rowsEl.children.length, values: [].map.call(rowsEl.querySelectorAll('.rx-bar b'), function (b) { return b.textContent; }) }; } };
+  }
+  var smplX = explorer(document.getElementById('smpl-rx'), D.smpl, ['all'], [{ name: 'IoU (%)', i: 0 }, { name: 'Consistency loss (×10⁻³)', i: 1, lower: true }], function (cat, m) {
+    return (m.lower ? 'Distance between corresponding detections; lower is better.' : 'Share of keypoints detected at corresponding points on another pose.') + ' Keypoints with p > 0.5, no NMS; baselines get a matching number of keypoints. ★ best.';
+  }, ['all', 0]);
+  var ablX = explorer(document.getElementById('abl'), D.ablation, ['Airplane', 'Chair', 'Table'], [{ name: 'IoU with human labels (%)', i: 0 }, { name: 'Rotation repeatability (%)', i: 1 }], function () {
+    return 'KeypointNet test sets. ★ best.';
+  }, ['Airplane', 0]);
+
+  /* ================= registration chart: metric against keypoint budget ================= */
+  var lcData = '3DMatch', lcDesc = 'PerfectMatch', lcMetric = 'fmr', svg = document.getElementById('lc-svg');
+  var BUD = [2500, 1000, 500, 250, 100], MET = { fmr: 'Feature-matching recall', rr: 'Registration recall', ir: 'Inlier ratio' };
+  document.getElementById('lc-data').innerHTML = ['3DMatch', 'ETH'].map(function (d, i) { return '<button type="button" role="tab" class="tab' + (i ? '' : ' on') + '" aria-selected="' + !i + '" data-d="' + d + '">' + d + (i ? ' (outdoor)' : ' (indoor)') + '</button>'; }).join('');
+  document.getElementById('lc-desc').innerHTML = ['PerfectMatch', 'D3Feat'].map(function (d, i) { return '<button type="button" class="chip" data-desc="' + d + '" aria-pressed="' + !i + '">' + d + ' descriptor</button>'; }).join('');
+  document.getElementById('lc-metric').innerHTML = Object.keys(MET).map(function (k, i) { return '<button type="button" class="chip" data-met="' + k + '" aria-pressed="' + !i + '">' + MET[k] + '</button>'; }).join('');
+  function lcRender() {
+    var rows = D.registration[lcData].filter(function (r) { return r.desc === lcDesc; });
+    /* draw at the element's real width so text stays legible on phones */
+    var pw = Math.round(svg.getBoundingClientRect().width) || 760, nar = pw < 560;
+    var W = nar ? Math.max(280, pw) : 760, H = nar ? 280 : 300, L = nar ? 34 : 46, R = nar ? 96 : 150, T = 14, B = 40, mx = Math.max.apply(null, rows.map(function (r) { return Math.max.apply(null, r[lcMetric]); })), mn = Math.min.apply(null, rows.map(function (r) { return Math.min.apply(null, r[lcMetric]); }));
+    /* fit the axis to the data, in steps of 10 */
+    var top = Math.min(100, Math.ceil(mx / 10) * 10), bot = Math.max(0, Math.floor(mn / 10) * 10 - 10);
+    function X(i) { return L + i * (W - L - R) / (BUD.length - 1); }
+    function Y(v) { return T + (1 - (v - bot) / (top - bot)) * (H - T - B); }
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var s = '';
+    for (var g = bot; g <= top; g += (top - bot > 50 ? 20 : 10)) s += '<line class="axis" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(g) + '" y2="' + Y(g) + '"/><text class="tick" x="' + (L - 8) + '" y="' + (Y(g) + 4) + '" text-anchor="end">' + g + '</text>';
+    BUD.forEach(function (b, i) { s += '<text class="tick" x="' + X(i) + '" y="' + (H - B + 20) + '" text-anchor="middle">' + b + '</text>'; });
+    s += '<text class="ttl" x="' + ((L + W - R) / 2) + '" y="' + (H - 4) + '" text-anchor="middle">' + (nar ? 'keypoints (fewer →)' : 'keypoints per fragment (fewer to the right)') + '</text>';
+    var labels = [];
+    rows.slice().sort(function (a, b) { return (a.ours ? 1 : 0) - (b.ours ? 1 : 0); }).forEach(function (r) {
+      var cls = r.ours ? 'ours' : (r.det === 'D3Feat' ? 'd3' : ''), v = r[lcMetric];
+      s += '<path class="ln ' + cls + '" d="' + v.map(function (y, i) { return (i ? 'L' : 'M') + X(i) + ' ' + Y(y); }).join(' ') + '"/>';
+      v.forEach(function (y, i) { s += '<circle class="dot ' + cls + '" cx="' + X(i) + '" cy="' + Y(y) + '" r="' + (r.ours ? 4.5 : 3.2) + '"/>'; });
+      labels.push({ y: Y(v[4]), t: (nar && r.ours ? 'Ours' : r.det) + ' ' + v[4].toFixed(1), cls: cls });
+    });
+    /* end labels, nudged apart so they do not overlap */
+    labels.sort(function (a, b) { return a.y - b.y; });
+    for (var k = 1; k < labels.length; k++) if (labels[k].y - labels[k - 1].y < 15) labels[k].y = labels[k - 1].y + 15;
+    labels.forEach(function (l) { s += '<text class="lab ' + l.cls + '" x="' + (W - R + 10) + '" y="' + (l.y + 4) + '">' + l.t + '</text>'; });
+    svg.innerHTML = s;
+    document.getElementById('lc-foot').textContent = MET[lcMetric] + ' (%) on ' + lcData + ' with the ' + lcDesc + ' descriptor; values at 100 keypoints on the right.' + (lcDesc === 'D3Feat' ? ' Dashed: D3Feat\'s own detector, trained on real scans.' : '');
+  }
+  function bindGroup(id, attr, set) {
+    document.getElementById(id).addEventListener('click', function (e) {
+      var b = e.target.closest('[' + attr + ']'); if (!b) return; set(b.getAttribute(attr));
+      document.querySelectorAll('#' + id + ' [' + attr + ']').forEach(function (x) { var on = x === b; if (x.classList.contains('tab')) { x.classList.toggle('on', on); x.setAttribute('aria-selected', String(on)); } else x.setAttribute('aria-pressed', String(on)); });
+      lcRender();
+    });
+  }
+  bindGroup('lc-data', 'data-d', function (v) { lcData = v; });
+  bindGroup('lc-desc', 'data-desc', function (v) { lcDesc = v; });
+  bindGroup('lc-metric', 'data-met', function (v) { lcMetric = v; });
+  lcRender();
+  var lcW = 0; window.addEventListener('resize', function () { var w = Math.round(svg.getBoundingClientRect().width); if (Math.abs(w - lcW) > 40) { lcW = w; lcRender(); } });
+
+  window.__ukpgan = {
+    kv: function () { return { set: kvSet, id: kvId, mode: kvMode, n: kvPC && kvPC.n, kps: kvPC && (kvMode === 'all' ? kvPC.ka : kvPC.kn), thumbs: document.querySelectorAll('#kv-thumbs canvas').length }; },
+    smpl: smplX.state, abl: ablX.state,
+    lc: function () { return { data: lcData, desc: lcDesc, metric: lcMetric, lines: svg.querySelectorAll('path.ln').length, labels: [].map.call(svg.querySelectorAll('text.lab'), function (t) { return t.textContent; }) }; }
+  };
+
+  /* ================= teaser, BibTeX, lightbox ================= */
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
