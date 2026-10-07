@@ -79,7 +79,7 @@ analytics:
 
 # Visitor globe in the home page sidebar: the d= value of the globe widget code from https://mapmyvisitors.com
 # (leave empty to show no globe)
-visitor_globe            :
+visitor_globe            : "H4YBq6mZajlXTg_v5r87Qr4356s4AvLtFKZ7Z6CSqYo"
 
 
 # Site Author
