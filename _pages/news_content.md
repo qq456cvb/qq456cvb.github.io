@@ -2,7 +2,7 @@
 
 🎉 **2026.05: Our paper: <a href='/publications/och3r'>OCH3R: Object-Centric Holistic 3D Reconstruction</a> is accepted to the <i>CVPR 2026 OpenSUN3D Workshop</i>! <a href='https://arxiv.org/pdf/2605.13018'>[Paper]</a>**
 
-🎉 **2026.01: Our paper: <a href='/publications/dotsim'>DOT-Sim: Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration</a> is accepted to <i>ICRA 2026</i>! <a href='https://arxiv.org/pdf/2604.27367'>[Paper]</a>**
+🎉 **2026.01: Our paper: <a href='/publications/dotsim'>DOT-Sim: Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration</a> is accepted to <i>ICRA 2026</i>! <a href='https://arxiv.org/pdf/2604.27367'>[Paper]</a> <a href='/projects/dotsim'>[Project Page]</a>**
 
 🎉 **2026.01: Our paper: <a href='/publications/rodrinet'>Rodrigues Network for Learning Robot Actions</a> is accepted to <i>ICLR 2026</i>! <a href='https://arxiv.org/pdf/2506.02618'>[Paper]</a>**
 

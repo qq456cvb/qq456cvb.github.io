@@ -7,7 +7,7 @@ date: '2026-04-30'
 venue: 'ICRA'
 weight: 1020
 arxiv: 'https://arxiv.org/abs/2604.27367'
-site: ''
+site: '/projects/dotsim'
 image: '/images/dotsim.png'
 citation: 'You, Y., Do, W.K., Swann, A., Antonova, R., Kennedy, M., & Guibas, L. (2026). DOT-Sim: Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration. ICRA 2026.'
 authors: '<b>Yang You</b>, Won Kyung Do, Aiden Swann, Rika Antonova, Monroe Kennedy, Leonidas Guibas'

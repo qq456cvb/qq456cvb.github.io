@@ -1,0 +1,1111 @@
+---
+layout: compress
+permalink: /projects/dotsim
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DOT-Sim: Differentiable Optical Tactile Simulation (ICRA 2026)</title>
+  <meta name="description" content="DOT-Sim simulates soft optical tactile sensors in two stages: the gel is an elastic material simulated with the Material Point Method and calibrated in minutes by differentiable simulation, and a network predicts the tactile image as a residual on top of the real idle image. Classifiers and policies trained only in simulation transfer zero-shot to a real DenseTact sensor. ICRA 2026.">
+  <meta name="keywords" content="DOT-Sim, optical tactile sensor, tactile simulation, differentiable simulation, Material Point Method, MPM, DenseTact, real-to-sim calibration, sim-to-real, residual rendering, ICRA 2026">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/dotsim">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DOT-Sim: Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration">
+  <meta property="og:description" content="Simulate the gel with MPM, calibrate it in minutes, render the tactile image as a residual: zero-shot sim-to-real for a soft optical tactile sensor. ICRA 2026.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/dotsim">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/dotsim/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/dotsim/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2334d399'/%3E%3Cstop offset='.55' stop-color='%2338bdf8'/%3E%3Cstop offset='1' stop-color='%23e879f9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2305060f'/%3E%3Cpath d='M10 46a22 22 0 0 1 44 0z' fill='url(%23g)'/%3E%3Ccircle cx='32' cy='17' r='7' fill='%23e5e7eb'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/dotsim#article",
+        "headline": "DOT-Sim: Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration",
+        "url": "https://qq456cvb.github.io/projects/dotsim",
+        "datePublished": "2026-04",
+        "publication": { "@type": "PublicationEvent", "name": "IEEE International Conference on Robotics and Automation (ICRA) 2026" },
+        "sameAs": ["https://arxiv.org/abs/2604.27367", "https://qq456cvb.github.io/publications/dotsim"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Won Kyung Do" }, { "@type": "Person", "name": "Aiden Swann" }, { "@type": "Person", "name": "Rika Antonova" },
+          { "@type": "Person", "name": "Monroe Kennedy" }, { "@type": "Person", "name": "Leonidas Guibas" }
+        ],
+        "keywords": ["tactile simulation", "optical tactile sensors", "differentiable physics", "Material Point Method", "sim-to-real transfer"],
+        "image": "https://qq456cvb.github.io/projects/dotsim/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/dotsim#video" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/dotsim#video",
+        "name": "DOT-Sim teaser",
+        "description": "DOT-Sim (ICRA 2026) in 56 seconds: simulating a soft optical tactile sensor in two stages, the gel with the Material Point Method calibrated by differentiable simulation, and the tactile image as a residual on the real idle image; image accuracy against other simulators, and zero-shot sim-to-real classification, tumor detection and trajectory following.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/dotsim/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/dotsim/static/media/teaser.mp4",
+        "uploadDate": "2026-10-11",
+        "duration": "PT56S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #faf8fc; --surface: #ffffff; --ink: #17121c; --muted: #4b4456; --faint: #7c748a; --line: #e8e2ee;
+      --accent: #a21caf; --accent-ink: #86198f; --accent-soft: rgba(162, 28, 175, .08); --best: #17121c; --pre: #bcb4c6;
+      --hero: #05060f; --hero-2: #14215a; --radius: 18px; --shadow: 0 1px 2px rgba(23, 18, 28, .05), 0 8px 28px rgba(23, 18, 28, .06);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0910; --surface: #15121b; --ink: #f4f0f8; --muted: #c0b8cc; --faint: #9088a0; --line: #2a2533;
+        --accent: #e879f9; --accent-ink: #f0abfc; --accent-soft: rgba(232, 121, 249, .12); --best: #ffffff; --pre: #5e566c;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    .hero { background: radial-gradient(900px 520px at 78% 4%, var(--hero-2), transparent 70%), radial-gradient(700px 420px at 8% 96%, rgba(134, 25, 143, .28), transparent 70%), var(--hero); color: #f1eef8; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #f5d0fe; border: 1px solid rgba(232, 121, 249, .5); background: rgba(232, 121, 249, .1); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 8px; font-size: clamp(50px, 9vw, 104px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { background: linear-gradient(90deg, #34d399, #38bdf8 50%, #e879f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e4def0; margin: 0 0 22px; max-width: 900px; }
+    .authors { font-size: 18px; font-weight: 500; color: #d3cce2; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #e879f9; }
+    .authors sup, .affil sup { color: #f0abfc; font-weight: 600; margin-left: 2px; }
+    .affil { color: #9d95b0; font-size: 15px; margin-top: 6px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #e879f9; border-color: #e879f9; color: #2a0a30; }
+    .btn.primary:hover { background: #f0abfc; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(5, 6, 15, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(5, 6, 15, .8); }
+
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b, p b, li b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+    .note { font-size: 14px; color: var(--faint); margin: 10px 2px 0; }
+    .mt { margin-top: 16px; }
+    .sub { margin-top: 48px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 36px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card p { margin: 0; font-size: 15.5px; }
+    .card p + p { margin-top: 10px; }
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    .figure img { border-radius: 8px; margin: 0 auto; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .grid-side { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; align-items: start; }
+    .grid2 > *, .grid-side > *, .gd > *, .cmp > * { min-width: 0; }
+
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 26px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .steps li::before { color: #2a0a30; } }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+    .steps li i { display: block; font-style: normal; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 4px; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip.on, .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .chip:disabled { opacity: .45; cursor: not-allowed; }
+    .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
+    .ctl h4 { margin: 0 0 8px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; gap: 8px; }
+    .ctl h4 output { font: 600 13px "JetBrains Mono", monospace; letter-spacing: 0; color: var(--accent-ink); text-transform: none; }
+    .ctl h4 i { font-style: normal; text-transform: none; }
+    .ctl p { font-size: 14px; margin: 10px 0 0; }
+    .ctl + .ctl { margin-top: 12px; }
+    .ctl .chips + h4 { margin-top: 18px; }
+    input[type=range] { width: 100%; accent-color: var(--accent); margin: 2px 0 4px; }
+    .go { border: 0; border-radius: 999px; padding: 9px 16px; font: 700 14px Inter, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
+    .go:hover { background: var(--accent); color: #fff; }
+    .go:disabled { opacity: .5; cursor: wait; }
+    .go.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+    .go.ghost:hover { background: var(--accent-soft); color: var(--accent-ink); }
+
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--line); }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    th[scope=row] { color: var(--ink); font-weight: 700; white-space: nowrap; }
+    td { color: var(--muted); }
+    tr.ours th, tr.ours td { background: var(--accent-soft); color: var(--ink); }
+    tr.ours th[scope=row] { color: var(--accent-ink); font-weight: 800; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    .tbl.num th, .tbl.num td { text-align: right; padding-left: 10px; padding-right: 14px; }
+
+    /* gel toy */
+    .gd { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; margin-top: 18px; }
+    .stage { position: relative; background: #0d0b14; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .stage canvas { display: block; width: 100%; height: 100%; }
+    .stage .cap { position: absolute; left: 14px; top: 12px; font: 600 12.5px Inter, sans-serif; color: #d3cce2; background: rgba(5, 6, 15, .55); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+    .stage .cap.r { left: auto; right: 14px; top: auto; bottom: 12px; }
+    #gel-stage { aspect-ratio: 3 / 2; }
+    #gel-canvas { cursor: grab; touch-action: none; }
+    #gel-canvas:active { cursor: grabbing; }
+    #cam-stage { aspect-ratio: 8 / 2; margin-top: 12px; }
+    #cal-chart { display: block; width: 100%; aspect-ratio: 5 / 3; margin-top: 12px; border-radius: 12px; background: #0d0b14; }
+    .gel-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .cal-out { font-size: 14px; font-weight: 600; color: var(--ink); margin: 10px 0 0; min-height: 2.9em; }
+
+    /* comparison slider */
+    .cmp { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; margin-top: 16px; }
+    #cmp-stage { aspect-ratio: 278 / 208; background: #000; }
+    #cmp-canvas { cursor: ew-resize; touch-action: pan-y; }
+    .cmp-read { font-size: 14.5px; color: var(--muted); margin: 12px 0 0; }
+    .cmp-read b { font: 700 17px "JetBrains Mono", monospace; color: var(--ink); }
+
+    /* bar explorers */
+    .rx { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px 16px; }
+    .rx-top { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .rx-row { display: grid; grid-template-columns: 250px 1fr; gap: 14px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .rx-row:last-child { border-bottom: 0; }
+    .grid2 .rx-row { grid-template-columns: 150px 1fr; }
+    .rx-name { font-weight: 700; font-size: 15px; line-height: 1.3; }
+    .rx-row.ours .rx-name { color: var(--accent-ink); }
+    .rx-bar { position: relative; height: 22px; border-radius: 6px; background: color-mix(in srgb, var(--line) 55%, transparent); }
+    .rx-bar span { position: absolute; inset: 0 auto 0 0; border-radius: 6px; background: var(--pre); transition: width .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar span { background: var(--accent); }
+    .rx-bar b { position: absolute; top: 50%; transform: translateY(-50%); font: 600 12.5px/1 "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; transition: left .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar b { color: var(--accent-ink); }
+    .rx-bar i { position: absolute; top: -4px; bottom: -4px; width: 0; border-left: 2px dashed var(--faint); }
+    .rx-foot { margin-top: 12px; font-size: 14px; color: var(--faint); }
+
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; position: relative; background: #120f18; color: #ece6f4; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    @media (prefers-color-scheme: dark) { .bib { border: 1px solid var(--line); } }
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(5, 6, 15, .9); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .related, .grid2, .grid-side, .gd, .cmp { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stat .num { font-size: 28px; }
+      .lead { font-size: 18.5px; }
+      .steps { grid-template-columns: 1fr; }
+      .rx { padding: 16px 14px 12px; }
+      .rx-row, .grid2 .rx-row { grid-template-columns: 1fr; gap: 6px; }
+      .tab { padding: 8px 10px; font-size: 14px; }
+      th, td { padding: 9px 11px; }
+      .sims thead { display: none; }
+      .sims tr { display: block; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+      .sims tbody tr:last-child { border-bottom: 0; }
+      .sims tr.ours { background: var(--accent-soft); }
+      .sims th, .sims td { display: block; padding: 0; border: 0; background: none !important; }
+      .sims td { font-size: 14.5px; margin-top: 2px; }
+      .sims td::before { content: attr(data-l) ": "; color: var(--faint); }
+      #gel-info { display: none; }
+      .bib { padding-top: 54px; }
+      #cam-stage { aspect-ratio: 8 / 3; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">ICRA 2026</span>
+    <h1>DOT-<span>Sim</span></h1>
+    <p class="subtitle">Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a><sup>1</sup></span><span>Won Kyung Do<sup>1</sup></span><span>Aiden Swann<sup>1</sup></span><span>Rika Antonova<sup>1,2</sup></span><span>Monroe Kennedy<sup>1</sup></span><span>Leonidas Guibas<sup>1</sup></span>
+    </div>
+    <div class="affil"><sup>1</sup>Stanford University · <sup>2</sup>University of Cambridge</div>
+    <div class="links">
+      <a class="btn primary" href="https://arxiv.org/pdf/2604.27367"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://arxiv.org/abs/2604.27367"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>arXiv</a>
+      <a class="btn" href="#toy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18a9 9 0 0 1 18 0z"/><circle cx="12" cy="5.5" r="2.5"/></svg>Try the toy</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/dotsim/static/media/teaser.mp4" poster="/projects/dotsim/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="DOT-Sim teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#method">Method</a><a href="#toy">Poke the gel</a><a href="#optical">Tactile images</a><a href="#physics">Deformation</a><a href="#sim2real">Sim-to-real</a><a href="#limits">Speed &amp; limits</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>Simulate the gel, then the picture it makes</h2>
+    <p class="lead">An optical tactile sensor is a soft gel dome with a camera inside: touch deforms the gel, and the camera sees the result. Simulating one is hard twice over, because the gel deforms a lot and non-linearly, and because its patterned, internally lit surface is hard to render. DOT-Sim splits the problem. The gel is an <b>elastic material simulated with the Material Point Method</b>, whose stiffness parameters are <b>calibrated in minutes</b> by differentiating through the simulator. The image is then predicted as a <b>residual on top of the real sensor's idle image</b>. Classifiers and a control policy trained only on these simulated images work on a real DenseTact sensor without any real training data for the task.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">+4.6<small>dB</small></div><p>PSNR of simulated tactile images over the strongest baseline, averaged over three settings: 31.3 dB vs 26.7 dB for calibrated Tacto</p></div>
+      <div class="stat"><div class="num">81.2<small>%</small></div><p>accuracy on real images for a classifier trained only in simulation, on indenters the renderer never saw in real images (best baseline 52.9%, chance 50%)</p></div>
+      <div class="stat"><div class="num">0.9<small>mm</small></div><p>average error when a real robot follows a trajectory with a policy trained only in simulation (0.896 ± 0.031 mm over 10 trials)</p></div>
+      <div class="stat"><div class="num">minutes</div><p>to calibrate the gel's physical parameters from 19 recordings, on a single GPU</p></div>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/dotsim/static/media/overview.jpg" width="2000" height="753" decoding="async" alt="Overview in three panels. MPM simulation: a real indenter presses a DenseTact sensor; system identification gives the MPM parameters; the simulated particles are rendered to a depth map and a normal map. Optical rendering: depth and normals go through a ResNet that predicts a residual, which is added to the undeformed image to give the rendered tactile image. Zero-shot sim-to-real: object classification, trajectory following and tumor detection."><figcaption>Left: the gel is simulated with MPM after system identification, and rendered to depth and normal maps. Middle: a network turns them into a residual that is added to the undeformed image. Right: three tasks learned in simulation and run on the real sensor.</figcaption></figure>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="kicker">Method</div>
+    <h2>Two stages: physics, then optics</h2>
+    <ol class="steps">
+      <li><i>Physics</i><b>Simulate the gel with MPM</b>The sensor is a set of particles carrying mass, velocity and deformation, moved through a background grid. A rigid indenter follows its recorded path and pushes the particles aside.</li>
+      <li><i>Physics</i><b>Calibrate by gradient descent</b>Young's modulus and Poisson's ratio are optimized so that the simulated surface matches the reference deformation (Chamfer distance), with gradients from the differentiable simulator.</li>
+      <li><i>Optics</i><b>Look from inside</b>A virtual camera at the centre of the sensor's base casts rays through the gel and records a depth map and a surface-normal map, the way the real camera looks at the gel from inside.</li>
+      <li><i>Optics</i><b>Predict the residual</b>A network maps depth and normals to the change of the image relative to the idle frame. Adding it to the real idle image gives the simulated tactile image.</li>
+    </ol>
+    <div class="grid-side">
+      <figure class="figure" data-zoom><img src="/projects/dotsim/static/media/calibration.jpg" width="1165" height="1322" loading="lazy" decoding="async" alt="Calibration and rendering. A real indenter presses the sensor at times t1 to t3. MPM system identification aligns the particle simulation with the Abaqus finite-element mesh. The simulated gel is rendered from inside by casting rays, giving normal and depth maps; a ResNet predicts a residual image, which is added to the idle image at t0 to give the predicted image."><figcaption>Calibration aligns the MPM gel with finite-element reference deformations. Rays from inside the gel give normals and depth; the network's residual is added to the idle image t<sub>0</sub>.</figcaption></figure>
+      <div>
+        <div class="card">
+          <h3>Calibration in detail</h3>
+          <p>The indenter's pose is tracked with a motion-capture system in 19 recordings, poking the sensor at different angles and depths. Measuring the deformed gel directly is impractical (the indenter hides it), so reference deformations come from the Abaqus finite-element solver, which is accurate but too slow to use as the simulator itself.</p>
+          <p>The MPM simulations of all recordings run in parallel; log E and ν are optimized for 30 iterations, and the median over the recordings is kept. This takes a few minutes on one RTX A5000.</p>
+        </div>
+        <div class="card mt">
+          <h3>Why a residual</h3>
+          <p>Most of a tactile image does not change during contact: the pattern, the lighting and the colour gradients stay where they are, and the signal is a local change. Predicting only that change, and adding it to a real idle frame, keeps the sensor's own look for free and leaves the network a much easier problem. The network is a DeepLabV3-ResNet50 trained with a plain pixel-wise L2 loss.</p>
+        </div>
+      </div>
+    </div>
+    <h3 class="sub">How it compares to other tactile simulators</h3>
+    <div class="tbl sims"><table><caption>The most notable optical tactile simulators. “Sim-to-real” is about learned policies, not only image generation: DiffTactile transfers policies through tracked markers, DOT-Sim through the full optical image.</caption><thead><tr><th>Simulator</th><th>Physics</th><th>Backend</th><th>Optical simulation</th><th>Sim-to-real</th></tr></thead><tbody><tr><th scope="row">Tacto</th><td data-l="Physics">PyBullet</td><td data-l="Backend">PyBullet</td><td data-l="Optical simulation">OpenGL</td><td data-l="Sim-to-real">None</td></tr><tr><th scope="row">Taxim</th><td data-l="Physics">FEM</td><td data-l="Backend">N/A</td><td data-l="Optical simulation">Calibrated LUT</td><td data-l="Sim-to-real">None</td></tr><tr><th scope="row">DiffTactile</th><td data-l="Physics">FEM</td><td data-l="Backend">Taichi</td><td data-l="Optical simulation">Learned reflectance</td><td data-l="Sim-to-real">Marker only</td></tr><tr class=ours><th scope="row">DOT-Sim (ours)</th><td data-l="Physics">MPM</td><td data-l="Backend">Warp</td><td data-l="Optical simulation">ResNet-based model</td><td data-l="Sim-to-real">Full optical</td></tr></tbody></table></div>
+  </div>
+</section>
+
+<section id="toy">
+  <div class="wrap">
+    <div class="kicker">Poke the gel</div>
+    <h2>A soft gel you can press, in your browser</h2>
+    <p>A 2D toy of the physics stage, not the paper's simulator: a cross-section of the gel dome, simulated live with the Material Point Method. Drag the indenter into the gel. The strips underneath show what a camera at the centre of the base sees along its rays: depth, surface normal, and how much each ray changed from the idle state. Depth and normal maps like these are the input of DOT-Sim's rendering network.</p>
+    <div class="gd" id="gel">
+      <div>
+        <div class="stage" id="gel-stage"><canvas id="gel-canvas" role="img" aria-label="Cross-section of a soft gel dome simulated with particles, pressed by a rigid indenter"></canvas><span class="cap" id="gel-cap">Drag the indenter</span><span class="cap r" id="gel-info"></span></div>
+        <div class="stage" id="cam-stage"><canvas id="cam-canvas" role="img" aria-label="Depth, normal and change-from-idle along the rays of the virtual camera"></canvas></div>
+      </div>
+      <div>
+        <div class="ctl">
+          <h4>Indenter</h4>
+          <div class="chips" id="gel-shape" role="group" aria-label="Indenter shape"></div>
+          <h4><span>Poisson's ratio <i>ν</i></span> <output id="gel-nu-v">0.30</output></h4>
+          <input type="range" id="gel-nu" min="0.05" max="0.45" step="0.01" value="0.3" aria-label="Poisson's ratio">
+          <p>Higher ν keeps the gel's volume, so it bulges sideways when pressed.</p>
+          <div class="gel-row mt"><button class="chip" type="button" id="gel-rays" aria-pressed="true">Camera rays</button><button class="go ghost" type="button" id="gel-lift">Lift</button></div>
+        </div>
+        <div class="ctl">
+          <h4>Real-to-sim calibration, in miniature</h4>
+          <div class="gel-row"><button class="go" type="button" id="cal-go">Fit ν to a recording</button></div>
+          <canvas id="cal-chart" role="img" aria-label="Poisson's ratio and Chamfer distance over the calibration iterations"></canvas>
+          <p class="cal-out" id="cal-out">A “recording” is a press simulated with a hidden ν. The fit starts from ν = 0.12 and follows the gradient of the Chamfer distance between its surface and the recorded one.</p>
+        </div>
+      </div>
+    </div>
+    <p class="note">The toy fits one parameter and estimates its gradient by finite differences. DOT-Sim fits Young's modulus and Poisson's ratio of a 3D simulator, with gradients from automatic differentiation, on 19 real recordings.</p>
+  </div>
+</section>
+
+<section id="optical">
+  <div class="wrap">
+    <div class="kicker">Tactile images</div>
+    <h2>Simulated images against the real sensor</h2>
+    <p>Six indenters are pressed into a DenseTact 2.0, a soft hemispherical sensor with a random surface pattern. Drag the divider to compare the real image with each simulator's image of the same contact. Indenters #1 and #3 are the two held out in the hardest setting: the renderer never saw a real image of them.</p>
+    <div class="cmp" id="cmp">
+      <div>
+        <div class="stage" id="cmp-stage"><canvas id="cmp-canvas" role="img" aria-label="Real and simulated tactile image, split by a draggable divider"></canvas></div>
+        <input type="range" id="cmp-pos" min="0" max="100" value="50" aria-label="Position of the divider between the real and the simulated image">
+      </div>
+      <div>
+        <div class="ctl">
+          <h4>Contact</h4>
+          <div class="chips" id="cmp-ex" role="group" aria-label="Example"></div>
+          <h4>Simulated by</h4>
+          <div class="chips" id="cmp-m" role="group" aria-label="Simulator"></div>
+          <div class="gel-row mt"><button class="chip" type="button" id="cmp-diff" aria-pressed="false">Show the difference ×4</button></div>
+          <p class="cmp-read" id="cmp-read"></p>
+          <p>The panels are taken from the paper's figures, at their resolution. The number is computed between the two panels shown; the benchmark numbers are below.</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid-side sub">
+      <div>
+        <h3>Three settings</h3>
+        <p><b>Easy</b>: indenters #1 and #3, frames split 80/20 at random. <b>Medium</b>: all six indenters, split 80/20. <b>Hard</b>: train on #2, #4, #5 and #6, test on #1 and #3, which are never seen. DOT-Sim has the best score in every setting and on every metric. From Easy to Hard it loses 1.6 dB of PSNR, where DiffTactile loses 7.4 dB; Tacto, which has no learned rendering, hardly changes.</p>
+        <div class="rx" id="rx-opt" style="margin-top:0">
+          <div class="rx-top"><div class="tabs" role="tablist" aria-label="Setting" data-role="tabs"></div><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/dotsim/static/media/indenters.jpg" width="1500" height="703" loading="lazy" decoding="async" alt="The six indenters in side, front and bottom view: number 1 is a ball on a stem, number 2 a dome, number 3 a thin bar, numbers 4 to 6 domes with steps, grooves and ridges."><figcaption>The six indenters. #3 is a thin bar, so its imprint depends on direction.</figcaption></figure>
+    </div>
+    <h3 class="sub">Does the residual matter?</h3>
+    <div class="grid2">
+      <div>
+        <p>Regressing the whole image from depth and normals, without the idle frame, gives blurrier images that lose the fine surface pattern. In the Hard setting it costs 1.6 dB of PSNR.</p>
+        <div class="rx" id="rx-abl" style="margin-top:0">
+          <div class="rx-top"><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/dotsim/static/media/ablation.jpg" width="906" height="257" loading="lazy" decoding="async" alt="The real tactile image, DOT-Sim's image and the image from direct regression without the residual, which is visibly blurrier."><figcaption>Real image, DOT-Sim, and direct regression without the residual. The same panels are under “Residual ablation” in the comparison above.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="physics">
+  <div class="wrap">
+    <div class="kicker">Deformation</div>
+    <h2>Does the simulated gel deform like the real one?</h2>
+    <div class="grid-side">
+      <div>
+        <p>The simulated surface is compared with the reference surface of the sensor for all indenters (2,048 points sampled on each). DOT-Sim is best on all four metrics. Chamfer distance and Earth Mover's Distance average over the whole dome, most of which barely moves, so they differ little between methods. The two metrics that focus on the deformed region separate them more: the Chamfer distance over the worst 1% of points, and the F-score at 1 mm (69.9 vs 64.7).</p>
+        <p class="note">The reference deformations come from finite-element analysis of the gel, as in the calibration. DiffTactile is missing here: with its released code the authors could not obtain a comparable sensor deformation (see the paper).</p>
+      </div>
+      <div class="rx" id="rx-phys" style="margin-top:0">
+        <div class="rx-top"><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+        <div data-role="rows"></div>
+        <p class="rx-foot" data-role="foot"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sim2real">
+  <div class="wrap">
+    <div class="kicker">Sim-to-real</div>
+    <h2>Trained in simulation, used on the real sensor</h2>
+    <p>If the simulated images are close enough to real ones, a model trained only on them should work on the real sensor as it is. Three tests, none of which uses real images for training the task.</p>
+    <div class="grid2">
+      <div>
+        <h3>Which indenter is it?</h3>
+        <p>A classifier learns to tell indenter #1 from #3 on simulated images and is tested on real ones. In the harder case, the renderer itself was trained without any real image of these two indenters; only their meshes are known. DOT-Sim reaches 81.2% there, and 90.5% when the renderer has seen them.</p>
+        <div class="rx" id="rx-cls" style="margin-top:0">
+          <div class="rx-top"><div class="tabs" role="tablist" aria-label="Setting" data-role="tabs"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+      <div>
+        <h3>Is there a lump under the skin?</h3>
+        <p>The sensor presses on foam “skin” lying over a tumor phantom, a bump (present) or a dent (absent). The classifier is trained on DOT-Sim images only and tested on real images for three skins of different softness and thickness. It is right in 80.6% to 96.5% of the cases; with the other simulators' images, the classifier stays near chance (at most 52.8%).</p>
+        <div class="rx" id="rx-tumor" style="margin-top:0">
+          <div class="rx-top"><div class="tabs" role="tablist" aria-label="Skin" data-role="tabs"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+    </div>
+    <figure class="figure sub" data-zoom><img src="/projects/dotsim/static/media/tumor_trajectory.jpg" width="2200" height="400" loading="lazy" decoding="async" alt="Left: the tumor-detection setup, with the optical tactile sensor above a layer of foam skin and a tumor phantom underneath, and the three foam skins. Right: three moments of trajectory following, each with the real tactile image and a photo of the robot pressing an indenter on the sensor."><figcaption>Left: tumor detection, with the three foam skins. Right: trajectory following on the real robot, with the tactile image at three moments.</figcaption></figure>
+    <div class="grid2 mt">
+      <div class="card">
+        <h3>Following a trajectory by touch</h3>
+        <p>A ResNet-18 policy is trained by behaviour cloning on simulated demonstrations. From each tactile image it outputs a 6-DoF velocity, with no force measurement. On a real xArm 7, running at 25 Hz, it tracks the demonstrated trajectory with an average error of 0.896 ± 0.031 mm over 10 trials.</p>
+      </div>
+      <div class="card">
+        <h3>Reinforcement learning in the simulator</h3>
+        <p>In simulation, a PPO agent that sees only the simulated tactile image learns to turn a box by 10° while keeping contact, choosing among nine planar motions. Training converges within 15 minutes.</p>
+      </div>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/dotsim/static/media/rl_rollout.jpg" width="1800" height="442" loading="lazy" decoding="async" alt="Four frames of a simulated rollout: the particle gel pushes a box near a wall and turns it step by step toward a semi-transparent target pose."><figcaption>A rollout of the learned policy in simulation: the gel turns the box toward the target pose (semi-transparent).</figcaption></figure>
+  </div>
+</section>
+
+<section id="limits">
+  <div class="wrap">
+    <div class="kicker">Speed &amp; limits</div>
+    <h2>What it costs and where it struggles</h2>
+    <div class="grid-side">
+      <div>
+        <p>With the settings used for the results, the simulation runs at 3.6 frames per second on an RTX A6000, too slow for real-time control. Most of that is the number of MPM substeps: with a fifth of them it reaches 17.1 FPS and loses 1.2 dB of PSNR. A coarser grid barely changes the speed.</p>
+        <p>It also generalizes poorly to shapes far from the training indenters, in particular sharp edges and fine surface detail, where simulated and real contacts no longer line up. Denser particles, a learned correction of the local deformation and a larger, more varied set of indenters are the paper's suggested remedies.</p>
+        <p>All experiments use one sensor, a DenseTact 2.0, chosen because its large deformations and patterned surface are hard to simulate.</p>
+      </div>
+      <div class="tbl num"><table><caption>Speed against image accuracy (Medium setting) for different MPM settings: voxel size, contact softness and substeps per frame. The highlighted row is used for all other results. Particles within 1/softness of the indenter count as in contact.</caption><thead><tr><th>Voxel (mm)</th><th>Softness</th><th>Substeps</th><th>FPS</th><th>PSNR (dB)</th></tr></thead><tbody><tr class=ours><td>1.2</td><td>15</td><td>100</td><td>3.6</td><td>31.39</td></tr><tr><td>1.2</td><td>15</td><td>20</td><td>17.1</td><td>30.17</td></tr><tr><td>2.4</td><td>30</td><td>100</td><td>3.8</td><td>30.98</td></tr><tr><td>2.4</td><td>30</td><td>20</td><td>17.2</td><td>29.79</td></tr></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>Simulating optical tactile sensors presents significant challenges due to their high deformability and intricate optical properties. To address these issues and enable a physically accurate simulation, we propose DOT-Sim: Differentiable Optical Tactile Simulation. Unlike prior simulators that rely on simplified models of deformable sensors, DOT-Sim accurately captures the physical behavior of soft sensors by modeling them as elastic materials using the Material Point Method (MPM). DOT-Sim enables rapid calibration of optical tactile sensor simulation using a small number of demonstrations within minutes, which is substantially faster than existing methods. Compared to current baselines, our approach supports much larger and non-linear deformations. To handle the optical aspect, we propose a novel approach to simulating optical responses by learning a residual image relative to the real-world idle state. We validate the physical and visual realism of our method through a series of zero-shot sim-to-real tasks. Our experiments show that DOT-Sim (1) accurately replicates the physical dynamics of a DenseTact optical tactile sensor in reality, (2) generates realistic optical outputs in contact-rich scenarios, and (3) enables direct deployment of simulation-trained classifiers in the real world, achieving 85% classification accuracy on challenging objects and 90% accuracy in embedded tumor-type detection, and (4) allows precise trajectory following with policy trained from demonstrations in simulation with an average error of less than 0.9 mm.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/projects/donut"><div class="venue">RA-L 2025</div><h3>Make a Donut</h3><p>Differentiable physics for shaping dough with tools: zero-shot deformable manipulation planned by a language model.</p></a>
+      <a class="card" href="/projects/unipose9d"><div class="venue">arXiv 2026</div><h3>UniPose9D</h3><p>One model for the rotation, translation and metric size of any object, from a single masked image.</p></a>
+      <a class="card" href="/projects/pace"><div class="venue">ECCV 2024</div><h3>PACE</h3><p>A large benchmark for object pose estimation in cluttered real scenes.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@inproceedings{you2026dotsim,
+  title={DOT-Sim: Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration},
+  author={You, Yang and Do, Won Kyung and Swann, Aiden and Antonova, Rika and Kennedy, Monroe and Guibas, Leonidas},
+  booktitle={IEEE International Conference on Robotics and Automation (ICRA)},
+  year={2026},
+  note={arXiv:2604.27367}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script id="page-data" type="application/json">{"physical":[{"name":"Tacto","ours":false,"v":[1.77,4.21,1.33,63.59]},{"name":"Taxim","ours":false,"v":[1.74,3.97,1.31,64.69]},{"name":"DOT-Sim (ours)","ours":true,"v":[1.71,3.82,1.29,69.89]}],"optical":{"Easy":[{"name":"DiffTactile","ours":false,"v":[3.8,28.73,4.91]},{"name":"Tacto (calibrated)","ours":false,"v":[4.92,26.97,6.18]},{"name":"DOT-Sim (ours)","ours":true,"v":[2.85,32.12,3.68]}],"Medium":[{"name":"DiffTactile","ours":false,"v":[7.28,22.89,8.99]},{"name":"Tacto (calibrated)","ours":false,"v":[5.35,26.35,6.71]},{"name":"DOT-Sim (ours)","ours":true,"v":[3.25,31.39,4.21]}],"Hard":[{"name":"DiffTactile","ours":false,"v":[8.63,21.31,10.67]},{"name":"Tacto (calibrated)","ours":false,"v":[5.04,26.79,6.35]},{"name":"DOT-Sim (ours)","ours":true,"v":[3.5,30.48,4.53]}]},"ablation":[{"name":"Without residual","ours":false,"v":[28.89,5.39]},{"name":"DOT-Sim (ours)","ours":true,"v":[30.48,4.53]}],"classification":[{"name":"DiffTactile","ours":false,"v":[65.88,52.94]},{"name":"Tacto","ours":false,"v":[50.59,50.59]},{"name":"DOT-Sim (ours)","ours":true,"v":[90.48,81.18]}],"tumor":[{"name":"DiffTactile","ours":false,"v":[52.78,46.15,51.72]},{"name":"Tacto","ours":false,"v":[38.89,46.15,44.83]},{"name":"DOT-Sim (ours)","ours":true,"v":[80.56,92.31,96.55]}],"tumor_n":[36,13,29],"runtime":[[1.2,15.0,100.0,3.6,31.39],[1.2,15.0,20.0,17.1,30.17],[2.4,30.0,100.0,3.8,30.98],[2.4,30.0,20.0,17.2,29.79]]}</script>
+<script>
+/* A 2D toy of DOT-Sim's physics stage: a soft gel dome (cross-section of a hemispherical sensor) simulated with the Material
+   Point Method (MLS-MPM, neo-Hookean), pressed by a rigid indenter; a virtual camera at the centre of the base casts rays
+   through the gel and reads depth and surface normals; and a small calibration that fits Poisson's ratio by gradient
+   descent on the Chamfer distance to a target surface (finite differences here; the paper differentiates through its 3D
+   simulator and fits Young's modulus and Poisson's ratio). Shared by the project page and the teaser; keep to ES5 with
+   block comments (the page is minified onto one line). Lengths are in units of the simulation box. */
+var GelCore = (function () {
+  var N = 48, DX = 1 / N, INV = N, DT = 3e-4, E = 200, RHO = 1, DAMP = 0.985, TINY = 1e-9;
+  var R = 0.3, CX = 0.5, BASE = 0.16, NT = 140;
+  var SHAPES = {
+    ball: { label: 'Ball', r: 0.07, h: 0 },
+    bar: { label: 'Flat bar', r: 0.028, h: 0.1 },
+    dome: { label: 'Wide dome', r: 0.13, h: 0 }
+  };
+
+  function create(nu) {
+    var xs = [], i, j, sp = DX / 2;
+    for (j = 0; j * sp < 1; j++) for (i = 0; i * sp < 1; i++) {
+      var x = (i + 0.5) * sp, y = (j + 0.5) * sp, dx = x - CX, dy = y - BASE;
+      if (dy >= 0 && dx * dx + dy * dy <= R * R) xs.push(x, y);
+    }
+    var n = xs.length / 2, s = { n: n, x: new Float32Array(xs), x0: new Float32Array(xs), v: new Float32Array(2 * n), C: new Float32Array(4 * n), F: new Float32Array(4 * n),
+      J: new Float32Array(n), gm: new Float32Array(N * N), gv: new Float32Array(2 * N * N), t: new Float32Array(2 * NT), nu: nu, steps: 0 };
+    for (i = 0; i < n; i++) { s.F[4 * i] = 1; s.F[4 * i + 3] = 1; s.J[i] = 1; }
+    /* passive tracers on the outer surface, from the right end of the arc to the left */
+    for (i = 0; i < NT; i++) { var a = Math.PI * i / (NT - 1); s.t[2 * i] = CX + R * Math.cos(a); s.t[2 * i + 1] = BASE + R * Math.sin(a); }
+    return s;
+  }
+
+  /* the indenter is a Float64Array [x, y, vx, vy, r, h]: a capsule lying flat (h = half-length) or a disc (h = 0) */
+  function indenter(shape, x, y) { var sh = SHAPES[shape], a = new Float64Array(6); a[0] = x; a[1] = y; a[4] = sh.r; a[5] = sh.h; return a; }
+  function setShape(ind, shape) { ind[4] = SHAPES[shape].r; ind[5] = SHAPES[shape].h; }
+  /* signed distance to the indenter; its outward normal goes to out */
+  function sdf(ind, px, py, out) {
+    var h = ind[5], qx = px - ind[0], qy = py - ind[1], cx = qx < -h ? -h : qx > h ? h : qx, dx = qx - cx, d = Math.sqrt(dx * dx + qy * qy);
+    if (d < 1e-9) d = 1e-9;
+    out[0] = dx / d; out[1] = qy / d;
+    return d - ind[4];
+  }
+
+  function reset(s, nu) {
+    s.x.set(s.x0); s.v.fill(0); s.C.fill(0); s.F.fill(0); s.J.fill(1); s.nu = nu; s.steps = 0;
+    for (var i = 0; i < s.n; i++) { s.F[4 * i] = 1; s.F[4 * i + 3] = 1; }
+    for (i = 0; i < NT; i++) { var a = Math.PI * i / (NT - 1); s.t[2 * i] = CX + R * Math.cos(a); s.t[2 * i + 1] = BASE + R * Math.sin(a); }
+    return s;
+  }
+
+  var _n = new Float64Array(2);
+  function step(s, ind) {
+    var n = s.n, x = s.x, v = s.v, C = s.C, F = s.F, gm = s.gm, gv = s.gv, nu = s.nu, mu = E / (2 * (1 + nu)), la = E * nu / ((1 + nu) * (1 - 2 * nu));
+    var vol = DX * DX / 4, mass = vol * RHO, k = -DT * vol * 4 * INV * INV, p, i, j, a, b;
+    gm.fill(0); gv.fill(0);
+    for (p = 0; p < n; p++) {
+      var px = x[2 * p] * INV, py = x[2 * p + 1] * INV, bx = Math.floor(px - 0.5), by = Math.floor(py - 0.5), fx = px - bx, fy = py - by;
+      var wx0 = 0.5 * (1.5 - fx) * (1.5 - fx), wx1 = 0.75 - (fx - 1) * (fx - 1), wx2 = 0.5 * (fx - 0.5) * (fx - 0.5);
+      var wy0 = 0.5 * (1.5 - fy) * (1.5 - fy), wy1 = 0.75 - (fy - 1) * (fy - 1), wy2 = 0.5 * (fy - 0.5) * (fy - 0.5);
+      var F00 = F[4 * p], F01 = F[4 * p + 1], F10 = F[4 * p + 2], F11 = F[4 * p + 3], J = F00 * F11 - F01 * F10;
+      if (!(J > 0.05)) J = 0.05;
+      /* Kirchhoff stress of a neo-Hookean solid: mu (F F^T - I) + lambda ln(J) I */
+      var lj = la * Math.log(J), t00 = mu * (F00 * F00 + F01 * F01 - 1) + lj, t01 = mu * (F00 * F10 + F01 * F11), t11 = mu * (F10 * F10 + F11 * F11 - 1) + lj;
+      var A00 = k * t00 + mass * C[4 * p], A01 = k * t01 + mass * C[4 * p + 1], A10 = k * t01 + mass * C[4 * p + 2], A11 = k * t11 + mass * C[4 * p + 3];
+      var mvx = mass * v[2 * p], mvy = mass * v[2 * p + 1];
+      for (a = 0; a < 3; a++) {
+        var wx = a === 0 ? wx0 : a === 1 ? wx1 : wx2, dxp = (a - fx) * DX, gi = bx + a;
+        if (gi < 0 || gi >= N) continue;
+        for (b = 0; b < 3; b++) {
+          var gj = by + b; if (gj < 0 || gj >= N) continue;
+          var w = wx * (b === 0 ? wy0 : b === 1 ? wy1 : wy2), dyp = (b - fy) * DX, g = gi * N + gj;
+          gm[g] += w * mass; gv[2 * g] += w * (mvx + A00 * dxp + A01 * dyp); gv[2 * g + 1] += w * (mvy + A10 * dxp + A11 * dyp);
+        }
+      }
+    }
+    var jb = Math.floor(BASE * INV);
+    for (i = 0; i < N; i++) for (j = 0; j < N; j++) {
+      var q = i * N + j, m = gm[q];
+      if (m < 1e-12) { gm[q] = 0; gv[2 * q] = 0; gv[2 * q + 1] = 0; continue; }
+      var ux = gv[2 * q] / m * DAMP, uy = gv[2 * q + 1] / m * DAMP;
+      if (ux < TINY && ux > -TINY) ux = 0;                              /* keep denormals out of the arrays */
+      if (uy < TINY && uy > -TINY) uy = 0;
+      if (j <= jb) { ux = 0; uy = 0; }                                  /* the base is glued to its mount */
+      else if (ind && sdf(ind, i * DX, j * DX, _n) < 0) {               /* rigid indenter: no penetration, free to slide and to separate */
+        var rn = (ux - ind[2]) * _n[0] + (uy - ind[3]) * _n[1];
+        if (rn < 0) { ux -= rn * _n[0]; uy -= rn * _n[1]; }
+      }
+      gv[2 * q] = ux; gv[2 * q + 1] = uy;
+    }
+    for (p = 0; p < n; p++) {
+      px = x[2 * p] * INV; py = x[2 * p + 1] * INV; bx = Math.floor(px - 0.5); by = Math.floor(py - 0.5); fx = px - bx; fy = py - by;
+      wx0 = 0.5 * (1.5 - fx) * (1.5 - fx); wx1 = 0.75 - (fx - 1) * (fx - 1); wx2 = 0.5 * (fx - 0.5) * (fx - 0.5);
+      wy0 = 0.5 * (1.5 - fy) * (1.5 - fy); wy1 = 0.75 - (fy - 1) * (fy - 1); wy2 = 0.5 * (fy - 0.5) * (fy - 0.5);
+      var nvx = 0, nvy = 0, c00 = 0, c01 = 0, c10 = 0, c11 = 0;
+      for (a = 0; a < 3; a++) {
+        wx = a === 0 ? wx0 : a === 1 ? wx1 : wx2; dxp = a - fx; gi = bx + a;
+        if (gi < 0 || gi >= N) continue;
+        for (b = 0; b < 3; b++) {
+          gj = by + b; if (gj < 0 || gj >= N) continue;
+          w = wx * (b === 0 ? wy0 : b === 1 ? wy1 : wy2); dyp = b - fy; g = gi * N + gj;
+          var gx = gv[2 * g], gy = gv[2 * g + 1];
+          nvx += w * gx; nvy += w * gy; c00 += w * gx * dxp; c01 += w * gx * dyp; c10 += w * gy * dxp; c11 += w * gy * dyp;
+        }
+      }
+      c00 *= 4 * INV; c01 *= 4 * INV; c10 *= 4 * INV; c11 *= 4 * INV;
+      if (c00 < TINY && c00 > -TINY) c00 = 0; if (c01 < TINY && c01 > -TINY) c01 = 0; if (c10 < TINY && c10 > -TINY) c10 = 0; if (c11 < TINY && c11 > -TINY) c11 = 0;
+      v[2 * p] = nvx; v[2 * p + 1] = nvy; C[4 * p] = c00; C[4 * p + 1] = c01; C[4 * p + 2] = c10; C[4 * p + 3] = c11;
+      x[2 * p] += DT * nvx; x[2 * p + 1] += DT * nvy;
+      F00 = F[4 * p]; F01 = F[4 * p + 1]; F10 = F[4 * p + 2]; F11 = F[4 * p + 3];
+      F[4 * p] = F00 + DT * (c00 * F00 + c01 * F10); F[4 * p + 1] = F01 + DT * (c00 * F01 + c01 * F11);
+      F[4 * p + 2] = F10 + DT * (c10 * F00 + c11 * F10); F[4 * p + 3] = F11 + DT * (c10 * F01 + c11 * F11);
+      s.J[p] = F[4 * p] * F[4 * p + 3] - F[4 * p + 1] * F[4 * p + 2];
+      if (ind) {                                                        /* particles never end up inside the indenter */
+        var pd = sdf(ind, x[2 * p], x[2 * p + 1], _n);
+        if (pd < 0) {
+          x[2 * p] -= pd * _n[0]; x[2 * p + 1] -= pd * _n[1];
+          var pr = (v[2 * p] - ind[2]) * _n[0] + (v[2 * p + 1] - ind[3]) * _n[1];
+          if (pr < 0) { v[2 * p] -= pr * _n[0]; v[2 * p + 1] -= pr * _n[1]; }
+        }
+      }
+    }
+    /* move the surface tracers with the grid velocity */
+    var T = s.t;
+    for (p = 0; p < NT; p++) {
+      px = T[2 * p] * INV; py = T[2 * p + 1] * INV; bx = Math.floor(px - 0.5); by = Math.floor(py - 0.5); fx = px - bx; fy = py - by;
+      wx0 = 0.5 * (1.5 - fx) * (1.5 - fx); wx1 = 0.75 - (fx - 1) * (fx - 1); wx2 = 0.5 * (fx - 0.5) * (fx - 0.5);
+      wy0 = 0.5 * (1.5 - fy) * (1.5 - fy); wy1 = 0.75 - (fy - 1) * (fy - 1); wy2 = 0.5 * (fy - 0.5) * (fy - 0.5);
+      nvx = 0; nvy = 0; var ws = 0;
+      for (a = 0; a < 3; a++) {
+        gi = bx + a; if (gi < 0 || gi >= N) continue;
+        wx = a === 0 ? wx0 : a === 1 ? wx1 : wx2;
+        for (b = 0; b < 3; b++) {
+          gj = by + b; if (gj < 0 || gj >= N) continue;
+          g = gi * N + gj; if (gm[g] <= 0) continue;
+          w = wx * (b === 0 ? wy0 : b === 1 ? wy1 : wy2); nvx += w * gv[2 * g]; nvy += w * gv[2 * g + 1]; ws += w;
+        }
+      }
+      if (ws > 1e-6) { T[2 * p] += DT * nvx / ws; T[2 * p + 1] += DT * nvy / ws; }
+      else if (p > 0 && p < NT - 1) { T[2 * p] = 0.5 * (T[2 * p - 2] + T[2 * p + 2]); T[2 * p + 1] = 0.5 * (T[2 * p - 1] + T[2 * p + 3]); }   /* stranded outside the gel: rejoin its neighbours */
+      if (ind) { pd = sdf(ind, T[2 * p], T[2 * p + 1], _n); if (pd < 0) { T[2 * p] -= pd * _n[0]; T[2 * p + 1] -= pd * _n[1]; } }
+    }
+    s.steps++;
+  }
+
+  /* the virtual camera at the centre of the base: K rays through the gel; depth to the surface (in gel radii) and the
+     surface normal there */
+  function camera(s, K) {
+    var T = s.t, depth = new Float32Array(K), nx = new Float32Array(K), ny = new Float32Array(K), k, i;
+    for (k = 0; k < K; k++) {
+      var a = Math.PI * (0.06 + 0.88 * (k + 0.5) / K), dx = Math.cos(a), dy = Math.sin(a), best = 1e9, bnx = dx, bny = dy;
+      for (i = 0; i < NT - 1; i++) {
+        var ax = T[2 * i] - CX, ay = T[2 * i + 1] - BASE, ex = T[2 * i + 2] - CX - ax, ey = T[2 * i + 3] - BASE - ay, den = dx * ey - dy * ex;
+        if (Math.abs(den) < 1e-12) continue;
+        var tt = (ax * ey - ay * ex) / den, u = (ax * dy - ay * dx) / den;
+        if (tt > 0 && u >= 0 && u <= 1 && tt < best) { best = tt; var l = Math.sqrt(ex * ex + ey * ey) || 1; bnx = ey / l; bny = -ex / l; }
+      }
+      if (best > 1e8) best = R;
+      depth[k] = best / R; nx[k] = bnx; ny[k] = bny;
+    }
+    return { depth: depth, nx: nx, ny: ny };
+  }
+
+  /* a recorded press: the indenter comes down along a fixed path to a given depth, then holds until the gel settles.
+     The returned state is a scratch state that the next press reuses: copy what you keep (state.t, state.x) */
+  var scratch = null;
+  function press(nu, o) {
+    o = o || {};
+    var shape = o.shape || 'ball', depth = o.depth === undefined ? 0.1 : o.depth, off = o.offset || 0, speed = o.speed || 1, hold = o.hold === undefined ? 240 : o.hold;
+    if (!scratch) scratch = create(nu);
+    var s = reset(scratch, nu), yTop = BASE + Math.sqrt(Math.max(0, R * R - off * off)) + SHAPES[shape].r, steps = Math.ceil(depth / (speed * DT)), i;
+    var ind = indenter(shape, CX + off, yTop), frames = o.frames ? [] : null, every = o.every || 20;
+    ind[3] = -speed;
+    for (i = 0; i < steps + hold; i++) {
+      if (i < steps) ind[1] = yTop - depth * (i + 1) / steps; else ind[3] = 0;
+      step(s, ind);
+      if (frames && i % every === 0) frames.push({ x: new Float32Array(s.x), t: new Float32Array(s.t), y: ind[1] });
+    }
+    if (frames) frames.push({ x: new Float32Array(s.x), t: new Float32Array(s.t), y: ind[1] });
+    return { state: s, ind: ind, frames: frames };
+  }
+
+  /* symmetric Chamfer distance between two surfaces (arrays of x, y), in units of the gel radius */
+  function chamfer(a, b) {
+    function one(p, q) {
+      var s = 0, n = p.length / 2, m = q.length / 2, i, j;
+      for (i = 0; i < n; i++) { var best = 1e9; for (j = 0; j < m; j++) { var dx = p[2 * i] - q[2 * j], dy = p[2 * i + 1] - q[2 * j + 1], d = dx * dx + dy * dy; if (d < best) best = d; } s += Math.sqrt(best); }
+      return s / n;
+    }
+    return (one(a, b) + one(b, a)) / 2 / R;
+  }
+
+  /* fit Poisson's ratio to a target surface by Adam on the Chamfer distance, with the gradient from central differences.
+     calibInit / calibUpdate hold the optimizer so that a page can run the three presses of an iteration one at a time */
+  var CAL = { lr: 0.05, decay: 0.84, b1: 0.6, b2: 0.9, h: 0.02, lo: 0.03, hi: 0.46 };
+  function calibInit(nu0) { return { nu: nu0, m: 0, v: 0, k: 0, hist: [] }; }
+  function calibProbe(c) { return [c.nu, Math.min(CAL.hi + 0.01, c.nu + CAL.h), Math.max(CAL.lo - 0.01, c.nu - CAL.h)]; }
+  function calibUpdate(c, loss, lossPlus, lossMinus) {
+    var g = (lossPlus - lossMinus) / (2 * CAL.h);
+    c.hist.push({ nu: c.nu, loss: loss });
+    c.k++;
+    c.m = CAL.b1 * c.m + (1 - CAL.b1) * g; c.v = CAL.b2 * c.v + (1 - CAL.b2) * g * g;
+    c.nu = Math.max(CAL.lo, Math.min(CAL.hi, c.nu - CAL.lr * Math.pow(CAL.decay, c.k - 1) * (c.m / (1 - Math.pow(CAL.b1, c.k))) / (Math.sqrt(c.v / (1 - Math.pow(CAL.b2, c.k))) + 1e-12)));
+    return c;
+  }
+  function calibrate(pressOpt, target, nu0, iters) {
+    var c = calibInit(nu0);
+    for (var k = 0; k < iters; k++) {
+      var L = calibProbe(c).map(function (x) { return chamfer(press(x, pressOpt).state.t, target); });
+      calibUpdate(c, L[0], L[1], L[2]);
+    }
+    return c;
+  }
+
+  return { N: N, DX: DX, DT: DT, R: R, CX: CX, BASE: BASE, NT: NT, SHAPES: SHAPES, create: create, reset: reset, indenter: indenter, setShape: setShape, step: step, sdf: sdf, camera: camera, press: press, chamfer: chamfer, calibInit: calibInit, calibProbe: calibProbe, calibUpdate: calibUpdate, calibrate: calibrate };
+})();
+</script>
+<script>
+(function () {
+  var MEDIA = '/projects/dotsim/static/media/';
+  var D = JSON.parse(document.getElementById('page-data').textContent);
+  var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function watch(el, cb, margin) { if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { cb(es[0].isIntersecting); }, { rootMargin: margin || '0px' }).observe(el); else cb(true); }
+  function sizeCanvas(cv) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
+    if (w && h && (cv.width !== w || cv.height !== h)) { cv.width = w; cv.height = h; }
+    return dpr;
+  }
+  function tick() { return new Promise(function (r) { setTimeout(r, 0); }); }
+
+  /* ================= the gel toy ================= */
+  var GEL = (function () {
+    var G = window.GelCore, cv = document.getElementById('gel-canvas'), cam = document.getElementById('cam-canvas'), chart = document.getElementById('cal-chart');
+    var capEl = document.getElementById('gel-cap'), infoEl = document.getElementById('gel-info'), outEl = document.getElementById('cal-out'), goBtn = document.getElementById('cal-go');
+    var st = { shape: 'ball', nu: 0.3, rays: true }, s = G.create(st.nu);
+    function rest() { return G.BASE + G.R + G.SHAPES[st.shape].r + 0.04; }
+    var ind = G.indenter('ball', G.CX, rest()), tgt = [G.CX, rest()];
+    var K = 120, idle = G.camera(s, K), view = null, visible = false, dirty = true, drag = false, touched = false, quiet = 0, demoT = 0, mode = 'live', cal = null, overlay = null;
+    var VX0 = 0.1, VX1 = 0.9, VY0 = 0.1, VY1 = 0.633;
+    var LUT = []; (function () { for (var i = 0; i < 64; i++) { var t = i / 63, S = [[62, 74, 128], [56, 189, 248], [232, 121, 249], [255, 241, 242]], k = Math.min(2, Math.floor(t * 3)), u = t * 3 - k, p = S[k], q = S[k + 1]; LUT.push('rgb(' + Math.round(p[0] + (q[0] - p[0]) * u) + ',' + Math.round(p[1] + (q[1] - p[1]) * u) + ',' + Math.round(p[2] + (q[2] - p[2]) * u) + ')'); } })();
+    document.getElementById('gel-shape').innerHTML = Object.keys(G.SHAPES).map(function (k, i) { return '<button class="chip" type="button" data-shape="' + k + '" aria-pressed="' + !i + '">' + G.SHAPES[k].label + '</button>'; }).join('');
+
+    function advance(budget) {
+      var t0 = performance.now(), n = 0;
+      while (n < 14 && performance.now() - t0 < budget) {
+        var dx = tgt[0] - ind[0], dy = tgt[1] - ind[1], d = Math.sqrt(dx * dx + dy * dy), m = Math.min(d, 1.0 * G.DT), f = d > 1e-9 ? m / d : 0;
+        ind[2] = dx * f / G.DT; ind[3] = dy * f / G.DT; ind[0] += dx * f; ind[1] += dy * f;
+        G.step(s, ind); n++;
+      }
+      var e = 0, bad = false;
+      for (var i = 0; i < s.n; i += 7) { var a = s.v[2 * i], b = s.v[2 * i + 1]; e += a * a + b * b; if (!(s.J[i] > 0)) bad = true; }
+      if (bad || !(e === e)) { G.reset(s, st.nu); ind[0] = tgt[0] = G.CX; ind[1] = tgt[1] = rest(); }
+      quiet = (Math.abs(tgt[0] - ind[0]) + Math.abs(tgt[1] - ind[1]) < 1e-6 && e < 1e-4) ? quiet + 1 : 0;
+    }
+    function drawIndenter(c, X, Y, sc, w, ix, iy, shape, col) {
+      var sh = G.SHAPES[shape];
+      c.fillStyle = col; c.strokeStyle = 'rgba(255,255,255,.55)'; c.lineWidth = 1.2 * w;
+      c.fillRect(X(ix) - 5 * w, 0, 10 * w, Y(iy + sh.r * 0.6));
+      c.beginPath();
+      if (sh.h) { c.moveTo(X(ix - sh.h), Y(iy + sh.r)); c.lineTo(X(ix + sh.h), Y(iy + sh.r)); c.arc(X(ix + sh.h), Y(iy), sh.r * sc, -Math.PI / 2, Math.PI / 2); c.lineTo(X(ix - sh.h), Y(iy - sh.r)); c.arc(X(ix - sh.h), Y(iy), sh.r * sc, Math.PI / 2, 1.5 * Math.PI); }
+      else c.arc(X(ix), Y(iy), sh.r * sc, 0, 6.2832);
+      c.closePath(); c.fill(); c.stroke();
+    }
+    function draw() {
+      var w = sizeCanvas(cv), W = cv.width, H = cv.height, c = cv.getContext('2d'), sc = W / (VX1 - VX0);
+      function X(x) { return (x - VX0) * sc; } function Y(y) { return H - (y - VY0) * sc; }
+      view = { sc: sc / w, H: H / w };
+      c.clearRect(0, 0, W, H);
+      var px = overlay ? overlay.x : s.x, tr = overlay ? overlay.t : s.t, J = s.J, r = G.DX / 2 * sc * 0.56, i;
+      for (i = 0; i < s.n; i++) {
+        var t = overlay ? 0.05 : Math.max(0, Math.min(1, (1 - J[i]) / 0.5));
+        c.fillStyle = LUT[Math.round(t * 63)];
+        c.beginPath(); c.arc(X(px[2 * i]), Y(px[2 * i + 1]), r, 0, 6.2832); c.fill();
+      }
+      if (st.rays && !overlay) {
+        var cm = G.camera(s, 24); c.strokeStyle = 'rgba(255,255,255,.3)'; c.lineWidth = w;
+        for (i = 0; i < 24; i++) { var a = Math.PI * (0.06 + 0.88 * (i + 0.5) / 24), d = cm.depth[i] * G.R; c.beginPath(); c.moveTo(X(G.CX), Y(G.BASE)); c.lineTo(X(G.CX + Math.cos(a) * d), Y(G.BASE + Math.sin(a) * d)); c.stroke(); }
+      }
+      c.strokeStyle = '#f5f3ff'; c.lineWidth = 2.2 * w; c.lineJoin = 'round'; c.beginPath();
+      for (i = 0; i < G.NT; i++) { if (i) c.lineTo(X(tr[2 * i]), Y(tr[2 * i + 1])); else c.moveTo(X(tr[0]), Y(tr[1])); }
+      c.stroke();
+      if (overlay && overlay.target) {
+        c.strokeStyle = '#34d399'; c.lineWidth = 2.4 * w; c.setLineDash([7 * w, 5 * w]); c.beginPath();
+        for (i = 0; i < G.NT; i++) { if (i) c.lineTo(X(overlay.target[2 * i]), Y(overlay.target[2 * i + 1])); else c.moveTo(X(overlay.target[0]), Y(overlay.target[1])); }
+        c.stroke(); c.setLineDash([]);
+      }
+      /* base plate and camera */
+      c.fillStyle = '#2a2533'; c.fillRect(X(G.CX - G.R - 0.05), Y(G.BASE), (2 * G.R + 0.1) * sc, 0.03 * sc);
+      c.fillStyle = '#f5f3ff'; c.beginPath(); c.arc(X(G.CX), Y(G.BASE), 5 * w, 0, 6.2832); c.fill();
+      c.fillStyle = '#9d95b0'; c.font = '600 ' + Math.round(11.5 * w) + 'px Inter, sans-serif'; c.textAlign = 'center'; c.fillText('camera', X(G.CX), Y(G.BASE) + 19 * w);
+      if (overlay) drawIndenter(c, X, Y, sc, w, overlay.ix, overlay.iy, 'ball', 'rgba(203,213,225,.85)');
+      else drawIndenter(c, X, Y, sc, w, ind[0], ind[1], st.shape, drag ? '#f8fafc' : '#cbd5e1');
+    }
+    function drawCam() {
+      var w = sizeCanvas(cam), W = cam.width, H = cam.height, c = cam.getContext('2d'), cm = G.camera(overlay ? { t: overlay.t } : s, K), L = 96 * w, R = W - 12 * w, bw = (R - L) / K, rows = 3, gap = 6 * w, top = 10 * w, rh = (H - 2 * top - (rows - 1) * gap) / rows, k;
+      c.clearRect(0, 0, W, H);
+      c.font = '600 ' + Math.round(12 * w) + 'px Inter, sans-serif'; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillStyle = '#d3cce2';
+      ['Depth', 'Normal', 'Change'].forEach(function (t, i) { c.fillText(t, 12 * w, top + i * (rh + gap) + rh / 2); });
+      var mx = 0;
+      for (k = 0; k < K; k++) {
+        var x = R - (k + 1) * bw, d = cm.depth[k], g = Math.round(255 * Math.max(0, Math.min(1, (d - 0.35) / 0.75)));
+        c.fillStyle = 'rgb(' + g + ',' + g + ',' + g + ')'; c.fillRect(x, top, bw + 0.6, rh);
+        c.fillStyle = 'rgb(' + Math.round(127.5 + 127.5 * cm.nx[k]) + ',' + Math.round(127.5 + 127.5 * cm.ny[k]) + ',235)'; c.fillRect(x, top + rh + gap, bw + 0.6, rh);
+        var raw = Math.abs(d - idle.depth[k]), ch = Math.min(1, raw / 0.3); if (raw > mx) mx = raw;
+        c.fillStyle = 'rgb(' + Math.round(20 + 212 * ch) + ',' + Math.round(16 + 105 * ch) + ',' + Math.round(32 + 217 * ch) + ')'; c.fillRect(x, top + 2 * (rh + gap), bw + 0.6, rh);
+      }
+      infoEl.textContent = 'deepest change ' + Math.round(mx * 100) + '% of the gel radius';
+    }
+    function drawChart() {
+      var w = sizeCanvas(chart), W = chart.width, H = chart.height, c = chart.getContext('2d'), L = 40 * w, R = W - 14 * w, T = 26 * w, B = H - 26 * w, n = 14, i;
+      c.clearRect(0, 0, W, H);
+      c.font = '600 ' + Math.round(11 * w) + 'px Inter, sans-serif'; c.fillStyle = '#9d95b0'; c.textBaseline = 'middle';
+      function X(k) { return L + (R - L) * k / (n - 1); } function Y(v) { return B - (B - T) * (v - 0.05) / 0.4; }
+      c.strokeStyle = 'rgba(255,255,255,.1)'; c.lineWidth = w; c.textAlign = 'right';
+      [0.1, 0.2, 0.3, 0.4].forEach(function (v) { c.beginPath(); c.moveTo(L, Y(v)); c.lineTo(R, Y(v)); c.stroke(); c.fillText(v.toFixed(1), L - 6 * w, Y(v)); });
+      c.textAlign = 'left'; c.fillStyle = '#f0abfc'; c.fillText('ν', L, 12 * w); c.fillStyle = '#9d95b0'; c.fillText('bars: Chamfer distance', L + 16 * w, 12 * w);
+      c.textAlign = 'center'; c.fillText('iteration', (L + R) / 2, H - 9 * w);
+      if (!cal) return;
+      var hs = cal.c.hist, top = Math.max.apply(null, hs.map(function (h) { return h.loss; }).concat([1e-6]));
+      for (i = 0; i < hs.length; i++) { var bh = (B - T) * 0.55 * hs[i].loss / top; c.fillStyle = 'rgba(148,163,184,.45)'; c.fillRect(X(i) - 5 * w, B - bh, 10 * w, bh); }
+      if (cal.done) { c.strokeStyle = '#34d399'; c.setLineDash([6 * w, 4 * w]); c.lineWidth = 1.6 * w; c.beginPath(); c.moveTo(L, Y(cal.truth)); c.lineTo(R, Y(cal.truth)); c.stroke(); c.setLineDash([]); }
+      var pts = hs.map(function (h) { return h.nu; }); if (cal.done) pts = pts.concat([cal.c.nu]);
+      c.strokeStyle = '#e879f9'; c.lineWidth = 2.4 * w; c.beginPath();
+      pts.forEach(function (v, k) { var x = X(Math.min(k, n - 1)); if (k) c.lineTo(x, Y(v)); else c.moveTo(x, Y(v)); }); c.stroke();
+      pts.forEach(function (v, k) { c.fillStyle = '#e879f9'; c.beginPath(); c.arc(X(Math.min(k, n - 1)), Y(v), 3.2 * w, 0, 6.2832); c.fill(); });
+    }
+
+    /* the miniature calibration: one press per probe, yielding to the browser in between */
+    var TRUTHS = [0.3, 0.38, 0.22, 0.34], runs = 0, PRESS = { shape: 'ball', depth: 0.1, offset: 0.04 };
+    function calibrate() {
+      if (mode === 'cal') return Promise.resolve(null);
+      mode = 'cal'; goBtn.disabled = true; capEl.textContent = 'Calibrating…';
+      var truth = TRUTHS[runs++ % TRUTHS.length], rec = G.press(truth, PRESS), target = new Float32Array(rec.state.t), iy = rec.ind[1];
+      cal = { c: G.calibInit(0.12), truth: truth, done: false };
+      overlay = { x: new Float32Array(rec.state.x), t: target, target: target, ix: rec.ind[0], iy: iy };
+      outEl.textContent = 'Recorded a press with a hidden ν (green dashes: its surface). Fitting…'; dirty = true;
+      function iter(k) {
+        if (k >= 14) return Promise.resolve();
+        var probes = G.calibProbe(cal.c), L = [];
+        function one(j) {
+          if (j >= 3) return Promise.resolve();
+          return tick().then(function () {
+            var r = G.press(probes[j], PRESS); L.push(G.chamfer(r.state.t, target));
+            if (j === 0) { overlay = { x: new Float32Array(r.state.x), t: new Float32Array(r.state.t), target: target, ix: r.ind[0], iy: r.ind[1] }; dirty = true; }
+            return one(j + 1);
+          });
+        }
+        return one(0).then(function () {
+          G.calibUpdate(cal.c, L[0], L[1], L[2]);
+          outEl.textContent = 'Iteration ' + (k + 1) + ' of 14: ν = ' + probes[0].toFixed(3) + ', Chamfer distance ' + (L[0] * 100).toFixed(2) + '% of the gel radius.';
+          drawChart(); return iter(k + 1);
+        });
+      }
+      return iter(0).then(function () {
+        cal.done = true; drawChart();
+        var res = { fitted: +cal.c.nu.toFixed(3), truth: truth, iters: cal.c.hist.length, loss0: cal.c.hist[0].loss, lossEnd: cal.c.hist[13].loss };
+        outEl.innerHTML = 'Fitted ν = <b>' + cal.c.nu.toFixed(3) + '</b>. The recording was made with ν = ' + truth.toFixed(2) + '. The Chamfer distance fell from ' + (res.loss0 * 100).toFixed(2) + '% to ' + (res.lossEnd * 100).toFixed(2) + '% of the gel radius.';
+        return new Promise(function (r) { setTimeout(r, REDUCED ? 0 : 1600); }).then(function () {
+          overlay = null; mode = 'live'; goBtn.disabled = false; capEl.textContent = 'Drag the indenter'; goBtn.textContent = 'Fit another recording';
+          setNu(Math.round(cal.c.nu * 100) / 100); G.reset(s, st.nu); G.setShape(ind, st.shape); ind[0] = tgt[0] = G.CX; ind[1] = tgt[1] = rest(); quiet = 0; dirty = true;
+          return res;
+        });
+      });
+    }
+    function setNu(v) { st.nu = v; s.nu = v; document.getElementById('gel-nu').value = v; document.getElementById('gel-nu-v').textContent = v.toFixed(2); quiet = 0; }
+    goBtn.addEventListener('click', function () { touched = true; calibrate(); });
+    document.getElementById('gel-nu').addEventListener('input', function (e) { touched = true; setNu(+e.target.value); });
+    document.getElementById('gel-shape').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-shape]'); if (!b || mode !== 'live') return;
+      st.shape = b.dataset.shape; touched = true;
+      document.querySelectorAll('#gel-shape .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      G.reset(s, st.nu); G.setShape(ind, st.shape); ind[0] = tgt[0] = G.CX; ind[1] = tgt[1] = rest(); quiet = 0; dirty = true;
+    });
+    var raysBtn = document.getElementById('gel-rays');
+    raysBtn.addEventListener('click', function () { st.rays = !st.rays; raysBtn.setAttribute('aria-pressed', String(st.rays)); dirty = true; });
+    document.getElementById('gel-lift').addEventListener('click', function () { touched = true; tgt[0] = ind[0]; tgt[1] = rest(); quiet = 0; });
+    function toSim(e) {
+      var rc = cv.getBoundingClientRect(), x = VX0 + (e.clientX - rc.left) / rc.width * (VX1 - VX0), y = VY0 + (1 - (e.clientY - rc.top) / rc.height) * (VY1 - VY0);
+      return clampT(x, y);
+    }
+    /* the indenter may go a bit more than a third of the gel radius deep */
+    function clampT(x, y) { return [Math.max(G.CX - G.R - 0.04, Math.min(G.CX + G.R + 0.04, x)), Math.max(G.BASE + G.R - 0.115 + G.SHAPES[st.shape].r, Math.min(rest(), y))]; }
+    cv.addEventListener('pointerdown', function (e) { if (mode !== 'live') return; drag = true; touched = true; tgt = toSim(e); quiet = 0; try { cv.setPointerCapture(e.pointerId); } catch (err) {} e.preventDefault(); });
+    cv.addEventListener('pointermove', function (e) { if (drag) { tgt = toSim(e); quiet = 0; } });
+    function up() { drag = false; }
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    watch(cv, function (v) { visible = v; dirty = true; }, '120px');
+    window.addEventListener('resize', function () { dirty = true; });
+    drawChart();
+    var last = performance.now();
+    (function loop(now) {
+      requestAnimationFrame(loop);
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      if (!visible) return;
+      if (mode === 'live') {
+        if (!touched && !REDUCED) { demoT += dt; var ph = (demoT % 7) / 7; tgt[0] = G.CX + 0.03; tgt[1] = ph < 0.5 ? G.BASE + G.R + 0.07 - 0.09 : rest(); quiet = 0; }
+        if (quiet < 40) { advance(9); dirty = true; }
+      }
+      if (dirty) { dirty = false; draw(); drawCam(); }
+    })(last);
+    return {
+      state: function () { var m = 0, cm = G.camera(s, K); for (var k = 0; k < K; k++) m = Math.max(m, Math.abs(cm.depth[k] - idle.depth[k])); return { n: s.n, shape: st.shape, nu: st.nu, mode: mode, steps: s.steps, indY: +ind[1].toFixed(3), change: +m.toFixed(3), finite: s.x.every(function (v) { return v === v; }) }; },
+      poke: function (x, y) { touched = true; tgt = clampT(x, y); quiet = 0; }, calibrate: calibrate
+    };
+  })();
+
+  /* ================= real vs simulated: comparison slider ================= */
+  var CMP = (function () {
+    var cv = document.getElementById('cmp-canvas'), range = document.getElementById('cmp-pos'), read = document.getElementById('cmp-read'), diffBtn = document.getElementById('cmp-diff');
+    var EX = { i1: { label: 'Indenter #1 (unseen)', m: ['dotsim', 'difftactile', 'tacto'] }, i3: { label: 'Indenter #3 (unseen)', m: ['dotsim', 'difftactile', 'tacto'] }, abl: { label: 'Residual ablation', m: ['dotsim', 'direct'] } };
+    var NAME = { dotsim: 'DOT-Sim', difftactile: 'DiffTactile', tacto: 'Tacto', direct: 'No residual' };
+    var st = { ex: 'i3', m: 'dotsim', pos: 0.5, diff: false }, imgs = {}, dirty = true, visible = false, started = false, dragging = false, psnr = null, diffCv = document.createElement('canvas'), swept = false, sweepT = 0;
+    function img(key) {
+      if (imgs[key]) return imgs[key];
+      var o = { im: new Image(), ok: false }; imgs[key] = o;
+      o.im.onload = function () { o.ok = true; o.data = null; compute(); dirty = true; };
+      o.im.src = MEDIA + 'compare/' + key + '.png';
+      return o;
+    }
+    function pixels(o) {
+      if (!o.data) { var c = document.createElement('canvas'); c.width = o.im.naturalWidth; c.height = o.im.naturalHeight; var x = c.getContext('2d'); x.drawImage(o.im, 0, 0); o.data = x.getImageData(0, 0, c.width, c.height); }
+      return o.data;
+    }
+    function compute() {
+      var a = img(st.ex + '_real'), b = img(st.ex + '_' + st.m); psnr = null;
+      if (!a.ok || !b.ok) return;
+      var pa = pixels(a), pb = pixels(b), n = pa.data.length, se = 0, cnt = 0, out;
+      diffCv.width = pa.width; diffCv.height = pa.height; out = diffCv.getContext('2d').createImageData(pa.width, pa.height);
+      for (var i = 0; i < n; i += 4) {
+        for (var k = 0; k < 3; k++) { var d = pa.data[i + k] - pb.data[i + k]; se += d * d; cnt++; out.data[i + k] = Math.min(255, Math.abs(d) * 4); }
+        out.data[i + 3] = 255;
+      }
+      diffCv.getContext('2d').putImageData(out, 0, 0);
+      psnr = 10 * Math.log(255 * 255 / (se / cnt)) / Math.LN10;
+      read.innerHTML = 'PSNR between these two panels: <b>' + psnr.toFixed(1) + ' dB</b>';
+    }
+    function draw() {
+      var w = sizeCanvas(cv), W = cv.width, H = cv.height, c = cv.getContext('2d'), a = img(st.ex + '_real'), b = img(st.ex + '_' + st.m);
+      c.clearRect(0, 0, W, H); c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high';
+      if (!a.ok || !b.ok) return;
+      function label(t, x, right) { c.font = '700 ' + Math.round(13 * w) + 'px Inter, sans-serif'; var tw = c.measureText(t).width + 20 * w; c.fillStyle = 'rgba(5,6,15,.7)'; c.beginPath(); if (c.roundRect) c.roundRect(right ? x - tw : x, 12 * w, tw, 28 * w, 14 * w); else c.rect(right ? x - tw : x, 12 * w, tw, 28 * w); c.fill(); c.fillStyle = '#fff'; c.textBaseline = 'middle'; c.textAlign = 'left'; c.fillText(t, (right ? x - tw : x) + 10 * w, 26.5 * w); }
+      if (st.diff) { c.drawImage(diffCv, 0, 0, W, H); label('|real − ' + NAME[st.m] + '| × 4', 12 * w, false); return; }
+      var x = Math.round(W * st.pos);
+      c.drawImage(b.im, 0, 0, W, H);
+      c.save(); c.beginPath(); c.rect(0, 0, x, H); c.clip(); c.drawImage(a.im, 0, 0, W, H); c.restore();
+      c.fillStyle = '#fff'; c.fillRect(x - w, 0, 2 * w, H);
+      c.beginPath(); c.arc(x, H / 2, 15 * w, 0, 6.2832); c.fill();
+      c.strokeStyle = '#17121c'; c.lineWidth = 2 * w; c.lineCap = 'round'; c.beginPath(); c.moveTo(x - 4 * w, H / 2 - 5 * w); c.lineTo(x - 8 * w, H / 2); c.lineTo(x - 4 * w, H / 2 + 5 * w); c.moveTo(x + 4 * w, H / 2 - 5 * w); c.lineTo(x + 8 * w, H / 2); c.lineTo(x + 4 * w, H / 2 + 5 * w); c.stroke();
+      label('Real sensor', 12 * w, false); label(NAME[st.m], W - 12 * w, true);
+    }
+    function chips() {
+      document.getElementById('cmp-ex').innerHTML = Object.keys(EX).map(function (k) { return '<button class="chip" type="button" data-ex="' + k + '" aria-pressed="' + (k === st.ex) + '">' + EX[k].label + '</button>'; }).join('');
+      if (EX[st.ex].m.indexOf(st.m) < 0) st.m = 'dotsim';
+      document.getElementById('cmp-m').innerHTML = EX[st.ex].m.map(function (k) { return '<button class="chip" type="button" data-m="' + k + '" aria-pressed="' + (k === st.m) + '">' + NAME[k] + '</button>'; }).join('');
+      if (started) compute();
+      dirty = true;
+    }
+    document.getElementById('cmp-ex').addEventListener('click', function (e) { var b = e.target.closest('[data-ex]'); if (b) { st.ex = b.dataset.ex; chips(); } });
+    document.getElementById('cmp-m').addEventListener('click', function (e) { var b = e.target.closest('[data-m]'); if (b) { st.m = b.dataset.m; chips(); } });
+    diffBtn.addEventListener('click', function () { st.diff = !st.diff; diffBtn.setAttribute('aria-pressed', String(st.diff)); dirty = true; });
+    function setPos(p) { st.pos = Math.max(0.02, Math.min(0.98, p)); range.value = Math.round(st.pos * 100); swept = true; dirty = true; }
+    range.addEventListener('input', function () { setPos(range.value / 100); });
+    function fromEvent(e) { var rc = cv.getBoundingClientRect(); setPos((e.clientX - rc.left) / rc.width); }
+    cv.addEventListener('pointerdown', function (e) { dragging = true; try { cv.setPointerCapture(e.pointerId); } catch (err) {} fromEvent(e); });
+    cv.addEventListener('pointermove', function (e) { if (dragging) fromEvent(e); });
+    cv.addEventListener('pointerup', function () { dragging = false; }); cv.addEventListener('pointercancel', function () { dragging = false; });
+    /* the controls are there from the start; the images load when the widget comes near the viewport */
+    chips();
+    watch(cv, function (v) { visible = v; dirty = true; if (v && !started) { started = true; compute(); } }, '200px');
+    window.addEventListener('resize', function () { dirty = true; });
+    var last = performance.now();
+    (function loop(now) {
+      requestAnimationFrame(loop);
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      if (!visible) return;
+      if (!swept && !REDUCED && psnr !== null) { sweepT += dt; st.pos = 0.5 + 0.3 * Math.sin(sweepT * 2.2); range.value = Math.round(st.pos * 100); dirty = true; if (sweepT > 2.86) { swept = true; st.pos = 0.5; range.value = 50; } }
+      if (dirty) { dirty = false; draw(); }
+    })(last);
+    return { state: function () { return { ex: st.ex, m: st.m, diff: st.diff, pos: +st.pos.toFixed(2), psnr: psnr === null ? null : +psnr.toFixed(2), loaded: Object.keys(imgs).filter(function (k) { return imgs[k].ok; }).length }; } };
+  })();
+
+  /* ================= bar explorers ================= */
+  function explorer(root, cfg) {
+    var els = {}; ['tabs', 'chips', 'rows', 'foot'].forEach(function (k) { els[k] = root.querySelector('[data-role=' + k + ']'); });
+    var sel = { tabs: null, chips: null };
+    function build(k) {
+      if (!els[k] || !cfg[k]) return;
+      if (sel[k] === null) sel[k] = (cfg[k].filter(function (t) { return t.def; })[0] || cfg[k][0]).k;
+      els[k].innerHTML = cfg[k].map(function (t) {
+        var on = t.k === sel[k];
+        return k === 'tabs' ? '<button type="button" role="tab" class="tab' + (on ? ' on' : '') + '" aria-selected="' + on + '" data-k="' + t.k + '">' + t.label + '</button>'
+          : '<button type="button" class="chip' + (on ? ' on' : '') + '" data-k="' + t.k + '">' + t.label + '</button>';
+      }).join('');
+    }
+    function render() {
+      var rows = cfg.rows(sel.tabs, sel.chips), lower = cfg.lower ? cfg.lower(sel.tabs, sel.chips) : false, mark = cfg.mark ? cfg.mark(sel.tabs, sel.chips) : null;
+      var vals = rows.map(function (r) { return cfg.value(r, sel.tabs, sel.chips); });
+      var bar = els.rows.querySelector('.rx-bar'), bw = bar ? bar.clientWidth : Math.max(120, els.rows.clientWidth - 264), top = Math.max.apply(null, vals);
+      var best = lower ? Math.min.apply(null, vals) : top, full = cfg.max ? cfg.max(sel.tabs, sel.chips) : top;
+      /* leave room for the value after the longest bar */
+      var mx = Math.max(full, top * bw / Math.max(40, bw - 84)) || 1;
+      els.rows.innerHTML = rows.map(function (r, i) {
+        var v = vals[i], w = v / mx * 100;
+        return '<div class="rx-row' + (r.ours ? ' ours' : '') + '"><div class="rx-name">' + r.name + '</div><div class="rx-bar"><span style="width:' + w + '%"></span>' + (mark !== null ? '<i style="left:' + (mark / mx * 100) + '%"></i>' : '') +
+          '<b style="left:calc(' + w + '% + 8px)">' + v.toFixed(cfg.digits === undefined ? 2 : cfg.digits) + (v === best ? ' ★' : '') + '</b></div></div>';
+      }).join('');
+      els.foot.textContent = cfg.foot(sel.tabs, sel.chips);
+    }
+    ['tabs', 'chips'].forEach(function (k) {
+      build(k);
+      if (els[k]) els[k].addEventListener('click', function (e) { var b = e.target.closest('[data-k]'); if (!b) return; sel[k] = b.dataset.k; build(k); render(); });
+    });
+    render();
+    return { state: function () { return { tab: sel.tabs, chip: sel.chips, values: [].map.call(els.rows.querySelectorAll('.rx-bar b'), function (b) { return b.textContent; }).join(' | ') }; } };
+  }
+  var SETTING = { Easy: 'Easy: indenters #1 and #3 in training and test, frames split 80/20.', Medium: 'Medium: all six indenters, frames split 80/20.', Hard: 'Hard: trained on #2, #4, #5, #6; tested on the unseen #1 and #3.' };
+  var OM = [{ k: '1', label: 'PSNR (dB) ↑', def: true }, { k: '0', label: 'Mean L2 (×10⁻²) ↓' }, { k: '2', label: 'L2 on worst pixels (×10⁻²) ↓' }];
+  var rxOpt = explorer(document.getElementById('rx-opt'), {
+    tabs: [{ k: 'Easy', label: 'Easy' }, { k: 'Medium', label: 'Medium' }, { k: 'Hard', label: 'Hard', def: true }], chips: OM,
+    rows: function (t) { return D.optical[t]; }, value: function (r, t, c) { return r.v[+c]; }, lower: function (t, c) { return c !== '1'; },
+    foot: function (t) { return SETTING[t] + ' Simulated against real tactile images. ★ best.'; }
+  });
+  var rxAbl = explorer(document.getElementById('rx-abl'), {
+    chips: [{ k: '0', label: 'PSNR (dB) ↑' }, { k: '1', label: 'L2 on worst pixels (×10⁻²) ↓' }],
+    rows: function () { return D.ablation; }, value: function (r, t, c) { return r.v[+c]; }, lower: function (t, c) { return c === '1'; },
+    foot: function () { return 'Hard setting. ★ best.'; }
+  });
+  var rxPhys = explorer(document.getElementById('rx-phys'), {
+    chips: [{ k: '3', label: 'F-score at 1 mm ↑', def: true }, { k: '1', label: 'Chamfer, worst 1% (mm) ↓' }, { k: '0', label: 'Chamfer (mm) ↓' }, { k: '2', label: 'EMD (mm) ↓' }],
+    rows: function () { return D.physical; }, value: function (r, t, c) { return r.v[+c]; }, lower: function (t, c) { return c !== '3'; },
+    foot: function () { return 'Simulated against reference surface, all six indenters (the Medium evaluation set). ★ best.'; }
+  });
+  var rxCls = explorer(document.getElementById('rx-cls'), {
+    tabs: [{ k: '1', label: 'Indenters unseen by the renderer', def: true }, { k: '0', label: 'Seen by the renderer' }],
+    rows: function () { return D.classification; }, value: function (r, t) { return r.v[+t]; }, mark: function () { return 50; }, max: function () { return 100; },
+    foot: function (t) { return 'Accuracy (%) on real images; classifiers trained on simulated images only. Dashed line: chance. Tacto has no learned rendering, so it scores the same in both cases. ★ best.'; }
+  });
+  var rxTumor = explorer(document.getElementById('rx-tumor'), {
+    tabs: [0, 1, 2].map(function (k) { return { k: String(k), label: 'Skin ' + (k + 1) }; }),
+    rows: function () { return D.tumor; }, value: function (r, t) { return r.v[+t]; }, mark: function () { return 50; }, max: function () { return 100; },
+    foot: function (t) { return 'Accuracy (%) on ' + D.tumor_n[+t] + ' real images; classifiers trained on simulated images only. Dashed line: chance. ★ best.'; }
+  });
+
+  window.__dot = { gel: GEL.state, poke: GEL.poke, calibrate: GEL.calibrate, cmp: CMP.state, rx: { opt: rxOpt.state, abl: rxAbl.state, phys: rxPhys.state, cls: rxCls.state, tumor: rxTumor.state } };
+
+  /* ================= teaser, BibTeX, lightbox ================= */
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
