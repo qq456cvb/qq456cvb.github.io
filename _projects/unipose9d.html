@@ -1,0 +1,1060 @@
+---
+layout: compress
+permalink: /projects/unipose9d
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UniPose9D: Universal Category-Agnostic Object Pose Estimation</title>
+  <meta name="description" content="UniPose9D estimates an object's rotation, translation and metric size from one masked RGB-D image, or one RGB image with predicted depth. It needs no category label, CAD model, shape prior or reference views. One model, trained on a mixture of public datasets, is competitive on standard benchmarks and transfers to unseen objects, unseen categories and in-the-wild images.">
+  <meta name="keywords" content="UniPose9D, 9D object pose estimation, category-agnostic, NOCS, point pairs, flow matching, Kabsch-Umeyama, RANSAC, DINOv2, PACE, Omni6DPose, REAL275, HouseCat6D, YCB-Video, HOPE">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/unipose9d">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UniPose9D: Universal Category-Agnostic Object Pose Estimation">
+  <meta property="og:description" content="Rotation, translation and metric size of any object from one masked image: no category label, CAD model, shape prior or reference views.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/unipose9d">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/unipose9d/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/unipose9d/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f0e0b'/%3E%3Cg fill='none' stroke='%23facc15' stroke-width='3.5' stroke-linejoin='round'%3E%3Cpath d='M14 24 34 16l16 8v18L30 50l-16-8z'/%3E%3Cpath d='M14 24l16 8 20-8M30 32v18'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/unipose9d#article",
+        "headline": "UniPose9D: Universal Category-Agnostic Object Pose Estimation",
+        "url": "https://qq456cvb.github.io/projects/unipose9d",
+        "datePublished": "2026-07",
+        "sameAs": ["https://arxiv.org/abs/2607.09985", "https://qq456cvb.github.io/publications/unipose9d"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Yi Du" }, { "@type": "Person", "name": "Cole Harrison" }, { "@type": "Person", "name": "Leonidas Guibas" }
+        ],
+        "keywords": ["9D object pose estimation", "category-agnostic", "NOCS", "point pairs", "flow matching"],
+        "image": "https://qq456cvb.github.io/projects/unipose9d/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/unipose9d#video" }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "UniPose9D",
+        "codeRepository": "https://github.com/qq456cvb/UniPose9D",
+        "programmingLanguage": "Python",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "sameAs": ["https://huggingface.co/spaces/qq456cvb/UniPose9D"],
+        "citation": { "@id": "https://qq456cvb.github.io/projects/unipose9d#article" }
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/unipose9d#video",
+        "name": "UniPose9D teaser",
+        "description": "UniPose9D in 56 seconds: 9D object pose from one masked image without category labels, CAD models, shape priors or reference views; point-pair NOCS prediction, per-pair scale calibration and N-hop Kabsch-Umeyama recovery; results on four benchmarks, on datasets never trained on, and in the wild.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/unipose9d/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/unipose9d/static/media/teaser.mp4",
+        "uploadDate": "2026-10-11",
+        "duration": "PT56S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #faf9f5; --surface: #ffffff; --ink: #17150f; --muted: #4d493d; --faint: #7b7667; --line: #e8e4d8;
+      --accent: #ca8a04; --accent-ink: #854d0e; --accent-soft: rgba(202, 138, 4, .1); --best: #17150f; --pre: #bdb8a8;
+      --hero: #0a0a0b; --hero-2: #2c2610; --radius: 18px; --shadow: 0 1px 2px rgba(23, 21, 15, .05), 0 8px 28px rgba(23, 21, 15, .06);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c0b09; --surface: #161511; --ink: #f5f2e8; --muted: #c2bdac; --faint: #918c7c; --line: #2b2920;
+        --accent: #facc15; --accent-ink: #fde047; --accent-soft: rgba(250, 204, 21, .12); --best: #ffffff; --pre: #5f5a4b;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    code { font: 500 .88em "JetBrains Mono", ui-monospace, monospace; background: var(--accent-soft); color: var(--ink); padding: 1px 6px; border-radius: 6px; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    .hero { background: radial-gradient(1200px 600px at 72% 8%, var(--hero-2), var(--hero) 70%); color: #f6f3e9; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #fef08a; border: 1px solid rgba(250, 204, 21, .5); background: rgba(250, 204, 21, .1); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 8px; font-size: clamp(46px, 8.4vw, 96px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { color: #facc15; text-shadow: 0 0 40px rgba(250, 204, 21, .3); }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #ebe6d6; margin: 0 0 22px; max-width: 940px; }
+    .authors { font-size: 18px; font-weight: 500; color: #d9d3c0; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #facc15; }
+    .authors sup { color: #fde047; font-weight: 600; margin-left: 2px; }
+    .affil { color: #a39d89; font-size: 15px; margin-top: 6px; }
+    .affil sup { color: #fde047; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #facc15; border-color: #facc15; color: #201a02; }
+    .btn.primary:hover { background: #fde047; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(10, 10, 11, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(10, 10, 11, .8); }
+
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b, p b, li b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+    .note { font-size: 14px; color: var(--faint); margin: 10px 2px 0; }
+    .mt { margin-top: 16px; }
+    .sub { margin-top: 48px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 36px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card p { margin: 0; font-size: 15.5px; }
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    .figure.dark { background: #000; }
+    .figure img { border-radius: 8px; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .grid-side { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; align-items: start; }
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid2 > *, .grid-side > *, .pd > *, .pair > * { min-width: 0; }
+
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 26px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s, upper-alpha); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .steps li::before { color: #201a02; } }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+    .why .card { padding: 18px 20px; }
+    .why h3 { font-size: 17px; }
+    .why p { font-size: 14.5px; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip.on, .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    .chip:disabled { opacity: .45; cursor: not-allowed; }
+    .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
+    .ctl h4 { margin: 0 0 8px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; gap: 8px; }
+    .ctl h4 output { font: 600 13px "JetBrains Mono", monospace; letter-spacing: 0; color: var(--accent-ink); text-transform: none; }
+    .ctl p { font-size: 14px; margin: 10px 0 0; }
+    .ctl .chips + h4, .ctl h4.mt { margin-top: 18px; }
+    .ctl + .ctl { margin-top: 12px; }
+    input[type=range] { width: 100%; accent-color: var(--accent); margin: 2px 0 8px; }
+
+    /* what each approach needs */
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    th[scope=row] { color: var(--ink); font-weight: 700; white-space: nowrap; }
+    td { color: var(--muted); }
+    td small { color: var(--faint); }
+    tr.ours th, tr.ours td { background: var(--accent-soft); }
+    tr.ours th[scope=row] { color: var(--accent-ink); font-weight: 800; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    .tbl.num th:not(:first-child), .tbl.num td { text-align: right; white-space: nowrap; }
+
+    /* pose-recovery demo */
+    .pd { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; margin-top: 18px; }
+    .stage { position: relative; background: #12110d; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .stage canvas { display: block; width: 100%; height: 100%; }
+    .stage .cap { position: absolute; left: 14px; top: 12px; font: 600 12.5px Inter, sans-serif; color: #d9d3c0; background: rgba(10, 10, 11, .55); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+    #pd-cam-stage { aspect-ratio: 4 / 3; }
+    .pd-small { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .pd-small .stage { aspect-ratio: 1 / 1; }
+    .stepper { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+    .stepper .chip b { font: 700 12px "JetBrains Mono", monospace; margin-right: 6px; color: var(--faint); }
+    .stepper .chip[aria-pressed="true"] b { color: var(--accent-ink); }
+    .play { border: 0; border-radius: 999px; padding: 8px 16px; font: 700 14px Inter, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
+    .play:hover { background: var(--accent); color: #fff; }
+    .pd-step { font-size: 15px; color: var(--muted); margin: 12px 2px 0; min-height: 3.2em; }
+    .pd-step b { color: var(--ink); }
+    .pd-out { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 4px; }
+    .pd-out div { background: color-mix(in srgb, var(--line) 40%, transparent); border-radius: 10px; padding: 8px 10px; font-size: 12.5px; color: var(--faint); line-height: 1.3; }
+    .pd-out b { display: block; font: 700 17px "JetBrains Mono", monospace; color: var(--ink); }
+    .pd-out div.bad b { color: #dc2626; }
+    .keys { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); margin-top: 10px; }
+    .keys i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: -1px; margin-right: 6px; }
+    .keys i.ln { width: 16px; height: 0; border-radius: 0; border-top: 3px solid; vertical-align: 4px; }
+
+    /* bar explorers */
+    .rx { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px 16px; }
+    .rx-top { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .rx-row { display: grid; grid-template-columns: 250px 1fr; gap: 14px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .rx-row:last-child { border-bottom: 0; }
+    .rx-name { font-weight: 700; font-size: 15px; line-height: 1.3; }
+    .rx-name .tag { font: 600 11px "JetBrains Mono", monospace; color: var(--faint); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; margin-left: 8px; vertical-align: 1px; }
+    .rx-row.ours .rx-name { color: var(--accent-ink); }
+    .rx-bar { position: relative; height: 22px; border-radius: 6px; background: color-mix(in srgb, var(--line) 55%, transparent); }
+    .rx-bar span { position: absolute; inset: 0 auto 0 0; border-radius: 6px; background: var(--pre); transition: width .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar span { background: var(--accent); }
+    .rx-bar b { position: absolute; top: 50%; transform: translateY(-50%); font: 600 12.5px/1 "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; transition: left .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.ours .rx-bar b { color: var(--accent-ink); }
+    .rx-bar.na b { color: var(--faint); font-weight: 500; }
+    .rx-foot { margin-top: 12px; font-size: 14px; color: var(--faint); }
+    .grid2 .rx-row { grid-template-columns: 190px 1fr; }
+
+    /* latency breakdown */
+    .lat { display: flex; height: 34px; border-radius: 9px; overflow: hidden; margin-top: 12px; }
+    .lat span { display: grid; place-items: center; font: 600 12px "JetBrains Mono", monospace; color: #201a02; white-space: nowrap; overflow: hidden; min-width: 3px; }
+    .lat-key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; color: var(--muted); margin-top: 10px; }
+    .lat-key i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+
+    /* qualitative gallery, demo */
+    .gal { margin-top: 16px; }
+    .gal figure { margin-top: 12px; }
+    .demo { margin-top: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+    .demo-ph { display: grid; place-items: center; gap: 14px; padding: 56px 24px; text-align: center; }
+    .demo-ph p { max-width: 520px; margin: 0; }
+    .demo iframe { display: block; width: 100%; height: 820px; border: 0; background: #fff; }
+
+    .dl { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: start; }
+    .dl ul { padding-left: 20px; margin: 0 0 14px; color: var(--muted); }
+    .dl li { margin: 6px 0; }
+    .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .btns .btn, .demo-ph .btn { background: var(--ink); color: var(--bg); border: 0; cursor: pointer; font-family: inherit; }
+    .btns .btn:hover, .demo-ph .btn:hover { background: var(--accent); color: #fff; }
+    .codes { display: grid; gap: 12px; }
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; }
+    pre.code, .bib { position: relative; background: #13120e; color: #f0ecdf; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    @media (prefers-color-scheme: dark) { pre.code, .bib { border: 1px solid var(--line); } }
+    pre.code .c { color: #9c9684; }
+    details.more { margin-top: 14px; }
+    details.more summary { cursor: pointer; font-weight: 600; color: var(--accent-ink); font-size: 15px; margin-bottom: 10px; }
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+
+    .related { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .related a.card { display: block; color: inherit; padding: 20px; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+    .related p { font-size: 14.5px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(10, 10, 11, .9); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats, .related { grid-template-columns: repeat(2, 1fr); }
+      .grid2, .grid-side, .pd, .dl { grid-template-columns: 1fr; }
+      .steps, .why { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stat .num { font-size: 28px; }
+      .lead { font-size: 18.5px; }
+      .rx { padding: 16px 14px 12px; }
+      .rx-row, .grid2 .rx-row { grid-template-columns: 1fr; gap: 6px; }
+      .tab { padding: 8px 10px; font-size: 14px; }
+      .related, .pair { grid-template-columns: 1fr; }
+      th, td { padding: 9px 11px; }
+      th[scope=row] { white-space: normal; }
+      .needs thead { display: none; }
+      .needs tr { display: block; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+      .needs tbody tr:last-child { border-bottom: 0; }
+      .needs tr.ours { background: var(--accent-soft); }
+      .needs th, .needs td { display: block; padding: 0; border: 0; background: none !important; }
+      .needs td:nth-child(2) { font-size: 13.5px; color: var(--faint); margin: 1px 0 6px; }
+      .bib { padding-top: 54px; }
+      .demo iframe { height: 640px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">ARXIV 2026</span>
+    <h1>UniPose<span>9D</span></h1>
+    <p class="subtitle">Universal Category-Agnostic Object Pose Estimation</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a><sup>1</sup></span><span><a href="https://scholar.google.com/citations?user=LhYjApUAAAAJ&amp;hl=en">Yi Du</a><sup>1</sup></span><span><a href="https://www.linkedin.com/in/cole-harrison-ai/">Cole Harrison</a><sup>2</sup></span><span><a href="https://geometry.stanford.edu/">Leonidas Guibas</a><sup>1</sup></span>
+    </div>
+    <div class="affil"><sup>1</sup>Stanford University · <sup>2</sup>Amazon</div>
+    <div class="links">
+      <a class="btn primary" href="https://arxiv.org/pdf/2607.09985"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://arxiv.org/abs/2607.09985"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>arXiv</a>
+      <a class="btn" href="https://github.com/qq456cvb/UniPose9D"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="#demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="m4 7 8 4 8-4M12 11v10"/></svg>Live demo</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/unipose9d/static/media/teaser.mp4" poster="/projects/unipose9d/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="UniPose9D teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#needs">What it needs</a><a href="#method">Method</a><a href="#recovery">Pose recovery</a><a href="#benchmarks">Benchmarks</a><a href="#unseen">Unseen objects</a><a href="#analysis">Analysis</a><a href="#demo">Live demo</a><a href="#code">Code</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>One model, any object, a full 9D pose</h2>
+    <p class="lead">Give UniPose9D an object's mask in one RGB-D image, or in one RGB image with predicted depth, and it returns the object's <b>rotation, translation and metric size</b>. It needs no category label, no CAD model, no shape prior and no reference views. Instead of regressing a canonical coordinate at every pixel, it predicts them for <b>pairs of points</b>, calibrates metric scale from each pair, and recovers the pose with an <b>N-hop Kabsch–Umeyama</b> solver; <b>flow matching</b> handles symmetric objects. A single set of weights, trained on a mixture of public datasets, is used for every result on this page.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">1<small>model</small></div><p>the same weights for all eight datasets, with no category label, CAD model, shape prior or reference view</p></div>
+      <div class="stat"><div class="num">40.1<small>AP</small></div><p>3D-box AP at IoU 0.5 on PACE, vs 18.6 for GenPose++, the next best</p></div>
+      <div class="stat"><div class="num">91.9<small>%</small></div><p>of YCB-Video poses within 2 cm with RGB-D input, vs 46.5% for GenPose++; its objects and scenes were never trained on</p></div>
+      <div class="stat"><div class="num">4.0<small>°</small></div><p>median rotation error on YCB-Video (RGB-D), and 4.2° on HOPE, also never trained on</p></div>
+    </div>
+    <div class="pair mt">
+      <figure class="figure" data-zoom><img src="/projects/unipose9d/static/media/teaser_a.jpg" width="1800" height="1012" decoding="async" alt="Four real scenes with predicted yellow 3D boxes and coloured axes: plates and a frying pan on a table, bowls and cups on chairs, a cluttered tabletop of cans and boxes, and a row of grocery items on a sofa."><figcaption>With measured depth: cluttered tabletops, occlusion and many objects at once.</figcaption></figure>
+      <figure class="figure" data-zoom><img src="/projects/unipose9d/static/media/teaser_b.jpg" width="1800" height="1012" decoding="async" alt="Predicted boxes on a glass bottle held by a robot arm, a table in a painting, and a lamb in a photo of sheep."><figcaption>With predicted depth: a robot's grasp, a painting and a photo of animals.</figcaption></figure>
+    </div>
+    <p class="note">Yellow cuboids are the predicted metric boxes; the red, green and blue axes show the predicted orientation.</p>
+  </div>
+</section>
+
+<section id="needs">
+  <div class="wrap">
+    <div class="kicker">What it needs</div>
+    <h2>Just the image and a mask</h2>
+    <p>Most pose estimators need something about the object beyond the picture. UniPose9D is <b>category-agnostic</b>: at inference it is not given a category name, a category template, a mean shape, an instance mesh or reference views. It learns canonical orientations from aligned pose annotations and shares one prediction head across all categories.</p>
+    <div class="tbl needs">
+      <table>
+        <thead><tr><th>Approach</th><th>Examples</th><th>Needs at inference, besides the image</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Instance-level</th><td>PoseCNN, GDR-Net, SurfEmb</td><td>A CAD model of each target object</td></tr>
+          <tr><th scope="row">Category-level</th><td>NOCS, SecondPose, CleanPose</td><td>A fixed set of trained categories; often the category label or a mean shape</td></tr>
+          <tr><th scope="row">Reference-based</th><td>Gen6D, FoundationPose, Any6D</td><td>Reference images, a video or a 3D model of the target</td></tr>
+          <tr><th scope="row">Open-vocabulary</th><td>Oryon, OV9D, Pov9D</td><td>A text description or category prompt; some also a second view or a shape prior</td></tr>
+          <tr class="ours"><th scope="row">UniPose9D</th><td>this work</td><td>Only the object's mask, with measured depth or depth predicted from the RGB image</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="kicker">Method</div>
+    <h2>Point pairs instead of pixels</h2>
+    <ol class="steps">
+      <li><b>Features</b>The masked depth is back-projected to a point cloud. Each point gets a visual descriptor from DINOv2 (enhanced by 3DCorrEnhance) and a geometric one from a small multi-radius PointNet.</li>
+      <li><b>Pairwise prediction</b>Pairs of points are sampled, each with three context points. A residual MLP and a transformer encode them, and a joint flow-matching head predicts the pair's two NOCS coordinates and the metric box size.</li>
+      <li><b>Pose recovery</b>Each pair calibrates the metric scale by itself. N-hop Kabsch–Umeyama with an adaptive inlier threshold gives rotation and translation; averaging the box sizes of inlier pairs gives the size.</li>
+    </ol>
+    <figure class="figure" data-zoom><img src="/projects/unipose9d/static/media/pipeline.jpg" width="2000" height="541" loading="lazy" decoding="async" alt="Pipeline in three parts. A, features: DINOv2 on the RGB crop and PointNet on the point cloud. B, pairwise prediction: a target pair with three context points and their relative offsets go through a residual MLP and transformer, then a joint flow head that outputs NOCS coordinates and size. C, pose recovery: scale calibration and N-hop Umeyama against the observed points give rotation and translation; the mean size over inliers gives the box size."><figcaption>(A) DINOv2 and PointNet descriptors. (B) A target pair plus three context points; the joint flow head predicts both NOCS coordinates and the box size. (C) Scale calibration and N-hop Umeyama recover the 9D pose.</figcaption></figure>
+    <h3 class="sub">Why point pairs</h3>
+    <div class="why">
+      <div class="card"><h3>Many more candidates</h3><p>N sampled points give on the order of N² possible pairs. A budget of them is sampled (10,000 from 1,024 points by default), each seeing the object in a different context.</p></div>
+      <div class="card"><h3>Differences cancel bias</h3><p>The difference between two points removes any shared translation error, and the ratio of the two distances, observed over predicted, gives the metric scale directly.</p></div>
+      <div class="card"><h3>Robust under occlusion</h3><p>With pairs as hypotheses, RANSAC can reject the inconsistent ones and still keep enough consistent pairs when only part of the object is visible.</p></div>
+    </div>
+    <div class="card sub">
+      <h3>Symmetric objects without listing symmetries</h3>
+      <p>A symmetric object has several equally valid NOCS answers for the same observation. Plain regression averages them, which matches none. The head is instead a Gaussian-mixture flow over a nine-dimensional state, the two NOCS points of a pair and the log box size, so it can represent several answers and sample one of them for the whole pair. No per-object symmetry list is needed.</p>
+    </div>
+  </div>
+</section>
+
+<section id="recovery">
+  <div class="wrap">
+    <div class="kicker">Pose recovery</div>
+    <h2>From noisy pairs to a box, step by step</h2>
+    <p>A toy version of the recovery stage in 2D, seen from above. The “network” here is simulated: predicted NOCS coordinates are the true ones plus noise, and a share of the pairs are pure outliers. Everything after that, the per-pair scale, the RANSAC hops with the adaptive threshold and the size average, is computed live as in the paper.</p>
+    <div class="pd" id="pd">
+      <div>
+        <div class="stage" id="pd-cam-stage"><canvas id="pd-cam" role="img" aria-label="Observed points of a toy object with sampled point pairs, inliers and outliers, and the recovered box"></canvas><span class="cap">Camera space (metres)</span></div>
+        <div class="stepper" role="group" aria-label="Steps">
+          <button class="chip" type="button" data-step="1" aria-pressed="false"><b>1</b>Pairs</button>
+          <button class="chip" type="button" data-step="2" aria-pressed="false"><b>2</b>Scale</button>
+          <button class="chip" type="button" data-step="3" aria-pressed="false"><b>3</b>N-hop RANSAC</button>
+          <button class="chip" type="button" data-step="4" aria-pressed="true"><b>4</b>Pose</button>
+          <button class="play" type="button" id="pd-play">Play steps</button>
+        </div>
+        <p class="pd-step" id="pd-step"></p>
+        <div class="keys"><span><i style="background:#9ca3af"></i>observed point</span><span><i style="background:#4ade80"></i>inlier prediction</span><span><i style="background:#f87171"></i>outlier prediction</span><span><i class="ln" style="border-color:#facc15"></i>recovered box</span><span><i class="ln" style="border-color:#e5e7eb;border-top-style:dashed"></i>true box</span></div>
+      </div>
+      <div>
+        <div class="ctl">
+          <h4>Object</h4>
+          <div class="chips" id="pd-obj" role="group" aria-label="Object"></div>
+          <div class="chips mt" id="pd-head" role="group" aria-label="Prediction head" hidden>
+            <button class="chip" type="button" data-head="flow" aria-pressed="true">Flow matching</button>
+            <button class="chip" type="button" data-head="l2" aria-pressed="false">Plain regression</button>
+          </div>
+          <h4 class="mt">Noise in predicted NOCS <output id="pd-s-v">0.02</output></h4>
+          <input type="range" id="pd-s" min="0" max="0.1" step="0.005" value="0.02" aria-label="NOCS noise">
+          <h4>Outlier pairs <output id="pd-o-v">25%</output></h4>
+          <input type="range" id="pd-o" min="0" max="0.7" step="0.05" value="0.25" aria-label="Share of outlier pairs">
+          <h4>Pairs sampled, T <output id="pd-t-v">400</output></h4>
+          <input type="range" id="pd-t" min="20" max="1000" step="20" value="400" aria-label="Number of pairs">
+          <div class="pd-out" id="pd-out"></div>
+        </div>
+        <div class="pd-small">
+          <div class="stage"><canvas id="pd-nocs" role="img" aria-label="Predicted NOCS coordinates of the sampled pairs"></canvas><span class="cap">Predicted NOCS</span></div>
+          <div class="stage"><canvas id="pd-hist" role="img" aria-label="Histogram of the per-pair scale estimates"></canvas><span class="cap">Per-pair scale γ</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="benchmarks">
+  <div class="wrap">
+    <div class="kicker">Benchmarks</div>
+    <h2>Four benchmarks, the same weights</h2>
+    <p>The training mixture is the training splits of PACE, Omni6DPose, NOCS and HouseCat6D; the model is evaluated on their held-out test sets with each benchmark's own metrics and no fine-tuning. On <b>PACE</b> it leads every reported metric, and on <b>Omni6DPose</b> it leads or ties every one. On <b>NOCS REAL275</b> and <b>HouseCat6D</b> it is competitive with category-level specialists that are trained for each benchmark's fixed categories: close to SecondPose on REAL275 and ahead of it on HouseCat6D, while the recent specialist CleanPose scores higher on both.</p>
+    <div class="rx" id="rx-bench">
+      <div class="rx-top"><div class="tabs" role="tablist" aria-label="Benchmark" data-role="tabs"></div><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <p class="note"><b>Cat</b>: a category-level specialist, trained for a fixed set of categories with category-specific inputs or branches. <b>Gen</b>: generalizable, needing no category label, mean shape, CAD model or reference view at inference.</p>
+    <figure class="figure sub" data-zoom><img src="/projects/unipose9d/static/media/pace.jpg" width="1800" height="1214" loading="lazy" decoding="async" alt="Four PACE examples, a bin, a helmet, a shoe and a plush toy, with boxes from ground truth, NOCS, HS-Pose, CPPF++, GenPose++ and UniPose9D; UniPose9D's boxes match the ground truth most closely."><figcaption>PACE: ground truth, NOCS, HS-Pose, CPPF++, GenPose++ and UniPose9D.</figcaption></figure>
+    <details class="more"><summary>What if the baselines train on the same four datasets?</summary>
+      <p>Retraining GenPose++, SecondPose and CleanPose on the same mixture (“All-DS”), UniPose9D leads the jointly trained models on all four benchmarks. The NOCS-only SecondPose and CleanPose checkpoints keep a higher REAL275 score; that is a different training setting. SecondPose and CleanPose stay category-conditioned, and CleanPose needs a 190-category head for the combined taxonomy.</p>
+      <div class="rx" id="rx-allds">
+        <div class="rx-top"><div class="chips" role="group" aria-label="Benchmark" data-role="chips"></div></div>
+        <div data-role="rows"></div>
+        <p class="rx-foot" data-role="foot"></p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="unseen">
+  <div class="wrap">
+    <div class="kicker">Unseen objects</div>
+    <h2>Datasets and categories it never trained on</h2>
+    <p><b>YCB-Video</b> and <b>HOPE</b> are not in the training mixture: none of their object instances or scenes were seen. With RGB-D input, more than 91% of poses are within 2 cm and the median rotation error is about 4°. With RGB alone, depth comes from MoGe-2. Rotation stays usable (median 8.9° and 7.6°), but metric translation mostly fails (3.4% and 1.5% within 2 cm), because any error in the predicted depth scale goes straight into the translation; on HOPE, GenPose++ is slightly better on that one number.</p>
+    <div class="rx" id="rx-cross">
+      <div class="rx-top"><div class="tabs" role="tablist" aria-label="Dataset" data-role="tabs"></div><div class="chips" role="group" aria-label="Input" data-role="chips2"></div><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <div class="gal" id="gal">
+      <div class="tabs" role="tablist" aria-label="Qualitative comparison" data-role="tabs"></div>
+      <figure class="figure" data-zoom><img id="gal-img" src="/projects/unipose9d/static/media/ycbv.jpg" width="1182" height="890" loading="lazy" decoding="async" alt=""><figcaption id="gal-cap"></figcaption></figure>
+    </div>
+    <h3 class="sub">Categories absent from training</h3>
+    <p>A stricter test keeps only categories with no example in the four training datasets, such as the power drill and pitcher of YCB-Video or the ladle and whisk of HANDAL. (This says nothing about what the pretrained DINOv2 or MoGe-2 saw.)</p>
+    <div class="tbl num"><table><caption>Accuracy (%) with RGB-D input on categories that are absent from the pose-training mixture: both the rotation and the translation error must be below the thresholds.</caption><thead><tr><th>Dataset</th><th>Unseen categories</th><th>Examples</th><th>5° 2 cm</th><th>5° 5 cm</th><th>10° 2 cm</th><th>10° 5 cm</th></tr></thead><tbody><tr><th scope="row">YCB-Video</th><td>5</td><td>3,543</td><td>40.6</td><td>40.8</td><td>63.8</td><td>64.2</td></tr><tr><th scope="row">HOPE</th><td>2</td><td>225</td><td>64.9</td><td>64.9</td><td>85.8</td><td>86.7</td></tr><tr><th scope="row">Omni6D</th><td>13</td><td>9,530</td><td>15.6</td><td>26.4</td><td>20.3</td><td>32.3</td></tr><tr><th scope="row">HANDAL</th><td>5</td><td>25</td><td>56.0</td><td>64.0</td><td>60.0</td><td>76.0</td></tr></tbody></table></div>
+    <p class="sub"><b>Omni6D</b> is a different dataset from Omni6DPose. Its baselines train on Omni6D and are tested on its 13 held-out categories; UniPose9D is evaluated zero-shot on the same split. It is ahead on box IoU (50.7 vs 36.9) and on every rotation and joint metric, while the trained baselines are more accurate on translation alone. On <b>HANDAL</b>, 25 examples from five unseen categories serve as a small diagnostic.</p>
+    <div class="rx" id="rx-unseen">
+      <div class="rx-top"><div class="tabs" role="tablist" aria-label="Dataset" data-role="tabs"></div><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <h3 class="sub">In the wild</h3>
+    <figure class="figure" data-zoom><img src="/projects/unipose9d/static/media/wild.jpg" width="2000" height="631" loading="lazy" decoding="async" alt="Predicted boxes on a product photo of a chair, a glass in an illustration, a cup on a cluttered table and a bench in a bedroom photo."><figcaption>RGB images with predicted depth, from very different sources: a product photo, an illustration and phone photos.</figcaption></figure>
+  </div>
+</section>
+
+<section id="analysis">
+  <div class="wrap">
+    <div class="kicker">Analysis</div>
+    <h2>What matters, what it costs, where it fails</h2>
+    <p>On REAL275, removing the geometric PointNet features or replacing flow matching with plain regression costs the most. Predicting NOCS per point instead of per pair, dropping the pairwise scale calibration, or using plain RANSAC instead of the N-hop loop each lose a few points.</p>
+    <div class="rx" id="rx-abl">
+      <div class="rx-top"><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+    <div class="grid2 sub">
+      <div>
+        <h3>Speed</h3>
+        <p>Estimating one object's pose takes 2.8 s on an RTX A6000 with the default 10,000 pairs, and most of that is flow sampling. With 3,000 pairs the REAL275 accuracy is the same and it takes about 1 s. Mask and depth prediction for RGB input are not included.</p>
+        <div class="card">
+          <h3 style="font-size:16px">Where the 2.8 s go</h3>
+          <div class="lat" id="lat" role="img" aria-label="Latency breakdown per object"></div>
+          <div class="lat-key" id="lat-key"></div>
+        </div>
+      </div>
+      <div>
+        <h3>Sensitivity</h3>
+        <p>How the REAL275 score moves with the pair budget, the solver settings, and corrupted masks or depth.</p>
+        <div class="rx" id="rx-sens" style="margin-top:0">
+          <div class="rx-top"><div class="tabs" role="tablist" aria-label="Setting" data-role="tabs"></div><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+    </div>
+    <div class="grid-side sub">
+      <div>
+        <h3>Limitations</h3>
+        <p>The model targets rigid indoor objects of moderate size and needs an instance mask. Its accuracy depends on the mask and the depth; with RGB input, errors of the predicted depth mainly hurt the metric translation. Flow sampling dominates the runtime, which limits uses that need frequent pose updates.</p>
+        <p>Two typical failures are shown on the right: under severe occlusion too few reliable correspondences remain, and very thin objects leave the box size and orientation ambiguous.</p>
+      </div>
+      <figure class="figure dark" data-zoom><img src="/projects/unipose9d/static/media/failure.jpg" width="1600" height="485" loading="lazy" decoding="async" alt="Failure cases: a heavily occluded brush on a chair with a wrong box, and a thin pen with an ambiguous box."><figcaption>Failure cases. Left: severe occlusion. Right: a very thin object.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="kicker">Live demo</div>
+    <h2>Try it on your own image</h2>
+    <p>The demo runs on Hugging Face Spaces: upload an image, mark the object with point prompts, and estimate its 9D pose. Depth and camera intrinsics are predicted when you only have RGB.</p>
+    <div class="demo" id="demo-box">
+      <div class="demo-ph">
+        <p>The demo is a separate app hosted by Hugging Face; it loads when you ask for it.</p>
+        <div class="btns" style="justify-content:center"><button class="btn" type="button" id="demo-load">Load the demo here</button><a class="btn" href="https://huggingface.co/spaces/qq456cvb/UniPose9D">Open on Hugging Face</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap dl">
+    <div>
+      <div class="kicker">Code</div>
+      <h2>Run it locally</h2>
+      <ul>
+        <li><b>Inference release</b> with the checkpoint (Git LFS), a command-line tool and an interactive app.</li>
+        <li><b>Masks</b> come from SAM2 with a point prompt, or from a text prompt through GroundingDINO.</li>
+        <li><b>Depth and intrinsics</b> are optional: when missing, MoGe estimates them from the RGB image.</li>
+        <li><b>Licence</b>: Apache 2.0. The curated training set is announced as coming soon.</li>
+      </ul>
+      <div class="btns">
+        <a class="btn" href="https://github.com/qq456cvb/UniPose9D">GitHub</a>
+        <a class="btn" href="https://huggingface.co/spaces/qq456cvb/UniPose9D">Demo</a>
+        <a class="btn" href="https://arxiv.org/abs/2607.09985">arXiv</a>
+      </div>
+      <p class="note">UniPose9D builds on <a href="https://github.com/facebookresearch/dinov2">DINOv2</a>, <a href="https://github.com/facebookresearch/sam2">SAM2</a>, <a href="https://github.com/IDEA-Research/GroundingDINO">GroundingDINO</a> and <a href="https://github.com/microsoft/MoGe">MoGe</a>, each under its own licence.</p>
+    </div>
+    <div class="codes">
+<pre class="code">git clone https://github.com/qq456cvb/UniPose9D &amp;&amp; cd UniPose9D
+git lfs install
+git lfs pull --include=checkpoints/last.ckpt
+conda env create -f environment.yml
+conda activate unipose9d</pre>
+<pre class="code"><span class="c"># the bundled example: RGB only, mask from a point prompt</span>
+python infer/unipose9d_inference.py \
+  --rgb examples/desktop_scene/example.jpg \
+  --sam2-point 540 430 1
+
+<span class="c"># your own image, with a text prompt and sensor depth in mm</span>
+python infer/unipose9d_inference.py --rgb rgb.png \
+  --sam2-text "object" --depth depth.npy --depth-scale 0.001
+
+python infer/app_unipose9d_pose.py   <span class="c"># interactive app</span></pre>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>Read the full abstract</summary>
+      <p>Object pose estimation is a fundamental problem in 3D vision. Although recent state-of-the-art approaches achieve strong performance, generalization to novel categories and unseen scenes remains challenging. We propose UniPose9D, a unified model for category-agnostic 9D object pose estimation: given an instance mask/ROI and either an RGB-D observation or an RGB image with predicted depth, the model estimates rotation, translation, and metric size without category labels, CAD models, mean-shape priors, or reference views. Specifically, UniPose9D samples point pairs from the observed object geometry and uses DINOv2 and PointNet features to predict NOCS coordinates for each pair. To improve accuracy, we introduce a point-pair-based RANSAC N-hop Kabsch–Umeyama algorithm with an adaptive threshold. We further employ flow matching to address symmetric ambiguities and construct a large-scale training set by curating and aligning pose annotations from existing public datasets. Experiments across eight datasets show that a single unified model achieves competitive performance on standard benchmarks while generalizing to unseen objects, unseen categories, and in-the-wild scenarios.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/projects/cppf"><div class="venue">CVPR 2022</div><h3>CPPF</h3><p>Point-pair voting for category-level pose, the idea behind the pairs used here.</p></a>
+      <a class="card" href="/projects/cppf++"><div class="venue">TPAMI 2024</div><h3>CPPF++</h3><p>Uncertainty-aware vote aggregation for sim-to-real pose estimation.</p></a>
+      <a class="card" href="/projects/pace"><div class="venue">ECCV 2024</div><h3>PACE</h3><p>A pose benchmark in cluttered scenes; part of the training mixture and a test set here.</p></a>
+      <a class="card" href="/projects/3dcorrenhance"><div class="venue">ICLR 2025</div><h3>3DCorrEnhance</h3><p>Multiview-consistent features that enhance the DINOv2 descriptors used here.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@misc{you2026unipose9duniversalcategoryagnosticobject,
+  title={UniPose9D: Universal Category-Agnostic Object Pose Estimation},
+  author={Yang You and Yi Du and Cole Harrison and Leonidas Guibas},
+  year={2026},
+  eprint={2607.09985},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2607.09985}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script id="page-data" type="application/json">{"pace":[{"name":"NOCS","type":"Cat","ours":false,"v":{"IoU25":0.2,"IoU50":0.0,"AP 0:20\u00b0":1.2,"AP 0:60\u00b0":4.3,"AP 0:5 cm":17.0,"AP 0:15 cm":33.5,"AP 0:20\u00b0, 0:5 cm":1.1,"AP 0:60\u00b0, 0:15 cm":4.2}},{"name":"HS-Pose","type":"Cat","ours":false,"v":{"IoU25":36.6,"IoU50":2.7,"AP 0:20\u00b0":5.3,"AP 0:60\u00b0":8.6,"AP 0:5 cm":48.7,"AP 0:15 cm":81.0,"AP 0:20\u00b0, 0:5 cm":3.9,"AP 0:60\u00b0, 0:15 cm":8.1}},{"name":"SGPA","type":"Cat","ours":false,"v":{"IoU25":2.6,"IoU50":1.2,"AP 0:20\u00b0":5.6,"AP 0:60\u00b0":11.4,"AP 0:5 cm":16.1,"AP 0:15 cm":50.7,"AP 0:20\u00b0, 0:5 cm":3.3,"AP 0:60\u00b0, 0:15 cm":10.1}},{"name":"DualPoseNet","type":"Cat","ours":false,"v":{"IoU25":24.2,"IoU50":0.1,"AP 0:20\u00b0":5.5,"AP 0:60\u00b0":8.1,"AP 0:5 cm":18.6,"AP 0:15 cm":63.4,"AP 0:20\u00b0, 0:5 cm":1.8,"AP 0:60\u00b0, 0:15 cm":6.5}},{"name":"SAR-Net","type":"Cat","ours":false,"v":{"IoU25":22.8,"IoU50":0.2,"AP 0:20\u00b0":5.3,"AP 0:60\u00b0":8.8,"AP 0:5 cm":48.6,"AP 0:15 cm":79.8,"AP 0:20\u00b0, 0:5 cm":3.7,"AP 0:60\u00b0, 0:15 cm":8.2}},{"name":"CPPF++","type":"Cat","ours":false,"v":{"IoU25":44.5,"IoU50":4.4,"AP 0:20\u00b0":15.2,"AP 0:60\u00b0":27.3,"AP 0:5 cm":35.3,"AP 0:15 cm":74.0,"AP 0:20\u00b0, 0:5 cm":9.9,"AP 0:60\u00b0, 0:15 cm":24.9}},{"name":"GenPose++","type":"Gen","ours":false,"v":{"IoU25":52.5,"IoU50":18.6,"AP 0:20\u00b0":21.8,"AP 0:60\u00b0":39.7,"AP 0:5 cm":52.3,"AP 0:15 cm":79.0,"AP 0:20\u00b0, 0:5 cm":15.7,"AP 0:60\u00b0, 0:15 cm":33.9}},{"name":"UniPose9D (ours)","type":"Gen","ours":true,"v":{"IoU25":61.7,"IoU50":40.1,"AP 0:20\u00b0":40.4,"AP 0:60\u00b0":57.4,"AP 0:5 cm":65.2,"AP 0:15 cm":87.7,"AP 0:20\u00b0, 0:5 cm":36.4,"AP 0:60\u00b0, 0:15 cm":56.0}}],"omni":[{"name":"NOCS","type":"Cat","ours":false,"v":{"AUC IoU25":0.0,"AUC IoU50":0.0,"AUC IoU75":0.0,"VUS 5\u00b0 2 cm":0.0,"VUS 5\u00b0 5 cm":0.0,"VUS 10\u00b0 2 cm":0.0,"VUS 10\u00b0 5 cm":0.0}},{"name":"SGPA","type":"Cat","ours":false,"v":{"AUC IoU25":10.5,"AUC IoU50":2.0,"AUC IoU75":0.0,"VUS 5\u00b0 2 cm":4.3,"VUS 5\u00b0 5 cm":6.7,"VUS 10\u00b0 2 cm":9.3,"VUS 10\u00b0 5 cm":15.0}},{"name":"IST-Net","type":"Cat","ours":false,"v":{"AUC IoU25":28.7,"AUC IoU50":10.6,"AUC IoU75":0.5,"VUS 5\u00b0 2 cm":2.0,"VUS 5\u00b0 5 cm":3.4,"VUS 10\u00b0 2 cm":5.3,"VUS 10\u00b0 5 cm":8.8}},{"name":"HS-Pose","type":"Cat","ours":false,"v":{"AUC IoU25":31.6,"AUC IoU50":13.6,"AUC IoU75":1.1,"VUS 5\u00b0 2 cm":3.5,"VUS 5\u00b0 5 cm":5.3,"VUS 10\u00b0 2 cm":8.4,"VUS 10\u00b0 5 cm":12.7}},{"name":"GenPose++","type":"Gen","ours":false,"v":{"AUC IoU25":39.0,"AUC IoU50":19.1,"AUC IoU75":2.0,"VUS 5\u00b0 2 cm":10.0,"VUS 5\u00b0 5 cm":15.1,"VUS 10\u00b0 2 cm":19.5,"VUS 10\u00b0 5 cm":29.4}},{"name":"UniPose9D (ours)","type":"Gen","ours":true,"v":{"AUC IoU25":43.1,"AUC IoU50":23.0,"AUC IoU75":2.9,"VUS 5\u00b0 2 cm":10.5,"VUS 5\u00b0 5 cm":15.8,"VUS 10\u00b0 2 cm":19.5,"VUS 10\u00b0 5 cm":29.7}}],"real":[{"name":"FS-Net","type":"Cat","ours":false,"v":{"IoU75":null,"5\u00b0 2 cm":null,"5\u00b0 5 cm":28.2,"10\u00b0 2 cm":null,"10\u00b0 5 cm":60.8}},{"name":"DualPoseNet","type":"Cat","ours":false,"v":{"IoU75":30.8,"5\u00b0 2 cm":29.3,"5\u00b0 5 cm":35.9,"10\u00b0 2 cm":50.0,"10\u00b0 5 cm":66.8}},{"name":"GPV-Pose","type":"Cat","ours":false,"v":{"IoU75":null,"5\u00b0 2 cm":32.0,"5\u00b0 5 cm":42.9,"10\u00b0 2 cm":null,"10\u00b0 5 cm":71.6}},{"name":"SS-ConvNet","type":"Cat","ours":false,"v":{"IoU75":null,"5\u00b0 2 cm":36.6,"5\u00b0 5 cm":43.4,"10\u00b0 2 cm":52.6,"10\u00b0 5 cm":63.5}},{"name":"HS-Pose","type":"Cat","ours":false,"v":{"IoU75":null,"5\u00b0 2 cm":41.3,"5\u00b0 5 cm":50.4,"10\u00b0 2 cm":72.3,"10\u00b0 5 cm":82.7}},{"name":"IST-Net","type":"Cat","ours":false,"v":{"IoU75":47.5,"5\u00b0 2 cm":53.4,"5\u00b0 5 cm":63.2,"10\u00b0 2 cm":72.1,"10\u00b0 5 cm":80.5}},{"name":"VI-Net","type":"Cat","ours":false,"v":{"IoU75":48.3,"5\u00b0 2 cm":50.0,"5\u00b0 5 cm":57.6,"10\u00b0 2 cm":70.8,"10\u00b0 5 cm":82.1}},{"name":"SecondPose","type":"Cat","ours":false,"v":{"IoU75":49.7,"5\u00b0 2 cm":56.2,"5\u00b0 5 cm":63.6,"10\u00b0 2 cm":74.7,"10\u00b0 5 cm":86.0}},{"name":"CleanPose","type":"Cat","ours":false,"v":{"IoU75":62.7,"5\u00b0 2 cm":61.7,"5\u00b0 5 cm":67.6,"10\u00b0 2 cm":78.3,"10\u00b0 5 cm":86.3}},{"name":"UniPose9D (ours)","type":"Gen","ours":true,"v":{"IoU75":48.1,"5\u00b0 2 cm":45.4,"5\u00b0 5 cm":60.2,"10\u00b0 2 cm":63.6,"10\u00b0 5 cm":82.9}}],"house":[{"name":"FS-Net","type":"Cat","ours":false,"v":{"IoU25":74.9,"IoU50":48.0,"5\u00b0 2 cm":3.3,"5\u00b0 5 cm":4.2,"10\u00b0 2 cm":17.1,"10\u00b0 5 cm":21.6}},{"name":"GPV-Pose","type":"Cat","ours":false,"v":{"IoU25":74.9,"IoU50":50.7,"5\u00b0 2 cm":3.5,"5\u00b0 5 cm":4.6,"10\u00b0 2 cm":17.8,"10\u00b0 5 cm":22.7}},{"name":"VI-Net","type":"Cat","ours":false,"v":{"IoU25":80.7,"IoU50":56.4,"5\u00b0 2 cm":8.4,"5\u00b0 5 cm":10.3,"10\u00b0 2 cm":20.5,"10\u00b0 5 cm":29.1}},{"name":"AG-Pose","type":"Cat","ours":false,"v":{"IoU25":81.8,"IoU50":62.5,"5\u00b0 2 cm":11.5,"5\u00b0 5 cm":12.0,"10\u00b0 2 cm":32.7,"10\u00b0 5 cm":35.8}},{"name":"SecondPose","type":"Cat","ours":false,"v":{"IoU25":83.7,"IoU50":66.1,"5\u00b0 2 cm":11.0,"5\u00b0 5 cm":13.4,"10\u00b0 2 cm":25.3,"10\u00b0 5 cm":35.7}},{"name":"CleanPose","type":"Cat","ours":false,"v":{"IoU25":89.2,"IoU50":79.8,"5\u00b0 2 cm":22.4,"5\u00b0 5 cm":24.1,"10\u00b0 2 cm":51.6,"10\u00b0 5 cm":56.5}},{"name":"UniPose9D (ours)","type":"Gen","ours":true,"v":{"IoU25":86.4,"IoU50":70.6,"5\u00b0 2 cm":16.9,"5\u00b0 5 cm":19.0,"10\u00b0 2 cm":37.5,"10\u00b0 5 cm":43.2}}],"cross":{"YCB-Video":[{"name":"Orient Anything","ours":false,"input":"RGB","v":[91.4,1.4,null]},{"name":"GenPose++","ours":false,"input":"RGB","v":[15.5,14.4,1.5]},{"name":"UniPose9D (ours)","ours":true,"input":"RGB","v":[8.9,27.9,3.4]},{"name":"GenPose++","ours":false,"input":"RGB-D","v":[10.3,33.9,46.5]},{"name":"UniPose9D (ours)","ours":true,"input":"RGB-D","v":[4.0,61.9,91.9]}],"HOPE":[{"name":"Orient Anything","ours":false,"input":"RGB","v":[77.4,1.1,null]},{"name":"GenPose++","ours":false,"input":"RGB","v":[63.6,19.8,2.3]},{"name":"UniPose9D (ours)","ours":true,"input":"RGB","v":[7.6,33.4,1.5]},{"name":"GenPose++","ours":false,"input":"RGB-D","v":[53.4,25.7,55.7]},{"name":"UniPose9D (ours)","ours":true,"input":"RGB-D","v":[4.2,57.0,91.5]}]},"o6d":[{"name":"SGPA","type":null,"ours":false,"v":{"IoU50":7.05,"5\u00b0 2 cm":0.07,"5\u00b0 5 cm":0.28,"10\u00b0 2 cm":0.19,"10\u00b0 5 cm":0.82,"Rotation 5\u00b0":0.53,"Rotation 10\u00b0":1.69,"Translation 2 cm":3.87,"Translation 5 cm":28.28}},{"name":"DualPoseNet","type":null,"ours":false,"v":{"IoU50":36.85,"5\u00b0 2 cm":3.24,"5\u00b0 5 cm":3.37,"10\u00b0 2 cm":8.04,"10\u00b0 5 cm":8.51,"Rotation 5\u00b0":3.39,"Rotation 10\u00b0":8.64,"Translation 2 cm":78.0,"Translation 5 cm":98.6}},{"name":"HS-Pose","type":null,"ours":false,"v":{"IoU50":36.75,"5\u00b0 2 cm":1.54,"5\u00b0 5 cm":1.66,"10\u00b0 2 cm":4.67,"10\u00b0 5 cm":5.16,"Rotation 5\u00b0":1.75,"Rotation 10\u00b0":5.38,"Translation 2 cm":79.95,"Translation 5 cm":98.27}},{"name":"UniPose9D (ours, zero-shot)","type":null,"ours":true,"v":{"IoU50":50.71,"5\u00b0 2 cm":15.61,"5\u00b0 5 cm":26.42,"10\u00b0 2 cm":20.26,"10\u00b0 5 cm":32.26,"Rotation 5\u00b0":29.77,"Rotation 10\u00b0":35.89,"Translation 2 cm":48.96,"Translation 5 cm":86.2}}],"handal":[{"name":"Orient Anything","type":null,"ours":false,"v":{"5\u00b0 2 cm":0.0,"5\u00b0 5 cm":0.0,"10\u00b0 2 cm":8.0,"10\u00b0 5 cm":8.0,"Median rotation error (\u00b0)":68.1}},{"name":"GenPose++","type":null,"ours":false,"v":{"5\u00b0 2 cm":0.0,"5\u00b0 5 cm":4.0,"10\u00b0 2 cm":16.0,"10\u00b0 5 cm":28.0,"Median rotation error (\u00b0)":33.9}},{"name":"UniPose9D (ours)","type":null,"ours":true,"v":{"5\u00b0 2 cm":56.0,"5\u00b0 5 cm":64.0,"10\u00b0 2 cm":60.0,"10\u00b0 5 cm":76.0,"Median rotation error (\u00b0)":3.3}}],"ablation":[{"name":"Full model","type":null,"ours":true,"v":{"IoU75":48.1,"5\u00b0 2 cm":45.4,"5\u00b0 5 cm":60.2,"10\u00b0 2 cm":63.6,"10\u00b0 5 cm":82.9}},{"name":"No PointNet (geometric) features","type":null,"ours":false,"v":{"IoU75":22.9,"5\u00b0 2 cm":24.5,"5\u00b0 5 cm":34.2,"10\u00b0 2 cm":40.0,"10\u00b0 5 cm":70.3}},{"name":"Per-point NOCS, no point pairs","type":null,"ours":false,"v":{"IoU75":44.7,"5\u00b0 2 cm":36.9,"5\u00b0 5 cm":51.6,"10\u00b0 2 cm":55.1,"10\u00b0 5 cm":77.5}},{"name":"Direct regression, no flow matching","type":null,"ours":false,"v":{"IoU75":41.5,"5\u00b0 2 cm":25.9,"5\u00b0 5 cm":33.2,"10\u00b0 2 cm":50.1,"10\u00b0 5 cm":65.1}},{"name":"No pairwise scale calibration","type":null,"ours":false,"v":{"IoU75":44.5,"5\u00b0 2 cm":44.0,"5\u00b0 5 cm":57.5,"10\u00b0 2 cm":61.2,"10\u00b0 5 cm":80.5}},{"name":"Plain RANSAC instead of N-hop","type":null,"ours":false,"v":{"IoU75":43.4,"5\u00b0 2 cm":43.7,"5\u00b0 5 cm":58.2,"10\u00b0 2 cm":59.7,"10\u00b0 5 cm":78.9}}],"allds":[{"name":"GenPose++ (Omni)","type":"Gen","ours":false,"v":{"PACE":21.8,"Omni6DPose":10.0,"REAL275":10.3,"HouseCat6D":1.8}},{"name":"GenPose++ (All-DS)","type":"Gen","ours":false,"v":{"PACE":31.2,"Omni6DPose":7.1,"REAL275":28.5,"HouseCat6D":9.8}},{"name":"SecondPose (NOCS)","type":"Cat","ours":false,"v":{"PACE":null,"Omni6DPose":null,"REAL275":56.2,"HouseCat6D":null}},{"name":"SecondPose (All-DS)","type":"Cat","ours":false,"v":{"PACE":24.5,"Omni6DPose":5.1,"REAL275":36.2,"HouseCat6D":7.9}},{"name":"CleanPose (NOCS, reproduced)","type":"Cat","ours":false,"v":{"PACE":null,"Omni6DPose":null,"REAL275":61.6,"HouseCat6D":null}},{"name":"CleanPose (All-DS)","type":"Cat","ours":false,"v":{"PACE":13.4,"Omni6DPose":2.3,"REAL275":4.0,"HouseCat6D":1.7}},{"name":"UniPose9D (ours)","type":"Gen","ours":true,"v":{"PACE":40.4,"Omni6DPose":10.5,"REAL275":45.4,"HouseCat6D":16.9}}],"pairs":[{"name":"1,000 pairs","ours":false,"v":[58.4,82.2,0.837,1.11]},{"name":"3,000 pairs","ours":false,"v":[60.3,83.0,0.979,1.17]},{"name":"10,000 pairs (default)","ours":true,"v":[60.2,82.9,2.784,1.48]}],"runtime":[{"name":"Preprocessing and aggregation","ours":false,"v":[0.105]},{"name":"Point features","ours":false,"v":[0.117]},{"name":"Flow sampling","ours":false,"v":[2.36]},{"name":"RANSAC","ours":false,"v":[0.201]}],"solver":[{"name":"Adaptive threshold, 5% of box size (default)","ours":true,"v":[60.2,82.9]},{"name":"Fixed threshold, 1 cm","ours":false,"v":[59.8,82.8]},{"name":"Fixed threshold, 2 cm","ours":false,"v":[59.6,81.6]},{"name":"Fixed threshold, 5 cm","ours":false,"v":[50.3,76.4]},{"name":"1 refinement hop","ours":false,"v":[59.9,82.7]},{"name":"2 refinement hops","ours":false,"v":[60.1,82.8]},{"name":"3 refinement hops (default)","ours":true,"v":[60.2,82.9]}],"robust":[{"name":"Clean input","ours":true,"v":[60.2,null]},{"name":"Mask eroded by 10% of its radius","ours":false,"v":[57.8,-2.4]},{"name":"Mask dilated by 10% of its radius","ours":false,"v":[62.9,2.7]},{"name":"Ragged mask boundary","ours":false,"v":[62.1,1.9]},{"name":"10% depth outliers","ours":false,"v":[56.6,-3.6]}]}</script>
+<script>
+/* UniPose9D pose recovery on a toy object seen from above, in 2D: point pairs with "predicted" NOCS coordinates (ground
+   truth plus noise, some outlier pairs), pairwise scale calibration, and N-hop RANSAC Kabsch-Umeyama with the adaptive
+   threshold (the paper's Section 3.4 and Algorithm 1). Shared by the project page and the teaser; keep to ES5 with block
+   comments (the page is minified onto one line). Lengths are in metres. */
+var PoseCore = (function () {
+  function rng(seed) {
+    var s = seed >>> 0;
+    return function () { s = (s + 0x6D2B79F5) >>> 0; var t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+  function gauss(r) { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(6.283185307 * v); }
+
+  /* objects: metric box size s = (width, depth), symmetry order under rotation, and a sampler of points in the box frame
+     with u, v in [-0.5, 0.5] of the box */
+  var OBJECTS = {
+    pan: { label: 'Frying pan', s: [0.42, 0.24], sym: 1, pose: { a: 0.55, t: [0.02, 0.01] },
+      sample: function (r) {
+        if (r() < 0.3) return [0.07 + r() * 0.43, (r() - 0.5) * 0.16];                 /* handle */
+        var a = r() * 6.283185307, rad = (r() < 0.55 ? 0.94 + r() * 0.06 : Math.sqrt(r()) * 0.94) * 0.5;
+        return [-0.5 + 0.2857 + Math.cos(a) * rad * 0.5714, Math.sin(a) * rad];       /* round body, rim denser */
+      } },
+    mug: { label: 'Mug', s: [0.125, 0.09], sym: 1, pose: { a: -0.7, t: [-0.01, 0.0] },
+      sample: function (r) {
+        if (r() < 0.25) { var b = (r() - 0.5) * 2.6; return [0.22 + Math.cos(b) * 0.28 * (0.8 + r() * 0.2), Math.sin(b) * 0.3 * (0.8 + r() * 0.2)]; }   /* handle loop */
+        var a = r() * 6.283185307, rad = (0.86 + r() * 0.14) * 0.5;
+        return [-0.5 + 0.36 + Math.cos(a) * rad * 0.72, Math.sin(a) * rad];           /* rim */
+      } },
+    box: { label: 'Box (symmetric)', s: [0.2, 0.08], sym: 2, pose: { a: 0.35, t: [0.0, 0.0] },
+      sample: function (r) {
+        if (r() < 0.6) { var e = Math.floor(r() * 4), f = r() - 0.5; return e === 0 ? [f, -0.5] : e === 1 ? [f, 0.5] : e === 2 ? [-0.5, f] : [0.5, f]; }
+        return [r() - 0.5, r() - 0.5];
+      } }
+  };
+  function rot(a, x) { var c = Math.cos(a), s = Math.sin(a); return [c * x[0] - s * x[1], s * x[0] + c * x[1]]; }
+
+  /* observed points with their ground-truth NOCS coordinates (the longest box side has length 1) */
+  function makeObject(key, n, seed) {
+    var o = OBJECTS[key], r = rng(seed || 3), g = Math.max(o.s[0], o.s[1]), pts = [];
+    for (var i = 0; i < n; i++) {
+      var q = o.sample(r), x = [q[0] * o.s[0] / g, q[1] * o.s[1] / g], w = rot(o.pose.a, [x[0] * g, x[1] * g]);
+      pts.push({ x: x, p: [w[0] + o.pose.t[0], w[1] + o.pose.t[1]] });
+    }
+    return { key: key, pts: pts, s: o.s, gamma: g, sym: o.sym, a: o.pose.a, t: o.pose.t, label: o.label };
+  }
+
+  /* the network's outputs for T sampled pairs. opt: sigma (NOCS noise), outliers (fraction of pairs with random outputs),
+     head: 'flow' (each pair commits to one valid answer of a symmetric object) or 'l2' (regression to their mean) */
+  function predictPairs(obj, T, opt, seed) {
+    var r = rng(seed || 11), n = obj.pts.length, pairs = [];
+    for (var k = 0; k < T; k++) {
+      var i = Math.floor(r() * n), j = Math.floor(r() * n); if (i === j) j = (j + 1) % n;
+      var out = r() < opt.outliers, m = 1, xi, xj, s;
+      if (out) { xi = [r() - 0.5, r() - 0.5]; xj = [r() - 0.5, r() - 0.5]; s = [obj.s[0] * (0.4 + 1.6 * r()), obj.s[1] * (0.4 + 1.6 * r())]; }
+      else {
+        if (obj.sym === 2) m = opt.head === 'l2' ? 0 : (r() < 0.5 ? 1 : -1);
+        xi = [m * obj.pts[i].x[0] + opt.sigma * gauss(r), m * obj.pts[i].x[1] + opt.sigma * gauss(r)];
+        xj = [m * obj.pts[j].x[0] + opt.sigma * gauss(r), m * obj.pts[j].x[1] + opt.sigma * gauss(r)];
+        s = [obj.s[0] * Math.exp(0.06 * gauss(r)), obj.s[1] * Math.exp(0.06 * gauss(r))];
+      }
+      pairs.push({ i: i, j: j, xi: xi, xj: xj, s: s, out: out, mode: m });
+    }
+    return pairs;
+  }
+
+  /* rigid 2D Kabsch between scaled NOCS a_k and observed b_k: b = R(angle) a + t */
+  function kabsch(A, B, idx) {
+    var n = idx.length, ax = 0, az = 0, bx = 0, bz = 0, k, i;
+    for (k = 0; k < n; k++) { i = idx[k]; ax += A[i][0]; az += A[i][1]; bx += B[i][0]; bz += B[i][1]; }
+    ax /= n; az /= n; bx /= n; bz /= n;
+    var sc = 0, ss = 0;
+    for (k = 0; k < n; k++) { i = idx[k]; var u0 = A[i][0] - ax, u1 = A[i][1] - az, v0 = B[i][0] - bx, v1 = B[i][1] - bz; sc += u0 * v0 + u1 * v1; ss += u0 * v1 - u1 * v0; }
+    var ang = Math.atan2(ss, sc), c = Math.cos(ang), s = Math.sin(ang);
+    return { a: ang, t: [bx - (c * ax - s * az), bz - (s * ax + c * az)] };
+  }
+  function median(v) { var s = v.slice().sort(function (a, b) { return a - b; }); return s[Math.floor((s.length - 1) / 2)]; }
+
+  /* Section 3.4: scale calibration per pair, then H hops of RANSAC with the adaptive threshold */
+  function recover(obj, pairs, opt, seed) {
+    opt = opt || {};
+    var H = opt.hops || 3, nh = opt.hyp || 300, r = rng(seed || 5), A = [], B = [], gam = [], k;
+    pairs.forEach(function (q) {
+      var pi = obj.pts[q.i].p, pj = obj.pts[q.j].p, g = Math.hypot(pj[0] - pi[0], pj[1] - pi[1]) / Math.max(1e-6, Math.hypot(q.xj[0] - q.xi[0], q.xj[1] - q.xi[1]));
+      gam.push(g);
+      A.push([g * q.xi[0], g * q.xi[1]], [g * q.xj[0], g * q.xj[1]]); B.push(pi, pj);
+    });
+    /* initial threshold from the spread of the observed points */
+    var mx = median(obj.pts.map(function (p) { return p.p[0]; })), mz = median(obj.pts.map(function (p) { return p.p[1]; }));
+    var dx = median(obj.pts.map(function (p) { return Math.abs(p.p[0] - mx); })), dz = median(obj.pts.map(function (p) { return Math.abs(p.p[1] - mz); }));
+    var tau = Math.max(0.01, Math.min(0.05, 0.03 * 4 * Math.hypot(dx, dz))), n = A.length, best = null, hops = [];
+    function inliers(m, th) {
+      var c = Math.cos(m.a), s = Math.sin(m.a), out = [];
+      for (var i = 0; i < n; i++) { var ex = c * A[i][0] - s * A[i][1] + m.t[0] - B[i][0], ez = s * A[i][0] + c * A[i][1] + m.t[1] - B[i][1]; if (ex * ex + ez * ez < th * th) out.push(i); }
+      return out;
+    }
+    for (var h = 0; h < H; h++) {
+      var bi = [], bm = null;
+      for (k = 0; k < nh; k++) {
+        var i0 = Math.floor(r() * n), i1 = Math.floor(r() * n); if (i0 === i1) continue;
+        var m = kabsch(A, B, [i0, i1]), inl = inliers(m, tau);
+        if (inl.length > bi.length) { bi = inl; bm = m; }
+      }
+      if (bi.length > 2) { bm = kabsch(A, B, bi); bi = inliers(bm, tau); }
+      if (!best || bi.length > best.idx.length) best = { idx: bi, model: bm };
+      var used = tau, sel = {}, sx = 0, sz = 0, np = 0;
+      bi.forEach(function (i) { sel[i >> 1] = 1; });
+      Object.keys(sel).forEach(function (p) { sx += pairs[p].s[0]; sz += pairs[p].s[1]; np++; });
+      if (bi.length > 0.1 * n && np) tau = 0.05 * Math.max(sx / np, sz / np); else tau = 1.5 * tau;
+      var fl = new Uint8Array(n); bi.forEach(function (i) { fl[i] = 1; });
+      hops.push({ tau: used, inliers: bi.length, frac: bi.length / n, next: tau, flag: fl, model: bm });
+    }
+    var res = { gamma: gam, hops: hops, n: n, A: A, B: B, ok: !!(best && best.idx.length > 2) };
+    if (!res.ok) return res;
+    var fin = kabsch(A, B, best.idx), flag = new Uint8Array(n), ps = {}, s0 = 0, s1 = 0, cnt = 0;
+    best.idx.forEach(function (i) { flag[i] = 1; ps[i >> 1] = 1; });
+    Object.keys(ps).forEach(function (p) { s0 += pairs[p].s[0]; s1 += pairs[p].s[1]; cnt++; });
+    res.a = fin.a; res.t = fin.t; res.s = [s0 / cnt, s1 / cnt]; res.inlier = flag;
+    /* errors against the ground truth; rotation up to the object's symmetry */
+    var per = 2 * Math.PI / obj.sym, da = Math.abs(((fin.a - obj.a) % per + per * 1.5) % per - per / 2);
+    res.err = { rot: da * 180 / Math.PI, trans: Math.hypot(fin.t[0] - obj.t[0], fin.t[1] - obj.t[1]) * 100,
+      size: Math.max(Math.abs(res.s[0] - obj.s[0]) / obj.s[0], Math.abs(res.s[1] - obj.s[1]) / obj.s[1]) * 100 };
+    return res;
+  }
+
+  return { OBJECTS: OBJECTS, rng: rng, rot: rot, makeObject: makeObject, predictPairs: predictPairs, recover: recover, median: median };
+})();
+</script>
+<script>
+(function () {
+  var MEDIA = '/projects/unipose9d/static/media/';
+  var D = JSON.parse(document.getElementById('page-data').textContent);
+  var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function watch(el, cb) { if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { cb(es[0].isIntersecting); }).observe(el); else cb(true); }
+  function sizeCanvas(cv) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
+    if (w && h && (cv.width !== w || cv.height !== h)) { cv.width = w; cv.height = h; }
+    return dpr;
+  }
+
+  /* ================= pose-recovery demo ================= */
+  var PD = (function () {
+    var P = window.PoseCore, cam = document.getElementById('pd-cam'), noc = document.getElementById('pd-nocs'), his = document.getElementById('pd-hist');
+    var st = { obj: 'pan', sigma: 0.02, out: 0.25, T: 400, head: 'flow', step: 4, hop: 2 }, obj, pairs, res, dirty = true, need = false, timer = null, visible = false, played = false;
+    var stepEl = document.getElementById('pd-step'), outEl = document.getElementById('pd-out');
+    document.getElementById('pd-obj').innerHTML = Object.keys(P.OBJECTS).map(function (k, i) { return '<button class="chip" type="button" data-obj="' + k + '" aria-pressed="' + !i + '">' + P.OBJECTS[k].label + '</button>'; }).join('');
+    function hue(x) { return 'hsl(' + Math.round(205 + 150 * Math.max(0, Math.min(1, x[0] + 0.5))) + ',85%,' + Math.round(58 + 14 * x[1]) + '%)'; }
+    function recompute() {
+      obj = P.makeObject(st.obj, 420, 3);
+      pairs = P.predictPairs(obj, st.T, { sigma: st.sigma, outliers: st.out, head: obj.sym === 2 ? st.head : 'flow' }, 11);
+      res = P.recover(obj, pairs, {}, 5);
+      var e = res.ok ? res.err : null, last = res.hops[res.hops.length - 1];
+      outEl.innerHTML = '<div' + (e && e.rot < 5 ? '' : ' class="bad"') + '><b>' + (e ? e.rot.toFixed(1) + '°' : '–') + '</b>rotation error</div>' +
+        '<div' + (e && e.trans < 2 ? '' : ' class="bad"') + '><b>' + (e ? e.trans.toFixed(1) + ' cm' : '–') + '</b>translation error</div>' +
+        '<div><b>' + Math.round(last.frac * 100) + '%</b>inliers</div>';
+      describe(); dirty = true;
+    }
+    function describe() {
+      var cm = function (v) { return (v * 100).toFixed(1) + ' cm'; }, g = P.median(res.gamma), h = res.hops, t;
+      if (st.step === 1) t = '<b>Sample pairs.</b> ' + st.T + ' pairs of observed points; for each, the network predicts where its two points sit in the object’s canonical NOCS box (right) and the metric box size.';
+      else if (st.step === 2) t = '<b>Calibrate scale per pair.</b> The ratio of the observed distance to the predicted NOCS distance estimates the object’s longest side. The estimates cluster at ' + cm(g) + ' (true: ' + cm(obj.gamma) + '); each pair’s NOCS points are scaled by its own ratio.';
+      else if (st.step === 3) t = '<b>Hop ' + (st.hop + 1) + ' of 3.</b> RANSAC fits a rotation and translation with threshold ' + cm(h[st.hop].tau) + ': ' + Math.round(h[st.hop].frac * 100) + '% of the predictions are inliers. ' + (h[st.hop].frac > 0.1 ? 'The next threshold is 5% of the inliers’ mean box size: ' + cm(h[st.hop].next) + '.' : 'Too few inliers, so the next threshold is 1.5 times larger: ' + cm(h[st.hop].next) + '.');
+      else t = res.ok ? '<b>Pose.</b> Kabsch–Umeyama on the best inlier set gives rotation and translation; the box size is the mean over inlier pairs: ' + (res.s[0] * 100).toFixed(1) + ' × ' + (res.s[1] * 100).toFixed(1) + ' cm (true: ' + (obj.s[0] * 100).toFixed(1) + ' × ' + (obj.s[1] * 100).toFixed(1) + ' cm).' + (obj.sym === 2 && st.head === 'flow' ? ' About half of the good pairs chose each of the two valid answers; RANSAC keeps one group.' : '') : '<b>No pose.</b> Too few consistent predictions to fit a transform.';
+      if (obj.sym === 2 && st.head === 'l2' && st.step !== 3) t += ' <b>With plain regression</b>, the two valid answers average to the centre of the box, the scale estimates are meaningless, and the pose is wrong.';
+      stepEl.innerHTML = t;
+    }
+    function box(c, X, t, a, s, col, w, dash, axes) {
+      var co = Math.cos(a), si = Math.sin(a), Q = [[-0.5, -0.5], [0.5, -0.5], [0.5, 0.5], [-0.5, 0.5]].map(function (q) { var x = q[0] * s[0], z = q[1] * s[1]; return X([t[0] + co * x - si * z, t[1] + si * x + co * z]); });
+      c.strokeStyle = col; c.lineWidth = w; c.setLineDash(dash || []); c.lineJoin = 'round';
+      c.beginPath(); Q.forEach(function (q, i) { if (i) c.lineTo(q[0], q[1]); else c.moveTo(q[0], q[1]); }); c.closePath(); c.stroke(); c.setLineDash([]);
+      if (!axes) return;
+      var o = X(t), ex = X([t[0] + co * s[0] * 0.5, t[1] + si * s[0] * 0.5]), ez = X([t[0] - si * s[1] * 0.5, t[1] + co * s[1] * 0.5]);
+      c.lineWidth = w * 1.1; c.lineCap = 'round';
+      c.strokeStyle = '#ef4444'; c.beginPath(); c.moveTo(o[0], o[1]); c.lineTo(ex[0], ex[1]); c.stroke();
+      c.strokeStyle = '#3b82f6'; c.beginPath(); c.moveTo(o[0], o[1]); c.lineTo(ez[0], ez[1]); c.stroke();
+    }
+    function drawCam() {
+      var w = sizeCanvas(cam), W = cam.width, H = cam.height, c = cam.getContext('2d');
+      c.clearRect(0, 0, W, H);
+      var ext = Math.hypot(obj.s[0], obj.s[1]) * 0.62, sc = Math.min(W, H) * 0.5 / ext, cx = W / 2, cy = H * 0.52;
+      function X(p) { return [cx + (p[0] - obj.t[0]) * sc, cy - (p[1] - obj.t[1]) * sc]; }
+      obj.pts.forEach(function (q) { var p = X(q.p); c.fillStyle = 'rgba(156,163,175,.75)'; c.beginPath(); c.arc(p[0], p[1], 1.9 * w, 0, 6.2832); c.fill(); });
+      if (st.step <= 2) {
+        c.lineWidth = w; var n = Math.min(pairs.length, 70);
+        for (var k = 0; k < n; k++) {
+          var q = pairs[k], a = X(obj.pts[q.i].p), b = X(obj.pts[q.j].p);
+          c.strokeStyle = q.out ? 'rgba(248,113,113,.4)' : 'rgba(250,204,21,.45)'; c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke();
+          c.fillStyle = '#facc15'; c.beginPath(); c.arc(a[0], a[1], 2.6 * w, 0, 6.2832); c.arc(b[0], b[1], 2.6 * w, 0, 6.2832); c.fill();
+        }
+      }
+      if (st.step >= 3) {
+        var hp = st.step === 3 ? res.hops[st.hop] : null, m = hp ? hp.model : (res.ok ? { a: res.a, t: res.t } : null), fl = hp ? hp.flag : res.inlier;
+        if (m && fl) {
+          var co = Math.cos(m.a), si = Math.sin(m.a);
+          for (var pass = 0; pass < 2; pass++) for (var i = 0; i < res.n; i++) {
+            if ((fl[i] ? 1 : 0) !== pass) continue;
+            var A = res.A[i], pr = X([co * A[0] - si * A[1] + m.t[0], si * A[0] + co * A[1] + m.t[1]]);
+            if (!pass && (pr[0] < -40 || pr[1] < -40 || pr[0] > W + 40 || pr[1] > H + 40)) continue;
+            if (!pass) { var ob = X(res.B[i]); c.strokeStyle = 'rgba(248,113,113,.13)'; c.lineWidth = w * 0.8; c.beginPath(); c.moveTo(pr[0], pr[1]); c.lineTo(ob[0], ob[1]); c.stroke(); }
+            c.fillStyle = pass ? 'rgba(74,222,128,.9)' : 'rgba(248,113,113,.7)'; c.beginPath(); c.arc(pr[0], pr[1], (pass ? 2.2 : 1.8) * w, 0, 6.2832); c.fill();
+          }
+          if (hp) { c.strokeStyle = '#e5e7eb'; c.lineWidth = 1.5 * w; c.beginPath(); c.arc(W - 46 * w, H - 46 * w, Math.max(2, hp.tau * sc), 0, 6.2832); c.stroke(); c.fillStyle = '#d9d3c0'; c.font = '600 ' + Math.round(11.5 * w) + 'px Inter, sans-serif'; c.textAlign = 'right'; c.fillText('threshold ' + (hp.tau * 100).toFixed(1) + ' cm', W - 46 * w - Math.max(2, hp.tau * sc) - 8 * w, H - 42 * w); }
+        }
+      }
+      box(c, X, obj.t, obj.a, obj.s, 'rgba(229,231,235,.75)', 1.4 * w, [6 * w, 5 * w]);
+      if (st.step === 4 && res.ok) box(c, X, res.t, res.a, res.s, '#facc15', 3.4 * w, null, true);
+    }
+    function drawNocs() {
+      var w = sizeCanvas(noc), W = noc.width, H = noc.height, c = noc.getContext('2d'), S = Math.min(W, H) * 0.74, cx = W / 2, cy = H * 0.54;
+      c.clearRect(0, 0, W, H);
+      c.strokeStyle = 'rgba(229,231,235,.5)'; c.lineWidth = w; c.setLineDash([5 * w, 4 * w]);
+      c.strokeRect(cx - obj.s[0] / obj.gamma * S / 2, cy - obj.s[1] / obj.gamma * S / 2, obj.s[0] / obj.gamma * S, obj.s[1] / obj.gamma * S); c.setLineDash([]);
+      var n = Math.min(pairs.length, 500);
+      for (var k = 0; k < n; k++) {
+        var q = pairs[k];
+        [[q.xi, obj.pts[q.i].x], [q.xj, obj.pts[q.j].x]].forEach(function (e) {
+          c.fillStyle = q.out ? 'rgba(248,113,113,.55)' : hue(e[1]); c.beginPath(); c.arc(cx + e[0][0] * S, cy - e[0][1] * S, 1.7 * w, 0, 6.2832); c.fill();
+        });
+      }
+    }
+    function drawHist() {
+      var w = sizeCanvas(his), W = his.width, H = his.height, c = his.getContext('2d'), nb = 32, mxv = obj.gamma * 2, bins = new Array(nb).fill(0), i;
+      c.clearRect(0, 0, W, H);
+      res.gamma.forEach(function (g) { var b = Math.floor(g / mxv * nb); if (b >= 0 && b < nb) bins[b]++; });
+      var top = Math.max.apply(null, bins) || 1, L = 14 * w, R = W - 14 * w, B = H - 30 * w, T = 44 * w, bw = (R - L) / nb;
+      for (i = 0; i < nb; i++) { var h = bins[i] / top * (B - T); c.fillStyle = st.step === 2 ? '#facc15' : 'rgba(250,204,21,.55)'; c.fillRect(L + i * bw + 0.5 * w, B - h, bw - w, h); }
+      var gx = L + obj.gamma / mxv * (R - L);
+      c.strokeStyle = '#e5e7eb'; c.lineWidth = 1.5 * w; c.setLineDash([4 * w, 3 * w]); c.beginPath(); c.moveTo(gx, T - 8 * w); c.lineTo(gx, B); c.stroke(); c.setLineDash([]);
+      c.fillStyle = '#d9d3c0'; c.font = '600 ' + Math.round(11 * w) + 'px Inter, sans-serif'; c.textAlign = 'center';
+      c.fillText('true longest side ' + +(obj.gamma * 100).toFixed(1) + ' cm', W / 2, H - 10 * w);
+    }
+    function render() { drawCam(); drawNocs(); drawHist(); }
+    function setStep(s, hop) {
+      st.step = s; st.hop = hop === undefined ? 2 : hop;
+      document.querySelectorAll('#pd [data-step]').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.step === s)); });
+      describe(); dirty = true;
+    }
+    function play() {
+      if (timer) clearTimeout(timer);
+      var seq = [[1, 0, 1700], [2, 0, 1900], [3, 0, 1300], [3, 1, 1300], [3, 2, 1300], [4, 2, 0]], k = 0;
+      (function next() { setStep(seq[k][0], seq[k][1]); var d = seq[k][2]; k++; timer = k < seq.length ? setTimeout(next, d) : null; })();
+    }
+    document.getElementById('pd-play').addEventListener('click', play);
+    document.querySelectorAll('#pd [data-step]').forEach(function (b) { b.addEventListener('click', function () { if (timer) { clearTimeout(timer); timer = null; } setStep(+b.dataset.step, 2); }); });
+    document.getElementById('pd-obj').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-obj]'); if (!b) return; st.obj = b.dataset.obj;
+      document.querySelectorAll('#pd-obj .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      document.getElementById('pd-head').hidden = P.OBJECTS[st.obj].sym !== 2; need = true;
+    });
+    document.getElementById('pd-head').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-head]'); if (!b) return; st.head = b.dataset.head;
+      document.querySelectorAll('#pd-head .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); need = true;
+    });
+    function bindRange(id, key, fmt) {
+      var el = document.getElementById(id), out = document.getElementById(id + '-v');
+      el.addEventListener('input', function () { st[key] = +el.value; out.textContent = fmt(st[key]); need = true; });
+    }
+    bindRange('pd-s', 'sigma', function (v) { return v.toFixed(3).replace(/0$/, ''); });
+    bindRange('pd-o', 'out', function (v) { return Math.round(v * 100) + '%'; });
+    bindRange('pd-t', 'T', function (v) { return String(v); });
+    recompute();
+    watch(cam, function (v) { visible = v; dirty = true; if (v && !played && !REDUCED) { played = true; play(); } });
+    window.addEventListener('resize', function () { dirty = true; });
+    (function loop() {
+      requestAnimationFrame(loop);
+      if (need) { need = false; recompute(); }
+      if (visible && dirty) { dirty = false; render(); }
+    })();
+    return { state: function () { if (need) { need = false; recompute(); } return { obj: st.obj, head: st.head, T: st.T, sigma: st.sigma, out: st.out, step: st.step, ok: res.ok, err: res.ok ? { rot: +res.err.rot.toFixed(2), trans: +res.err.trans.toFixed(2), size: +res.err.size.toFixed(1) } : null, hops: res.hops.map(function (h) { return [+(h.tau * 100).toFixed(2), +(h.frac * 100).toFixed(0)]; }), gamma: +(P.median(res.gamma) * 100).toFixed(1) }; } };
+  })();
+
+  /* ================= bar explorers ================= */
+  function explorer(root, cfg) {
+    var els = {}; ['tabs', 'chips', 'chips2', 'rows', 'foot'].forEach(function (k) { els[k] = root.querySelector('[data-role=' + k + ']'); });
+    var sel = { tabs: null, chips: null, chips2: null };
+    function list(k) { var v = cfg[k]; return typeof v === 'function' ? v(sel.tabs) : v; }
+    function build(k) {
+      if (!els[k] || !cfg[k]) return;
+      var items = list(k);
+      if (!items.some(function (t) { return t.k === sel[k]; })) sel[k] = (items.filter(function (t) { return t.def; })[0] || items[0]).k;
+      els[k].innerHTML = items.map(function (t) {
+        var on = t.k === sel[k];
+        return k === 'tabs' ? '<button type="button" role="tab" class="tab' + (on ? ' on' : '') + '" aria-selected="' + on + '" data-k="' + t.k + '">' + t.label + '</button>'
+          : '<button type="button" class="chip' + (on ? ' on' : '') + '" data-k="' + t.k + '">' + t.label + '</button>';
+      }).join('');
+    }
+    function render() {
+      var rows = cfg.rows(sel.tabs, sel.chips, sel.chips2), lower = cfg.lower ? cfg.lower(sel.tabs, sel.chips, sel.chips2) : false;
+      var vals = rows.map(function (r) { return cfg.value(r, sel.tabs, sel.chips, sel.chips2); });
+      var ok = vals.filter(function (v) { return v !== null && v !== undefined; }), best = lower ? Math.min.apply(null, ok) : Math.max.apply(null, ok);
+      var mx = Math.max.apply(null, ok) * (els.rows.clientWidth < 520 ? 1.32 : 1.16) || 1;
+      els.rows.innerHTML = rows.map(function (r, i) {
+        var v = vals[i], name = r.name + (r.type ? '<span class="tag">' + r.type + '</span>' : '');
+        if (v === null || v === undefined) return '<div class="rx-row' + (r.ours ? ' ours' : '') + '"><div class="rx-name">' + name + '</div><div class="rx-bar na"><b style="left:8px">not reported</b></div></div>';
+        var w = Math.max(0, v) / mx * 100;
+        return '<div class="rx-row' + (r.ours ? ' ours' : '') + '"><div class="rx-name">' + name + '</div><div class="rx-bar"><span style="width:' + w + '%"></span><b style="left:calc(' + w + '% + 8px)">' + (cfg.fmt ? cfg.fmt(v, sel.tabs, sel.chips, sel.chips2) : v.toFixed(1)) + (v === best ? ' ★' : '') + '</b></div></div>';
+      }).join('');
+      els.foot.textContent = cfg.foot(sel.tabs, sel.chips, sel.chips2);
+    }
+    ['tabs', 'chips', 'chips2'].forEach(function (k) {
+      build(k);
+      if (els[k]) els[k].addEventListener('click', function (e) {
+        var b = e.target.closest('[data-k]'); if (!b) return; sel[k] = b.dataset.k;
+        if (k === 'tabs') { build('tabs'); build('chips'); build('chips2'); } else build(k);
+        render();
+      });
+    });
+    render();
+    return { state: function () { return { tab: sel.tabs, chip: sel.chips, chip2: sel.chips2, values: [].map.call(els.rows.querySelectorAll('.rx-bar b'), function (b) { return b.textContent; }).join(' | ') }; } };
+  }
+  function opts(keys, def) { return keys.map(function (k) { return { k: k, label: k, def: k === def }; }); }
+  var BENCH = {
+    PACE: { rows: D.pace, def: 'IoU50', foot: 'PACE test split: 3D-box AP at IoU 0.25 / 0.5, and AP averaged over rotation and translation thresholds (%).' },
+    Omni6DPose: { rows: D.omni, def: 'AUC IoU50', foot: 'Omni6DPose (ROPE, real): AUC of box overlap and VUS of joint pose thresholds (%).' },
+    'NOCS REAL275': { rows: D.real, def: '5° 5 cm', foot: 'NOCS REAL275: IoU at 0.75 and pose mAP (%). Specialists use their native training protocols.' },
+    HouseCat6D: { rows: D.house, def: '5° 5 cm', foot: 'HouseCat6D: 3D-box AP and pose mAP (%) under the native protocol.' }
+  };
+  var rxBench = explorer(document.getElementById('rx-bench'), {
+    tabs: Object.keys(BENCH).map(function (k) { return { k: k, label: k }; }),
+    chips: function (t) { return opts(Object.keys(BENCH[t].rows[0].v), BENCH[t].def); },
+    rows: function (t) { return BENCH[t].rows; }, value: function (r, t, c) { return r.v[c]; },
+    foot: function (t) { return BENCH[t].foot + ' ★ best.'; }
+  });
+  var ALLDS = { PACE: 'AP 0:20°', Omni6DPose: 'VUS 5° 2 cm', REAL275: 'mAP 5° 2 cm', HouseCat6D: 'mAP 5° 2 cm' };
+  var rxAllds = explorer(document.getElementById('rx-allds'), {
+    chips: Object.keys(ALLDS).map(function (k) { return { k: k, label: k + ' (' + ALLDS[k] + ')' }; }),
+    rows: function () { return D.allds; }, value: function (r, t, c) { return r.v[c]; },
+    foot: function () { return '“All-DS”: trained on the same PACE, Omni6DPose, NOCS and HouseCat6D mixture as UniPose9D. “Not reported”: native checkpoints that were not evaluated there. ★ best.'; }
+  });
+  var CM = [{ k: '2', label: 'Within 2 cm (%) ↑', def: true }, { k: '1', label: 'Within 5° (%) ↑' }, { k: '0', label: 'Median rotation error (°) ↓' }];
+  var rxCross = explorer(document.getElementById('rx-cross'), {
+    tabs: [{ k: 'YCB-Video', label: 'YCB-Video' }, { k: 'HOPE', label: 'HOPE' }],
+    chips2: [{ k: 'RGB-D', label: 'RGB-D input' }, { k: 'RGB', label: 'RGB input, predicted depth' }], chips: CM,
+    rows: function (t, c, c2) { return D.cross[t].filter(function (r) { return r.input === c2; }); },
+    value: function (r, t, c) { return r.v[+c]; }, lower: function (t, c) { return c === '0'; },
+    foot: function (t, c, c2) { return t + ', never used for training; poses from the provided masks. ' + (c2 === 'RGB' ? 'Depth from MoGe-2. Orient Anything predicts rotation only. ' : '') + '★ best.'; }
+  });
+  var UNS = {
+    Omni6D: { label: 'Omni6D, 13 unseen categories', rows: D.o6d, def: '5° 5 cm', foot: 'Omni6D unseen split, 9,530 examples. Baselines are trained on Omni6D and report mAP; UniPose9D is zero-shot and reports pooled per-instance accuracy (%).' },
+    HANDAL: { label: 'HANDAL, 5 unseen categories', rows: D.handal, def: 'Median rotation error (°)', foot: 'HANDAL: the same 25 examples for all methods (ladle, power drill, spatula, strainer, whisk). Orient Anything is given the ground-truth translation.' }
+  };
+  var rxUnseen = explorer(document.getElementById('rx-unseen'), {
+    tabs: Object.keys(UNS).map(function (k) { return { k: k, label: UNS[k].label }; }),
+    chips: function (t) { return opts(Object.keys(UNS[t].rows[0].v), UNS[t].def); },
+    rows: function (t) { return UNS[t].rows; }, value: function (r, t, c) { return r.v[c]; }, lower: function (t, c) { return c.indexOf('Median') === 0; },
+    fmt: function (v, t) { return t === 'Omni6D' ? v.toFixed(2) : v.toFixed(1); },
+    foot: function (t) { return UNS[t].foot + ' ★ best.'; }
+  });
+  var rxAbl = explorer(document.getElementById('rx-abl'), {
+    chips: opts(Object.keys(D.ablation[0].v), '5° 5 cm'), rows: function () { return D.ablation; }, value: function (r, t, c) { return r.v[c]; },
+    foot: function () { return 'NOCS REAL275, IoU at 0.75 and pose mAP (%). ★ best.'; }
+  });
+  var SENS = {
+    pairs: { label: 'Pair budget', rows: D.pairs, chips: [{ k: '0', label: 'mAP 5° 5 cm ↑' }, { k: '1', label: 'mAP 10° 5 cm ↑' }, { k: '2', label: 'Latency (s) ↓' }, { k: '3', label: 'GPU memory (GiB) ↓' }], foot: 'REAL275, 1,024 object points, one RTX A6000.' },
+    solver: { label: 'Solver', rows: D.solver, chips: [{ k: '0', label: 'mAP 5° 5 cm ↑' }, { k: '1', label: 'mAP 10° 5 cm ↑' }], foot: 'REAL275: inlier threshold and number of refinement hops.' },
+    input: { label: 'Corrupted input', rows: D.robust, chips: [{ k: '0', label: 'mAP 5° 5 cm ↑' }], foot: 'REAL275 with corrupted masks or depth. Dilated and ragged masks scored higher than clean ones in this run.' }
+  };
+  var rxSens = explorer(document.getElementById('rx-sens'), {
+    tabs: Object.keys(SENS).map(function (k) { return { k: k, label: SENS[k].label }; }),
+    chips: function (t) { return SENS[t].chips; }, rows: function (t) { return SENS[t].rows; }, value: function (r, t, c) { return r.v[+c]; },
+    lower: function (t, c) { return t === 'pairs' && (c === '2' || c === '3'); },
+    fmt: function (v, t, c) { return t === 'pairs' && (c === '2' || c === '3') ? v.toFixed(c === '2' ? 3 : 2) : v.toFixed(1); },
+    foot: function (t) { return SENS[t].foot + ' ★ best.'; }
+  });
+
+  /* latency breakdown */
+  (function () {
+    var cols = ['#a8a29e', '#fb923c', '#facc15', '#4ade80'], tot = D.runtime.reduce(function (a, r) { return a + r.v[0]; }, 0);
+    document.getElementById('lat').innerHTML = D.runtime.map(function (r, i) { return '<span style="width:' + (r.v[0] / tot * 100) + '%;background:' + cols[i] + '">' + (r.v[0] / tot > 0.12 ? r.v[0].toFixed(2) + ' s' : '') + '</span>'; }).join('');
+    document.getElementById('lat-key').innerHTML = D.runtime.map(function (r, i) { return '<span><i style="background:' + cols[i] + '"></i>' + r.name + ' ' + r.v[0].toFixed(3) + ' s</span>'; }).join('');
+  })();
+
+  /* qualitative gallery */
+  var GAL = [
+    { k: 'ycbv', label: 'YCB-Video', cap: 'YCB-Video: ground truth, Orient Anything, GenPose++ and UniPose9D on objects it never trained on, in clutter and occlusion.', alt: 'Three YCB-Video examples with boxes from ground truth, Orient Anything, GenPose++ and UniPose9D.' },
+    { k: 'ycbv_rgb', label: 'YCB-Video, RGB input', cap: 'YCB-Video with RGB input. Orient Anything predicts rotation only, so it is drawn with the ground-truth translation and size.', alt: 'Three YCB-Video examples with RGB input: boxes from ground truth, Orient Anything, GenPose++ and UniPose9D.' },
+    { k: 'hope', label: 'HOPE', cap: 'HOPE: ground truth, Orient Anything, GenPose++ and UniPose9D on toy groceries under heavy occlusion.', alt: 'Three HOPE examples with boxes from ground truth, Orient Anything, GenPose++ and UniPose9D.' },
+    { k: 'hope_rgb', label: 'HOPE, RGB input', cap: 'HOPE with RGB input. Orient Anything is drawn with the ground-truth translation and size.', alt: 'Three HOPE examples with RGB input: boxes from ground truth, Orient Anything, GenPose++ and UniPose9D.' }
+  ];
+  var galTabs = document.querySelector('#gal [data-role=tabs]'), galImg = document.getElementById('gal-img'), galCap = document.getElementById('gal-cap'), galCur = 'ycbv';
+  galTabs.innerHTML = GAL.map(function (g, i) { return '<button type="button" role="tab" class="tab' + (i ? '' : ' on') + '" aria-selected="' + !i + '" data-k="' + g.k + '">' + g.label + '</button>'; }).join('');
+  function showGal(k) {
+    var g = GAL.filter(function (x) { return x.k === k; })[0]; galCur = k;
+    galTabs.querySelectorAll('.tab').forEach(function (b) { var on = b.dataset.k === k; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
+    if (galImg.getAttribute('src') !== MEDIA + k + '.jpg') { galImg.removeAttribute('width'); galImg.removeAttribute('height'); galImg.src = MEDIA + k + '.jpg'; }
+    galImg.alt = g.alt; galCap.textContent = g.cap;
+  }
+  galTabs.addEventListener('click', function (e) { var b = e.target.closest('[data-k]'); if (b) showGal(b.dataset.k); });
+  showGal('ycbv');
+
+  /* live demo, loaded on request */
+  document.getElementById('demo-load').addEventListener('click', function () {
+    document.getElementById('demo-box').innerHTML = '<iframe src="https://qq456cvb-unipose9d.hf.space" title="UniPose9D demo on Hugging Face Spaces" allow="clipboard-write" loading="lazy"></iframe>';
+  });
+
+  window.__uni = {
+    pd: PD.state, gallery: function () { return { cur: galCur, src: galImg.getAttribute('src'), loaded: galImg.complete && galImg.naturalWidth > 0 }; },
+    rx: { bench: rxBench.state, allds: rxAllds.state, cross: rxCross.state, unseen: rxUnseen.state, abl: rxAbl.state, sens: rxSens.state }
+  };
+
+  /* ================= teaser, BibTeX, lightbox ================= */
+  var v = document.getElementById('teaser'), s = document.getElementById('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+  var lb = document.getElementById('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
