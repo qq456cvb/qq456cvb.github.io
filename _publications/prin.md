@@ -8,6 +8,7 @@ venue: 'AAAI'
 image: '/images/prin.png'
 arxiv: 'https://arxiv.org/abs/1811.09361'
 code: 'https://github.com/qq456cvb/PRIN'
+site: '/projects/prin'
 weight: 70
 citation: 'You, Y., Lou, Y., Liu, Q., Tai, Y. W., Ma, L., Lu, C., & Wang, W. (2020). Pointwise Rotation-Invariant Network with Adaptive Sampling and 3D Spherical Voxel Convolution. In AAAI (pp. 12717-12724).'
 authors: '<b>Yang You</b>, Yujing Lou, Qi Liu, Yu-Wing Tai, Lizhuang Ma, Cewu Lu, Weiming Wang'

@@ -42,7 +42,7 @@
 
 2022.03: Our paper: <a href='https://arxiv.org/abs/2203.03089'>CPPF: Towards Robust Category-Level 9D Pose Estimation in the Wild</a> is accepted to <i>CVPR 2022</i>! <a href='https://arxiv.org/abs/2203.03089'>[Paper]</a> <a href='https://github.com/qq456cvb/CPPF'>[Code]</a> <a href='/projects/cppf'>[Project Page]</a>
 
-2021.11: Our paper: <a href='https://arxiv.org/abs/2102.12093'>PRIN/SPRIN: On Extracting Point-wise Rotation Invariant Features</a> is accepted to <i>TPAMI</i>, and to appear in the upcoming issues! <a href='https://arxiv.org/abs/2102.12093'>[Paper]</a> <a href='https://github.com/qq456cvb/SPRIN'>[Code]</a> <a href='/sprin'>[Project Page]</a>
+2021.11: Our paper: <a href='https://arxiv.org/abs/2102.12093'>PRIN/SPRIN: On Extracting Point-wise Rotation Invariant Features</a> is accepted to <i>TPAMI</i>, and to appear in the upcoming issues! <a href='https://arxiv.org/abs/2102.12093'>[Paper]</a> <a href='https://github.com/qq456cvb/SPRIN'>[Code]</a> <a href='/projects/prin'>[Project Page]</a>
 
 2021.04: Our paper: <a href='https://arxiv.org/abs/2111.10817'>Understanding Pixel-level 2D Image Semantics with 3D Keypoint Knowledge Engine</a> is accepted to <i>TPAMI</i>, and to appear in the upcoming issues! <a href='https://arxiv.org/abs/2111.10817'>[Paper]</a> <a href='/pixel-understanding'>[Project Page]</a>
 

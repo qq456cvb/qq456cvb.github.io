@@ -8,6 +8,7 @@ venue: 'TPAMI'
 image: '/images/sprin.jpg'
 arxiv: 'https://arxiv.org/abs/2102.12093'
 code: 'https://github.com/qq456cvb/SPRIN'
+site: '/projects/prin'
 weight: 200
 citation: 'You, Y., Lou, Y., Shi, R., Liu, Q., Tai, Y. W., Ma, L., Wang, W., & Lu, C. (2022). PRIN/SPRIN: On Extracting Point-wise Rotation Invariant Features. IEEE Transactions on Pattern Analysis and Machine Intelligence, 44(12), 9489-9502.'
 authors: '<b>Yang You</b>, Yujing Lou, Ruoxi Shi, Qi Liu, Yu-Wing Tai, Lizhuang Ma, Weiming Wang, Cewu Lu'

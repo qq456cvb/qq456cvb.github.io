@@ -1,0 +1,1183 @@
+---
+layout: compress
+permalink: /projects/prin
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRIN/SPRIN: Point-wise Rotation Invariant Features (TPAMI 2022, AAAI 2020)</title>
+  <meta name="description" content="PRIN and SPRIN compute a feature for every point of a point cloud that provably does not change when the cloud is rotated. PRIN uses a convolution on spherical voxels; SPRIN, its sparse version, works directly on the points. Trained on upright shapes only, SPRIN segments randomly rotated ShapeNet shapes as well as upright ones. TPAMI 2022 and AAAI 2020.">
+  <meta name="keywords" content="PRIN, SPRIN, rotation invariance, point cloud, point-wise features, spherical voxel convolution, density aware adaptive sampling, sparse correlation, part segmentation, ShapeNet, ModelNet40, TPAMI 2022, AAAI 2020">
+  <link rel="canonical" href="https://qq456cvb.github.io/projects/prin">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PRIN/SPRIN: On Extracting Point-wise Rotation Invariant Features">
+  <meta property="og:description" content="A feature for every point that does not change when the point cloud is rotated, with a proof. Spherical voxel convolution (PRIN) and its sparse version (SPRIN). TPAMI 2022, AAAI 2020.">
+  <meta property="og:url" content="https://qq456cvb.github.io/projects/prin">
+  <meta property="og:image" content="https://qq456cvb.github.io/projects/prin/static/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://qq456cvb.github.io/projects/prin/static/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='.55' stop-color='%23818cf8'/%3E%3Cstop offset='1' stop-color='%23e879f9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2305060f'/%3E%3Cg fill='none' stroke='url(%23g)' stroke-width='3.5'%3E%3Ccircle cx='32' cy='32' r='20'/%3E%3Cellipse cx='32' cy='32' rx='20' ry='7.5'/%3E%3Cellipse cx='32' cy='32' rx='7.5' ry='20'/%3E%3C/g%3E%3Ccircle cx='44' cy='21' r='4.5' fill='%23f1f5f9'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/prin#article",
+        "headline": "PRIN/SPRIN: On Extracting Point-wise Rotation Invariant Features",
+        "url": "https://qq456cvb.github.io/projects/prin",
+        "datePublished": "2022-12",
+        "isPartOf": { "@type": "Periodical", "name": "IEEE Transactions on Pattern Analysis and Machine Intelligence" },
+        "sameAs": ["https://doi.org/10.1109/TPAMI.2021.3130590", "https://arxiv.org/abs/2102.12093", "https://qq456cvb.github.io/publications/sprin"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Yujing Lou" }, { "@type": "Person", "name": "Ruoxi Shi" }, { "@type": "Person", "name": "Qi Liu" }, { "@type": "Person", "name": "Yu-Wing Tai" },
+          { "@type": "Person", "name": "Lizhuang Ma" }, { "@type": "Person", "name": "Weiming Wang" }, { "@type": "Person", "name": "Cewu Lu" }
+        ],
+        "keywords": ["rotation invariance", "point cloud", "spherical voxel convolution", "sparse correlation", "part segmentation"],
+        "image": "https://qq456cvb.github.io/projects/prin/static/media/og.jpg",
+        "video": { "@id": "https://qq456cvb.github.io/projects/prin#video" }
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://qq456cvb.github.io/projects/prin#aaai",
+        "headline": "Pointwise Rotation-Invariant Network with Adaptive Sampling and 3D Spherical Voxel Convolution",
+        "datePublished": "2020-02",
+        "publication": { "@type": "PublicationEvent", "name": "AAAI Conference on Artificial Intelligence (AAAI) 2020" },
+        "sameAs": ["https://ojs.aaai.org/index.php/AAAI/article/view/6965", "https://arxiv.org/abs/1811.09361", "https://qq456cvb.github.io/publications/prin"],
+        "author": [
+          { "@type": "Person", "@id": "https://qq456cvb.github.io/#person", "name": "Yang You" },
+          { "@type": "Person", "name": "Yujing Lou" }, { "@type": "Person", "name": "Qi Liu" }, { "@type": "Person", "name": "Yu-Wing Tai" },
+          { "@type": "Person", "name": "Lizhuang Ma" }, { "@type": "Person", "name": "Cewu Lu" }, { "@type": "Person", "name": "Weiming Wang" }
+        ]
+      },
+      {
+        "@type": "VideoObject",
+        "@id": "https://qq456cvb.github.io/projects/prin#video",
+        "name": "PRIN/SPRIN teaser",
+        "description": "PRIN/SPRIN (TPAMI 2022, AAAI 2020) in 56 seconds: why networks that read coordinates fail on rotated point clouds, point-wise rotation-invariant features with a proof, PRIN's convolution on spherical voxels, SPRIN's sparse correlation on the points, part segmentation of randomly rotated ShapeNet shapes without rotation augmentation, and point matching across poses.",
+        "thumbnailUrl": "https://qq456cvb.github.io/projects/prin/static/media/teaser_poster.jpg",
+        "contentUrl": "https://qq456cvb.github.io/projects/prin/static/media/teaser.mp4",
+        "uploadDate": "2026-10-12",
+        "duration": "PT56S"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f8f8fd; --surface: #ffffff; --ink: #14132a; --muted: #46455e; --faint: #76758f; --line: #e3e3f0;
+      --accent: #4f46e5; --accent-ink: #4338ca; --accent-soft: rgba(79, 70, 229, .08); --best: #14132a; --pre: #b9b9cc; --ri: #2aa79b; --lrf: #d9a441;
+      --hero: #05060f; --hero-2: #26217a; --radius: 18px; --shadow: 0 1px 2px rgba(20, 19, 42, .05), 0 8px 28px rgba(20, 19, 42, .06);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #09090f; --surface: #13131d; --ink: #f1f1fa; --muted: #b9b9cf; --faint: #8a8aa3; --line: #272736;
+        --accent: #818cf8; --accent-ink: #a5b4fc; --accent-soft: rgba(129, 140, 248, .14); --best: #ffffff; --pre: #55556b; --ri: #2dd4bf; --lrf: #e0b65a;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25); color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .narrow { width: min(820px, 100% - 40px); margin: 0 auto; }
+
+    .hero { background: radial-gradient(900px 520px at 78% 4%, var(--hero-2), transparent 70%), radial-gradient(700px 420px at 8% 96%, rgba(14, 116, 144, .3), transparent 70%), var(--hero); color: #eef0fb; padding: 64px 0 56px; }
+    .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #c7d2fe; border: 1px solid rgba(129, 140, 248, .55); background: rgba(129, 140, 248, .12); padding: 6px 14px; border-radius: 999px; }
+    .hero h1 { margin: 18px 0 8px; font-size: clamp(46px, 8.6vw, 104px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+    .hero h1 span { background: linear-gradient(90deg, #38bdf8, #818cf8 50%, #e879f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e0e2f4; margin: 0 0 22px; max-width: 900px; }
+    .authors { font-size: 18px; font-weight: 500; color: #cdd0e8; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+    .authors a:hover { text-decoration: none; border-color: #818cf8; }
+    .authors sup, .affil sup { color: #a5b4fc; font-weight: 600; margin-left: 2px; }
+    .affil { color: #9698b6; font-size: 15px; margin-top: 6px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .3); text-decoration: none; transform: translateY(-1px); }
+    .btn.primary { background: #818cf8; border-color: #818cf8; color: #0d0b33; }
+    .btn.primary:hover { background: #a5b4fc; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
+    .video-frame video { width: 100%; height: 100%; }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(5, 6, 15, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound:hover { background: rgba(5, 6, 15, .8); }
+
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    nav.toc a { color: var(--muted); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; }
+
+    section { padding: 72px 0 8px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 10px 0 18px; font-weight: 800; }
+    h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .lead { font-size: 21px; line-height: 1.6; color: var(--muted); }
+    .lead b, p b, li b { color: var(--ink); }
+    p { color: var(--muted); margin: 0 0 14px; }
+    .note { font-size: 14px; color: var(--faint); margin: 10px 2px 0; }
+    .mt { margin-top: 16px; }
+    .sub { margin-top: 48px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 20px 16px; box-shadow: var(--shadow); }
+    .stat .num { font-size: 36px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .stat .num small { font-size: 16px; font-weight: 700; color: var(--accent-ink); margin-left: 4px; letter-spacing: 0; white-space: nowrap; }
+    .stat p { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card p { margin: 0; font-size: 15.5px; }
+    .card p + p { margin-top: 10px; }
+    figure { margin: 0; }
+    .figure { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: zoom-in; }
+    .figure img { border-radius: 8px; margin: 0 auto; }
+    .figure.mid { max-width: 860px; margin-left: auto; margin-right: auto; }
+    figcaption { color: var(--faint); font-size: 14.5px; line-height: 1.55; margin-top: 10px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .grid-side { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; align-items: start; }
+    .grid2 > *, .grid-side > *, .gd > *, .pair > * { min-width: 0; }
+
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 26px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 14px "JetBrains Mono", monospace; margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .steps li::before { color: #0d0b33; } }
+    .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
+    .steps li i.tag { display: block; font-style: normal; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 4px; }
+
+    .formula { font-family: "Source Serif 4", Georgia, serif; font-size: 21px; line-height: 1.5; text-align: center; color: var(--ink); background: var(--accent-soft); border-radius: 12px; padding: 14px 16px; margin: 14px 0; overflow-x: auto; white-space: nowrap; }
+    .formula sub, .formula sup { font-size: .68em; }
+    p i.m, li i.m, figcaption i.m { font-family: "Source Serif 4", Georgia, serif; font-size: 1.06em; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab.on { background: var(--ink); color: var(--bg); }
+    .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip.on, .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+    select.chip { padding-right: 8px; max-width: 100%; }
+    .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
+    .ctl h4 { margin: 0 0 8px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; gap: 8px; }
+    .ctl p { font-size: 14px; margin: 10px 0 0; }
+    .ctl + .ctl { margin-top: 12px; }
+    .ctl .chips + h4, .ctl .row + h4 { margin-top: 18px; }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .go { border: 0; border-radius: 999px; padding: 9px 16px; font: 700 14px Inter, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
+    .go:hover { background: var(--accent); color: #fff; }
+    .go.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+    .go.ghost:hover { background: var(--accent-soft); color: var(--accent-ink); }
+    dl.read { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 7px 12px; font-size: 14.5px; }
+    dl.read dt { color: var(--muted); }
+    dl.read dd { margin: 0; font: 600 14.5px "JetBrains Mono", monospace; color: var(--ink); text-align: right; }
+    dl.read dd.ok { color: var(--accent-ink); }
+
+    .tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+    caption { caption-side: bottom; text-align: left; color: var(--faint); font-size: 13.5px; padding: 10px 16px 14px; }
+    th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--line); }
+    thead th { color: var(--faint); font-weight: 600; font-size: 13px; background: color-mix(in srgb, var(--surface) 92%, var(--ink)); }
+    thead th small { font-weight: 500; }
+    th[scope=row] { color: var(--ink); font-weight: 600; }
+    td { color: var(--muted); }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    .tbl.num th, .tbl.num td { text-align: right; padding-left: 10px; padding-right: 14px; }
+    .tbl.num th[scope=row] { text-align: left; padding-left: 16px; font-size: 14.5px; }
+    .versions thead th { font-size: 14px; color: var(--ink); line-height: 1.3; }
+    .versions thead th:last-child, .versions td:last-child { background: var(--accent-soft); }
+    .versions td.best { color: var(--ink); font-weight: 800; }
+
+    /* toys */
+    .gd { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 16px; margin-top: 18px; }
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stage { position: relative; background: #0b0b14; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .stage canvas { display: block; width: 100%; height: 100%; }
+    .stage.sq { aspect-ratio: 1; }
+    .stage.drag canvas { cursor: grab; touch-action: none; }
+    .stage.drag canvas:active { cursor: grabbing; }
+    .stage .cap { position: absolute; left: 12px; top: 10px; font: 600 12.5px Inter, sans-serif; color: #d5d7ee; background: rgba(5, 6, 15, .6); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+    .stage .cap.r { left: auto; right: 12px; top: auto; bottom: 10px; font-family: "JetBrains Mono", monospace; }
+    .stage .cap.tr { left: auto; right: 12px; }
+    .stage .cap.good { color: #c7d2fe; border: 1px solid rgba(129, 140, 248, .6); }
+    #toy-chart-stage { aspect-ratio: 8 / 2.2; margin-top: 12px; }
+    #match-stage { aspect-ratio: 2 / 1; }
+
+    /* bar explorers */
+    .rx { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px 16px; }
+    .rx-top { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .rx-row { display: grid; grid-template-columns: 200px 1fr; gap: 14px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line); }
+    .rx-row:last-child { border-bottom: 0; }
+    .grid2 .rx-row, .grid-side .rx-row { grid-template-columns: 172px 1fr; }
+    .rx-name { font-weight: 700; font-size: 15px; line-height: 1.3; }
+    .rx-row.g-ours .rx-name { color: var(--accent-ink); }
+    .rx-bar { position: relative; height: 22px; border-radius: 6px; background: color-mix(in srgb, var(--line) 55%, transparent); }
+    .rx-bar span { position: absolute; inset: 0 auto 0 0; border-radius: 6px; background: var(--pre); transition: width .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.g-ours .rx-bar span { background: var(--accent); }
+    .rx-row.g-ri .rx-bar span { background: var(--ri); }
+    .rx-row.g-lrf .rx-bar span { background: var(--lrf); }
+    .rx-bar b { position: absolute; top: 50%; transform: translateY(-50%); font: 600 12.5px/1 "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; transition: left .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-row.g-ours .rx-bar b { color: var(--accent-ink); }
+    .rx-bar i { position: absolute; top: -3px; bottom: -3px; width: 3px; margin-left: -1.5px; border-radius: 2px; background: var(--ink); opacity: .75; transition: left .5s cubic-bezier(.2, .8, .2, 1); }
+    .rx-foot { margin-top: 12px; font-size: 14px; color: var(--faint); }
+    .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+    .legend span::before { content: ""; display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; background: var(--pre); }
+    .legend .g-ours::before { background: var(--accent); }
+    .legend .g-ri::before { background: var(--ri); }
+    .legend .g-lrf::before { background: var(--lrf); }
+    .legend .tick::before { width: 3px; height: 14px; border-radius: 2px; background: var(--ink); opacity: .75; vertical-align: -3px; }
+
+    .bib { white-space: pre-wrap; overflow-wrap: anywhere; position: relative; background: #0f0f1a; color: #e8e9f6; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    @media (prefers-color-scheme: dark) { .bib { border: 1px solid var(--line); } }
+    details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+    details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details.abstract p { margin-top: 14px; }
+    details.abstract + details.abstract { margin-top: 12px; }
+
+    .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related a.card { display: block; color: inherit; transition: transform .2s, border-color .2s; }
+    .related a.card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+    .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
+    .related h3 { margin-top: 4px; }
+
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy:hover { background: rgba(255, 255, 255, .14); }
+
+    footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(5, 6, 15, .9); padding: 4vh 3vw; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 92vh; border-radius: 10px; background: #fff; }
+
+    @media (max-width: 960px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .related, .grid2, .grid-side, .gd { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) { .steps { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 40px; }
+      .stat .num { font-size: 28px; }
+      .lead { font-size: 18.5px; }
+      .formula { font-size: 17px; text-align: left; }
+      .rx { padding: 16px 14px 12px; }
+      .rx-row, .grid2 .rx-row, .grid-side .rx-row { grid-template-columns: 1fr; gap: 5px; }
+      .tab { padding: 8px 10px; font-size: 14px; }
+      th, td { padding: 9px 11px; }
+      .tbl.num th[scope=row] { padding-left: 11px; font-size: 13.5px; }
+      .stage .cap { font-size: 11px; padding: 3px 8px; left: 8px; top: 8px; }
+      .stage .cap.r { right: 8px; bottom: 8px; }
+      .stage .cap.tr { right: 8px; }
+      #toy-chart-stage { aspect-ratio: 8 / 3; }
+      #match-stage { aspect-ratio: 4 / 3; }
+      .bib { padding-top: 54px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b, .rx-bar i { transition: none; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">TPAMI 2022 · AAAI 2020</span>
+    <h1>PRIN<span>/SPRIN</span></h1>
+    <p class="subtitle">On Extracting Point-wise Rotation Invariant Features</p>
+    <div class="authors">
+      <span><a href="https://qq456cvb.github.io">Yang You</a><sup>1</sup></span><span>Yujing Lou<sup>1</sup></span><span>Ruoxi Shi<sup>1</sup></span><span>Qi Liu<sup>1</sup></span><span>Yu-Wing Tai<sup>2</sup></span><span>Lizhuang Ma<sup>1</sup></span><span>Weiming Wang<sup>1</sup></span><span>Cewu Lu<sup>1</sup></span>
+    </div>
+    <div class="affil"><sup>1</sup>Shanghai Jiao Tong University · <sup>2</sup>The Hong Kong University of Science and Technology</div>
+    <div class="links">
+      <a class="btn primary" href="https://doi.org/10.1109/TPAMI.2021.3130590"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn" href="https://arxiv.org/abs/2102.12093"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>arXiv</a>
+      <a class="btn" href="https://arxiv.org/abs/1811.09361"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>AAAI 2020 paper</a>
+      <a class="btn" href="https://github.com/qq456cvb/SPRIN"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="#toy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.4"/><ellipse cx="12" cy="12" rx="3.4" ry="9"/></svg>Try the toy</a>
+      <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
+    </div>
+    <div class="video-frame">
+      <video id="teaser" src="/projects/prin/static/media/teaser.mp4" poster="/projects/prin/static/media/teaser_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="PRIN/SPRIN teaser video"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#prin">PRIN</a><a href="#sprin">SPRIN</a><a href="#toy">Rotate it</a><a href="#results">Results</a><a href="#matching">Matching</a><a href="#ablations">Ablations</a><a href="#versions">Two papers</a><a href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="kicker">Overview</div>
+    <h2>The same features, however the object is turned</h2>
+    <p class="lead">A point cloud arrives in whatever pose the object happened to be in. Networks that read coordinates, such as PointNet++, are trained on upright shapes and break when a shape is turned, and teaching them every rotation by augmentation is expensive. PRIN and SPRIN take another route: they compute <b>a feature for every point that provably does not change when the input is rotated</b>. PRIN builds it with a convolution on spherical voxels. SPRIN, its sparse successor, works on the points directly, which is more efficient and more accurate. Trained on upright shapes only, SPRIN segments randomly rotated shapes as well as upright ones.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">82.67<small>mIoU</small></div><p>part segmentation on randomly rotated ShapeNet shapes for SPRIN, trained on upright shapes only; the best other method reaches 82.17</p></div>
+      <div class="stat"><div class="num">0.08<small>points</small></div><p>between SPRIN's scores on upright and on rotated test shapes (82.59 and 82.67). PointNet++ falls from 84.63 to 36.66</p></div>
+      <div class="stat"><div class="num">86.1<small>%</small></div><p>of points matched to the right part across objects and rotations with PRIN's features; the best baseline descriptor, CGF, reaches 52.5%</p></div>
+      <div class="stat"><div class="num">4.8<small>× 10⁻⁷</small></div><p>largest deviation from exact invariance of the spherical voxel convolution on a test signal: floating-point precision</p></div>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/prin/static/media/problem.jpg" width="2000" height="499" decoding="async" alt="Six rotated point clouds (chair, airplane, knife, laptop, table, guitar) with part labels predicted by PointNet++: the colours cut across the objects in the wrong places."><figcaption>The problem: PointNet++, trained on upright shapes, segments rotated ones. It does not know how the objects are oriented and fails to find their parts.</figcaption></figure>
+  </div>
+</section>
+
+<section id="prin">
+  <div class="wrap">
+    <div class="kicker">PRIN</div>
+    <h2>A convolution on spherical voxels</h2>
+    <p>PRIN, the Point-wise Rotation Invariant Network, turns the point cloud into a signal on a grid of spherical voxels, convolves it there, and reads the result back at the points.</p>
+    <ol class="steps">
+      <li><i class="tag">In</i><b>Density Aware Adaptive Sampling</b>The unit ball is divided into voxels by two angles and the distance to the centre. Voxels that span equal angles are not equal in size: they shrink towards the poles, which would bias the signal. DAAS scales its sampling filter by sin <i class="m">β</i>, the factor by which spherical coordinates distort volume.</li>
+      <li><i class="tag">Features</i><b>Spherical Voxel Convolution</b>Voxel coordinates are mapped one to one onto 3D rotations, which lifts the signal to the rotation group SO(3). There, a group convolution is computed with fast Fourier transforms and averaged over the last rotation angle.</li>
+      <li><i class="tag">Out</i><b>Point re-sampling</b>Each input point reads its feature from the eight voxels around it by trilinear interpolation. Fully connected layers turn point features into part labels; max-pooling over all voxels gives a global feature for classification.</li>
+    </ol>
+    <figure class="figure" data-zoom><img src="/projects/prin/static/media/prin.jpg" width="2400" height="483" loading="lazy" decoding="async" alt="PRIN architecture: a randomly rotated point cloud (N, 3) goes through density-aware adaptive sampling into a spherical signal (S, S, H), then spherical voxel convolution layers. Point re-sampling gives a rotation-invariant feature per point and, after fully connected layers, a part segmentation; max pooling gives a rotation-invariant global feature and a class."><figcaption>PRIN. In the experiments: one spherical voxel convolution with 40 channels followed by two SO(3) group convolutions with 40 and 50 channels, all at bandwidth 32.</figcaption></figure>
+
+    <div class="grid2 sub">
+      <div>
+        <h3>Why the output cannot depend on the rotation</h3>
+        <p>Rotate the point cloud by any rotation <i class="m">Q</i>. The signal <i class="m">f</i> turns into the rotated signal <i class="m">L<sub>Q</sub> f</i>, and a point <i class="m">p</i> moves to <i class="m">Qp</i>. The theorem says that the convolution, evaluated at the moved point of the rotated signal, returns exactly the value it had before:</p>
+        <div class="formula">[<i>ψ</i> ⋆ <i>L<sub>Q</sub> f</i> ](<i>Qp</i>) = [<i>ψ</i> ⋆ <i>f</i> ](<i>p</i>)</div>
+        <p>It holds under one condition on the filter <i class="m">ψ</i>: written as a function of the three Euler angles (<i class="m">α</i>, <i class="m">β</i>, <i class="m">γ</i>) of SO(3), it must not depend on <i class="m">γ</i>. In the implementation the filter is a 3D tensor that is constant along its third axis. This condition and the full proof are what the journal paper adds to the theory of the AAAI version.</p>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/prin/static/media/svc.jpg" width="1744" height="635" loading="lazy" decoding="async" alt="A signal f on a sphere is convolved with a filter psi, drawn as a cube that is constant along the gamma axis, and then rotated by Q. Below, f is first rotated by Q and then convolved. The difference between the two results is a uniformly blue sphere: zero."><figcaption>The theorem checked numerically. Convolving and then rotating (top) gives the same as rotating and then convolving (bottom); the largest difference is 4.77 × 10⁻⁷. The filter cube is constant along <i class="m">γ</i>.</figcaption></figure>
+    </div>
+    <div class="grid2 sub">
+      <figure class="figure" data-zoom><img src="/projects/prin/static/media/daas.jpg" width="1369" height="569" loading="lazy" decoding="async" alt="A point cloud inside a sphere divided into spherical voxels; the same points sampled into angle bins that are distorted in Euclidean space; and the equal-sized angle bins in SO(3), where a bin near the pole is stretched."><figcaption>Bins of equal angle (right) correspond to voxels of unequal size in space (middle): near the poles a small region is stretched over a whole bin.</figcaption></figure>
+      <div>
+        <h3>Why the sampling must be density aware</h3>
+        <p>The convolution needs the signal on a regular grid of angles, because that is what the fast Fourier transforms on the rotation group work with. In space, however, such a grid is far from regular. The volume of a spherical voxel is proportional to <i class="m">h</i>² sin <i class="m">β</i>: the factor <i class="m">h</i>² is the same in all directions, but sin <i class="m">β</i> makes voxels near the poles much smaller than those at the equator.</p>
+        <p>A filter of fixed width would therefore see the same surface differently depending on where the pole happens to be, which changes with every rotation of the object. DAAS corrects the filter by sin <i class="m">β</i>. The value written into a voxel also records how far the nearby points are from it along the radius, a quantity that no rotation changes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sprin">
+  <div class="wrap">
+    <div class="kicker">SPRIN</div>
+    <h2>The same idea, directly on the points</h2>
+    <div class="grid-side">
+      <div>
+        <p>PRIN's voxel grid is dense. GPU memory limits it to 64³ voxels, and most of them contain no point. SPRIN, the sparse version, drops the grid: the point cloud is treated as a sum of Dirac deltas, and the convolution becomes a sum over the points themselves.</p>
+        <div class="formula">[<i>ψ</i> ∗ <i>f</i> ](<i>x<sub>j</sub></i>) = <sup>1</sup>⁄<sub><i>N</i></sub> ∑<sub><i>i</i></sub> <i>ψ</i>( <i>T</i>(<i>x<sub>j</sub></i>)<sup>−1</sup> <i>x<sub>i</sub></i> )</div>
+        <p><i class="m">T</i>(<i class="m">x<sub>j</sub></i>) is the rotation that belongs to the point <i class="m">x<sub>j</sub></i>. Applying its inverse turns the cloud so that <i class="m">x<sub>j</sub></i> lies on the <i class="m">z</i> axis, and each neighbour <i class="m">x<sub>i</sub></i> is seen from there. What is left undetermined is a spin about that axis, and the output is point-wise rotation invariant when the filter ignores it: <i class="m">ψ</i>(<i class="m">x</i>) = <i class="m">ψ</i>(<i class="m">Z</i>(<i class="m">θ</i>)<i class="m">x</i>) for every angle <i class="m">θ</i>.</p>
+        <p>In practice <i class="m">ψ</i> is a small fully connected network, and the sum runs over a random subset of the <i class="m">k</i> nearest neighbours. The filter also receives six more rotation-invariant numbers: the sides and angles of the triangle formed by <i class="m">x<sub>i</sub></i>, <i class="m">x<sub>j</sub></i> and the centroid. No sampling into voxels and no re-sampling back are needed.</p>
+      </div>
+      <div class="card">
+        <h3>The network</h3>
+        <p>Sparse spherical correlation layers are stacked as in PointNet++. Two layers run on all 2,048 points; farthest point sampling then keeps 128 points, and later 32, with three layers at each level.</p>
+        <p>For classification, max- and average-pooled features go through fully connected layers. For part segmentation, two up-sampling stages run the same correlation layer on the finer point sets, without any interpolation weights.</p>
+        <p>Because the correlation is sparse, 2,048 points fit on one GPU with a large batch. The paper notes that tensor field networks and SE(3)-Transformers do not scale to clouds of this size.</p>
+      </div>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/prin/static/media/sprin.jpg" width="2200" height="751" loading="lazy" decoding="async" alt="SPRIN architecture: a point cloud (N, 3) goes through sparse spherical correlation layers with sampling and grouping in between. A classification head pools and applies fully connected layers; a part segmentation head propagates features back up through more sparse spherical correlation layers and fully connected layers."><figcaption>SPRIN: sparse spherical correlation layers, with farthest point sampling and nearest-neighbour grouping between them, and one head for classification and one for part segmentation.</figcaption></figure>
+  </div>
+</section>
+
+<section id="toy">
+  <div class="wrap">
+    <div class="kicker">Rotate it</div>
+    <h2>Two classifiers, one rotating object</h2>
+    <p>A toy, not the paper's networks. The shapes are procedural, and nothing is trained: each point gets the part label of its nearest neighbour, in feature space, among the points of five upright example shapes. On the left the features are the raw coordinates <i class="m">x</i>, <i class="m">y</i>, <i class="m">z</i>. On the right they come from one hand-made layer in the spirit of SPRIN: for every pair of points it keeps only what a rotation cannot change, namely where the neighbour lies along and around the axis through the point, and the triangle the two form with the centroid. Drag a view to turn the object. Both sides recompute everything from the rotated coordinates.</p>
+    <div class="gd" id="toy-box">
+      <div>
+        <div class="pair">
+          <div class="stage sq drag"><canvas id="toy-xyz" role="img" aria-label="The rotating point cloud coloured by the parts predicted from raw coordinates"></canvas><span class="cap">Reads coordinates</span><span class="cap r" id="toy-xyz-v"></span></div>
+          <div class="stage sq drag"><canvas id="toy-inv" role="img" aria-label="The rotating point cloud coloured by the parts predicted from rotation-invariant features"></canvas><span class="cap good">Invariant features</span><span class="cap r" id="toy-inv-v"></span></div>
+        </div>
+        <div class="stage" id="toy-chart-stage"><canvas id="toy-chart" role="img" aria-label="Part segmentation quality of both classifiers over the most recent rotations"></canvas></div>
+      </div>
+      <div>
+        <div class="ctl">
+          <h4>Shape</h4>
+          <div class="chips" id="toy-cat" role="group" aria-label="Shape"></div>
+          <h4>Colour the points by</h4>
+          <div class="chips" id="toy-view" role="group" aria-label="Colouring"></div>
+          <h4>Rotation</h4>
+          <div class="row"><button class="go" type="button" id="toy-rand">Random rotation</button><button class="go ghost" type="button" id="toy-up">Upright</button><button class="chip" type="button" id="toy-spin" aria-pressed="true">Spin</button></div>
+        </div>
+        <div class="ctl">
+          <h4>Right now</h4>
+          <dl class="read">
+            <dt>Turned away from upright by</dt><dd id="toy-angle">0°</dd>
+            <dt>mIoU, reading coordinates</dt><dd id="toy-r-xyz">–</dd>
+            <dt>mIoU, invariant features</dt><dd class="ok" id="toy-r-inv">–</dd>
+            <dt>Largest change of any feature value since upright</dt><dd class="ok" id="toy-diff">–</dd>
+          </dl>
+          <p id="toy-hint">White rings mark points with the wrong part. The classifier on the left has learned a partition of space, so it is right only when the object stands the way the examples did.</p>
+        </div>
+      </div>
+    </div>
+    <p class="note">The invariant features change only by floating-point rounding, so the labels on the right never change. That they are not perfect has nothing to do with rotation: a hand-made layer and a nearest-neighbour rule are a weak classifier. PRIN and SPRIN learn their filters, stack several layers and are trained on ShapeNet.</p>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="kicker">Results</div>
+    <h2>Trained upright, tested rotated</h2>
+    <p>Every method is trained on shapes in their canonical orientation, without rotation augmentation, and tested twice: on shapes in the canonical orientation (“upright” below) and on randomly rotated shapes. RIConv, Kim et al. and Li et al. originally reported results with rotation augmentation about the <i class="m">z</i> axis during training; for a like-for-like comparison they were re-trained without it.</p>
+    <h3 class="sub" style="margin-top:28px">Part segmentation, ShapeNet Part</h3>
+    <p>The eight networks that read coordinates score 83 to 85 mIoU on upright shapes and 26 to 50 on rotated ones. Hand-crafted rotation-invariant descriptors fed to a PointNet (SHOT, CGF) are stable but weak. SPRIN has the best instance mIoU and the best class mIoU on rotated shapes (82.67 and 79.50; Li et al.: 82.17 and 78.78), and the best score in 12 of the 16 categories. On upright shapes it stays within 3 points of the best coordinate-reading network (82.59 against 85.33). PRIN, limited by the resolution of its voxel grid, reaches 71.20.</p>
+    <div class="rx" id="rx-seg">
+      <div class="rx-top"><div class="tabs" role="tablist" aria-label="Comparison" data-role="tabs"></div><div class="chips" role="group" aria-label="Metric"><span data-role="chips" class="chips"></span><select class="chip" data-role="select" aria-label="One category, rotated shapes"></select></div></div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+      <div class="legend"><span class="g-ours">PRIN / SPRIN</span><span class="g-ri">rotation-invariant or equivariant network</span><span class="g-lrf">hand-crafted invariant descriptor + PointNet</span><span>network that reads coordinates</span><span class="tick">the same method in the other test condition</span></div>
+    </div>
+    <figure class="figure mt" data-zoom><img src="/projects/prin/static/media/results.jpg" width="2200" height="1540" loading="lazy" decoding="async" alt="Part segmentation of a rotated chair, table, car, guitar and skateboard: ground truth, PointNet, CGF+PointNet, RIConv, PRIN and SPRIN. PointNet and CGF+PointNet mislabel large regions; RIConv is wrong at part boundaries; PRIN and SPRIN are close to the ground truth."><figcaption>Rotated test shapes, all models trained on upright shapes. PointNet's labels follow a fixed partition of space, and RIConv is inaccurate at part boundaries. The circles mark regions worth comparing.</figcaption></figure>
+
+    <h3 class="sub">Classification, ModelNet40 and ScanObjectNN</h3>
+    <p>A class label needs one global feature, not point-wise ones, and here the picture is less one-sided. All coordinate-reading networks collapse under rotation, as before. Among the rotation-invariant networks SPRIN is competitive but not the best: 86.13% on rotated ModelNet40 against 89.32% for Li et al., and 69.83% against 73.44% on rotated ScanObjectNN, which consists of real scans with background clutter. SPRIN's accuracy is practically the same with and without rotation on both datasets (86.01% and 86.13% on ModelNet40). PRIN loses some accuracy under rotation (79.76% to 72.43% on ModelNet40): its voxel grid is discrete, and a rotation does not move voxel centres onto voxel centres, an effect the AAAI paper already describes.</p>
+    <div class="rx" id="rx-cls">
+      <div class="rx-top"><div class="tabs" role="tablist" aria-label="Dataset" data-role="tabs"></div><div class="chips" role="group" aria-label="Test shapes" data-role="chips"></div></div>
+      <div data-role="rows"></div>
+      <p class="rx-foot" data-role="foot"></p>
+    </div>
+  </div>
+</section>
+
+<section id="matching">
+  <div class="wrap">
+    <div class="kicker">Matching</div>
+    <h2>Finding the same spot on another object</h2>
+    <p>A feature that ignores rotation is a point descriptor: the nearest feature on a second object tells where a point of the first one lies there, whatever the two poses are. In the toy below, each line joins a point of the upright shape on the left to the point of the rotated shape on the right whose feature is closest. Green lines end on the same part, red ones on a different part. Drag to rotate the shape on the right, and switch the features to raw coordinates to see the matches fall apart.</p>
+    <div class="gd" id="match-box">
+      <div class="stage drag" id="match-stage"><canvas id="match-canvas" role="img" aria-label="Two point clouds of the same category, the right one rotated, with lines joining matched points"></canvas><span class="cap">Query, upright</span><span class="cap tr">Other object, rotated: drag</span><span class="cap r" id="match-v"></span></div>
+      <div>
+        <div class="ctl">
+          <h4>Features</h4>
+          <div class="chips" id="match-kind" role="group" aria-label="Features used for matching"></div>
+          <h4>Shape</h4>
+          <div class="chips" id="match-cat" role="group" aria-label="Shape"></div>
+          <h4>Rotation</h4>
+          <div class="row"><button class="go" type="button" id="match-rand">Random rotation</button><button class="go ghost" type="button" id="match-up">Upright</button></div>
+          <p id="match-read"></p>
+        </div>
+      </div>
+    </div>
+    <div class="grid-side sub">
+      <div>
+        <h3>On ShapeNet</h3>
+        <p>The point features of 80% of the test objects, in canonical orientation, are stored as a database. The remaining 20% are rotated at random and used as queries: every query point retrieves its nearest feature, and the match counts as correct when both points belong to the same part. PRIN's features match 86.1% of the points correctly and SPRIN's 78.9%, against 52.5% for the hand-crafted CGF descriptor.</p>
+        <div class="rx" id="rx-match" style="margin-top:0">
+          <div class="rx-top"><div class="tabs" role="tablist" aria-label="Comparison" data-role="tabs"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/prin/static/media/matching.jpg" width="2000" height="1090" loading="lazy" decoding="async" alt="Four pairs of objects (airplanes, chairs, tables, guitars) in different orientations, with lines joining matched points: fuselage to fuselage, chair back to chair back, table top to table top, guitar head to guitar head."><figcaption>Point matching with PRIN features between a query (left of each pair) and a retrieved object in another orientation (right).</figcaption></figure>
+    </div>
+    <div class="grid-side sub">
+      <figure class="figure" data-zoom><img src="/projects/prin/static/media/alignment.jpg" width="1210" height="601" loading="lazy" decoding="async" alt="A chair point cloud and a box labelled chair back. Initial pose: the chair is upside down and its legs are in the box. Optimized pose: the chair is upright and its back fills the box."><figcaption>Alignment from a label: the box should contain the chair's back. Left: initial pose. Right: pose after optimization.</figcaption></figure>
+      <div class="card">
+        <h3>Aligning a shape from a label</h3>
+        <p>Point-wise labels that follow the object can also be used to pose it. Given a requirement such as “the back of the chair is at the top”, virtual points carrying that label are placed where the part should be, and the pose is optimized until the predicted labels of these points agree with it, measured by KL divergence.</p>
+        <p>In the example of the AAAI paper the divergence drops from 1.34 for the initial pose to 0.12 for the optimized one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ablations">
+  <div class="wrap">
+    <div class="kicker">Ablations</div>
+    <h2>What the pieces contribute</h2>
+    <p>All numbers are on the randomly rotated ShapeNet Part test set: mean IoU, or the share of correctly labelled points.</p>
+    <div class="grid2">
+      <div>
+        <h3>PRIN: resolution and sampling</h3>
+        <p>The bandwidth is the resolution of the spherical voxel grid. Going from 4 to 32 raises the mIoU from 52.98 to 71.20, at a higher memory cost. With plain uniform sampling instead of DAAS, the mIoU at bandwidth 32 falls to 67.47.</p>
+        <div class="rx" id="rx-abl" style="margin-top:0">
+          <div class="rx-top"><div class="tabs" role="tablist" aria-label="Paper" data-role="tabs"></div><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/prin/static/media/daas_features.jpg" width="1536" height="820" loading="lazy" decoding="async" alt="A table point cloud coloured by its features, and the same table under two rotations. With uniform sampling the colours of the legs and edges change with the rotation; with DAAS they stay the same."><figcaption>Features shown as colours for one table under two rotations. With uniform sampling (top) they change with the rotation, most visibly where the arrows point; with DAAS (bottom) they follow the object.</figcaption></figure>
+    </div>
+    <div class="grid2 sub">
+      <div>
+        <h3>SPRIN: what the filter sees</h3>
+        <p>The filter receives the neighbour's position in the frame of the point (the correlation feature) and the six triangle features. Each alone already works; together they give the best result.</p>
+        <div class="rx" id="rx-feat" style="margin-top:0">
+          <div class="rx-top"><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+      <div>
+        <h3>Fewer points</h3>
+        <p>The test clouds are sub-sampled without retraining. Both networks keep most of their accuracy at half the points; at 512 points SPRIN still reaches 72.04 mIoU, and at 256 both drop sharply.</p>
+        <div class="rx" id="rx-rob" style="margin-top:0">
+          <div class="rx-top"><div class="tabs" role="tablist" aria-label="Network" data-role="tabs"></div><div class="chips" role="group" aria-label="Metric" data-role="chips"></div></div>
+          <div data-role="rows"></div>
+          <p class="rx-foot" data-role="foot"></p>
+        </div>
+      </div>
+    </div>
+    <figure class="figure mt mid" data-zoom><img src="/projects/prin/static/media/robustness.jpg" width="1800" height="1325" loading="lazy" decoding="async" alt="An airplane, a bag and a table segmented by PRIN with 2048, 1024, 512 and 256 points: the part colours stay consistent as the clouds get sparser."><figcaption>PRIN's segmentation of test clouds sub-sampled to 2,048, 1,024, 512 and 256 points.</figcaption></figure>
+  </div>
+</section>
+
+<section id="versions">
+  <div class="wrap">
+    <div class="kicker">Two papers</div>
+    <h2>From PRIN to PRIN/SPRIN</h2>
+    <div class="grid-side">
+      <div>
+        <p><b>AAAI 2020</b> introduced PRIN: density-aware sampling, the spherical voxel convolution and point re-sampling. On rotated shapes it was already ahead of every method it was compared with, without any augmentation.</p>
+        <p><b>TPAMI 2022</b> extends it in two ways. The first is the theory: a complete proof of point-wise rotation invariance, which shows what the filter must satisfy. With the convolution revised accordingly, PRIN rises from 58.76 to 71.20 mIoU on rotated shapes, and the gap between its scores on upright and rotated shapes, 12.8 points in the first version, shrinks to 0.8. The second is SPRIN, which carries the idea to sparse points and adds another 11.5 points.</p>
+        <p class="note">The AAAI paper lists Yang You and Yujing Lou as equal contributors, with Qi Liu, Yu-Wing Tai, Lizhuang Ma, Cewu Lu and Weiming Wang.</p>
+      </div>
+      <div class="tbl num versions"><table><caption>All numbers in %, trained on upright shapes without rotation augmentation. Rotated: randomly rotated test shapes. The best of each row is in bold.</caption><thead><tr><th></th><th>PRIN<br><small>AAAI 2020</small></th><th>PRIN<br><small>TPAMI 2022</small></th><th>SPRIN<br><small>TPAMI 2022</small></th></tr></thead><tbody><tr><th scope="row">ShapeNet Part, rotated: instance mIoU</th><td>58.76</td><td>71.20</td><td class=best>82.67</td></tr><tr><th scope="row">ShapeNet Part, rotated: class mIoU</th><td>54.22</td><td>66.75</td><td class=best>79.50</td></tr><tr><th scope="row">ShapeNet Part, upright: instance mIoU</th><td>71.52</td><td>72.04</td><td class=best>82.59</td></tr><tr><th scope="row">ShapeNet Part, upright: class mIoU</th><td>70.33</td><td>68.39</td><td class=best>79.31</td></tr><tr><th scope="row">ModelNet40, rotated: accuracy</th><td>70.35</td><td>72.43</td><td class=best>86.13</td></tr><tr><th scope="row">ModelNet40, upright: accuracy</th><td>80.13</td><td>79.76</td><td class=best>86.01</td></tr><tr><th scope="row">Point matching on rotated shapes: accuracy</th><td>64.23</td><td class=best>86.12</td><td>78.92</td></tr></tbody></table></div>
+    </div>
+    <div class="grid-side sub">
+      <div>
+        <h3>Limits</h3>
+        <p>PRIN's dense grid is the main one: its resolution is bounded by memory (bandwidth 32 in the experiments), and shapes with complex internal structure were failure cases of the first version. Its filters are aware of density but not of curvature. SPRIN removes the grid, but for classification, where a single global feature is enough, it is competitive rather than the best.</p>
+        <div class="card mt">
+          <h3>Code and weights</h3>
+          <p><a href="https://github.com/qq456cvb/SPRIN">qq456cvb/SPRIN</a> holds PyTorch code for both PRIN and SPRIN in their journal versions; SPRIN needs only PyTorch and hydra. Trained checkpoints for ShapeNet part segmentation are on <a href="https://huggingface.co/qq456cvb/SPRIN">Hugging Face</a>. The original AAAI code is at <a href="https://github.com/qq456cvb/PRIN">qq456cvb/PRIN</a>.</p>
+        </div>
+      </div>
+      <figure class="figure" data-zoom><img src="/projects/prin/static/media/failure.jpg" width="1429" height="675" loading="lazy" decoding="async" alt="Six point clouds with noisy part predictions: a table with a shelf, earphones, a motorbike, a lamp with several arms, an airplane and a car."><figcaption>Failure cases of the first PRIN (AAAI 2020): objects with complex internal structure.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="abstract">
+  <div class="narrow">
+    <div class="kicker">Abstract</div>
+    <details class="abstract">
+      <summary>PRIN/SPRIN: On Extracting Point-wise Rotation Invariant Features (TPAMI 2022)</summary>
+      <p>Point cloud analysis without pose priors is very challenging in real applications, as the orientations of point clouds are often unknown. In this paper, we propose a brand new point-set learning framework PRIN, namely, Point-wise Rotation Invariant Network, focusing on rotation invariant feature extraction in point clouds analysis. We construct spherical signals by Density Aware Adaptive Sampling to deal with distorted point distributions in spherical space. Spherical Voxel Convolution and Point Re-sampling are proposed to extract rotation invariant features for each point. In addition, we extend PRIN to a sparse version called SPRIN, which directly operates on sparse point clouds. Both PRIN and SPRIN can be applied to tasks ranging from object classification, part segmentation, to 3D feature matching and label alignment. Results show that, on the dataset with randomly rotated point clouds, SPRIN demonstrates better performance than state-of-the-art methods without any data augmentation. We also provide thorough theoretical proof and analysis for point-wise rotation invariance achieved by our methods.</p>
+    </details>
+    <details class="abstract">
+      <summary>Pointwise Rotation-Invariant Network with Adaptive Sampling and 3D Spherical Voxel Convolution (AAAI 2020)</summary>
+      <p>Point cloud analysis without pose priors is very challenging in real applications, as the orientations of point clouds are often unknown. In this paper, we propose a brand new point-set learning framework PRIN, namely, Pointwise Rotation-Invariant Network, focusing on rotation-invariant feature extraction in point clouds analysis. We construct spherical signals by Density Aware Adaptive Sampling to deal with distorted point distributions in spherical space. In addition, we propose Spherical Voxel Convolution and Point Re-sampling to extract rotation-invariant features for each point. Our network can be applied to tasks ranging from object classification, part segmentation, to 3D feature matching and label alignment. We show that, on the dataset with randomly rotated point clouds, PRIN demonstrates better performance than state-of-the-art methods without any data augmentation. We also provide theoretical analysis for the rotation-invariance achieved by our methods.</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="kicker">Related</div>
+    <h2>See also</h2>
+    <div class="related">
+      <a class="card" href="/projects/cppf"><div class="venue">CVPR 2022</div><h3>CPPF</h3><p>Category-level 9D pose estimation by voting with point pairs; its point embeddings are SPRIN layers.</p></a>
+      <a class="card" href="/projects/ukpgan"><div class="venue">CVPR 2022</div><h3>UKPGAN</h3><p>A self-supervised 3D keypoint detector built on rotation-invariant local features, so its keypoints repeat under rotation.</p></a>
+      <a class="card" href="/projects/cppf++"><div class="venue">TPAMI 2024</div><h3>CPPF++</h3><p>Uncertainty-aware vote aggregation for sim-to-real object pose estimation.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <div class="wrap">
+    <div class="kicker">Cite</div>
+    <h2>BibTeX</h2>
+    <div style="position:relative">
+      <button class="copy" id="copy" type="button">Copy</button>
+<pre class="bib" id="bibtext">@article{you2022prin,
+  title={PRIN/SPRIN: On Extracting Point-wise Rotation Invariant Features},
+  author={You, Yang and Lou, Yujing and Shi, Ruoxi and Liu, Qi and Tai, Yu-Wing and Ma, Lizhuang and Wang, Weiming and Lu, Cewu},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume={44},
+  number={12},
+  pages={9489--9502},
+  year={2022},
+  doi={10.1109/TPAMI.2021.3130590}
+}
+
+@inproceedings{you2020pointwise,
+  title={Pointwise Rotation-Invariant Network with Adaptive Sampling and 3D Spherical Voxel Convolution},
+  author={You, Yang and Lou, Yujing and Liu, Qi and Tai, Yu-Wing and Ma, Lizhuang and Lu, Cewu and Wang, Weiming},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={34},
+  number={07},
+  pages={12717--12724},
+  year={2020}
+}</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 the authors · This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    <a href="https://qq456cvb.github.io">← Yang You's homepage</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+
+<script id="page-data" type="application/json">{"cats":["airplane","bag","cap","car","chair","earphone","guitar","knife","lamp","laptop","motorbike","mug","pistol","rocket","skateboard","table"],"seg":{"j":[{"name":"PointNet","g":"plain","v":[31.3,29.38,19.9,46.25,43.27,20.81,27.04,15.63,34.72,34.64,42.1,36.4,19.25,49.88,33.3,22.07,25.71,29.74,83.15,78.95]},{"name":"PointNet++","g":"plain","v":[36.66,35.0,21.9,51.7,40.06,23.13,43.03,9.65,38.51,40.91,45.56,41.75,18.18,53.42,42.19,28.51,38.92,36.57,84.63,81.52]},{"name":"RS-Net","g":"plain","v":[50.38,32.99,38.29,15.45,53.78,33.49,60.83,31.27,9.5,43.48,57.37,9.86,20.37,25.74,20.63,11.51,30.14,66.11,84.92,81.41]},{"name":"PCNN","g":"plain","v":[28.8,31.72,23.46,46.55,35.25,22.62,24.27,16.67,32.89,39.8,52.18,38.6,18.54,48.9,27.83,27.46,27.6,24.88,85.13,81.8]},{"name":"SPLATNet","g":"plain","v":[32.21,38.25,34.58,68.1,46.96,19.36,16.25,24.72,88.39,52.99,49.21,31.83,17.06,48.56,21.2,34.98,28.99,28.86,84.97,82.34]},{"name":"DGCNN","g":"plain","v":[43.79,30.87,24.84,51.29,36.69,20.33,30.07,27.86,38.0,45.5,42.29,34.84,20.51,48.74,26.25,26.88,26.95,28.85,85.15,82.33]},{"name":"SO-Net","g":"plain","v":[26.21,14.37,21.08,8.46,1.87,11.78,27.81,11.99,8.34,15.01,43.98,1.81,7.05,8.78,4.41,6.38,16.1,34.98,84.83,81.16]},{"name":"SpiderCNN","g":"plain","v":[31.81,35.46,22.28,53.07,54.2,22.57,28.86,23.17,35.85,42.72,44.09,55.44,19.23,48.93,28.65,25.61,31.36,31.32,85.33,82.4]},{"name":"SHOT+PointNet","g":"lrf","v":[32.88,31.46,37.42,47.3,49.53,27.71,28.09,16.34,9.79,27.66,37.33,25.22,16.31,50.91,25.07,21.29,43.1,40.27,32.75,31.25]},{"name":"CGF+PointNet","g":"lrf","v":[50.13,46.26,50.97,70.34,60.44,25.51,59.08,33.29,50.92,71.64,40.77,31.91,23.93,63.17,27.73,30.99,47.25,52.06,50.13,46.31]},{"name":"SRINet","g":"ri","v":[76.95,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,76.95,null]},{"name":"RIConv","g":"ri","v":[79.31,74.6,78.64,78.7,73.19,68.03,86.82,71.87,89.36,82.95,74.7,76.42,56.58,88.44,72.16,51.63,66.65,77.47,79.55,74.43]},{"name":"Kim et al.","g":"ri","v":[79.56,74.41,77.53,73.43,76.95,66.13,87.22,75.44,87.42,80.71,78.44,71.21,51.09,90.76,73.69,53.86,68.1,78.62,79.92,74.69]},{"name":"Li et al.","g":"ri","v":[82.17,78.78,81.49,80.07,85.55,74.83,88.62,71.34,90.38,82.82,80.34,81.64,68.87,92.23,74.51,54.08,74.59,79.11,82.47,79.4]},{"name":"PRIN (ours)","g":"ours","v":[71.2,66.75,69.29,55.9,71.49,56.31,78.44,65.92,86.01,73.58,66.97,59.29,47.56,81.47,71.99,49.02,64.7,70.12,72.04,68.39]},{"name":"SPRIN (ours)","g":"ours","v":[82.67,79.5,82.07,82.01,76.48,75.53,88.17,71.45,90.51,83.95,79.22,83.83,72.59,93.24,78.99,58.85,74.77,80.31,82.59,79.31]}],"a":[{"name":"PointNet","g":"plain","v":[31.3,29.38,19.9,46.25,43.27,20.81,27.04,15.63,34.72,34.64,42.1,36.4,19.25,49.88,33.3,22.07,25.71,29.74,83.15,78.95]},{"name":"PointNet++","g":"plain","v":[36.66,35.0,21.9,51.7,40.06,23.13,43.03,9.65,38.51,40.91,45.56,41.75,18.18,53.42,42.19,28.51,38.92,36.57,84.63,81.52]},{"name":"RS-Net","g":"plain","v":[50.38,32.99,38.29,15.45,53.78,33.49,60.83,31.27,9.5,43.48,57.37,9.86,20.37,25.74,20.63,11.51,30.14,66.11,84.92,81.41]},{"name":"PCNN","g":"plain","v":[28.8,31.72,23.46,46.55,35.25,22.62,24.27,16.67,32.89,39.8,52.18,38.6,18.54,48.9,27.83,27.46,27.6,24.88,85.13,81.8]},{"name":"SPLATNet","g":"plain","v":[32.21,38.25,34.58,68.1,46.96,19.36,16.25,24.72,88.39,52.99,49.21,31.83,17.06,48.56,21.2,34.98,28.99,28.86,84.97,82.34]},{"name":"DGCNN","g":"plain","v":[43.79,30.87,24.84,51.29,36.69,20.33,30.07,27.86,38.0,45.5,42.29,34.84,20.51,48.74,26.25,26.88,26.95,28.85,85.15,82.33]},{"name":"SO-Net","g":"plain","v":[26.21,14.37,21.08,8.46,1.87,11.78,27.81,11.99,8.34,15.01,43.98,1.81,7.05,8.78,4.41,6.38,16.1,34.98,84.83,81.16]},{"name":"SpiderCNN","g":"plain","v":[31.81,35.46,22.28,53.07,54.2,22.57,28.86,23.17,35.85,42.72,44.09,55.44,19.23,48.93,28.65,25.61,31.36,31.32,85.33,82.4]},{"name":"SHOT+PointNet","g":"lrf","v":[32.88,31.46,37.42,47.3,49.53,27.71,28.09,16.34,9.79,27.66,37.33,25.22,16.31,50.91,25.07,21.29,43.1,40.27,32.75,31.25]},{"name":"CGF+PointNet","g":"lrf","v":[50.13,46.26,50.97,70.34,60.44,25.51,59.08,33.29,50.92,71.64,40.77,31.91,23.93,63.17,27.73,30.99,47.25,52.06,50.13,46.31]},{"name":"PRIN, AAAI 2020 (ours)","g":"ours","v":[58.76,54.22,51.02,56.18,63.39,40.78,57.31,54.39,58.07,71.67,61.82,38.63,24.93,70.44,45.89,48.68,58.73,65.59,71.52,70.33]}]},"cls":{"modelnet":[{"name":"PointNet","g":"plain","v":[88.45,12.47]},{"name":"PointNet++","g":"plain","v":[89.82,21.35]},{"name":"PCNN","g":"plain","v":[92.3,17.38]},{"name":"Point2Sequence","g":"plain","v":[92.6,10.53]},{"name":"Kd-Network","g":"plain","v":[86.2,8.49]},{"name":"Spherical CNN","g":"ri","v":[81.73,55.62]},{"name":"DeepSets","g":"plain","v":[88.73,9.72]},{"name":"LDGCNN","g":"plain","v":[92.91,17.82]},{"name":"SO-Net","g":"plain","v":[93.44,9.64]},{"name":"Tensor field networks","g":"ri","v":[31.24,32.29]},{"name":"QE-Net","g":"ri","v":[74.43,74.07]},{"name":"SPHNet","g":"ri","v":[87.7,86.6]},{"name":"SRINet","g":"ri","v":[87.01,87.01]},{"name":"RIConv","g":"ri","v":[87.56,87.24]},{"name":"Kim et al.","g":"ri","v":[88.49,88.4]},{"name":"Li et al.","g":"ri","v":[89.4,89.32]},{"name":"PRIN (ours)","g":"ours","v":[79.76,72.43]},{"name":"SPRIN (ours)","g":"ours","v":[86.01,86.13]},{"name":"SHOT+PointNet","g":"lrf","v":[48.79,48.79]},{"name":"CGF+PointNet","g":"lrf","v":[57.7,57.89]}],"scanobjectnn":[{"name":"PointNet","g":"plain","v":[73.32,21.35]},{"name":"PointNet++","g":"plain","v":[82.31,18.61]},{"name":"SO-Net","g":"plain","v":[86.18,13.26]},{"name":"SPHNet","g":"ri","v":[67.43,66.52]},{"name":"SRINet","g":"ri","v":[69.53,69.18]},{"name":"RIConv","g":"ri","v":[69.32,68.44]},{"name":"Kim et al.","g":"ri","v":[68.76,68.65]},{"name":"Li et al.","g":"ri","v":[73.42,73.44]},{"name":"PRIN (ours)","g":"ours","v":[58.43,52.14]},{"name":"SPRIN (ours)","g":"ours","v":[70.12,69.83]},{"name":"SHOT+PointNet","g":"lrf","v":[7.43,7.43]},{"name":"CGF+PointNet","g":"lrf","v":[2.87,2.87]}],"aaai":[{"name":"PointNet","g":"plain","v":[88.45,12.47],"params":"3.5M"},{"name":"PointNet++","g":"plain","v":[89.82,21.35],"params":"1.5M"},{"name":"Point2Sequence","g":"plain","v":[92.6,10.53],"params":"1.8M"},{"name":"Kd-Network","g":"plain","v":[86.2,8.49],"params":"3.6M"},{"name":"Spherical CNN","g":"ri","v":[81.73,55.62],"params":"0.4M"},{"name":"DeepSets","g":"plain","v":[88.73,9.72],"params":"0.8M"},{"name":"LDGCNN","g":"plain","v":[92.91,17.82],"params":"2.8M"},{"name":"SO-Net","g":"plain","v":[93.44,9.64],"params":"2.7M"},{"name":"PRIN, AAAI 2020 (ours)","g":"ours","v":[80.13,70.35],"params":"0.4M"},{"name":"SHOT+PointNet","g":"lrf","v":[48.79,48.79],"params":"1.1M"},{"name":"CGF+PointNet","g":"lrf","v":[57.7,57.89],"params":"4.2M"}]},"match":{"j":[{"name":"PointNet","g":"plain","v":[38.91]},{"name":"SHOT","g":"lrf","v":[17.11]},{"name":"CGF","g":"lrf","v":[52.51]},{"name":"PRIN (ours)","g":"ours","v":[86.12]},{"name":"SPRIN (ours)","g":"ours","v":[78.92]}],"a":[{"name":"PointNet","g":"plain","v":[38.91]},{"name":"SHOT","g":"lrf","v":[17.11]},{"name":"CGF","g":"lrf","v":[52.51]},{"name":"PRIN, AAAI 2020 (ours)","g":"ours","v":[64.23]}]},"abl":[{"name":"Bandwidth 32","g":"ours","v":[85.99,71.2]},{"name":"Bandwidth 16","g":"ri","v":[84.84,68.09]},{"name":"Bandwidth 8","g":"ri","v":[82.58,65.43]},{"name":"Bandwidth 4","g":"ri","v":[72.2,52.98]},{"name":"Bandwidth 32, uniform sampling","g":"ri","v":[83.13,67.47]}],"feat":[{"name":"Correlation feature only","g":"ri","v":[90.75,79.7]},{"name":"Triangle features only","g":"ri","v":[91.59,81.38]},{"name":"Both","g":"ours","v":[92.08,82.67]}],"rob":{"points":[2048,1024,512,256],"prin":[[85.99,71.2],[84.19,67.43],[71.19,51.5],[55.23,36.8]],"sprin":[[92.08,82.67],[90.92,79.79],[85.59,72.04],[64.17,51.38]]},"abl_a":[{"name":"S\u00b2 bandwidth 32, 64 shells","g":"ours","v":[79.43,58.76]},{"name":"S\u00b2 bandwidth 16, 64 shells","g":"ri","v":[74.53,53.8]},{"name":"S\u00b2 bandwidth 8, 64 shells","g":"ri","v":[71.17,47.1]},{"name":"S\u00b2 bandwidth 32, 32 shells","g":"ri","v":[76.56,55.63]},{"name":"S\u00b2 bandwidth 32, 1 shell","g":"ri","v":[76.19,54.32]},{"name":"S\u00b2 bandwidth 32, 64 shells, uniform sampling","g":"ri","v":[74.61,54.23]}]}</script>
+<script>
+/* PRIN/SPRIN toy: point-wise rotation-invariant features on small procedural shapes.
+   One layer in the spirit of SPRIN's sparse correlation: for a point x_j, every other point x_i is looked at in a frame
+   whose z axis points along x_j, and the filter ignores the spin about that axis, so all that is left of x_i is
+   u = <x_i, x_j/|x_j|> and rho = distance of x_i to that axis. The "filter" is a fixed set of soft bins over (u, rho),
+   plus bins on a local neighbourhood and on |x_j| (the triangle x_i, x_j, centroid). Nothing is learned: parts are
+   predicted by the nearest neighbour among the features of a few upright training shapes. The baseline does the same
+   with the raw coordinates as features. A toy, not the paper's networks. */
+var RICore = (function () {
+  'use strict';
+  var GU = 6, GP = 4, LU = 5, LP = 3, HB = 4, RL = 0.38, WL = 0.9, WH = 0.55;
+  var DIM = GU * GP + LU * LP + HB + 1;
+  var TRAIN = 5, NTRAIN = 260, KP = 6;
+
+  function rng(seed) { var s = (seed * 2654435761) >>> 0; return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+
+  /* ---------- surface primitives: { area, sample(r, out) } ---------- */
+  function box(c, h) {
+    var a = [h[1] * h[2], h[0] * h[2], h[0] * h[1]], tot = a[0] + a[1] + a[2];
+    return { area: 8 * tot, sample: function (r, o) {
+      var u = r() * tot, k = u < a[0] ? 0 : u < a[0] + a[1] ? 1 : 2, p = [(2 * r() - 1) * h[0], (2 * r() - 1) * h[1], (2 * r() - 1) * h[2]];
+      p[k] = r() < 0.5 ? -h[k] : h[k];
+      o[0] = c[0] + p[0]; o[1] = c[1] + p[1]; o[2] = c[2] + p[2];
+    } };
+  }
+  /* cylinder or cone frustum along axis ax (0, 1, 2), radii r0 (at -h) and r1 (at +h), half height h; caps optional */
+  function tube(c, r0, r1, h, ax, caps) {
+    var sl = Math.sqrt(4 * h * h + (r1 - r0) * (r1 - r0)), side = Math.PI * (r0 + r1) * sl, c0 = caps ? Math.PI * r0 * r0 : 0, c1 = caps ? Math.PI * r1 * r1 : 0;
+    var a = (ax + 1) % 3, b = (ax + 2) % 3;
+    return { area: side + c0 + c1, sample: function (r, o) {
+      var u = r() * (side + c0 + c1), th = r() * 6.283185307, t, rad;
+      if (u < side) { /* radius-weighted height */
+        var q = r(); t = Math.abs(r1 - r0) < 1e-9 ? q : (Math.sqrt(r0 * r0 + q * (r1 * r1 - r0 * r0)) - r0) / (r1 - r0); rad = r0 + (r1 - r0) * t;
+      } else if (u < side + c0) { t = 0; rad = r0 * Math.sqrt(r()); } else { t = 1; rad = r1 * Math.sqrt(r()); }
+      o[ax] = c[ax] + (2 * t - 1) * h; o[a] = c[a] + rad * Math.cos(th); o[b] = c[b] + rad * Math.sin(th);
+    } };
+  }
+  function ellipsoid(c, h) {
+    return { area: 4 * Math.PI * Math.pow((Math.pow(h[0] * h[1], 1.6) + Math.pow(h[0] * h[2], 1.6) + Math.pow(h[1] * h[2], 1.6)) / 3, 1 / 1.6), sample: function (r, o) {
+      var z = 2 * r() - 1, th = r() * 6.283185307, s = Math.sqrt(1 - z * z);
+      o[0] = c[0] + h[0] * s * Math.cos(th); o[1] = c[1] + h[1] * s * Math.sin(th); o[2] = c[2] + h[2] * z;
+    } };
+  }
+  /* arc of a torus in the x-y plane: centre c, ring radius R, tube radius t, angles a0..a1 */
+  function arc(c, R, t, a0, a1) {
+    return { area: (a1 - a0) * R * 6.283185307 * t, sample: function (r, o) {
+      var a = a0 + (a1 - a0) * r(), th = r() * 6.283185307, rr = R + t * Math.cos(th);
+      o[0] = c[0] + rr * Math.cos(a); o[1] = c[1] + rr * Math.sin(a); o[2] = c[2] + t * Math.sin(th);
+    } };
+  }
+
+  /* ---------- shapes: lists of [part, primitive]; y is up ---------- */
+  var SHAPES = {
+    chair: { label: 'Chair', parts: ['back', 'seat', 'legs'], colors: ['#a3e635', '#3b82f6', '#facc15'], build: function (j) {
+      var w = j(0.36, 0.46), d = j(0.36, 0.44), hb = j(0.36, 0.5), hl = j(0.3, 0.42), t = j(0.035, 0.05), L = [[1, box([0, 0, 0], [w, 0.04, d])], [0, box([0, hb, -d + 0.035], [w, hb, 0.035])]];
+      [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(function (s) { L.push([2, box([s[0] * (w - t), -hl, s[1] * (d - t)], [t, hl, t])]); });
+      return L;
+    } },
+    table: { label: 'Table', parts: ['top', 'legs'], colors: ['#8b5cf6', '#38bdf8'], build: function (j) {
+      var w = j(0.62, 0.85), d = j(0.36, 0.5), hl = j(0.28, 0.4), t = j(0.035, 0.05), L = [[0, box([0, 0, 0], [w, 0.035, d])]];
+      [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(function (s) { L.push([1, box([s[0] * (w - 0.08), -hl, s[1] * (d - 0.08)], [t, hl, t])]); });
+      return L;
+    } },
+    airplane: { label: 'Airplane', parts: ['body', 'wings', 'tail', 'engines'], colors: ['#a3e635', '#c026d3', '#f0abfc', '#fde68a'], build: function (j) {
+      var l = j(0.8, 0.95), r = j(0.1, 0.13), ws = j(0.7, 0.9), wc = j(0.13, 0.18), wz = j(-0.02, 0.12), ex = j(0.28, 0.4);
+      return [[0, ellipsoid([0, 0, 0], [r, r, l])], [1, box([0, -0.02, wz], [ws, 0.014, wc])],
+        [2, box([0, 0.02, -l + 0.12], [j(0.24, 0.32), 0.012, 0.075])], [2, box([0, j(0.14, 0.18), -l + 0.12], [0.012, 0.15, 0.085])],
+        [3, tube([ex, -0.09, wz + 0.04], 0.055, 0.055, 0.1, 2, true)], [3, tube([-ex, -0.09, wz + 0.04], 0.055, 0.055, 0.1, 2, true)]];
+    } },
+    guitar: { label: 'Guitar', parts: ['body', 'neck', 'head'], colors: ['#22d3ee', '#ec4899', '#fbcfe8'], build: function (j) {
+      var r1 = j(0.28, 0.34), r2 = j(0.2, 0.25), nl = j(0.36, 0.44), th = j(0.05, 0.07);
+      return [[0, tube([0, -0.52, 0], r1, r1, th, 2, true)], [0, tube([0, -0.52 + r1 + r2 * 0.45, 0], r2, r2, th, 2, true)],
+        [1, box([0, -0.05 + nl, 0], [0.042, nl, 0.024])], [2, box([0, -0.05 + 2 * nl + 0.08, 0], [j(0.065, 0.085), 0.085, 0.024])]];
+    } },
+    lamp: { label: 'Lamp', parts: ['base', 'pole', 'shade'], colors: ['#fb923c', '#cbd5e1', '#fde047'], build: function (j) {
+      var rb = j(0.26, 0.34), ph = j(0.5, 0.6), rs = j(0.32, 0.42), sh = j(0.17, 0.24);
+      return [[0, tube([0, -0.8, 0], rb, rb, 0.03, 1, true)], [1, tube([0, -0.77 + ph, 0], 0.028, 0.028, ph, 1, false)],
+        [2, tube([0, -0.77 + 2 * ph + sh - 0.06, 0], rs, rs * j(0.4, 0.55), sh, 1, false)]];
+    } },
+    mug: { label: 'Mug', parts: ['body', 'handle'], colors: ['#fb7185', '#fbbf24'], build: function (j) {
+      var r = j(0.38, 0.46), h = j(0.42, 0.52), R = j(0.24, 0.3);
+      return [[0, tube([0, 0, 0], r, r, h, 1, false)], [0, tube([0, -h, 0], 0, r, 0.0001, 1, false)], [1, arc([r - 0.02, 0, 0], R, 0.05, -1.5708, 1.5708)]];
+    } }
+  };
+  var CATS = Object.keys(SHAPES);
+
+  function makeShape(cat, seed, n) {
+    var S = SHAPES[cat], r = rng(seed * 7919 + CATS.indexOf(cat) * 104729 + 13), j = function (a, b) { return a + (b - a) * r(); };
+    var prims = S.build(j), w = prims.map(function (p) { return Math.pow(p[1].area, 0.75); }), tot = w.reduce(function (a, b) { return a + b; }, 0);
+    var x = new Float32Array(3 * n), part = new Uint8Array(n), o = [0, 0, 0], k, i, m = [0, 0, 0], mx = 0;
+    for (i = 0; i < n; i++) {
+      var u = (i + r()) / n * tot; k = 0; while (k < prims.length - 1 && u > w[k]) { u -= w[k]; k++; }   /* stratified over primitives */
+      prims[k][1].sample(r, o); x[3 * i] = o[0]; x[3 * i + 1] = o[1]; x[3 * i + 2] = o[2]; part[i] = prims[k][0];
+      m[0] += o[0] / n; m[1] += o[1] / n; m[2] += o[2] / n;
+    }
+    for (i = 0; i < n; i++) { x[3 * i] -= m[0]; x[3 * i + 1] -= m[1]; x[3 * i + 2] -= m[2]; mx = Math.max(mx, Math.hypot(x[3 * i], x[3 * i + 1], x[3 * i + 2])); }
+    for (i = 0; i < 3 * n; i++) x[i] /= mx;   /* centred, inside the unit ball */
+    return { cat: cat, n: n, x: x, part: part, parts: S.parts, colors: S.colors };
+  }
+
+  /* ---------- the invariant layer ---------- */
+  function splat(f, base, nu, np, a, b, w) {   /* bilinear soft bin of (a, b) in [0, 1]^2 */
+    a = a < 0 ? 0 : a > 1 ? 1 : a; b = b < 0 ? 0 : b > 1 ? 1 : b;
+    var pa = a * (nu - 1), pb = b * (np - 1), ia = Math.min(nu - 2, Math.floor(pa)), ib = Math.min(np - 2, Math.floor(pb)), fa = pa - ia, fb = pb - ib, k = base + ia * np + ib;
+    f[k] += w * (1 - fa) * (1 - fb); f[k + 1] += w * (1 - fa) * fb; f[k + np] += w * fa * (1 - fb); f[k + np + 1] += w * fa * fb;
+  }
+  function describe(x, n, out) {
+    var f = out || new Float32Array(n * DIM), i, j, k, nrm = new Float32Array(n), G = GU * GP, Lb = LU * LP;
+    f.fill(0);
+    for (i = 0; i < n; i++) nrm[i] = x[3 * i] * x[3 * i] + x[3 * i + 1] * x[3 * i + 1] + x[3 * i + 2] * x[3 * i + 2];
+    for (j = 0; j < n; j++) {
+      var hj = Math.sqrt(nrm[j]), s = hj > 1e-9 ? 1 / hj : 0, dx = x[3 * j] * s, dy = x[3 * j + 1] * s, dz = x[3 * j + 2] * s, b = j * DIM, cnt = 0;
+      for (i = 0; i < n; i++) {
+        if (i === j) continue;
+        var u = x[3 * i] * dx + x[3 * i + 1] * dy + x[3 * i + 2] * dz, r2 = nrm[i] - u * u, rho = r2 > 0 ? Math.sqrt(r2) : 0;
+        splat(f, b, GU, GP, (u + 1) / 2, rho, 1);
+        var du = u - hj;
+        if (du * du + r2 < RL * RL) { splat(f, b + G, LU, LP, (du / RL + 1) / 2, rho / RL, 1); cnt++; }
+      }
+      for (k = 0; k < G; k++) f[b + k] /= (n - 1);
+      for (k = 0; k < Lb; k++) f[b + G + k] *= WL / Math.max(1, cnt);
+      var ph = Math.min(1, hj) * (HB - 1), ih = Math.min(HB - 2, Math.floor(ph));
+      f[b + G + Lb + ih] = WH * (1 - (ph - ih)); f[b + G + Lb + ih + 1] = WH * (ph - ih);
+      f[b + DIM - 1] = WL * cnt / (n - 1);
+    }
+    return f;
+  }
+
+  /* nearest reference (squared L2, early exit) for every query. With projections qp, rp of both sets on kp orthonormal
+     directions, the distance in that subspace is a lower bound that skips most references. */
+  function nearest(q, nq, ref, nr, dim, out, qp, rp, kp) {
+    var idx = out || new Int32Array(nq), i, j, k;
+    for (i = 0; i < nq; i++) {
+      var best = Infinity, bi = 0, qo = i * dim, po = i * kp;
+      for (j = 0; j < nr; j++) {
+        var d = 0, ro = j * dim, e;
+        if (qp) {
+          var lb = 0, so = j * kp;
+          for (k = 0; k < kp; k++) { e = qp[po + k] - rp[so + k]; lb += e * e; if (lb >= best) break; }
+          if (lb * 0.9999 >= best) continue;
+        }
+        for (k = 0; k < dim; k++) { e = q[qo + k] - ref[ro + k]; d += e * e; if (d >= best) break; }
+        if (d < best) { best = d; bi = j; }
+      }
+      idx[i] = bi;
+    }
+    return idx;
+  }
+  function project(model, f, n, out) {
+    var o = out || new Float32Array(n * KP), i, k, d;
+    for (i = 0; i < n; i++) for (k = 0; k < KP; k++) { var t = 0, v = model.pcs[k]; for (d = 0; d < DIM; d++) t += (f[i * DIM + d] - model.mean[d]) * v[d]; o[i * KP + k] = t; }
+    return o;
+  }
+  /* mean intersection-over-union over the parts (a part absent from both prediction and truth counts as 1) */
+  function miou(pred, gt, n, np) {
+    var I = new Float64Array(np), U = new Float64Array(np), i, k, s = 0;
+    for (i = 0; i < n; i++) { if (pred[i] === gt[i]) { I[gt[i]]++; U[gt[i]]++; } else { U[gt[i]]++; U[pred[i]]++; } }
+    for (k = 0; k < np; k++) s += U[k] ? I[k] / U[k] : 1;
+    return s / np;
+  }
+
+  /* ---------- rotations (row-major 3x3) ---------- */
+  function ident() { return [1, 0, 0, 0, 1, 0, 0, 0, 1]; }
+  function mul(a, b) { var o = new Array(9), i, j; for (i = 0; i < 3; i++) for (j = 0; j < 3; j++) o[3 * i + j] = a[3 * i] * b[j] + a[3 * i + 1] * b[3 + j] + a[3 * i + 2] * b[6 + j]; return o; }
+  function axisAngle(ax, ay, az, t) {
+    var l = Math.hypot(ax, ay, az) || 1, x = ax / l, y = ay / l, z = az / l, c = Math.cos(t), s = Math.sin(t), C = 1 - c;
+    return [c + x * x * C, x * y * C - z * s, x * z * C + y * s, y * x * C + z * s, c + y * y * C, y * z * C - x * s, z * x * C - y * s, z * y * C + x * s, c + z * z * C];
+  }
+  function fromQuat(q) {
+    var w = q[0], x = q[1], y = q[2], z = q[3];
+    return [1 - 2 * (y * y + z * z), 2 * (x * y - z * w), 2 * (x * z + y * w), 2 * (x * y + z * w), 1 - 2 * (x * x + z * z), 2 * (y * z - x * w), 2 * (x * z - y * w), 2 * (y * z + x * w), 1 - 2 * (x * x + y * y)];
+  }
+  function toQuat(m) {
+    var t = m[0] + m[4] + m[8], q, s;
+    if (t > 0) { s = Math.sqrt(t + 1) * 2; q = [s / 4, (m[7] - m[5]) / s, (m[2] - m[6]) / s, (m[3] - m[1]) / s]; }
+    else if (m[0] > m[4] && m[0] > m[8]) { s = Math.sqrt(1 + m[0] - m[4] - m[8]) * 2; q = [(m[7] - m[5]) / s, s / 4, (m[1] + m[3]) / s, (m[2] + m[6]) / s]; }
+    else if (m[4] > m[8]) { s = Math.sqrt(1 + m[4] - m[0] - m[8]) * 2; q = [(m[2] - m[6]) / s, (m[1] + m[3]) / s, s / 4, (m[5] + m[7]) / s]; }
+    else { s = Math.sqrt(1 + m[8] - m[0] - m[4]) * 2; q = [(m[3] - m[1]) / s, (m[2] + m[6]) / s, (m[5] + m[7]) / s, s / 4]; }
+    return q;
+  }
+  function slerp(a, b, t) {
+    var qa = toQuat(a), qb = toQuat(b), d = qa[0] * qb[0] + qa[1] * qb[1] + qa[2] * qb[2] + qa[3] * qb[3], k;
+    if (d < 0) { d = -d; for (k = 0; k < 4; k++) qb[k] = -qb[k]; }
+    var th = Math.acos(Math.min(1, d)), s = Math.sin(th), wa = s < 1e-6 ? 1 - t : Math.sin((1 - t) * th) / s, wb = s < 1e-6 ? t : Math.sin(t * th) / s, q = [0, 0, 0, 0], l = 0;
+    for (k = 0; k < 4; k++) { q[k] = wa * qa[k] + wb * qb[k]; l += q[k] * q[k]; }
+    l = Math.sqrt(l); for (k = 0; k < 4; k++) q[k] /= l;
+    return fromQuat(q);
+  }
+  function randomRotation(r) {   /* uniform over SO(3) */
+    var u = r(), v = r() * 6.283185307, w = r() * 6.283185307, a = Math.sqrt(1 - u), b = Math.sqrt(u);
+    return fromQuat([a * Math.sin(v), a * Math.cos(v), b * Math.sin(w), b * Math.cos(w)]);
+  }
+  function angle(m) { return Math.acos(Math.max(-1, Math.min(1, (m[0] + m[4] + m[8] - 1) / 2))) * 180 / Math.PI; }
+  function apply(m, x, n, out) {
+    var o = out || new Float32Array(3 * n), i;
+    for (i = 0; i < n; i++) {
+      var a = x[3 * i], b = x[3 * i + 1], c = x[3 * i + 2];
+      o[3 * i] = m[0] * a + m[1] * b + m[2] * c; o[3 * i + 1] = m[3] * a + m[4] * b + m[5] * c; o[3 * i + 2] = m[6] * a + m[7] * b + m[8] * c;
+    }
+    return o;
+  }
+
+  /* ---------- "training": features and labels of a few upright shapes ---------- */
+  var models = {};
+  function train(cat) {
+    if (models[cat]) return models[cat];
+    var m = TRAIN * NTRAIN, X = new Float32Array(3 * m), F = new Float32Array(DIM * m), P = new Uint8Array(m), k;
+    for (k = 0; k < TRAIN; k++) {
+      var s = makeShape(cat, k + 1, NTRAIN);
+      X.set(s.x, 3 * k * NTRAIN); P.set(s.part, k * NTRAIN); F.set(describe(s.x, NTRAIN), DIM * k * NTRAIN);
+    }
+      /* directions of largest variance of the features: the first three show features as colours, all of them speed up the search */
+    var mean = new Float32Array(DIM), i, d, pcs = [], lo = [], hi = [];
+    for (i = 0; i < m; i++) for (d = 0; d < DIM; d++) mean[d] += F[i * DIM + d] / m;
+    for (k = 0; k < KP; k++) {
+      var v = new Float32Array(DIM), r = rng(31 + k), it, c;
+      for (d = 0; d < DIM; d++) v[d] = r() - 0.5;
+      for (it = 0; it < 30; it++) {
+        var nv = new Float32Array(DIM);
+        for (i = 0; i < m; i++) { var p = 0; for (d = 0; d < DIM; d++) p += (F[i * DIM + d] - mean[d]) * v[d]; for (d = 0; d < DIM; d++) nv[d] += p * (F[i * DIM + d] - mean[d]); }
+        for (c = 0; c < pcs.length; c++) { var q = 0; for (d = 0; d < DIM; d++) q += nv[d] * pcs[c][d]; for (d = 0; d < DIM; d++) nv[d] -= q * pcs[c][d]; }
+        var l = 0; for (d = 0; d < DIM; d++) l += nv[d] * nv[d]; l = Math.sqrt(l) || 1; for (d = 0; d < DIM; d++) v[d] = nv[d] / l;
+      }
+      pcs.push(v);
+      var pr = []; for (i = 0; i < m; i++) { var t = 0; for (d = 0; d < DIM; d++) t += (F[i * DIM + d] - mean[d]) * v[d]; pr.push(t); }
+      pr.sort(function (a, b) { return a - b; }); lo.push(pr[Math.floor(m * 0.03)]); hi.push(pr[Math.floor(m * 0.97)]);
+    }
+    var M = { cat: cat, m: m, x: X, f: F, part: P, mean: mean, pcs: pcs, lo: lo, hi: hi };
+    M.proj = project(M, F, m);
+    return (models[cat] = M);
+  }
+  /* colour (three numbers in 0..1 per point) of features */
+  function featureColors(model, f, n, out) {
+    var o = out || new Float32Array(3 * n), i, k, d;
+    for (i = 0; i < n; i++) for (k = 0; k < 3; k++) {
+      var t = 0; for (d = 0; d < DIM; d++) t += (f[i * DIM + d] - model.mean[d]) * model.pcs[k][d];
+      t = (t - model.lo[k]) / (model.hi[k] - model.lo[k]); o[3 * i + k] = t < 0 ? 0 : t > 1 ? 1 : t;
+    }
+    return o;
+  }
+
+  /* segment a shape whose points have been rotated by R: both classifiers see only the rotated coordinates */
+  function segment(model, shape, R, buf) {
+    var n = shape.n, b = buf || {}, i, a = 0, c = 0, np = shape.parts.length;
+    b.x = apply(R, shape.x, n, b.x); b.f = describe(b.x, n, b.f); b.p = project(model, b.f, n, b.p);
+    b.iInv = nearest(b.f, n, model.f, model.m, DIM, b.iInv, b.p, model.proj, KP); b.iXyz = nearest(b.x, n, model.x, model.m, 3, b.iXyz);
+    if (!b.pInv) { b.pInv = new Uint8Array(n); b.pXyz = new Uint8Array(n); }
+    for (i = 0; i < n; i++) { b.pInv[i] = model.part[b.iInv[i]]; b.pXyz[i] = model.part[b.iXyz[i]]; if (b.pInv[i] === shape.part[i]) a++; if (b.pXyz[i] === shape.part[i]) c++; }
+    b.accInv = a / n; b.accXyz = c / n; b.iouInv = miou(b.pInv, shape.part, n, np); b.iouXyz = miou(b.pXyz, shape.part, n, np);
+    return b;
+  }
+  /* largest change of any feature value between two feature arrays */
+  function maxDiff(a, b) { var m = 0, i; for (i = 0; i < a.length; i++) { var d = Math.abs(a[i] - b[i]); if (d > m) m = d; } return m; }
+
+  /* match every point of A to its nearest point of B in feature space; kind: 'inv' or 'xyz' */
+  function match(model, A, xa, B, xb, kind, buf) {
+    var b = buf || {}, i, ok = 0;
+    if (kind === 'inv') {
+      b.fa = describe(xa, A.n, b.fa); b.fb = describe(xb, B.n, b.fb); b.pa = project(model, b.fa, A.n, b.pa); b.pb = project(model, b.fb, B.n, b.pb);
+      b.idx = nearest(b.fa, A.n, b.fb, B.n, DIM, b.idx, b.pa, b.pb, KP);
+    } else b.idx = nearest(xa, A.n, xb, B.n, 3, b.idx);
+    for (i = 0; i < A.n; i++) if (A.part[i] === B.part[b.idx[i]]) ok++;
+    b.acc = ok / A.n;
+    return b;
+  }
+  /* k points spread over the shape (farthest point sampling) */
+  function spread(x, n, k) {
+    var out = [0], d = new Float32Array(n).fill(Infinity), i, j;
+    for (j = 1; j < k; j++) {
+      var l = out[out.length - 1], best = -1, bi = 0;
+      for (i = 0; i < n; i++) { var e = Math.hypot(x[3 * i] - x[3 * l], x[3 * i + 1] - x[3 * l + 1], x[3 * i + 2] - x[3 * l + 2]); if (e < d[i]) d[i] = e; if (d[i] > best) { best = d[i]; bi = i; } }
+      out.push(bi);
+    }
+    return out;
+  }
+
+  return { DIM: DIM, CATS: CATS, SHAPES: SHAPES, TRAIN: TRAIN, NTRAIN: NTRAIN, rng: rng, makeShape: makeShape, describe: describe, nearest: nearest,
+    ident: ident, mul: mul, axisAngle: axisAngle, slerp: slerp, randomRotation: randomRotation, angle: angle, apply: apply,
+    train: train, project: project, miou: miou, featureColors: featureColors, segment: segment, maxDiff: maxDiff, match: match, spread: spread };
+})();
+</script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById('page-data').textContent), G = RICore;
+  var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id) { return document.getElementById(id); }
+  function watch(el, cb, margin) { if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { cb(es[0].isIntersecting); }, { rootMargin: margin || '0px' }).observe(el); else cb(true); }
+  function sizeCanvas(cv) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
+    if (w && h && (cv.width !== w || cv.height !== h)) { cv.width = w; cv.height = h; }
+    return dpr;
+  }
+  function pct(v) { return Math.round(v * 100) + '%'; }
+  function sci(v) { if (!v) return '0'; var e = v.toExponential(1).split('e'); return e[0] + ' × 10' + String(+e[1]).replace(/[-\d]/g, function (c) { return c === '-' ? '⁻' : '⁰¹²³⁴⁵⁶⁷⁸⁹'[+c]; }); }
+  function chips(el, items, cur, cb) {
+    function build(k) { el.innerHTML = items.map(function (t) { return '<button type="button" class="chip' + (t.k === k ? ' on' : '') + '" data-k="' + t.k + '">' + t.label + '</button>'; }).join(''); }
+    build(cur);
+    el.addEventListener('click', function (e) { var b = e.target.closest('[data-k]'); if (!b) return; build(b.dataset.k); cb(b.dataset.k); });
+    return build;
+  }
+
+  /* ---------- a fixed camera, slightly above and to the side; dragging turns the object, not the camera ---------- */
+  var CAM = G.mul(G.axisAngle(1, 0, 0, 0.3), G.axisAngle(0, 1, 0, -0.6)), CAMT = [CAM[0], CAM[3], CAM[6], CAM[1], CAM[4], CAM[7], CAM[2], CAM[5], CAM[8]];
+  function dragRot(R, dx, dy) { return G.mul(G.mul(CAMT, G.mul(G.mul(G.axisAngle(0, 1, 0, dx * 0.011), G.axisAngle(1, 0, 0, dy * 0.011)), CAM)), R); }
+  function renorm(R) { return G.slerp(R, R, 0); }
+  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  /* draw a cloud given in world coordinates; col(i) is a CSS colour, ring(i) marks a point */
+  function cloud(ctx, x, n, cx, cy, s, rad, col, ring, tmp) {
+    var v = G.apply(CAM, x, n, tmp.v), o = tmp.o || (tmp.o = new Int32Array(n)), i, k;
+    tmp.v = v;
+    for (i = 0; i < n; i++) o[i] = i;
+    o.sort(function (a, b) { return v[3 * a + 2] - v[3 * b + 2]; });
+    for (k = 0; k < n; k++) {
+      i = o[k];
+      var d = (v[3 * i + 2] + 1) / 2, px = cx + v[3 * i] * s, py = cy - v[3 * i + 1] * s, r = rad * (0.78 + 0.4 * d);
+      ctx.globalAlpha = 0.5 + 0.5 * d; ctx.fillStyle = col(i); ctx.beginPath(); ctx.arc(px, py, r, 0, 6.2832); ctx.fill();
+      if (ring && ring(i)) { ctx.globalAlpha = 0.9; ctx.strokeStyle = '#fff'; ctx.lineWidth = Math.max(1, rad * 0.42); ctx.beginPath(); ctx.arc(px, py, r + rad * 0.2, 0, 6.2832); ctx.stroke(); }
+    }
+    ctx.globalAlpha = 1;
+    return v;
+  }
+  function draggable(cv, get, set, start) {
+    var last = null;
+    cv.addEventListener('pointerdown', function (e) { last = [e.clientX, e.clientY]; cv.setPointerCapture(e.pointerId); if (start) start(); });
+    cv.addEventListener('pointermove', function (e) { if (!last) return; set(renorm(dragRot(get(), e.clientX - last[0], e.clientY - last[1]))); last = [e.clientX, e.clientY]; });
+    ['pointerup', 'pointercancel'].forEach(function (k) { cv.addEventListener(k, function () { last = null; }); });
+  }
+  var CATS = G.CATS.map(function (c) { return { k: c, label: G.SHAPES[c].label }; });
+
+  /* ================= toy 1: segment a rotating shape ================= */
+  var TOY = (function () {
+    var box = $('toy-box'), cvs = [$('toy-xyz'), $('toy-inv')], chart = $('toy-chart'), N = 420, HIST = 220;
+    var st = { cat: 'chair', view: 'parts', R: G.ident(), spin: !REDUCED, ready: false, visible: false, hist: [], anim: null, t: 0, frames: 0 };
+    var shape, model, buf, f0, res, tmp = [{}, {}], dirty = true, last = 0, raf = 0, fc = null;
+    function load(cat) {
+      st.cat = cat; model = G.train(cat); shape = G.makeShape(cat, 101, N); buf = {}; tmp = [{}, {}];
+      f0 = new Float32Array(G.segment(model, shape, G.ident(), {}).f); st.hist = []; compute();
+    }
+    function compute() {
+      res = G.segment(model, shape, st.R, buf); st.diff = G.maxDiff(res.f, f0);
+      st.hist.push([res.iouXyz, res.iouInv]); if (st.hist.length > HIST) st.hist.shift();
+      fc = st.view === 'feat' ? G.featureColors(model, res.f, N, fc) : fc; dirty = true;
+    }
+    function setR(R) { st.R = R; if (st.ready) compute(); }
+    function animateTo(R) { st.anim = { from: st.R, to: R, t: 0, dur: 0.9 }; if (REDUCED) { st.anim = null; setR(R); } kick(); }
+    function drawChart() {
+      var dpr = sizeCanvas(chart), c = chart.getContext('2d'), w = chart.width, h = chart.height, pl = 44 * dpr, pr = 14 * dpr, pt = 26 * dpr, pb = 12 * dpr, k, i;
+      c.clearRect(0, 0, w, h);
+      c.font = '600 ' + 11.5 * dpr + 'px Inter, sans-serif'; c.textBaseline = 'middle';
+      [0, 0.5, 1].forEach(function (v) { var y = pt + (h - pt - pb) * (1 - v); c.strokeStyle = 'rgba(255,255,255,.09)'; c.lineWidth = dpr; c.beginPath(); c.moveTo(pl, y); c.lineTo(w - pr, y); c.stroke(); c.fillStyle = '#8a8aa3'; c.textAlign = 'right'; c.fillText(Math.round(v * 100) + '%', pl - 8 * dpr, y); });
+      [['#94a3b8', 0], ['#a5b4fc', 1]].forEach(function (s) {
+        c.strokeStyle = s[0]; c.lineWidth = (s[1] ? 2.6 : 2) * dpr; c.lineJoin = 'round'; c.beginPath();
+        for (i = 0; i < st.hist.length; i++) { var x = pl + (w - pl - pr) * (i + HIST - st.hist.length) / (HIST - 1), y = pt + (h - pt - pb) * (1 - st.hist[i][s[1]]); if (i) c.lineTo(x, y); else c.moveTo(x, y); }
+        c.stroke();
+      });
+      c.textAlign = 'left'; k = pl;
+      [['#94a3b8', 'reads coordinates'], ['#a5b4fc', 'invariant features']].forEach(function (s) { c.fillStyle = s[0]; c.fillRect(k, 9 * dpr, 14 * dpr, 3 * dpr); c.fillText(s[1], k + 20 * dpr, 11 * dpr); k += c.measureText(s[1]).width + 44 * dpr; });
+      if (w > 560 * dpr) { c.fillStyle = '#8a8aa3'; c.textAlign = 'right'; c.fillText('mIoU over the last rotations', w - pr, 11 * dpr); }
+    }
+    function draw() {
+      var cols = shape.colors;
+      cvs.forEach(function (cv, k) {
+        var dpr = sizeCanvas(cv), c = cv.getContext('2d'), w = cv.width, h = cv.height, pred = k ? res.pInv : res.pXyz, x = res.x;
+        c.clearRect(0, 0, w, h);
+        var col = st.view === 'truth' ? function (i) { return cols[shape.part[i]]; }
+          : st.view === 'parts' ? function (i) { return cols[pred[i]]; }
+          : k ? function (i) { return 'rgb(' + Math.round(50 + 205 * fc[3 * i]) + ',' + Math.round(50 + 205 * fc[3 * i + 1]) + ',' + Math.round(50 + 205 * fc[3 * i + 2]) + ')'; }
+          : function (i) { return 'rgb(' + Math.round(152 + 100 * x[3 * i]) + ',' + Math.round(152 + 100 * x[3 * i + 1]) + ',' + Math.round(152 + 100 * x[3 * i + 2]) + ')'; };
+        cloud(c, x, N, w / 2, h / 2 + h * 0.02, Math.min(w, h) * 0.4, Math.max(2.2 * dpr, w * 0.0085), col, st.view === 'parts' ? function (i) { return pred[i] !== shape.part[i]; } : null, tmp[k]);
+      });
+      $('toy-xyz-v').textContent = 'mIoU ' + pct(res.iouXyz); $('toy-inv-v').textContent = 'mIoU ' + pct(res.iouInv);
+      $('toy-angle').textContent = Math.round(G.angle(st.R)) + '°'; $('toy-r-xyz').textContent = pct(res.iouXyz); $('toy-r-inv').textContent = pct(res.iouInv);
+      $('toy-diff').textContent = sci(st.diff);
+      drawChart(); st.frames++;
+    }
+    function frame(now) {
+      raf = 0;
+      if (!st.visible || !st.ready) { last = 0; return; }
+      var dt = last ? Math.max(0, Math.min(0.05, (now - last) / 1000)) : 0.016; last = now;
+      if (st.anim) { var a = st.anim; a.t += dt / a.dur; st.R = G.slerp(a.from, a.to, a.t >= 1 ? 1 : ease(a.t)); if (a.t >= 1) st.anim = null; compute(); }
+      else if (st.spin) { st.t += dt; st.R = renorm(G.mul(G.axisAngle(Math.sin(st.t * 0.31), 1, 0.6 * Math.cos(st.t * 0.23), dt * 0.5), st.R)); compute(); }
+      if (dirty) { draw(); dirty = false; }
+      if (st.spin || st.anim) kick(); else last = 0;
+    }
+    function kick() { if (!raf && st.visible && st.ready) raf = requestAnimationFrame(frame); }
+    function spin(on) { st.spin = on; $('toy-spin').setAttribute('aria-pressed', String(on)); kick(); }
+    var HINT = { parts: 'White rings mark points with the wrong part. The classifier on the left has learned a partition of space, so it is right only when the object stands the way the examples did.',
+      feat: 'Each point is coloured by its feature. Coordinates (left) are a colour gradient fixed in space that the object moves through; the invariant features (right) stay attached to the object.',
+      truth: 'The true parts of this shape, which both classifiers try to predict.' };
+    chips($('toy-cat'), CATS, st.cat, function (k) { load(k); draw(); dirty = false; kick(); });
+    chips($('toy-view'), [{ k: 'parts', label: 'Predicted parts' }, { k: 'feat', label: 'Features' }, { k: 'truth', label: 'True parts' }], st.view, function (k) { st.view = k; $('toy-hint').textContent = HINT[k]; compute(); draw(); dirty = false; });
+    $('toy-rand').addEventListener('click', function () { spin(false); animateTo(G.randomRotation(Math.random)); });
+    $('toy-up').addEventListener('click', function () { spin(false); animateTo(G.ident()); });
+    $('toy-spin').addEventListener('click', function () { spin(!st.spin); });
+    cvs.forEach(function (cv) { draggable(cv, function () { return st.R; }, function (R) { st.anim = null; setR(R); draw(); dirty = false; }, function () { spin(false); }); });
+    watch(box, function (v) {
+      st.visible = v;
+      if (v && !st.ready) { load(st.cat); st.ready = true; draw(); dirty = false; }
+      if (v) kick();
+    }, '300px');
+    addEventListener('resize', function () { if (st.ready) { draw(); } });
+    return {
+      state: function () { return { ready: st.ready, cat: st.cat, view: st.view, spin: st.spin, angle: st.ready ? Math.round(G.angle(st.R)) : null, iouXyz: res ? +res.iouXyz.toFixed(3) : null, iouInv: res ? +res.iouInv.toFixed(3) : null, diff: st.diff, frames: st.frames, hist: st.hist.length }; },
+      rotate: function (ax, ay, az, deg) { if (!st.ready) { load(st.cat); st.ready = true; } spin(false); st.anim = null; setR(G.axisAngle(ax, ay, az, deg * Math.PI / 180)); draw(); dirty = false; }
+    };
+  })();
+
+  /* ================= toy 2: match points between two shapes ================= */
+  var MATCH = (function () {
+    var box = $('match-box'), cv = $('match-canvas'), N = 360, PICK = 16;
+    var st = { cat: 'chair', kind: 'inv', R: G.axisAngle(1, 0.5, 0.3, 2.2), ready: false, visible: false, anim: null }, A, B, model, buf, xb, m, picks, tmp = [{}, {}], raf = 0, last = 0;
+    function load(cat) { st.cat = cat; model = G.train(cat); A = G.makeShape(cat, 101, N); B = G.makeShape(cat, 202, N); picks = G.spread(A.x, N, PICK); buf = {}; tmp = [{}, {}]; compute(); }
+    function compute() { xb = G.apply(st.R, B.x, N, xb); m = G.match(model, A, A.x, B, xb, st.kind, buf); st.acc = m.acc; }
+    function draw() {
+      var dpr = sizeCanvas(cv), c = cv.getContext('2d'), w = cv.width, h = cv.height, s = Math.min(w * 0.21, h * 0.4), rad = Math.max(2 * dpr, w * 0.0042), cy = h * 0.53, ax = w * 0.25, bx = w * 0.75, k;
+      c.clearRect(0, 0, w, h);
+      var va = cloud(c, A.x, N, ax, cy, s, rad, function (i) { return A.colors[A.part[i]]; }, null, tmp[0]), vb = cloud(c, xb, N, bx, cy, s, rad, function (i) { return B.colors[B.part[i]]; }, null, tmp[1]), ok = 0;
+      c.lineWidth = 1.6 * dpr; c.lineCap = 'round';
+      for (k = 0; k < picks.length; k++) {
+        var i = picks[k], j = m.idx[i], good = A.part[i] === B.part[j], x0 = ax + va[3 * i] * s, y0 = cy - va[3 * i + 1] * s, x1 = bx + vb[3 * j] * s, y1 = cy - vb[3 * j + 1] * s;
+        if (good) ok++;
+        c.strokeStyle = good ? 'rgba(74,222,128,.85)' : 'rgba(248,113,113,.9)'; c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1, y1); c.stroke();
+        c.fillStyle = '#fff'; c.beginPath(); c.arc(x0, y0, rad * 1.15, 0, 6.2832); c.fill(); c.beginPath(); c.arc(x1, y1, rad * 1.15, 0, 6.2832); c.fill();
+      }
+      st.lines = ok;
+      $('match-v').textContent = 'same part: ' + pct(st.acc);
+      $('match-read').textContent = (st.kind === 'inv' ? 'With rotation-invariant features, ' : 'With raw coordinates as features, ') + pct(st.acc) + ' of the ' + N + ' query points find a point of the same part (' + ok + ' of the ' + PICK + ' lines drawn). The other object is turned by ' + Math.round(G.angle(st.R)) + '° from upright.';
+    }
+    function frame(now) {
+      raf = 0; if (!st.anim || !st.visible) return;
+      var a = st.anim, dt = last ? Math.max(0, Math.min(0.05, (now - last) / 1000)) : 0.016; last = now; a.t += dt / a.dur;
+      st.R = G.slerp(a.from, a.to, a.t >= 1 ? 1 : ease(a.t)); if (a.t >= 1) st.anim = null;
+      compute(); draw(); if (st.anim) raf = requestAnimationFrame(frame);
+    }
+    function animateTo(R) { if (REDUCED) { st.R = R; compute(); draw(); return; } st.anim = { from: st.R, to: R, t: 0, dur: 0.9 }; last = 0; if (!raf) raf = requestAnimationFrame(frame); }
+    chips($('match-kind'), [{ k: 'inv', label: 'Rotation-invariant' }, { k: 'xyz', label: 'Raw coordinates' }], st.kind, function (k) { st.kind = k; compute(); draw(); });
+    chips($('match-cat'), CATS, st.cat, function (k) { load(k); draw(); });
+    $('match-rand').addEventListener('click', function () { animateTo(G.randomRotation(Math.random)); });
+    $('match-up').addEventListener('click', function () { animateTo(G.ident()); });
+    draggable(cv, function () { return st.R; }, function (R) { st.anim = null; st.R = R; compute(); draw(); });
+    watch(box, function (v) { st.visible = v; if (v && !st.ready) { load(st.cat); st.ready = true; draw(); } }, '300px');
+    addEventListener('resize', function () { if (st.ready) draw(); });
+    return {
+      state: function () { return { ready: st.ready, cat: st.cat, kind: st.kind, angle: st.ready ? Math.round(G.angle(st.R)) : null, acc: st.ready ? +st.acc.toFixed(3) : null, lines: st.lines }; },
+      rotate: function (ax, ay, az, deg) { if (!st.ready) { load(st.cat); st.ready = true; } st.anim = null; st.R = G.axisAngle(ax, ay, az, deg * Math.PI / 180); compute(); draw(); }
+    };
+  })();
+
+  /* ================= bar explorers ================= */
+  function explorer(root, cfg) {
+    var els = {}; ['tabs', 'chips', 'select', 'rows', 'foot'].forEach(function (k) { els[k] = root.querySelector('[data-role=' + k + ']'); });
+    var sel = { tabs: null, chips: null, select: '' };
+    function build(k) {
+      if (!els[k] || !cfg[k]) return;
+      if (sel[k] === null) sel[k] = (cfg[k].filter(function (t) { return t.def; })[0] || cfg[k][0]).k;
+      els[k].innerHTML = cfg[k].map(function (t) {
+        var on = t.k === sel[k] && (k === 'tabs' || sel.select === '');
+        return k === 'tabs' ? '<button type="button" role="tab" class="tab' + (on ? ' on' : '') + '" aria-selected="' + on + '" data-k="' + t.k + '">' + t.label + '</button>'
+          : '<button type="button" class="chip' + (on ? ' on' : '') + '" data-k="' + t.k + '">' + t.label + '</button>';
+      }).join('');
+    }
+    function render() {
+      var rows = cfg.rows(sel).filter(function (r) { return r.v !== null && r.v !== undefined; }), lower = cfg.lower ? cfg.lower(sel) : false;
+      if (cfg.sort !== false) rows = rows.slice().sort(function (a, b) { return lower ? a.v - b.v : b.v - a.v; });
+      var vals = rows.map(function (r) { return r.v; }), top = Math.max.apply(null, vals.concat(rows.map(function (r) { return r.m || 0; })));
+      var bar = els.rows.querySelector('.rx-bar'), bw = bar ? bar.clientWidth : Math.max(120, els.rows.clientWidth - 214);
+      var best = lower ? Math.min.apply(null, vals) : Math.max.apply(null, vals), full = cfg.max ? cfg.max(sel) : top;
+      /* leave room for the value after the longest bar */
+      var mx = Math.max(full, top * bw / Math.max(40, bw - 78)) || 1;
+      els.rows.innerHTML = rows.map(function (r) {
+        var w = r.v / mx * 100, tk = r.m !== null && r.m !== undefined ? r.m / mx * 100 : -1, lab = tk > w && tk - w < 7800 / bw ? tk : w;
+        return '<div class="rx-row g-' + (r.g || 'plain') + '"><div class="rx-name">' + r.name + '</div><div class="rx-bar"><span style="width:' + w + '%"></span>' + (r.m !== null && r.m !== undefined ? '<i style="left:' + (r.m / mx * 100) + '%"></i>' : '') +
+          '<b style="left:calc(' + lab + '% + 8px)">' + r.v.toFixed(cfg.digits === undefined ? 2 : cfg.digits) + (r.v === best ? ' ★' : '') + '</b></div></div>';
+      }).join('');
+      els.foot.textContent = cfg.foot(sel);
+    }
+    ['tabs', 'chips'].forEach(function (k) {
+      build(k);
+      if (els[k]) els[k].addEventListener('click', function (e) { var b = e.target.closest('[data-k]'); if (!b) return; sel[k] = b.dataset.k; if (k === 'chips' && els.select) { sel.select = ''; els.select.value = ''; els.select.classList.remove('on'); } build(k); render(); });
+    });
+    if (els.select && cfg.select) {
+      els.select.innerHTML = cfg.select.map(function (o) { return '<option value="' + o.k + '">' + o.label + '</option>'; }).join('');
+      els.select.addEventListener('change', function () { sel.select = els.select.value; els.select.classList.toggle('on', sel.select !== ''); build('chips'); render(); });
+    }
+    render();
+    addEventListener('resize', render);
+    return { state: function () { return { tab: sel.tabs, chip: sel.chips, select: sel.select, n: els.rows.children.length, first: els.rows.querySelector('.rx-name').textContent, values: [].map.call(els.rows.querySelectorAll('.rx-bar b'), function (b) { return b.textContent; }).join(' | ') }; } };
+  }
+  var OTHER = { 0: 18, 1: 19, 18: 0, 19: 1 }, SEGL = { 0: 'Instance mIoU (%) on randomly rotated test shapes', 1: 'Class mIoU (%) on randomly rotated test shapes', 18: 'Instance mIoU (%) on upright test shapes', 19: 'Class mIoU (%) on upright test shapes' };
+  var rxSeg = explorer($('rx-seg'), {
+    tabs: [{ k: 'j', label: 'TPAMI 2022 comparison', def: true }, { k: 'a', label: 'AAAI 2020 comparison' }],
+    chips: [{ k: '0', label: 'Rotated · instance mIoU', def: true }, { k: '1', label: 'Rotated · class mIoU' }, { k: '18', label: 'Upright · instance mIoU' }, { k: '19', label: 'Upright · class mIoU' }],
+    select: [{ k: '', label: 'One category, rotated…' }].concat(D.cats.map(function (c, i) { return { k: String(i + 2), label: c }; })),
+    rows: function (s) { var i = s.select !== '' ? +s.select : +s.chips, o = s.select !== '' ? undefined : OTHER[i]; return D.seg[s.tabs].map(function (r) { return { name: r.name, g: r.g, v: r.v[i], m: o === undefined ? null : r.v[o] }; }); },
+    max: function () { return 100; },
+    foot: function (s) { return (s.select !== '' ? 'IoU (%) of the category “' + D.cats[+s.select - 2] + '” on randomly rotated test shapes' : SEGL[s.chips]) + '. ShapeNet Part, all models trained on upright shapes without rotation augmentation. ★ best.' + (s.tabs === 'j' ? ' SRINet reports only the instance average.' : ' The PRIN of this comparison is the first version.'); }
+  });
+  var CLSN = { modelnet: 'ModelNet40', scanobjectnn: 'ScanObjectNN (real scans)', aaai: 'ModelNet40, as compared in the AAAI 2020 paper' };
+  var rxCls = explorer($('rx-cls'), {
+    tabs: [{ k: 'modelnet', label: 'ModelNet40', def: true }, { k: 'scanobjectnn', label: 'ScanObjectNN' }, { k: 'aaai', label: 'ModelNet40, AAAI 2020' }],
+    chips: [{ k: '1', label: 'Rotated test shapes', def: true }, { k: '0', label: 'Upright test shapes' }],
+    rows: function (s) { return D.cls[s.tabs].map(function (r) { return { name: r.name, g: r.g, v: r.v[+s.chips], m: r.v[1 - s.chips] }; }); },
+    max: function () { return 100; },
+    foot: function (s) { return 'Accuracy (%) on ' + CLSN[s.tabs] + ', ' + (s.chips === '1' ? 'randomly rotated' : 'upright') + ' test shapes, averaged over instances; trained on upright shapes. Colours as above; the tick is the same method on ' + (s.chips === '1' ? 'upright' : 'rotated') + ' shapes. ★ best.'; }
+  });
+  var rxMatch = explorer($('rx-match'), {
+    tabs: [{ k: 'j', label: 'TPAMI 2022', def: true }, { k: 'a', label: 'AAAI 2020' }],
+    rows: function (s) { return D.match[s.tabs].map(function (r) { return { name: r.name, g: r.g, v: r.v[0] }; }); }, max: function () { return 100; },
+    foot: function () { return 'Matched points that belong to the same part (%), rotated queries against an upright database. ★ best.'; }
+  });
+  var AM = [{ k: '1', label: 'mIoU', def: true }, { k: '0', label: 'Accuracy' }];
+  function am(s) { return (s.chips === '1' ? 'Mean IoU' : 'Share of correctly labelled points') + ' (%), rotated ShapeNet Part.'; }
+  var rxAbl = explorer($('rx-abl'), {
+    tabs: [{ k: 'abl', label: 'PRIN', def: true }, { k: 'abl_a', label: 'PRIN, AAAI 2020' }], chips: AM, sort: false,
+    rows: function (s) { return D[s.tabs].map(function (r) { return { name: r.name, g: r.g, v: r.v[+s.chips] }; }); }, max: function () { return 100; },
+    foot: function (s) { return am(s) + (s.tabs === 'abl_a' ? ' First version: bandwidth on the sphere, number of radial shells, and sampling.' : ' Uniform sampling: without the density-aware factor.') + ' ★ best.'; }
+  });
+  var rxFeat = explorer($('rx-feat'), {
+    chips: AM, sort: false, rows: function (s) { return D.feat.map(function (r) { return { name: r.name, g: r.g, v: r.v[+s.chips] }; }); }, max: function () { return 100; },
+    foot: function (s) { return am(s) + ' Inputs of SPRIN\'s filter. ★ best.'; }
+  });
+  var rxRob = explorer($('rx-rob'), {
+    tabs: [{ k: 'sprin', label: 'SPRIN', def: true }, { k: 'prin', label: 'PRIN' }], chips: AM, sort: false,
+    rows: function (s) { return D.rob.points.map(function (p, i) { return { name: p.toLocaleString('en-US') + ' points', g: i ? 'ri' : 'ours', v: D.rob[s.tabs][i][+s.chips] }; }); }, max: function () { return 100; },
+    foot: function (s) { return am(s) + ' Test clouds sub-sampled; the networks are trained with 2,048 points.'; }
+  });
+
+  window.__prin = { toy: TOY.state, rotate: TOY.rotate, match: MATCH.state, matchRotate: MATCH.rotate, rx: { seg: rxSeg.state, cls: rxCls.state, match: rxMatch.state, abl: rxAbl.state, feat: rxFeat.state, rob: rxRob.state } };
+
+  /* ================= teaser, BibTeX, lightbox ================= */
+  var v = $('teaser'), s = $('sound');
+  s.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    s.setAttribute('aria-pressed', String(!v.muted));
+    s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute';
+  });
+  v.addEventListener('volumechange', function () { s.querySelector('span').textContent = v.muted ? 'Play with sound' : 'Mute'; });
+  var copy = $('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText($('bibtext').innerText).then(function () {
+      copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    });
+  });
+  var lb = $('lightbox');
+  document.querySelectorAll('[data-zoom] img').forEach(function (img) {
+    img.addEventListener('click', function () { lb.querySelector('img').src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
