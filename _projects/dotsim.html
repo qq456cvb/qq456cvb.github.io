@@ -44,6 +44,13 @@ permalink: /projects/dotsim
         "video": { "@id": "https://qq456cvb.github.io/projects/dotsim#video" }
       },
       {
+        "@type": "SoftwareSourceCode",
+        "name": "DOT-Sim",
+        "codeRepository": "https://github.com/qq456cvb/DOT-Sim",
+        "programmingLanguage": "Python",
+        "license": "https://opensource.org/licenses/MIT"
+      },
+      {
         "@type": "VideoObject",
         "@id": "https://qq456cvb.github.io/projects/dotsim#video",
         "name": "DOT-Sim teaser",
@@ -215,6 +222,16 @@ permalink: /projects/dotsim
 
     .bib { white-space: pre-wrap; overflow-wrap: anywhere; position: relative; background: #120f18; color: #ece6f4; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
     @media (prefers-color-scheme: dark) { .bib { border: 1px solid var(--line); } }
+    .dl { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: start; }
+    .dl ul { padding-left: 20px; margin: 0 0 14px; color: var(--muted); }
+    .dl li { margin: 6px 0; }
+    .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .btns .btn { background: var(--ink); color: var(--bg); border: 0; }
+    .btns .btn:hover { background: var(--accent); color: #fff; }
+    .codes { display: grid; gap: 12px; min-width: 0; }
+    pre.code { background: #120f18; color: #ece6f4; border-radius: var(--radius); padding: 20px 22px; overflow-x: auto; font: 500 13.5px/1.7 "JetBrains Mono", ui-monospace, monospace; margin: 0; }
+    pre.code .c { color: #9a90a8; }
+    @media (prefers-color-scheme: dark) { pre.code { border: 1px solid var(--line); } }
     details.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
     details.abstract summary { cursor: pointer; font-weight: 700; color: var(--ink); }
     details.abstract p { margin-top: 14px; }
@@ -237,7 +254,7 @@ permalink: /projects/dotsim
 
     @media (max-width: 960px) {
       .stats { grid-template-columns: repeat(2, 1fr); }
-      .related, .grid2, .grid-side, .gd, .cmp { grid-template-columns: 1fr; }
+      .related, .grid2, .grid-side, .gd, .cmp, .dl { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 560px) {
@@ -278,6 +295,7 @@ permalink: /projects/dotsim
     <div class="links">
       <a class="btn primary" href="https://arxiv.org/pdf/2604.27367"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
       <a class="btn" href="https://arxiv.org/abs/2604.27367"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h14"/></svg>arXiv</a>
+      <a class="btn" href="https://github.com/qq456cvb/DOT-Sim"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
       <a class="btn" href="#toy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18a9 9 0 0 1 18 0z"/><circle cx="12" cy="5.5" r="2.5"/></svg>Try the toy</a>
       <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9H6v6h4M14 9h4v6h-4"/></svg>BibTeX</a>
     </div>
@@ -290,7 +308,7 @@ permalink: /projects/dotsim
 
 <nav class="toc" aria-label="Sections">
   <div class="wrap">
-    <a href="#overview">Overview</a><a href="#method">Method</a><a href="#toy">Poke the gel</a><a href="#optical">Tactile images</a><a href="#physics">Deformation</a><a href="#sim2real">Sim-to-real</a><a href="#limits">Speed &amp; limits</a><a href="#bibtex">BibTeX</a>
+    <a href="#overview">Overview</a><a href="#method">Method</a><a href="#toy">Poke the gel</a><a href="#optical">Tactile images</a><a href="#physics">Deformation</a><a href="#sim2real">Sim-to-real</a><a href="#limits">Speed &amp; limits</a><a href="#code">Code</a><a href="#bibtex">BibTeX</a>
   </div>
 </nav>
 
@@ -488,6 +506,37 @@ permalink: /projects/dotsim
         <p>All experiments use one sensor, a DenseTact 2.0, chosen because its large deformations and patterned surface are hard to simulate.</p>
       </div>
       <div class="tbl num"><table><caption>Speed against image accuracy (Medium setting) for different MPM settings: voxel size, contact softness and substeps per frame. The highlighted row is used for all other results. Particles within 1/softness of the indenter count as in contact.</caption><thead><tr><th>Voxel (mm)</th><th>Softness</th><th>Substeps</th><th>FPS</th><th>PSNR (dB)</th></tr></thead><tbody><tr class=ours><td>1.2</td><td>15</td><td>100</td><td>3.6</td><td>31.39</td></tr><tr><td>1.2</td><td>15</td><td>20</td><td>17.1</td><td>30.17</td></tr><tr><td>2.4</td><td>30</td><td>100</td><td>3.8</td><td>30.98</td></tr><tr><td>2.4</td><td>30</td><td>20</td><td>17.2</td><td>29.79</td></tr></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap dl">
+    <div>
+      <div class="kicker">Code</div>
+      <h2>Run it yourself</h2>
+      <ul>
+        <li><b>Physical calibration</b>: fits the gel's Young's modulus and Poisson's ratio to a recording by differentiating through the MPM simulation, written in NVIDIA Warp.</li>
+        <li><b>Optical simulation</b>: replays recorded indentations, renders depth and normals, and trains and evaluates the residual image network.</li>
+        <li><b>Data</b>: the DenseTact recordings and trained models are not released; the README describes the data format, for use with your own sensor.</li>
+        <li><b>Licence</b>: MIT.</li>
+      </ul>
+      <div class="btns">
+        <a class="btn" href="https://github.com/qq456cvb/DOT-Sim">GitHub</a>
+        <a class="btn" href="https://arxiv.org/abs/2604.27367">arXiv</a>
+      </div>
+      <p class="note">The MPM solver is adapted from <a href="https://github.com/a1600012888/PhysDreamer">PhysDreamer</a> and <a href="https://github.com/zeshunzong/warp-mpm">warp-mpm</a>.</p>
+    </div>
+    <div class="codes">
+<pre class="code">git clone https://github.com/qq456cvb/DOT-Sim &amp;&amp; cd DOT-Sim
+pip install torch==2.5.1 torchvision==0.20.1 \
+  --index-url https://download.pytorch.org/whl/cu118
+pip install -r requirements.txt &amp;&amp; pip install -e .</pre>
+<pre class="code"><span class="c"># fit E and ν to one recorded sequence</span>
+python scripts/calibrate.py --data_root data --traj 3 --seq 1
+
+<span class="c"># smoke tests on a small synthetic gel (GPU or CPU)</span>
+pytest</pre>
     </div>
   </div>
 </section>
