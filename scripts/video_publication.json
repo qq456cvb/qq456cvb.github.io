@@ -1,0 +1,89 @@
+{
+  "basis": "Earliest successful GitHub Pages deployment step for the commit that first adds each self-hosted teaser. These are publication records for these specific site videos, not paper dates, file creation times, later page updates, or a claim about an earlier release elsewhere.",
+  "videos": [
+    {
+      "page": "_projects/3dcorrenhance.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/3dcorrenhance/static/media/teaser.mp4",
+      "commit": "0d6dfff6a1da528325e2b71e5ec7f83ad3ba260a",
+      "uploadDate": "2026-10-06T12:24:58Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/37462858937/job/112267028110"
+    },
+    {
+      "page": "_projects/canonical-voting.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/canonical-voting/static/media/teaser.mp4",
+      "commit": "cddf542bb94dc81bf8b62e1b9f18a151a75cd2c3",
+      "uploadDate": "2026-10-07T15:05:15Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/37641890774/job/112863179755"
+    },
+    {
+      "page": "_projects/cppf++.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/cppf++/static/videos/teaser.mp4",
+      "commit": "e128d0e70aadf604febaf05fe419449c75d55bc2",
+      "uploadDate": "2026-10-06T02:03:33Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/37402098944/job/112071694600"
+    },
+    {
+      "page": "_projects/cppf.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/cppf/static/media/teaser.mp4",
+      "commit": "10df3dd3ba71458285376470cafd02078a885840",
+      "uploadDate": "2026-10-06T11:50:53Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/37458925446/job/112253798943"
+    },
+    {
+      "page": "_projects/donut.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/donut/static/media/teaser.mp4",
+      "commit": "f75095668807524c91c26ed93c5118841197555a",
+      "uploadDate": "2026-10-07T08:54:19Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/37596715219/job/112711475751"
+    },
+    {
+      "page": "_projects/dotsim.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/dotsim/static/media/teaser.mp4",
+      "commit": "e702d3a4fc59ddfebab2f8e62c5426f51ccbebef",
+      "uploadDate": "2026-10-11T03:39:15Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/38109022176/job/114380641460"
+    },
+    {
+      "page": "_projects/img2cad.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/img2cad/static/media/teaser.mp4",
+      "commit": "c77f6b9d3dbcfb2e8e1ea81d57b9f4a5a8d634a8",
+      "uploadDate": "2026-10-07T03:42:53Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/37567886511/job/112620001278"
+    },
+    {
+      "page": "_projects/keypointnet.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/keypointnet/static/media/teaser.mp4",
+      "commit": "374d096c15810f0fda4be368900bd1589f2b1ad8",
+      "uploadDate": "2026-10-06T10:48:41Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/37452029968/job/112231090978"
+    },
+    {
+      "page": "_projects/pace.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/pace/static/media/teaser.mp4",
+      "commit": "0e5aab0329a8227f0a62a516c30511af9042e69d",
+      "uploadDate": "2026-10-06T05:49:39Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/37420321091/job/112128382265"
+    },
+    {
+      "page": "_projects/prin.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/prin/static/media/teaser.mp4",
+      "commit": "5e32d8446a1be8c082fb4ea5bfb4cc9782104e29",
+      "uploadDate": "2026-10-12T06:42:02Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/38213703472/job/114693619919"
+    },
+    {
+      "page": "_projects/ukpgan.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/ukpgan/static/media/teaser.mp4",
+      "commit": "723adb94e8d9bea07b575f14380ff3124caafdee",
+      "uploadDate": "2026-10-07T10:09:50Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/37605411392/job/112739968246"
+    },
+    {
+      "page": "_projects/unipose9d.html",
+      "contentUrl": "https://qq456cvb.github.io/projects/unipose9d/static/media/teaser.mp4",
+      "commit": "c152b8b7afb99f88eb259b32639c79a11e70b96c",
+      "uploadDate": "2026-10-11T02:13:56Z",
+      "deployment": "https://github.com/qq456cvb/qq456cvb.github.io/actions/runs/38104419779/job/114366891076"
+    }
+  ]
+}
