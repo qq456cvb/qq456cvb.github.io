@@ -114,7 +114,6 @@ li {
 
 .masthead__menu-item--lg a {
   font-weight: 700;
-  font-stretch: 112%;
   letter-spacing: -0.005em;
 }
 
@@ -140,7 +139,6 @@ li {
   margin-bottom: 1.2rem;
   font-size: 2rem;
   font-weight: 700;
-  font-stretch: 108%;
   line-height: 1.1;
   letter-spacing: -0.012em;
 }
@@ -210,7 +208,6 @@ h2.h1-style,
 .author__name {
   font-family: $sans-serif;
   font-weight: 700;
-  font-stretch: 108%;
 }
 
 .author__bio {
@@ -238,96 +235,25 @@ h2.h1-style,
 }
 
 /* --------------------------------------------------------------------------
-   Home: name, introduction and the pose figure, then research, news, visitors
+   Home: introduction beside the pose figure, then research and news (sidebar on the left)
    -------------------------------------------------------------------------- */
-
-#main.home .page {
-  float: none;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-#main.home .page__content {
-  max-width: 66rem;
-}
 
 .pose-hero {
   display: grid;
-  gap: 1.5rem 3.5rem;
-  align-items: center;
-  padding: 0.5rem 0 3rem;
+  gap: 1.5rem 2.5rem;
+  align-items: start;
+  padding: 0 0 2rem;
 
   @include breakpoint($medium-wide) {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
-}
-
-.pose-hero__id {
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-  margin-bottom: 1.5rem;
-}
-
-.pose-hero .pose-hero__photo {
-  flex: none;
-  width: 5.2rem;
-  height: 5.2rem;
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-.pose-hero__name {
-  margin: 0;
-  font-size: clamp(2.5rem, 6vw, 4.2rem);
-  font-weight: 800;
-  font-stretch: 118%;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-}
-
-.pose-hero__cjk {
-  display: block;
-  margin-top: 0.4rem;
-  color: $lead;
-  font-size: 0.4em;
-  font-weight: 500;
-  font-stretch: 100%;
-  letter-spacing: 0.1em;
 }
 
 .page__content .pose-hero__intro {
   max-width: 34em;
-  margin: 0 0 1.4rem;
+  margin: 0;
   font-size: 1.111rem;
   line-height: 1.6;
-}
-
-.page__content .pose-hero__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 1.3rem;
-  margin: 0;
-  padding: 0;
-  font-family: $sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  list-style: none;
-
-  li {
-    margin: 0;
-  }
-
-  a {
-    padding-bottom: 0.1em;
-    border-bottom: 1px solid rgba($axis-z, 0.35);
-    text-decoration: none;
-
-    &:hover {
-      border-bottom-color: currentColor;
-    }
-  }
 }
 
 .pose-figure {
@@ -382,7 +308,6 @@ h2.h1-style,
   padding: 0;
   border: 0;
   font-size: 1rem;
-  font-stretch: 108%;
   line-height: 1.62;
 }
 
@@ -437,11 +362,17 @@ h2.h1-style,
   }
 }
 
-/* Visitor globe (_includes/visitor-globe.html): collapsed until the widget has drawn. Not display: none, which would
-   stop the widget from measuring itself. */
+/* Visitor globe (_includes/visitor-globe.html): in the home page sidebar, collapsed until the widget has drawn.
+   Not display: none, which would stop the widget from measuring itself. */
 .visitor-globe {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid $grid-line;
+  text-align: center;
+
   &:not(.is-ready) {
     height: 0;
+    margin: 0;
     padding: 0;
     border: 0;
     overflow: hidden;
@@ -449,10 +380,28 @@ h2.h1-style,
   }
 }
 
+.visitor-globe__label {
+  margin: 0 0 0.55rem;
+  color: $lead;
+  font-family: $sans-serif;
+  font-size: $type-size-6;
+  font-weight: 600;
+}
+
 .visitor-globe__slot {
-  width: 150px;
+  width: 140px;
   max-width: 100%;
+  margin: 0 auto;
   line-height: 0;
+}
+
+/* below the page content when the sidebar is collapsed */
+.visitor-globe--inline {
+  margin-top: 2.5rem;
+
+  .visitor-globe__slot {
+    width: 170px;
+  }
 }
 
 /* --------------------------------------------------------------------------

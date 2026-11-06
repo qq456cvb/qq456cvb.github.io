@@ -1,25 +1,10 @@
 {% comment %}
-  Home and About page header: name, introduction, profile links, and the pose figure (assets/js/pose-hero.js).
+  Home and About page opening: the introduction beside the pose figure (assets/js/pose-hero.js).
+  Photo, name and profile links are in the sidebar.
 {% endcomment %}
 {% include base_path %}
-{% assign a = site.author %}
-<section class="pose-hero" aria-labelledby="home-name">
-  <div class="pose-hero__text">
-    <div class="pose-hero__id">
-      <img class="pose-hero__photo" src="{{ a.avatar | prepend: '/images/' | prepend: base_path }}" alt="Portrait of Yang You" width="104" height="104">
-      <h1 class="pose-hero__name" id="home-name">Yang You <span class="pose-hero__cjk" lang="zh-Hans">尤洋</span></h1>
-    </div>
-    <p class="pose-hero__intro">I am a postdoctoral researcher in the <a href="https://geometry.stanford.edu/">Geometric Computation group</a> led by Prof. <a href="https://profiles.stanford.edu/leonidas-guibas">Leonidas Guibas</a> at Stanford. My research focuses on 3D graphics, 3D computer vision, and robotics, with an emphasis on robust perception and representation for real-world spatial understanding.</p>
-    <ul class="pose-hero__links">
-      <li><a href="mailto:{{ a.email }}">Email</a></li>
-      {% if a.googlescholar %}<li><a href="{{ a.googlescholar }}">Google Scholar</a></li>{% endif %}
-      {% if a.github %}<li><a href="https://github.com/{{ a.github }}">GitHub</a></li>{% endif %}
-      {% if a.orcid %}<li><a href="{{ a.orcid }}">ORCID</a></li>{% endif %}
-      {% if a.linkedin %}<li><a href="https://www.linkedin.com/in/{{ a.linkedin }}">LinkedIn</a></li>{% endif %}
-      {% if a.researchgate %}<li><a href="{{ a.researchgate }}">ResearchGate</a></li>{% endif %}
-      <li><a href="{{ base_path }}/cv/">CV</a></li>
-    </ul>
-  </div>
+<section class="pose-hero">
+  <p class="pose-hero__intro">I am a postdoctoral researcher in the <a href="https://geometry.stanford.edu/">Geometric Computation group</a> led by Prof. <a href="https://profiles.stanford.edu/leonidas-guibas">Leonidas Guibas</a> at Stanford. My research focuses on 3D graphics, 3D computer vision, and robotics, with an emphasis on robust perception and representation for real-world spatial understanding.</p>
   <figure class="pose-figure" id="pose-figure" data-src="{{ base_path }}/assets/data/kpnet-mug.json">
     <canvas tabindex="0" aria-label="A mug from KeypointNet drawn as a point cloud, with its keypoints, oriented bounding box and x, y and z axes. Drag or use the arrow keys to turn it."></canvas>
     <figcaption>A mug from <a href="{{ base_path }}/projects/keypointnet">KeypointNet</a> with its annotated keypoints and its <a href="{{ base_path }}/projects/unipose9d">9D pose</a>: the box gives position and size, the axes give rotation. Drag to turn it.</figcaption>
