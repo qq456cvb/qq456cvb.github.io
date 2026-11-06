@@ -33,4 +33,5 @@ Links: [paper page]({{ pv_url }}){% if post.arxiv %} · [arXiv]({{ post.arxiv }}
 - [Publications]({{ site.url }}/publications/): full list with BibTeX
 - [News]({{ site.url }}/news/): paper acceptances and releases
 - [CV]({{ site.url }}/cv/)
+- [Services]({{ site.url }}/services/): workshop organization, committees, invited talks, reviewing, awards
 - [Side projects]({{ site.url }}/sideprojects/)
