@@ -1,0 +1,156 @@
+/* Shared identity for the project pages (_projects/*.html), matching the main site's "pose frame" design: vellum and
+   graphite, Archivo for interface text and Newsreader for the serif subtitle, sentence-case labels, flat surfaces.
+   It is linked after each page's own <style>, so its rules win at equal specificity. Each paper keeps its own accent
+   color (--accent and the hero tints). If a page is regenerated from its template, keep the link to this file, the
+   "Yang You" home link in the hero, and the Archivo/Newsreader font names. */
+
+:root {
+  --hero: #14181d;
+  --hero-2: #14181d;
+  --radius: 10px;
+  --shadow: none;
+}
+
+/* The pages define light tokens plus a dark-mode set; override each in its own scheme so dark mode keeps working. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f2f4f3;
+    --surface: #ffffff;
+    --ink: #1d232a;
+    --muted: #4d5763;
+    --faint: #6f7a85;
+    --line: #d3d9dd;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101418;
+    --surface: #171c22;
+    --ink: #e8ecef;
+    --muted: #aab3bc;
+    --faint: #86919b;
+    --line: #29313a;
+    --hero: #0b0e12;
+    --hero-2: #0b0e12;
+    --shadow: none;
+  }
+}
+
+/* Hero: flat graphite instead of a glow, a way back to the homepage, the venue as plain text */
+.hero {
+  background: var(--hero);
+  color: #eef1f3;
+}
+
+.site-home {
+  display: inline-block;
+  margin-bottom: 26px;
+  color: rgba(238, 241, 243, 0.78);
+  font-size: 15px;
+  font-weight: 700;
+  font-stretch: 112%;
+}
+
+.site-home:hover {
+  color: #fff;
+}
+
+.badge {
+  display: block;
+  width: fit-content;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  color: rgba(238, 241, 243, 0.72);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.hero h1 {
+  letter-spacing: -0.03em;
+  text-shadow: none;
+}
+
+/* one word of the title in a gradient (DOT-Sim, PRIN/SPRIN) becomes plain title text */
+.hero h1 span {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+}
+
+.subtitle {
+  color: #dfe4e8;
+}
+
+.btn {
+  border-radius: 8px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn:hover {
+  transform: none;
+}
+
+.sound {
+  border-radius: 8px;
+}
+
+.video-frame {
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+nav.toc a {
+  border-radius: 6px;
+}
+
+/* Section and control labels: sentence case, no rule in front of the section label */
+.kicker,
+.related .venue,
+.ctl h4,
+.vd-side h3,
+.side h3,
+.kx-side h3,
+.steps li i {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.kicker {
+  font-size: 15px;
+}
+
+.kicker::before {
+  content: none;
+}
+
+.ctl h4,
+.vd-side h3,
+.side h3,
+.kx-side h3 {
+  font-size: 13.5px;
+}
+
+/* Numbers and readouts in the interface face with tabular figures; monospace stays for code and BibTeX */
+.steps li::before,
+.rx-bar b,
+.ctl h4 output,
+.vd-tag,
+.vd-range output,
+.tile .cap,
+.sw,
+dl.read dd {
+  font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

@@ -21,7 +21,7 @@ permalink: /projects/prin
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='.55' stop-color='%23818cf8'/%3E%3Cstop offset='1' stop-color='%23e879f9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2305060f'/%3E%3Cg fill='none' stroke='url(%23g)' stroke-width='3.5'%3E%3Ccircle cx='32' cy='32' r='20'/%3E%3Cellipse cx='32' cy='32' rx='20' ry='7.5'/%3E%3Cellipse cx='32' cy='32' rx='7.5' ry='20'/%3E%3C/g%3E%3Ccircle cx='44' cy='21' r='4.5' fill='%23f1f5f9'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -86,7 +86,7 @@ permalink: /projects/prin
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
     html { scroll-behavior: smooth; scroll-padding-top: 72px; }
-    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Archivo, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: var(--accent-ink); text-decoration: none; }
     a:hover { text-decoration: underline; }
     img, video { max-width: 100%; height: auto; display: block; }
@@ -97,7 +97,7 @@ permalink: /projects/prin
     .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #c7d2fe; border: 1px solid rgba(129, 140, 248, .55); background: rgba(129, 140, 248, .12); padding: 6px 14px; border-radius: 999px; }
     .hero h1 { margin: 18px 0 8px; font-size: clamp(46px, 8.6vw, 104px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
     .hero h1 span { background: linear-gradient(90deg, #38bdf8, #818cf8 50%, #e879f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e0e2f4; margin: 0 0 22px; max-width: 900px; }
+    .subtitle { font-family: "Newsreader", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e0e2f4; margin: 0 0 22px; max-width: 900px; }
     .authors { font-size: 18px; font-weight: 500; color: #cdd0e8; display: flex; flex-wrap: wrap; gap: 4px 18px; }
     .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
     .authors a:hover { text-decoration: none; border-color: #818cf8; }
@@ -111,7 +111,7 @@ permalink: /projects/prin
     .btn svg { width: 18px; height: 18px; flex: none; }
     .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
     .video-frame video { width: 100%; height: 100%; }
-    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(5, 6, 15, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(5, 6, 15, .6); color: #fff; font: 600 14px Archivo, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
     .sound:hover { background: rgba(5, 6, 15, .8); }
 
     nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
@@ -156,16 +156,16 @@ permalink: /projects/prin
     .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
     .steps li i.tag { display: block; font-style: normal; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 4px; }
 
-    .formula { font-family: "Source Serif 4", Georgia, serif; font-size: 21px; line-height: 1.5; text-align: center; color: var(--ink); background: var(--accent-soft); border-radius: 12px; padding: 14px 16px; margin: 14px 0; overflow-x: auto; white-space: nowrap; }
+    .formula { font-family: "Newsreader", Georgia, serif; font-size: 21px; line-height: 1.5; text-align: center; color: var(--ink); background: var(--accent-soft); border-radius: 12px; padding: 14px 16px; margin: 14px 0; overflow-x: auto; white-space: nowrap; }
     .formula sub, .formula sup { font-size: .68em; }
-    p i.m, li i.m, figcaption i.m { font-family: "Source Serif 4", Georgia, serif; font-size: 1.06em; }
+    p i.m, li i.m, figcaption i.m { font-family: "Newsreader", Georgia, serif; font-size: 1.06em; }
 
     .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
-    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Archivo, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
     .tab.on { background: var(--ink); color: var(--bg); }
     .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Archivo, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
     .chip.on, .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
     select.chip { padding-right: 8px; max-width: 100%; }
     .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
@@ -174,7 +174,7 @@ permalink: /projects/prin
     .ctl + .ctl { margin-top: 12px; }
     .ctl .chips + h4, .ctl .row + h4 { margin-top: 18px; }
     .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    .go { border: 0; border-radius: 999px; padding: 9px 16px; font: 700 14px Inter, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
+    .go { border: 0; border-radius: 999px; padding: 9px 16px; font: 700 14px Archivo, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
     .go:hover { background: var(--accent); color: #fff; }
     .go.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
     .go.ghost:hover { background: var(--accent-soft); color: var(--accent-ink); }
@@ -206,7 +206,7 @@ permalink: /projects/prin
     .stage.sq { aspect-ratio: 1; }
     .stage.drag canvas { cursor: grab; touch-action: none; }
     .stage.drag canvas:active { cursor: grabbing; }
-    .stage .cap { position: absolute; left: 12px; top: 10px; font: 600 12.5px Inter, sans-serif; color: #d5d7ee; background: rgba(5, 6, 15, .6); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+    .stage .cap { position: absolute; left: 12px; top: 10px; font: 600 12.5px Archivo, sans-serif; color: #d5d7ee; background: rgba(5, 6, 15, .6); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
     .stage .cap.r { left: auto; right: 12px; top: auto; bottom: 10px; font-family: "JetBrains Mono", monospace; }
     .stage .cap.tr { left: auto; right: 12px; }
     .stage .cap.good { color: #c7d2fe; border: 1px solid rgba(129, 140, 248, .6); }
@@ -250,7 +250,7 @@ permalink: /projects/prin
     .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
     .related h3 { margin-top: 4px; }
 
-    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Archivo, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
     .copy:hover { background: rgba(255, 255, 255, .14); }
 
     footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
@@ -285,11 +285,13 @@ permalink: /projects/prin
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b, .rx-bar i { transition: none; } }
   </style>
+  <link rel="stylesheet" href="/assets/css/project-theme.css">
 </head>
 <body>
 
 <header class="hero">
   <div class="wrap">
+    <a class="site-home" href="/">Yang You</a>
     <span class="badge">TPAMI 2022 · AAAI 2020</span>
     <h1>PRIN<span>/SPRIN</span></h1>
     <p class="subtitle">On Extracting Point-wise Rotation Invariant Features</p>
@@ -975,7 +977,7 @@ var RICore = (function () {
     function drawChart() {
       var dpr = sizeCanvas(chart), c = chart.getContext('2d'), w = chart.width, h = chart.height, pl = 44 * dpr, pr = 14 * dpr, pt = 26 * dpr, pb = 12 * dpr, k, i;
       c.clearRect(0, 0, w, h);
-      c.font = '600 ' + 11.5 * dpr + 'px Inter, sans-serif'; c.textBaseline = 'middle';
+      c.font = '600 ' + 11.5 * dpr + 'px Archivo, sans-serif'; c.textBaseline = 'middle';
       [0, 0.5, 1].forEach(function (v) { var y = pt + (h - pt - pb) * (1 - v); c.strokeStyle = 'rgba(255,255,255,.09)'; c.lineWidth = dpr; c.beginPath(); c.moveTo(pl, y); c.lineTo(w - pr, y); c.stroke(); c.fillStyle = '#8a8aa3'; c.textAlign = 'right'; c.fillText(Math.round(v * 100) + '%', pl - 8 * dpr, y); });
       [['#94a3b8', 0], ['#a5b4fc', 1]].forEach(function (s) {
         c.strokeStyle = s[0]; c.lineWidth = (s[1] ? 2.6 : 2) * dpr; c.lineJoin = 'round'; c.beginPath();

@@ -1,252 +1,447 @@
 /* ==========================================================================
-   Modern academic polish
+   "Pose frame": the site's visual identity
+   A vellum page, graphite ink, and the red/green/blue x-y-z axis colors of 3D vision. The axis colors appear in full
+   only in the home page's pose figure; axis blue is the link color. Archivo sets the name, headings and interface
+   text; Newsreader sets reading text. Sections are separated by space and single rules, not cards or shadows.
    ========================================================================== */
 
 :root {
-  --academic-ink: #172033;
-  --academic-muted: #5d6b7b;
-  --academic-accent: #2f6f9f;
-  --academic-accent-2: #7a4cc2;
-  --academic-surface: rgba(255, 255, 255, 0.86);
+  --vellum: #{$vellum};
+  --graphite: #{$graphite};
+  --lead: #{$lead};
+  --grid: #{$grid-line};
+  --axis-x: #{$axis-x};
+  --axis-y: #{$axis-y};
+  --axis-z: #{$axis-z};
+  --measure: 68ch;
 }
 
 html {
+  background: $vellum;
   scroll-behavior: smooth;
-  background: #f6f8fb;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, rgba(47, 111, 159, 0.12), transparent 32rem),
-    linear-gradient(180deg, #f8fafc 0%, #ffffff 34rem);
-  color: var(--academic-ink);
+  background: $vellum;
+  color: $graphite;
+  font-family: $serif;
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+::selection {
+  background: rgba($axis-z, 0.18);
+}
+
+/* The theme fades every page in on load, which leaves the page blank wherever the animation does not run. */
+.masthead,
+.breadcrumbs,
+#main,
+#project,
+.page__footer {
+  animation: none;
+}
+
 a {
-  color: var(--academic-accent);
+  color: $axis-z;
+  text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
-  transition: color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 
   &:hover {
-    color: mix(#000, $info-color, 35%);
+    color: $graphite;
   }
 }
+
+a:focus-visible,
+button:focus-visible,
+canvas:focus-visible {
+  outline: 2px solid $axis-z;
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $graphite;
+  font-family: $sans-serif;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+/* --------------------------------------------------------------------------
+   Masthead
+   -------------------------------------------------------------------------- */
 
 .masthead {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.88);
-  border-bottom: 1px solid rgba(84, 94, 102, 0.14);
-  box-shadow: 0 12px 32px rgba(23, 32, 51, 0.06);
-  backdrop-filter: saturate(180%) blur(16px);
+  z-index: 20;
+  background: rgba($vellum, 0.96);
+  border-bottom: 1px solid $grid-line;
+  box-shadow: none;
 }
 
 .greedy-nav {
   background: transparent;
+  font-family: $sans-serif;
 
   a {
-    margin-right: 0.6rem;
-    margin-left: 0.6rem;
-    padding-right: 0.4rem;
-    padding-left: 0.4rem;
-    color: var(--academic-ink);
-    border-radius: 999px;
+    margin-right: 0.55rem;
+    margin-left: 0.55rem;
+    color: $graphite;
+    font-weight: 500;
 
     &:hover {
-      color: var(--academic-accent);
-      background: rgba(47, 111, 159, 0.09);
+      color: $axis-z;
     }
   }
 }
 
 .masthead__menu-item--lg a {
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: -0.005em;
 }
 
+/* --------------------------------------------------------------------------
+   Page frame and reading text
+   -------------------------------------------------------------------------- */
+
 #main {
-  margin-top: 2.5em;
+  margin-top: 2.5rem;
 }
 
 .page,
 .archive {
-  background: var(--academic-surface);
-  border: 1px solid rgba(84, 94, 102, 0.12);
-  border-radius: 24px;
-  box-shadow: 0 22px 70px rgba(23, 32, 51, 0.08);
-  padding: 1.4rem;
-
-  @include breakpoint($medium) {
-    padding: 2rem;
-  }
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .page__title,
 .archive h1 {
-  letter-spacing: -0.04em;
+  margin-bottom: 1.2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  font-stretch: 108%;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
 }
 
 .page__content {
-  line-height: 1.72;
+  line-height: 1.62;
 
-  h2 {
-    margin-top: 2.2em;
-    padding-bottom: 0.35em;
-    border-bottom: 1px solid rgba(47, 111, 159, 0.22);
-    letter-spacing: -0.025em;
+  > p,
+  > ul,
+  > ol {
+    max-width: var(--measure);
   }
 
-  h2::after {
-    display: block;
-    width: 3rem;
-    height: 3px;
-    margin-top: 0.55rem;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--academic-accent), var(--academic-accent-2));
-    content: "";
+  h2 {
+    margin-top: 2.4em;
+    padding: 0.7em 0 0;
+    border-top: 1px solid $grid-line;
+    border-bottom: 0;
+    font-size: 1.333rem;
+    letter-spacing: -0.005em;
+  }
+
+  h3 {
+    font-size: 1.111rem;
   }
 
   img {
-    border-radius: 14px;
+    border-radius: 4px;
   }
 }
 
-.academic-hero {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  border: 1px solid rgba(47, 111, 159, 0.14);
-  border-radius: 24px;
-  background:
-    linear-gradient(135deg, rgba(47, 111, 159, 0.11), rgba(122, 76, 194, 0.08)),
-    #ffffff;
+.archive > p {
+  max-width: var(--measure);
 }
 
-.academic-kicker {
-  margin-bottom: 0.45rem;
-  color: var(--academic-accent);
-  font-size: $type-size-6;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+/* Section headings that are <h2> so each page keeps a single <h1> (CV, services, project pages, ...). */
+h2.h1-style,
+.page__content h2.h1-style {
+  margin: 2.4em 0 0.8em;
+  padding: 0.7em 0 0;
+  border-top: 1px solid $grid-line;
+  border-bottom: 0;
+  font-size: 1.333rem;
+  letter-spacing: -0.005em;
 }
 
-.academic-hero p {
-  max-width: 48rem;
-  color: var(--academic-muted);
-  font-size: 1.05rem;
-}
-
-.academic-highlights {
-  display: grid;
-  gap: 1rem;
-  margin: 1.6rem 0 2rem;
-
-  @include breakpoint($medium) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.academic-card {
-  padding: 1rem;
-  border: 1px solid rgba(84, 94, 102, 0.14);
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
-}
-
-.academic-card strong {
-  display: block;
-  margin-bottom: 0.35rem;
-  color: var(--academic-ink);
-}
+/* --------------------------------------------------------------------------
+   Sidebar (inner pages)
+   -------------------------------------------------------------------------- */
 
 .sidebar {
   @include breakpoint($large) {
-    padding: 1rem;
-    border: 1px solid rgba(84, 94, 102, 0.12);
-    border-radius: 22px;
-    background: rgba(255, 255, 255, 0.82);
-    box-shadow: 0 18px 48px rgba(23, 32, 51, 0.07);
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
   }
 }
 
 .author__avatar img {
-  border: 4px solid #fff;
-  box-shadow: 0 14px 34px rgba(23, 32, 51, 0.18);
+  max-width: 128px;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.author__name {
+  font-family: $sans-serif;
+  font-weight: 700;
+  font-stretch: 108%;
 }
 
 .author__bio {
-  color: var(--academic-muted);
+  color: $lead;
+  font-family: $serif;
+  line-height: 1.45;
 }
 
-.author__urls a {
-  border-radius: 10px;
+.author__urls {
+  font-family: $sans-serif;
 
-  &:hover {
-    background: rgba(47, 111, 159, 0.08);
-    text-decoration: none;
+  a {
+    color: $graphite;
+
+    &:hover {
+      color: $axis-z;
+      background: none;
+      text-decoration: none;
+    }
+  }
+
+  i {
+    color: $lead;
   }
 }
 
-.page__content table {
-  border-collapse: separate;
-  border-spacing: 0 1rem;
+/* --------------------------------------------------------------------------
+   Home: name, introduction and the pose figure, then research, news, visitors
+   -------------------------------------------------------------------------- */
+
+#main.home .page {
+  float: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.page__content table tr {
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
+#main.home .page__content {
+  max-width: 66rem;
 }
 
-.page__content table td {
-  border-top: 1px solid rgba(84, 94, 102, 0.11) !important;
-  border-bottom: 1px solid rgba(84, 94, 102, 0.11) !important;
+.pose-hero {
+  display: grid;
+  gap: 1.5rem 3.5rem;
+  align-items: center;
+  padding: 0.5rem 0 3rem;
+
+  @include breakpoint($medium-wide) {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
 }
 
-.page__content table td:first-child {
-  border-left: 1px solid rgba(84, 94, 102, 0.11) !important;
-  border-radius: 18px 0 0 18px;
+.pose-hero__id {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-bottom: 1.5rem;
 }
 
-.page__content table td:last-child {
-  border-right: 1px solid rgba(84, 94, 102, 0.11) !important;
-  border-radius: 0 18px 18px 0;
+.pose-hero .pose-hero__photo {
+  flex: none;
+  width: 5.2rem;
+  height: 5.2rem;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
-/* Headings demoted from <h1> to <h2> so each page has a single <h1> (Bing and
-   other SEO checkers flag multiple), kept at the size and spacing of the <h1>. */
-h2.h1-style {
-  margin-top: 0;
-  font-size: $type-size-3;
+.pose-hero__name {
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 800;
+  font-stretch: 118%;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
 }
 
-.archive h2.h1-style {
-  letter-spacing: -0.04em;
+.pose-hero__cjk {
+  display: block;
+  margin-top: 0.4rem;
+  color: $lead;
+  font-size: 0.4em;
+  font-weight: 500;
+  font-stretch: 100%;
+  letter-spacing: 0.1em;
 }
 
-.page__content h2.h1-style {
-  margin-top: 0;
-  padding-bottom: 0;
-  border-bottom: 0;
-  letter-spacing: normal;
+.page__content .pose-hero__intro {
+  max-width: 34em;
+  margin: 0 0 1.4rem;
+  font-size: 1.111rem;
+  line-height: 1.6;
+}
 
-  &::after {
+.page__content .pose-hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.3rem;
+  margin: 0;
+  padding: 0;
+  font-family: $sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  list-style: none;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    padding-bottom: 0.1em;
+    border-bottom: 1px solid rgba($axis-z, 0.35);
+    text-decoration: none;
+
+    &:hover {
+      border-bottom-color: currentColor;
+    }
+  }
+}
+
+.pose-figure {
+  margin: 0;
+
+  canvas {
+    display: block;
+    width: 100%;
+    max-width: 32rem;
+    aspect-ratio: 6 / 5;
+    margin: 0 auto;
+    cursor: grab;
+    /* vertical swipes still scroll the page on touch screens; sideways drags turn the mug */
+    touch-action: pan-y;
+  }
+
+  &.is-dragging canvas {
+    cursor: grabbing;
+  }
+
+  &:not(.is-ready) canvas {
+    visibility: hidden;
+  }
+
+  &.is-failed {
     display: none;
   }
+
+  figcaption {
+    max-width: 32rem;
+    margin: 0.3rem auto 0;
+    color: $lead;
+    font-family: $sans-serif;
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
 }
 
-/* Visitor globe (_includes/visitor-globe.html): collapsed until the widget has drawn. */
-.visitor-globe {
-  margin-top: 0.9rem;
-  padding-top: 0.9rem;
-  border-top: 1px solid rgba(84, 94, 102, 0.12);
-  text-align: center;
+.home-section {
+  display: grid;
+  gap: 0.3rem 2.5rem;
+  padding: 1.6rem 0;
+  border-top: 1px solid $grid-line;
 
+  @include breakpoint($medium) {
+    grid-template-columns: 9rem minmax(0, 1fr);
+  }
+}
+
+.page__content .home-section__title {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1rem;
+  font-stretch: 108%;
+  line-height: 1.62;
+}
+
+.home-section__body {
+  max-width: var(--measure);
+
+  > p:first-child {
+    margin-top: 0;
+  }
+
+  > p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.page__content .home-section__lead {
+  font-size: 1.111rem;
+}
+
+.home-section__more {
+  font-family: $sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.page__content .news-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page__content .news-item {
+  display: grid;
+  grid-template-columns: 4.4rem minmax(0, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 0.45rem 0;
+  line-height: 1.5;
+
+  time {
+    padding-top: 0.12em;
+    color: $lead;
+    font-family: $sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &.is-accepted time {
+    color: $graphite;
+    font-weight: 700;
+  }
+}
+
+/* Visitor globe (_includes/visitor-globe.html): collapsed until the widget has drawn. Not display: none, which would
+   stop the widget from measuring itself. */
+.visitor-globe {
   &:not(.is-ready) {
     height: 0;
-    margin: 0;
     padding: 0;
     border: 0;
     overflow: hidden;
@@ -254,29 +449,152 @@ h2.h1-style {
   }
 }
 
-.visitor-globe__label {
-  margin: 0 0 0.55rem;
-  color: var(--academic-muted);
-  font-size: $type-size-7;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .visitor-globe__slot {
-  width: 140px;
+  width: 150px;
   max-width: 100%;
-  margin: 0 auto;
   line-height: 0;
 }
 
-/* below the page content when the sidebar is collapsed */
-.visitor-globe--inline {
-  margin-top: 2.5rem;
+/* --------------------------------------------------------------------------
+   Publication list (_includes/archive-publications.html)
+   -------------------------------------------------------------------------- */
 
-  .visitor-globe__slot {
-    width: 170px;
+.pub-list {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pub {
+  display: grid;
+  gap: 1rem 1.6rem;
+  margin: 0;
+  padding: 1.6rem 0;
+  border-top: 1px solid $grid-line;
+
+  @include breakpoint($medium) {
+    grid-template-columns: 12rem minmax(0, 1fr);
   }
+}
+
+.pub__thumb {
+  display: block;
+  align-self: start;
+  width: 100%;
+  max-width: 20rem;
+  aspect-ratio: 16 / 10;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid $grid-line;
+  border-radius: 4px;
+  cursor: zoom-in;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.pub__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.111rem;
+  line-height: 1.3;
+
+  a {
+    color: $graphite;
+    text-decoration: none;
+
+    &:hover {
+      color: $axis-z;
+      text-decoration: underline;
+    }
+  }
+}
+
+.pub__authors {
+  margin: 0 0 0.3rem;
+  color: $lead;
+  font-size: 0.9rem;
+  line-height: 1.45;
+
+  b {
+    color: $graphite;
+    font-weight: 600;
+  }
+}
+
+.pub__venue {
+  margin: 0 0 0.5rem;
+  font-family: $sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pub__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0 0 0.7rem;
+  font-family: $sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pub__abstract {
+  max-width: var(--measure);
+  color: $lead;
+  font-size: 0.9rem;
+  line-height: 1.55;
+
+  p {
+    margin: 0;
+  }
+}
+
+/* Single publication pages (_includes/publication-details.html): the details sit in the page header */
+.page__inner-wrap > header {
+  > p,
+  > h2 + p {
+    max-width: var(--measure);
+  }
+}
+
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-family: $sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.page__footer {
+  margin-top: 4rem;
+  color: $lead;
+  background: none;
+  border-top: 1px solid $grid-line;
+  font-family: $sans-serif;
+
+  a {
+    color: $lead;
+
+    &:hover {
+      color: $graphite;
+    }
+  }
+}
+
+.page__footer-follow li {
+  font-family: $sans-serif;
+  font-size: 0.8rem;
+  text-transform: none;
 }
 
 .sidebar.sticky.sidebar--static {

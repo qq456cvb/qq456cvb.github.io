@@ -1,0 +1,36 @@
+{%- comment -%}
+  News as a dated list, read from _pages/news_content.md, which stays the place to add news: one paragraph per item,
+  starting with "YYYY.MM:". A leading 🎉 (an acceptance) and bold wrapping are turned into the is-accepted style.
+  Items that start with an HTML comment are skipped.
+  Usage: {% include news-list.html limit=8 %}   (no limit: all items)
+{%- endcomment -%}
+{%- capture news_raw -%}{% include_relative news_content.md %}{%- endcapture -%}
+{%- comment -%} one item per line; newline_to_br copes with both LF and CRLF files {%- endcomment -%}
+{%- assign news_items = news_raw | newline_to_br | split: "<br />" -%}
+{%- assign news_limit = include.limit | default: 1000 -%}
+{%- assign news_shown = 0 -%}
+<ol class="news-list">
+{%- for raw in news_items -%}
+  {%- assign item = raw | strip -%}
+  {%- if item == "" -%}{%- continue -%}{%- endif -%}
+  {%- assign head4 = item | slice: 0, 4 -%}
+  {%- if head4 == "<!--" -%}{%- continue -%}{%- endif -%}
+  {%- if news_shown >= news_limit -%}{%- break -%}{%- endif -%}
+  {%- assign accepted = false -%}
+  {%- if item contains "🎉" -%}{%- assign accepted = true -%}{%- endif -%}
+  {%- assign t = item | remove_first: "🎉" | strip -%}
+  {%- assign head2 = t | slice: 0, 2 -%}
+  {%- if head2 == "**" -%}
+    {%- assign tlen = t | size | minus: 4 -%}
+    {%- assign t = t | slice: 2, tlen -%}
+  {%- endif -%}
+  {%- assign news_date = t | split: ":" | first | strip -%}
+  {%- assign news_text = t | remove_first: news_date | remove_first: ":" | strip -%}
+  {%- assign ym = news_date | split: "." -%}
+  <li class="news-item{% if accepted %} is-accepted{% endif %}">
+    <time datetime="{{ ym[0] }}-{{ ym[1] }}">{{ news_date }}</time>
+    <div class="news-item__text">{{ news_text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</div>
+  </li>
+  {%- assign news_shown = news_shown | plus: 1 -%}
+{%- endfor -%}
+</ol>

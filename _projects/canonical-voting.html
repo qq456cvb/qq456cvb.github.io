@@ -21,7 +21,7 @@ permalink: /projects/canonical-voting
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23170b2b'/%3E%3Cg fill='none' stroke='%237c3aed' stroke-width='3'%3E%3Ccircle cx='24' cy='26' r='13'/%3E%3Ccircle cx='40' cy='26' r='13'/%3E%3Ccircle cx='32' cy='40' r='13'/%3E%3C/g%3E%3Ccircle cx='32' cy='31' r='5' fill='%23bef264'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -83,7 +83,7 @@ permalink: /projects/canonical-voting
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
     html { scroll-behavior: smooth; scroll-padding-top: 72px; }
-    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Archivo, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: var(--accent-ink); text-decoration: none; }
     a:hover { text-decoration: underline; }
     img, video { max-width: 100%; height: auto; display: block; }
@@ -95,7 +95,7 @@ permalink: /projects/canonical-voting
     .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #d9f99d; border: 1px solid rgba(190, 242, 100, .5); background: rgba(190, 242, 100, .1); padding: 6px 14px; border-radius: 999px; }
     .hero h1 { margin: 18px 0 8px; font-size: clamp(44px, 8vw, 92px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
     .hero h1 span { color: #bef264; text-shadow: 0 0 40px rgba(190, 242, 100, .3); }
-    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e7e1f2; margin: 0 0 22px; max-width: 940px; }
+    .subtitle { font-family: "Newsreader", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e7e1f2; margin: 0 0 22px; max-width: 940px; }
     .authors { font-size: 18px; font-weight: 500; color: #d6cfe3; display: flex; flex-wrap: wrap; gap: 4px 18px; }
     .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
     .authors a:hover { text-decoration: none; border-color: #bef264; }
@@ -109,7 +109,7 @@ permalink: /projects/canonical-voting
     .btn svg { width: 18px; height: 18px; flex: none; }
     .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
     .video-frame video { width: 100%; height: 100%; }
-    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(12, 7, 22, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(12, 7, 22, .6); color: #fff; font: 600 14px Archivo, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
     .sound:hover { background: rgba(12, 7, 22, .8); }
 
     nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
@@ -153,11 +153,11 @@ permalink: /projects/canonical-voting
     .steps li b { color: var(--ink); display: block; margin-bottom: 2px; }
 
     .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
-    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Archivo, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
     .tab.on { background: var(--ink); color: var(--bg); }
     .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Archivo, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
     .chip.on, .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
     .chip:disabled { opacity: .45; cursor: not-allowed; }
     .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
@@ -178,11 +178,11 @@ permalink: /projects/canonical-voting
     .stage .count { position: absolute; left: 14px; top: 12px; font: 600 12.5px "JetBrains Mono", monospace; color: var(--muted); background: color-mix(in srgb, var(--surface) 80%, transparent); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
     .stage .msg { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--faint); font-weight: 600; pointer-events: none; }
     .zoom { position: absolute; right: 12px; top: 12px; display: flex; flex-direction: column; gap: 6px; }
-    .zoom button { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 88%, transparent); color: var(--ink); font: 700 17px Inter, sans-serif; cursor: pointer; display: grid; place-items: center; }
+    .zoom button { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 88%, transparent); color: var(--ink); font: 700 17px Archivo, sans-serif; cursor: pointer; display: grid; place-items: center; }
     .zoom button:hover { border-color: var(--accent); color: var(--accent-ink); }
     .zoom button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
     .scenes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .scenes button { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 9px 12px; cursor: pointer; font: 600 14px/1.3 Inter, sans-serif; color: var(--ink); }
+    .scenes button { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 9px 12px; cursor: pointer; font: 600 14px/1.3 Archivo, sans-serif; color: var(--ink); }
     .scenes button small { display: block; font-weight: 500; font-size: 12.5px; color: var(--faint); margin-top: 2px; }
     .scenes button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px var(--accent-soft); }
     .cls { display: inline-flex; align-items: center; gap: 7px; }
@@ -214,10 +214,10 @@ permalink: /projects/canonical-voting
     .vd .stage { background: #440154; aspect-ratio: 70 / 46; }
     #vd-canvas { cursor: crosshair; }
     .vd .stage .count { color: #ece6f7; background: rgba(12, 7, 22, .55); }
-    .vd .scale { position: absolute; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 8px; font: 600 12px Inter, sans-serif; color: #ece6f7; background: rgba(12, 7, 22, .55); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+    .vd .scale { position: absolute; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 8px; font: 600 12px Archivo, sans-serif; color: #ece6f7; background: rgba(12, 7, 22, .55); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
     .vd .scale i { width: 70px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #440154, #3b528b, #21918c, #5ec962, #fde725); }
     .vd-run { display: flex; gap: 8px; flex-wrap: wrap; }
-    .vd-run button { border: 0; border-radius: 999px; padding: 9px 16px; font: 700 14px Inter, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
+    .vd-run button { border: 0; border-radius: 999px; padding: 9px 16px; font: 700 14px Archivo, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
     .vd-run button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
     .vd-run button:hover { background: var(--accent); color: #fff; }
     .vd-run button.ghost:hover { background: var(--accent-soft); color: var(--accent-ink); }
@@ -265,7 +265,7 @@ permalink: /projects/canonical-voting
     .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
     .related h3 { margin-top: 4px; }
 
-    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Archivo, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
     .copy:hover { background: rgba(255, 255, 255, .14); }
 
     footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
@@ -294,11 +294,13 @@ permalink: /projects/canonical-voting
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b { transition: none; } }
   </style>
+  <link rel="stylesheet" href="/assets/css/project-theme.css">
 </head>
 <body>
 
 <header class="hero">
   <div class="wrap">
+    <a class="site-home" href="/">Yang You</a>
     <span class="badge">CVPR 2022</span>
     <h1>Canonical <span>Voting</span></h1>
     <p class="subtitle">Towards Robust Oriented Bounding Box Detection in 3D Scenes</p>
@@ -955,7 +957,7 @@ var VoteCore = (function () {
     }
     function label(c, x, y, t, w, ink) {
       c.fillStyle = ink; c.beginPath(); c.arc(x, y, 8.5 * w, 0, 6.2832); c.fill();
-      c.fillStyle = cssVar('--bg') || '#fff'; c.font = '700 ' + Math.round(10.5 * w) + 'px Inter, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(t, x, y + 0.5);
+      c.fillStyle = cssVar('--bg') || '#fff'; c.font = '700 ' + Math.round(10.5 * w) + 'px Archivo, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(t, x, y + 0.5);
     }
     function draw(cv, mode) {
       var w = sizeCanvas(cv), W = cv.width, H = cv.height, c = cv.getContext('2d'), a = ang * Math.PI / 180, ink = cssVar('--ink') || '#15111f';
@@ -979,7 +981,7 @@ var VoteCore = (function () {
       var bs = Math.min(W, H) * 0.2, bx = W - bs - 14 * w, by = 14 * w, bc = [bx + bs / 2, by + bs / 2];
       c.fillStyle = cssVar('--surface') || '#fff'; c.strokeStyle = cssVar('--line') || '#ddd'; c.lineWidth = w;
       c.beginPath(); c.rect(bx, by, bs, bs); c.fill(); c.stroke();
-      c.fillStyle = cssVar('--faint') || '#888'; c.font = '600 ' + Math.round(10.5 * w) + 'px Inter, sans-serif'; c.textAlign = 'left'; c.textBaseline = 'top';
+      c.fillStyle = cssVar('--faint') || '#888'; c.font = '600 ' + Math.round(10.5 * w) + 'px Archivo, sans-serif'; c.textAlign = 'left'; c.textBaseline = 'top';
       c.fillText(mode === 'off' ? 'target: offset' : 'target: LCC', bx + 6 * w, by + bs + 6 * w);
       TRACK.forEach(function (q, k) {
         var t = mode === 'off' ? rot([-q[0], -q[1]], a) : q, m = bs * (mode === 'off' ? 0.34 : 0.4);

@@ -6,10 +6,14 @@ seo_title: "About Yang You (尤洋) – Stanford, 3D Vision & Robotics"
 description: "About Yang You (尤洋), a postdoctoral researcher at Stanford University's Geometric Computation group (Guibas Lab) working on 3D computer vision, graphics and robotics."
 canonical_path: /
 sitemap: false
-author_profile: true
+author_profile: false
+hide_title: true
+classes: home
 redirect_from:
   - /about.html
 ---
+
+{% include home-hero.html %}
 
 {% include_relative about_content.md %}
 

@@ -13,8 +13,9 @@ $paragraph-indent           : false; // true, false (default)
 $indent-var                 : 1.3em;
 
 /* system typefaces */
-$serif                      : Georgia, Times, serif;
-$sans-serif                 : -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+/* Newsreader (body) and Archivo (name, headings, interface) are loaded from Google Fonts in _includes/head/custom.html */
+$serif                      : "Newsreader", Georgia, "Times New Roman", "Songti SC", serif;
+$sans-serif                 : "Archivo", -apple-system, "Segoe UI", "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
 $monospace                  : Monaco, Consolas, "Lucida Console", monospace;
 
 /* sans serif typefaces */
@@ -28,7 +29,7 @@ $bodoni                     : "Bodoni MT", serif;
 $calisto                    : "Calisto MT", serif;
 $garamond                   : Garamond, serif;
 
-$global-font-family         : $sans-serif;
+$global-font-family         : $serif;
 $header-font-family         : $sans-serif;
 $caption-font-family        : $serif;
 
@@ -53,12 +54,21 @@ $darker-gray                : mix(#000, $gray, 60%);
 $light-gray                 : mix(#fff, $gray, 50%);
 $lighter-gray               : mix(#fff, $gray, 90%);
 
-$body-color                 : #fff;
-$background-color           : #fff;
+/* "pose frame" palette: vellum page, graphite ink, axis blue links (see _modern-academic.scss) */
+$vellum                     : #f2f4f3;
+$graphite                   : #1d232a;
+$lead                       : #5b6570;
+$grid-line                  : #d3d9dd;
+$axis-x                     : #d2453b;
+$axis-y                     : #2e9a5c;
+$axis-z                     : #2b67c6;
+
+$body-color                 : $vellum;
+$background-color           : $vellum;
 $code-background-color      : #fafafa;
 $code-background-color-dark : $light-gray;
-$text-color                 : #222;
-$border-color               : $lighter-gray;
+$text-color                 : $graphite;
+$border-color               : $grid-line;
 
 $primary-color              : #2b4c6f;
 $success-color              : #62c462;
@@ -90,11 +100,11 @@ $xing-color                 : #006567;
 
 
 /* links */
-$link-color                 : $info-color;
+$link-color                 : $axis-z;
 $link-color-hover           : mix(#000, $link-color, 25%);
 $link-color-visited         : mix(#fff, $link-color, 25%);
-$masthead-link-color        : $primary-color;
-$masthead-link-color-hover  : mix(#000, $primary-color, 25%);
+$masthead-link-color        : $graphite;
+$masthead-link-color-hover  : $axis-z;
 
 
 /*

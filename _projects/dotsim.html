@@ -21,7 +21,7 @@ permalink: /projects/dotsim
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2334d399'/%3E%3Cstop offset='.55' stop-color='%2338bdf8'/%3E%3Cstop offset='1' stop-color='%23e879f9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2305060f'/%3E%3Cpath d='M10 46a22 22 0 0 1 44 0z' fill='url(%23g)'/%3E%3Ccircle cx='32' cy='17' r='7' fill='%23e5e7eb'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -80,7 +80,7 @@ permalink: /projects/dotsim
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
     html { scroll-behavior: smooth; scroll-padding-top: 72px; }
-    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Archivo, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: var(--accent-ink); text-decoration: none; }
     a:hover { text-decoration: underline; }
     img, video { max-width: 100%; height: auto; display: block; }
@@ -91,7 +91,7 @@ permalink: /projects/dotsim
     .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #f5d0fe; border: 1px solid rgba(232, 121, 249, .5); background: rgba(232, 121, 249, .1); padding: 6px 14px; border-radius: 999px; }
     .hero h1 { margin: 18px 0 8px; font-size: clamp(50px, 9vw, 104px); line-height: 1; font-weight: 800; letter-spacing: -.035em; }
     .hero h1 span { background: linear-gradient(90deg, #34d399, #38bdf8 50%, #e879f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e4def0; margin: 0 0 22px; max-width: 900px; }
+    .subtitle { font-family: "Newsreader", Georgia, serif; font-style: italic; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.3; color: #e4def0; margin: 0 0 22px; max-width: 900px; }
     .authors { font-size: 18px; font-weight: 500; color: #d3cce2; display: flex; flex-wrap: wrap; gap: 4px 18px; }
     .authors a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .25); }
     .authors a:hover { text-decoration: none; border-color: #e879f9; }
@@ -105,7 +105,7 @@ permalink: /projects/dotsim
     .btn svg { width: 18px; height: 18px; flex: none; }
     .video-frame { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); background: #000; aspect-ratio: 16 / 9; }
     .video-frame video { width: 100%; height: 100%; }
-    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(5, 6, 15, .6); color: #fff; font: 600 14px Inter, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
+    .sound { position: absolute; right: 16px; top: 16px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(5, 6, 15, .6); color: #fff; font: 600 14px Archivo, sans-serif; cursor: pointer; backdrop-filter: blur(8px); }
     .sound:hover { background: rgba(5, 6, 15, .8); }
 
     nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
@@ -150,11 +150,11 @@ permalink: /projects/dotsim
     .steps li i { display: block; font-style: normal; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 4px; }
 
     .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px; width: fit-content; max-width: 100%; }
-    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Inter, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
+    .tab { border: 0; background: transparent; color: var(--muted); font: 600 15px Archivo, sans-serif; padding: 9px 14px; border-radius: 10px; cursor: pointer; }
     .tab.on { background: var(--ink); color: var(--bg); }
     .tab:not(.on):hover { background: var(--accent-soft); color: var(--accent-ink); }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Inter, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .chip { border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 600 14px Archivo, sans-serif; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
     .chip.on, .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
     .chip:disabled { opacity: .45; cursor: not-allowed; }
     .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
@@ -165,7 +165,7 @@ permalink: /projects/dotsim
     .ctl + .ctl { margin-top: 12px; }
     .ctl .chips + h4 { margin-top: 18px; }
     input[type=range] { width: 100%; accent-color: var(--accent); margin: 2px 0 4px; }
-    .go { border: 0; border-radius: 999px; padding: 9px 16px; font: 700 14px Inter, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
+    .go { border: 0; border-radius: 999px; padding: 9px 16px; font: 700 14px Archivo, sans-serif; cursor: pointer; background: var(--ink); color: var(--bg); }
     .go:hover { background: var(--accent); color: #fff; }
     .go:disabled { opacity: .5; cursor: wait; }
     .go.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
@@ -187,7 +187,7 @@ permalink: /projects/dotsim
     .gd { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; margin-top: 18px; }
     .stage { position: relative; background: #0d0b14; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
     .stage canvas { display: block; width: 100%; height: 100%; }
-    .stage .cap { position: absolute; left: 14px; top: 12px; font: 600 12.5px Inter, sans-serif; color: #d3cce2; background: rgba(5, 6, 15, .55); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+    .stage .cap { position: absolute; left: 14px; top: 12px; font: 600 12.5px Archivo, sans-serif; color: #d3cce2; background: rgba(5, 6, 15, .55); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
     .stage .cap.r { left: auto; right: 14px; top: auto; bottom: 12px; }
     #gel-stage { aspect-ratio: 3 / 2; }
     #gel-canvas { cursor: grab; touch-action: none; }
@@ -242,7 +242,7 @@ permalink: /projects/dotsim
     .related .venue { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); text-transform: uppercase; }
     .related h3 { margin-top: 4px; }
 
-    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Inter, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .copy { position: absolute; z-index: 2; right: 14px; top: 14px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; font: 600 13px Archivo, sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
     .copy:hover { background: rgba(255, 255, 255, .14); }
 
     footer { margin-top: 80px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
@@ -280,11 +280,13 @@ permalink: /projects/dotsim
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related a.card, .rx-bar span, .rx-bar b { transition: none; } }
   </style>
+  <link rel="stylesheet" href="/assets/css/project-theme.css">
 </head>
 <body>
 
 <header class="hero">
   <div class="wrap">
+    <a class="site-home" href="/">Yang You</a>
     <span class="badge">ICRA 2026</span>
     <h1>DOT-<span>Sim</span></h1>
     <p class="subtitle">Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration</p>
@@ -877,14 +879,14 @@ var GelCore = (function () {
       /* base plate and camera */
       c.fillStyle = '#2a2533'; c.fillRect(X(G.CX - G.R - 0.05), Y(G.BASE), (2 * G.R + 0.1) * sc, 0.03 * sc);
       c.fillStyle = '#f5f3ff'; c.beginPath(); c.arc(X(G.CX), Y(G.BASE), 5 * w, 0, 6.2832); c.fill();
-      c.fillStyle = '#9d95b0'; c.font = '600 ' + Math.round(11.5 * w) + 'px Inter, sans-serif'; c.textAlign = 'center'; c.fillText('camera', X(G.CX), Y(G.BASE) + 19 * w);
+      c.fillStyle = '#9d95b0'; c.font = '600 ' + Math.round(11.5 * w) + 'px Archivo, sans-serif'; c.textAlign = 'center'; c.fillText('camera', X(G.CX), Y(G.BASE) + 19 * w);
       if (overlay) drawIndenter(c, X, Y, sc, w, overlay.ix, overlay.iy, 'ball', 'rgba(203,213,225,.85)');
       else drawIndenter(c, X, Y, sc, w, ind[0], ind[1], st.shape, drag ? '#f8fafc' : '#cbd5e1');
     }
     function drawCam() {
       var w = sizeCanvas(cam), W = cam.width, H = cam.height, c = cam.getContext('2d'), cm = G.camera(overlay ? { t: overlay.t } : s, K), L = 96 * w, R = W - 12 * w, bw = (R - L) / K, rows = 3, gap = 6 * w, top = 10 * w, rh = (H - 2 * top - (rows - 1) * gap) / rows, k;
       c.clearRect(0, 0, W, H);
-      c.font = '600 ' + Math.round(12 * w) + 'px Inter, sans-serif'; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillStyle = '#d3cce2';
+      c.font = '600 ' + Math.round(12 * w) + 'px Archivo, sans-serif'; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillStyle = '#d3cce2';
       ['Depth', 'Normal', 'Change'].forEach(function (t, i) { c.fillText(t, 12 * w, top + i * (rh + gap) + rh / 2); });
       var mx = 0;
       for (k = 0; k < K; k++) {
@@ -899,7 +901,7 @@ var GelCore = (function () {
     function drawChart() {
       var w = sizeCanvas(chart), W = chart.width, H = chart.height, c = chart.getContext('2d'), L = 40 * w, R = W - 14 * w, T = 26 * w, B = H - 26 * w, n = 14, i;
       c.clearRect(0, 0, W, H);
-      c.font = '600 ' + Math.round(11 * w) + 'px Inter, sans-serif'; c.fillStyle = '#9d95b0'; c.textBaseline = 'middle';
+      c.font = '600 ' + Math.round(11 * w) + 'px Archivo, sans-serif'; c.fillStyle = '#9d95b0'; c.textBaseline = 'middle';
       function X(k) { return L + (R - L) * k / (n - 1); } function Y(v) { return B - (B - T) * (v - 0.05) / 0.4; }
       c.strokeStyle = 'rgba(255,255,255,.1)'; c.lineWidth = w; c.textAlign = 'right';
       [0.1, 0.2, 0.3, 0.4].forEach(function (v) { c.beginPath(); c.moveTo(L, Y(v)); c.lineTo(R, Y(v)); c.stroke(); c.fillText(v.toFixed(1), L - 6 * w, Y(v)); });
@@ -1028,7 +1030,7 @@ var GelCore = (function () {
       var w = sizeCanvas(cv), W = cv.width, H = cv.height, c = cv.getContext('2d'), a = img(st.ex + '_real'), b = img(st.ex + '_' + st.m);
       c.clearRect(0, 0, W, H); c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high';
       if (!a.ok || !b.ok) return;
-      function label(t, x, right) { c.font = '700 ' + Math.round(13 * w) + 'px Inter, sans-serif'; var tw = c.measureText(t).width + 20 * w; c.fillStyle = 'rgba(5,6,15,.7)'; c.beginPath(); if (c.roundRect) c.roundRect(right ? x - tw : x, 12 * w, tw, 28 * w, 14 * w); else c.rect(right ? x - tw : x, 12 * w, tw, 28 * w); c.fill(); c.fillStyle = '#fff'; c.textBaseline = 'middle'; c.textAlign = 'left'; c.fillText(t, (right ? x - tw : x) + 10 * w, 26.5 * w); }
+      function label(t, x, right) { c.font = '700 ' + Math.round(13 * w) + 'px Archivo, sans-serif'; var tw = c.measureText(t).width + 20 * w; c.fillStyle = 'rgba(5,6,15,.7)'; c.beginPath(); if (c.roundRect) c.roundRect(right ? x - tw : x, 12 * w, tw, 28 * w, 14 * w); else c.rect(right ? x - tw : x, 12 * w, tw, 28 * w); c.fill(); c.fillStyle = '#fff'; c.textBaseline = 'middle'; c.textAlign = 'left'; c.fillText(t, (right ? x - tw : x) + 10 * w, 26.5 * w); }
       if (st.diff) { c.drawImage(diffCv, 0, 0, W, H); label('|real − ' + NAME[st.m] + '| × 4', 12 * w, false); return; }
       var x = Math.round(W * st.pos);
       c.drawImage(b.im, 0, 0, W, H);

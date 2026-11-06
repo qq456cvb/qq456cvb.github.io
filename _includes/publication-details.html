@@ -5,12 +5,12 @@
 {% include pub-vars.html pub=page %}
 <p class="pub-authors">{{ page.authors }}</p>
 <p class="pub-links">
-  {% if page.arxiv %}<a href="{{ page.arxiv }}">arXiv</a> / {% endif %}
-  {% if pv_pdf_url %}<a href="{{ pv_pdf_url }}">PDF</a> / {% endif %}
-  {% if page.supp %}<a href="{{ page.supp }}">supplementary</a> / {% endif %}
-  {% if pv_code %}<a href="{{ pv_code }}">code</a> / {% endif %}
-  {% if page.video %}<a href="{{ page.video }}">video</a> / {% endif %}
-  {% if pv_project %}<a href="{{ page.site }}">project page</a> / {% endif %}
+  {% if page.arxiv %}<a href="{{ page.arxiv }}">arXiv</a>{% endif %}
+  {% if pv_pdf_url %}<a href="{{ pv_pdf_url }}">PDF</a>{% endif %}
+  {% if page.supp %}<a href="{{ page.supp }}">Supplementary</a>{% endif %}
+  {% if pv_code %}<a href="{{ pv_code }}">Code</a>{% endif %}
+  {% if page.video %}<a href="{{ page.video }}">Video</a>{% endif %}
+  {% if pv_project %}<a href="{{ page.site }}">Project page</a>{% endif %}
   <a href="#bibtex">BibTeX</a>
 </p>
 {% if page.excerpt %}
