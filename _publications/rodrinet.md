@@ -7,6 +7,7 @@ This work introduces the Neural Rodrigues Operator, a learnable generalization o
 "
 date: '2026-01-26'
 venue: 'ICLR'
+oral: true
 image: '/images/rodrigues_teaser.jpg'
 weight: 700
 arxiv: 'https://arxiv.org/abs/2506.02618'

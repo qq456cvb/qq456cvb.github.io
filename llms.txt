@@ -23,7 +23,7 @@ sitemap: false
 {% assign pubs = site.publications | sort: "weight" | reverse %}
 {% for post in pubs %}{% include pub-vars.html pub=post %}
 ### [{{ post.title | strip_html }}]({{ pv_url }})
-{{ pv_authors | join: ", " }}. *{{ pv_venue_name }}*, {{ pv_year }}.
+{{ pv_authors | join: ", " }}. *{{ pv_venue_name }}*, {{ pv_year }}{% if post.oral %} (oral presentation){% endif %}.
 Links: [paper page]({{ pv_url }}){% if post.arxiv %} · [arXiv]({{ post.arxiv }}){% endif %}{% if pv_code %} · [code]({{ pv_code }}){% endif %}{% if pv_project %} · [project page]({{ pv_project }}){% endif %}
 
 {{ post.excerpt | strip_html | strip_newlines | strip }}
