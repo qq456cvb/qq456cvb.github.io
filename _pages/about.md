@@ -13,5 +13,3 @@ redirect_from:
 
 {% include home-hero.html %}
 
-{% include_relative about_content.md %}
-

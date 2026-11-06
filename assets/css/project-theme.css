@@ -73,13 +73,14 @@
   text-shadow: none;
 }
 
-/* one word of the title in a gradient (DOT-Sim, PRIN/SPRIN) becomes plain title text */
+/* the part of the title set apart in a color, gradient or glow (e.g. "9D", "Sim") becomes plain title text */
 .hero h1 span {
   background: none;
   -webkit-background-clip: border-box;
   background-clip: border-box;
   color: inherit;
   -webkit-text-fill-color: currentColor;
+  text-shadow: none;
 }
 
 .subtitle {

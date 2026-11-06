@@ -10,8 +10,6 @@ redirect_from:
 
 {% include home-hero.html %}
 
-{% include_relative about_content.md %}
-
 <section class="home-section" aria-labelledby="news">
   <h2 class="home-section__title" id="news">News</h2>
   <div class="home-section__body">

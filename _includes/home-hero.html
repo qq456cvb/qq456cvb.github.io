@@ -1,10 +1,13 @@
 {% comment %}
   Home and About page opening: the introduction beside the pose figure (assets/js/pose-hero.js).
-  Photo, name and profile links are in the sidebar.
+  Photo, name and profile links are in the sidebar; the research focus and contact note come from _pages/about_content.md.
 {% endcomment %}
 {% include base_path %}
 <section class="pose-hero">
-  <p class="pose-hero__intro">I am a postdoctoral researcher in the <a href="https://geometry.stanford.edu/">Geometric Computation group</a> led by Prof. <a href="https://profiles.stanford.edu/leonidas-guibas">Leonidas Guibas</a> at Stanford. My research focuses on 3D graphics, 3D computer vision, and robotics, with an emphasis on robust perception and representation for real-world spatial understanding.</p>
+  <div class="pose-hero__text">
+    <p class="pose-hero__intro">I am a postdoctoral researcher in the <a href="https://geometry.stanford.edu/">Geometric Computation group</a> led by Prof. <a href="https://profiles.stanford.edu/leonidas-guibas">Leonidas Guibas</a> at Stanford. My research focuses on 3D graphics, 3D computer vision, and robotics, with an emphasis on robust perception and representation for real-world spatial understanding.</p>
+    {% include_relative about_content.md %}
+  </div>
   <figure class="pose-figure" id="pose-figure" data-src="{{ base_path }}/assets/data/kpnet-mug.json">
     <canvas tabindex="0" aria-label="A mug from KeypointNet drawn as a point cloud, with its keypoints, oriented bounding box and x, y and z axes. Drag or use the arrow keys to turn it."></canvas>
     <figcaption>A mug from <a href="{{ base_path }}/projects/keypointnet">KeypointNet</a> with its annotated keypoints and its <a href="{{ base_path }}/projects/unipose9d">9D pose</a>: the box gives position and size, the axes give rotation. Drag to turn it.</figcaption>

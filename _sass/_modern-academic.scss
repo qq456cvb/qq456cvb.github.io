@@ -245,13 +245,20 @@ h2.h1-style,
   padding: 0 0 2rem;
 
   @include breakpoint($medium-wide) {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
+  }
+}
+
+.pose-hero__text > p {
+  max-width: var(--measure);
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
 .page__content .pose-hero__intro {
-  max-width: 34em;
-  margin: 0;
+  margin: 0 0 1rem;
   font-size: 1.111rem;
   line-height: 1.6;
 }
@@ -262,7 +269,7 @@ h2.h1-style,
   canvas {
     display: block;
     width: 100%;
-    max-width: 32rem;
+    max-width: 18rem;
     aspect-ratio: 6 / 5;
     margin: 0 auto;
     cursor: grab;
@@ -283,7 +290,7 @@ h2.h1-style,
   }
 
   figcaption {
-    max-width: 32rem;
+    max-width: 18rem;
     margin: 0.3rem auto 0;
     color: $lead;
     font-family: $sans-serif;
@@ -321,10 +328,6 @@ h2.h1-style,
   > p:last-child {
     margin-bottom: 0;
   }
-}
-
-.page__content .home-section__lead {
-  font-size: 1.111rem;
 }
 
 .home-section__more {
