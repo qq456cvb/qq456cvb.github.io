@@ -11,7 +11,7 @@ redirect_from:
 ## Organizing and committees
 {: .h1-style}
 - Lead organizer, [ICCV 2025 Workshop & Challenge on Category-Level Object Pose Estimation in the Wild](https://wclop.github.io/)
-- Organizer, ECCV 2026 Workshop & Challenge “The Path to Manufacturing: Evolving 3D Generation to Intelligent CAD”
+- Organizer, [ECCV 2026 Workshop & Challenge “The Path to Manufacturing: Evolving 3D Generation to Intelligent CAD”](https://3dgen-cad-workshop.github.io/)
 - Member, IEEE RAS Technical Committee on Computer & Robot Vision
 
 ## Invited talks
