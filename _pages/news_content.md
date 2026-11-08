@@ -1,3 +1,5 @@
+2026.11: Our paper <a href='/publications/recr'>ReCR: What Remains in Sight? Autoregressive Video Decoding as Representation-Guided Context Rewriting</a> (NeurIPS 2026) is now available on <i>arXiv</i>. <a href='https://arxiv.org/pdf/2611.04164'>[Paper]</a> <a href='https://github.com/lixuan27/ReCR'>[Code]</a>
+
 2026.07: Our paper <a href='/publications/unipose9d'>UniPose9D: Universal Category-Agnostic Object Pose Estimation</a> is now available on <i>arXiv</i>. <a href='https://arxiv.org/pdf/2607.09985'>[Paper]</a> <a href='https://github.com/qq456cvb/UniPose9D'>[Code]</a> <a href='/projects/unipose9d'>[Project Page]</a> <a href='https://huggingface.co/spaces/qq456cvb/UniPose9D'>[Demo]</a>
 
 🎉 **2026.05: Our paper: <a href='/publications/och3r'>OCH3R: Object-Centric Holistic 3D Reconstruction</a> is accepted to the <i>CVPR 2026 OpenSUN3D Workshop</i>! <a href='https://arxiv.org/pdf/2605.13018'>[Paper]</a>**
