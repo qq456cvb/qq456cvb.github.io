@@ -20,7 +20,7 @@
 <h2 class="pub-section" id="bibtex">BibTeX</h2>
 <div style="position:relative">
 <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('bibtex-entry').innerText); this.textContent='Copied';" style="position:absolute;top:8px;right:8px;font-size:0.75em;padding:2px 10px;cursor:pointer">Copy</button>
-<pre id="bibtex-entry" style="white-space:pre-wrap;font-size:0.8em">@{{ pv_bibtype }}{ {{- pv_bibkey }},
+<pre id="bibtex-entry" style="white-space:pre-wrap;font-size:0.8em">{% if page.bibtex %}{{ page.bibtex | strip | escape }}{% else %}@{{ pv_bibtype }}{ {{- pv_bibkey }},
   title     = { {{- page.title | strip_html -}} },
   author    = { {{- pv_authors | join: " and " -}} },
 {% if pv_venue_type == "conference" %}  booktitle = { {{- pv_venue_name -}} },
@@ -29,5 +29,5 @@
 {% endif %}  year      = { {{- pv_year -}} }{% if pv_arxiv_id %},
   eprint    = { {{- pv_arxiv_id -}} },
   archivePrefix = {arXiv}{% endif %}
-}</pre>
+}{% endif %}</pre>
 </div>
