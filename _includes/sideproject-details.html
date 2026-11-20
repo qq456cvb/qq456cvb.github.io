@@ -3,4 +3,7 @@
 {% endcomment %}
 {% if page.code %}<p class="pub-links"><a href="{{ page.code }}">Code</a></p>{% endif %}
 {% if page.excerpt %}<p class="sideproject__description">{{ page.excerpt }}</p>{% endif %}
-{% if page.image %}<img class="sideproject__image" src="{{ base_path }}{{ page.image }}" alt="">{% endif %}
+{% if page.image %}
+  {% if page.image contains "://" %}{% assign image_src = page.image %}{% else %}{% assign image_src = base_path | append: page.image %}{% endif %}
+  <img class="sideproject__image" src="{{ image_src }}" alt="">
+{% endif %}
