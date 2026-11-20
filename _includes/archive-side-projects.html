@@ -1,15 +1,17 @@
 {% comment %}
   Side project list, newest first by `date` (when the GitHub repo was created). Same markup and styles as the
   publication list (_includes/archive-publications.html); projects without an image keep the text column aligned
-  with the others.
+  with the others. `image` is either a site path (/images/...) or a full URL, e.g. the raw GitHub file in the
+  project's own repo.
 {% endcomment %}
 <ol class="pub-list">
   {% assign projects = site.sideprojects | sort: "date" | reverse %}
   {% for post in projects %}
   <li class="pub{% unless post.image %} pub--no-thumb{% endunless %}">
     {% if post.image %}
+    {% if post.image contains "://" %}{% assign image_src = post.image %}{% else %}{% assign image_src = base_path | append: post.image %}{% endif %}
     <button type="button" class="pub__thumb" onclick="openPubPopup(this.querySelector('img').src)" aria-label="Enlarge the image for {{ post.title | strip_html | escape }}">
-      <img src="{{ base_path }}{{ post.image }}" alt="" loading="lazy">
+      <img src="{{ image_src }}" alt="" loading="lazy">
     </button>
     {% endif %}
     <div class="pub__body">
