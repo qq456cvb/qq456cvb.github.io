@@ -1,8 +1,9 @@
 ---
-title: "Matlab implementation of <em>Single Image Haze Removal Using Dark Channel Prior</em>"
+title: "MATLAB implementation of <em>Single Image Haze Removal Using Dark Channel Prior</em>"
 collection: sideprojects
 permalink: /sideprojects/dehaze
-excerpt: This is a Matlab implementation of Kaiming He's famous papaer <em>Single Image Haze Removal Using Dark Channel Prior</em>.
+date: '2017-03-22'
+excerpt: This is a MATLAB implementation of Kaiming He's famous paper <em>Single Image Haze Removal Using Dark Channel Prior</em>.
 code: 'https://github.com/qq456cvb/DeHaze'
 image: /images/dehaze.png
 ---

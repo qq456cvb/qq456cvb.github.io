@@ -17,12 +17,12 @@ redirect_from:
 
 ## Work experience
 {: .h1-style}
+* 2023 ~ present: Postdoctoral Researcher at Stanford University
+  * Group: [Geometric Computation group](https://geometry.stanford.edu/), led by Prof. [Leonidas Guibas](https://profiles.stanford.edu/leonidas-guibas)
 * 2015.10 ~ 2016.04: Internship at Intel Asia-Pacific Research Center
   * Duties: WebRTC Development, iOS Test
   * Supervisor: Jianjun Zhu (诸剑俊)
 
 ## Publications and Preprints
 {: .h1-style}
-  <ul>{% for post in site.publications %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+{% include cv-publications.html %}

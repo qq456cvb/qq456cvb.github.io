@@ -1,0 +1,6 @@
+{% comment %}
+  Link and description for a single side project page, matching the side project list.
+{% endcomment %}
+{% if page.code %}<p class="pub-links"><a href="{{ page.code }}">Code</a></p>{% endif %}
+{% if page.excerpt %}<p class="sideproject__description">{{ page.excerpt }}</p>{% endif %}
+{% if page.image %}<img class="sideproject__image" src="{{ base_path }}{{ page.image }}" alt="">{% endif %}

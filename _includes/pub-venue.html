@@ -1,0 +1,6 @@
+{%- comment -%}
+  "Venue Year" plus the Oral tag for one publication, as shown in the publication list, the CV and paper pages.
+  Usage: {% include pub-venue.html pub=post %}
+{%- endcomment -%}
+{%- assign pvy_year = include.pub.date | date: "%Y" -%}
+{{ include.pub.venue }}{% unless include.pub.venue contains pvy_year %} {{ pvy_year }}{% endunless %}{% if include.pub.oral %} <span class="oral">Oral</span>{% endif %}

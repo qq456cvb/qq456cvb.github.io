@@ -3,7 +3,7 @@ permalink: /services/
 title: "Services"
 excerpt: "Services"
 description: "Service and awards of Yang You (尤洋, Stanford): workshop and challenge organization at ICCV 2025 and ECCV 2026, IEEE RAS Technical Committee on Computer & Robot Vision, invited talks, and reviewing for TPAMI, T-IP, CVPR, ICCV, ICLR, ECCV, SIGGRAPH and 3DV."
-author_profile: false
+author_profile: true
 redirect_from:
   - /services.html
 ---

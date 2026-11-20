@@ -34,6 +34,9 @@ body {
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* The theme pins the footer to the bottom of the page (position: absolute), so its margin makes no gap; reserve
+     its height (about 9-10rem) plus a gap here instead. */
+  padding-bottom: 12.5rem;
 }
 
 ::selection {
@@ -172,7 +175,8 @@ h6 {
 
 /* Section headings that are <h2> so each page keeps a single <h1> (CV, services, project pages, ...). */
 h2.h1-style,
-.page__content h2.h1-style {
+.page__content h2.h1-style,
+.page__inner-wrap h2.pub-section {
   margin: 2.4em 0 0.8em;
   padding: 0.7em 0 0;
   border-top: 1px solid $grid-line;
@@ -429,6 +433,13 @@ h2.h1-style,
   }
 }
 
+/* side projects without an image: keep the text in the same column as the others */
+.pub--no-thumb .pub__body {
+  @include breakpoint($medium) {
+    grid-column: 2;
+  }
+}
+
 .pub__thumb {
   display: block;
   align-self: start;
@@ -529,6 +540,24 @@ h2.h1-style,
   }
 }
 
+.pub-authors {
+  margin: 0 0 0.35rem;
+  color: $lead;
+  line-height: 1.45;
+
+  b {
+    color: $graphite;
+    font-weight: 600;
+  }
+}
+
+.pub-venue {
+  margin: 0 0 0.6rem;
+  font-family: $sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .pub-links {
   display: flex;
   flex-wrap: wrap;
@@ -536,6 +565,155 @@ h2.h1-style,
   font-family: $sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+.bibtex {
+  position: relative;
+
+  pre {
+    white-space: pre-wrap;
+    font-size: 0.8em;
+  }
+}
+
+.bibtex__copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 0.15rem 0.6rem;
+  color: $graphite;
+  background: $vellum;
+  border: 1px solid $grid-line;
+  border-radius: 3px;
+  font-family: $sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    color: $axis-z;
+    border-color: currentColor;
+  }
+
+  /* on narrow screens the entry fills the width, so the button goes above it */
+  @include breakpoint(max-width $medium) {
+    position: static;
+    margin-bottom: 0.4rem;
+  }
+}
+
+/* Single side project pages (_includes/sideproject-details.html) */
+.sideproject__description {
+  max-width: var(--measure);
+}
+
+.sideproject__image {
+  display: block;
+  max-width: 100%;
+  margin-top: 1rem;
+
+  @include breakpoint($medium) {
+    max-width: 32rem;
+  }
+  background: #fff;
+  border: 1px solid $grid-line;
+  border-radius: 4px;
+}
+
+/* CV publication list (_includes/cv-publications.html) */
+.cv-pubs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0;
+    padding: 0.55rem 0;
+  }
+
+  .pub__title {
+    margin: 0 0 0.2rem;
+    font-size: 1rem;
+  }
+
+  .pub__authors {
+    margin: 0 0 0.15rem;
+  }
+
+  .pub__venue {
+    margin: 0;
+  }
+}
+
+/* Share links and previous/next links under single pages (social-share.html, post_pagination.html) */
+.page__share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin-top: 2.4em;
+  padding-top: 0.9em;
+  border-top: 1px solid $grid-line;
+  font-family: $sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.page__share-title {
+  margin: 0;
+  color: $lead;
+  font-size: inherit;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.pager {
+  /* the theme floats the blocks above it */
+  clear: both;
+  display: grid;
+  gap: 1rem 2rem;
+  margin-top: 1.6em;
+  padding-top: 1.2em;
+  border-top: 1px solid $grid-line;
+  font-family: $sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.35;
+
+  @include breakpoint($medium) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.page__share + .pager {
+  margin-top: 2.2em;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.pager__link {
+  color: $graphite;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: $axis-z;
+    text-decoration: underline;
+  }
+}
+
+.pager__link--next {
+  @include breakpoint($medium) {
+    grid-column: 2;
+    text-align: right;
+  }
+}
+
+.pager__label {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: $lead;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 /* --------------------------------------------------------------------------

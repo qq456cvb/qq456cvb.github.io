@@ -1,7 +1,6 @@
 <ol class="pub-list">
   {% assign pubs = site.publications | sort: "weight" | reverse %}
   {% for post in pubs %}
-  {% assign pub_year = post.date | date: "%Y" %}
   <li class="pub">
     <button type="button" class="pub__thumb" onclick="openPubPopup(this.querySelector('img').src)" aria-label="Enlarge the figure for {{ post.title | strip_html | escape }}">
       <img src="{{ base_path }}{{ post.image }}" alt="" loading="lazy">
@@ -9,7 +8,7 @@
     <div class="pub__body">
       <h2 class="pub__title"><a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a></h2>
       <p class="pub__authors">{{ post.authors }}</p>
-      <p class="pub__venue">{{ post.venue }}{% unless post.venue contains pub_year %} {{ pub_year }}{% endunless %}{% if post.oral %} <span class="oral">Oral</span>{% endif %}</p>
+      <p class="pub__venue">{% include pub-venue.html pub=post %}</p>
       <p class="pub__links">
         {% if post.arxiv %}<a href="{{ post.arxiv }}">arXiv</a>{% endif %}
         {% if post.pdf %}<a href="{{ post.pdf }}">PDF</a>{% endif %}
@@ -27,34 +26,4 @@
   {% endfor %}
 </ol>
 
-<!-- Image popup lightbox: single instance, shared by all publication images. On open it is
-     moved to document.body so it escapes the #main stacking context (created by the intro
-     opacity animation) and covers the masthead menu. -->
-<style>
-  #popup-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 4vh 4vw; box-sizing: border-box; background: rgba(8, 11, 18, 0.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; visibility: hidden; transition: opacity 0.28s ease, visibility 0s linear 0.28s; cursor: zoom-out; }
-  #popup-modal.open { opacity: 1; visibility: visible; transition: opacity 0.28s ease; }
-  #popup-modal img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 10px; background: #fff; box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55); transform: scale(0.94) translateY(12px); transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.3, 1); cursor: default; }
-  #popup-modal.open img { transform: scale(1) translateY(0); }
-  #popup-modal .popup-close { position: absolute; top: 12px; right: 22px; font-size: 34px; line-height: 1; font-weight: bold; color: rgba(255, 255, 255, 0.8); cursor: pointer; user-select: none; transition: color 0.2s ease, transform 0.2s ease; }
-  #popup-modal .popup-close:hover { color: #fff; transform: scale(1.15); }
-</style>
-<div id="popup-modal" onclick="closePubPopup()">
-  <span class="popup-close">&times;</span>
-  <img id="popup-img" alt="enlarged project image" onclick="event.stopPropagation()">
-</div>
-<script>
-  /* Lightbox helpers. Block comments only: this HTML may be minified onto a single line. */
-  function openPubPopup(src) {
-    var m = document.getElementById('popup-modal');
-    if (m.parentElement !== document.body) { document.body.appendChild(m); }
-    document.getElementById('popup-img').src = src;
-    m.getBoundingClientRect(); /* flush styles so the open transition always plays */
-    m.classList.add('open');
-    document.documentElement.style.overflow = 'hidden';
-  }
-  function closePubPopup() {
-    document.getElementById('popup-modal').classList.remove('open');
-    document.documentElement.style.overflow = '';
-  }
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closePubPopup(); } });
-</script>
+{% include pub-lightbox.html %}
