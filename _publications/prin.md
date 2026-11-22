@@ -1,5 +1,6 @@
 ---
 title: "Pointwise Rotation-Invariant Network with Adaptive Sampling and 3D Spherical Voxel Convolution"
+seo_title: "PRIN: Pointwise Rotation-Invariant Network with Adaptive Sampling"
 collection: publications
 permalink: /publications/prin
 excerpt: 'In this paper, we propose a new point-set learning framework named Pointwise Rotation-Invariant Network (PRIN), focusing on achieving rotation-invariance in point clouds. We construct spherical signals by Density-Aware Adaptive Sampling (DAAS) from sparse points and employ Spherical Voxel Convolution (SVC) to extract rotation-invariant features for each point. Our network can be applied to applications ranging from object classification, part segmentation, to 3D feature matching and label alignment.'

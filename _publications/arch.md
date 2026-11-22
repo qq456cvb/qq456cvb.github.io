@@ -1,5 +1,6 @@
 ---
 title: "ARCH: Hierarchical Hybrid Learning for Long-Horizon Contact-Rich Robotic Assembly"
+seo_title: "ARCH: Hierarchical Hybrid Learning for Long-Horizon Assembly"
 collection: publications
 permalink: /publications/arch
 excerpt: 'ARCH proposes a hierarchical modular approach for long-horizon, high-precision robotic assembly in contact-rich settings. It employs a hierarchical planning framework, including a low-level primitive library of parameterized skills and a high-level policy learned via IL. ARCH generalizes well to unseen objects and outperforms baseline methods in terms of success rate and data efficiency.'

@@ -49,3 +49,19 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Tell IndexNow search engines (Bing, Yandex, ...) about the site's pages after each deploy. The key file
+  # 6b25166cbd7695c8d33692e1cc70948a.txt at the site root proves ownership. Failures here never affect the deploy.
+  indexnow:
+    runs-on: ubuntu-latest
+    needs: deploy
+    continue-on-error: true
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          sleep 30
+          urls=$(curl -fsSL https://qq456cvb.github.io/sitemap.xml | grep -oE '<loc>[^<]+</loc>' | sed -E 's#</?loc>##g' | jq -R . | jq -s .)
+          jq -n --argjson urls "$urls" '{host: "qq456cvb.github.io", key: "6b25166cbd7695c8d33692e1cc70948a", keyLocation: "https://qq456cvb.github.io/6b25166cbd7695c8d33692e1cc70948a.txt", urlList: $urls}' > body.json
+          echo "Submitting $(jq '.urlList | length' body.json) URLs"
+          curl -sS -o response.txt -w 'IndexNow HTTP %{http_code}\n' -H "Content-Type: application/json; charset=utf-8" --data @body.json https://api.indexnow.org/indexnow
+          cat response.txt || true

@@ -1,5 +1,6 @@
 ---
 title: "ProvNeRF: Modeling per Point Provenance in NeRFs as a Stochastic Process"
+seo_title: "ProvNeRF: Modeling per Point Provenance in NeRFs"
 collection: publications
 permalink: /publications/provnerf
 excerpt: 'Neural radiance fields (NeRFs) excel at 3D scene reconstruction but struggle with sparse, unconstrained camera views. ProvNeRF addresses this by modeling per-point provenance as a stochastic process, enabling improved uncertainty estimation, criteria-based view optimization, and enhanced novel view synthesis. Our method, compatible with any pre-trained NeRF, extends IMLE for stochastic processes, leveraging training camera poses to enrich the 3D point information.'

@@ -8,6 +8,10 @@
 
 {% if page.title %}
   {% assign seo_title = page.title | append: " " | append: site.title_separator | append: " " | append: site.title %}
+  {% comment %} Bing flags titles over 70 characters: drop the site name when it would push the title past that.
+     Pages whose own title is still too long set a shorter `seo_title`. {% endcomment %}
+  {% assign seo_title_size = seo_title | strip_html | size %}
+  {% if seo_title_size > 70 %}{% assign seo_title = page.title %}{% endif %}
 {% endif %}
 
 {% if seo_title %}

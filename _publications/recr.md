@@ -1,5 +1,6 @@
 ---
 title: "What Remains in Sight? Autoregressive Video Decoding as Representation-Guided Context Rewriting"
+seo_title: "ReCR: Autoregressive Video Decoding as Context Rewriting"
 collection: publications
 permalink: /publications/recr
 excerpt: 'ReCR is a training-free method for long-horizon autoregressive video generation. Under a fixed visible-token budget, it uses internal decoder representations to select context from the generated history, balancing global relevance, redundancy, temporal boundary coverage, and spatial-layout diversity. The selected context is temporally reindexed before decoding the next block, improving long-video consistency across multiple backbones without updating model weights.'

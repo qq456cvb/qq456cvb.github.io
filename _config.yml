@@ -268,6 +268,11 @@ collections:
 
 # Defaults
 defaults:
+  # search engine verification files are not pages: keep them out of sitemap.xml
+  - scope:
+      path: "googlef5448b04a795f77e.html"
+    values:
+      sitemap: false
   # _posts
   - scope:
       path: ""

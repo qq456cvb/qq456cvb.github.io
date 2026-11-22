@@ -1,5 +1,6 @@
 ---
 title: "Img2CAD: Reverse Engineering 3D CAD Models from Images through VLM-Assisted Conditional Factorization"
+seo_title: "Img2CAD: Reverse Engineering 3D CAD Models from Images"
 collection: publications
 permalink: /publications/img2cad
 excerpt: 'Img2CAD reverse engineers editable 3D CAD programs from single images. A finetuned vision-language model (Llama 3.2) predicts the discrete program structure with semantic part labels, and TrAssembler, a transformer flow-matching model with symmetry guidance, predicts the continuous attributes. We also release a dataset of 4,574 ShapeNet chairs, tables and cabinets turned into sketch-and-extrude CAD programs.'

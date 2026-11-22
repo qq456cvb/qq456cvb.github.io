@@ -1,5 +1,6 @@
 ---
 title: "DOT-Sim: Differentiable Optical Tactile Simulation with Precise Real-to-Sim Physical Calibration"
+seo_title: "DOT-Sim: Differentiable Optical Tactile Simulation"
 collection: publications
 permalink: /publications/dotsim
 excerpt: 'DOT-Sim is a differentiable optical tactile simulator that models soft sensors as elastic materials via the Material Point Method (MPM), enabling rapid real-to-sim calibration within minutes and supporting large, non-linear deformations. It simulates optical responses by learning a residual image relative to the real-world idle state, and demonstrates strong zero-shot sim-to-real performance on a DenseTact sensor across object classification, embedded tumor detection, and precise trajectory following.'

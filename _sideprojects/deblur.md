@@ -1,5 +1,6 @@
 ---
 title: "Implementation of <em>Two-Phase Kernel Estimation for Robust Motion Deblurring</em>"
+seo_title: "Two-Phase Kernel Estimation for Motion Deblurring (implementation)"
 collection: sideprojects
 permalink: /sideprojects/deblur
 date: '2019-05-02'

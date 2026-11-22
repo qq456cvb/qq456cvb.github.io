@@ -1,5 +1,6 @@
 ---
 title: "TensorFlow implementation of <em>Collaborative Learning for Deep Neural Networks</em>"
+seo_title: "Collaborative Learning for Deep Neural Networks (TensorFlow)"
 collection: sideprojects
 permalink: /sideprojects/coll
 date: '2018-12-25'

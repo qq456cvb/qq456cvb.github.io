@@ -1,5 +1,6 @@
 ---
 title: "PyTorch implementation of <em>Learning Latent Subspaces in Variational Autoencoders</em>"
+seo_title: "Learning Latent Subspaces in Variational Autoencoders (PyTorch)"
 collection: sideprojects
 permalink: /sideprojects/csvae
 date: '2019-11-25'

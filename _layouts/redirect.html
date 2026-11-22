@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  {% comment %} Used by jekyll-redirect-from for old addresses (e.g. /keypointnet/). Same as the plugin's default page,
+     plus a description, so crawlers that check every page for one (Bing) don't report it. {% endcomment %}
+  <meta charset="utf-8">
+  <title>Moved to {{ page.redirect.to }}</title>
+  <meta name="description" content="This page has moved to {{ page.redirect.to }}.">
+  <link rel="canonical" href="{{ page.redirect.to }}">
+  <script>location="{{ page.redirect.to }}"</script>
+  <meta http-equiv="refresh" content="0; url={{ page.redirect.to }}">
+  <meta name="robots" content="noindex">
+  <h1>This page has moved</h1>
+  <a href="{{ page.redirect.to }}">Continue to {{ page.redirect.to }}</a>
+</html>

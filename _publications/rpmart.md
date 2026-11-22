@@ -1,5 +1,6 @@
 ---
 title: 'RPMArt: Towards Robust Perception and Manipulation for Articulated Objects'
+seo_title: "RPMArt: Robust Perception and Manipulation for Articulated Objects"
 collection: publications
 permalink: /publications/rpmart
 excerpt: "Articulated objects are common in daily life, requiring robots to have robust perception and manipulation skills. Current methods struggle with noise in point clouds and bridging the gap between simulation and reality. We propose RPMArt, a framework for robust perception and manipulation of articulated objects, learning to estimate articulation parameters from noisy point clouds. Our main contribution, RoArtNet, predicts joint parameters and affordable points using local feature learning and point tuple voting. An articulation-aware classification scheme enhances sim-to-real transfer. RPMArt achieves state-of-the-art performance in both noise-added simulations and real-world environments."

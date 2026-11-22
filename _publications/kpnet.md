@@ -1,5 +1,6 @@
 ---
 title: "KeypointNet: A Large-scale 3D Keypoint Dataset Aggregated from Numerous Human Annotations"
+seo_title: "KeypointNet: A Large-scale 3D Keypoint Dataset"
 collection: publications
 permalink: /publications/kpnet
 excerpt: 'We present KeypointNet: the first large-scale and diverse 3D keypoint dataset that contains 103,450 keypoints and 8,234 3D models from 16 object categories, by leveraging numerous human annotations. To handle the inconsistency between annotations from different people, we propose a novel method to aggregate these keypoints automatically, through minimization of a fidelity loss. Finally, ten state-of-the-art methods are benchmarked on our proposed dataset.'

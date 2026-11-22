@@ -1,5 +1,6 @@
 ---
 title: "Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning"
+seo_title: "Multiview Equivariance Improves 3D Correspondence Understanding"
 collection: publications
 permalink: /publications/3dcorrenhance
 excerpt: "
