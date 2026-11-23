@@ -1,2 +1,7 @@
 _site/
 
+# Local-only dependency locks. GitHub Pages builds with its own pinned gems and never reads these,
+# so committing them only produced Dependabot alerts for versions the live site never uses.
+Gemfile.lock
+package-lock.json
+node_modules/
