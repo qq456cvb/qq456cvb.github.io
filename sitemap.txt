@@ -1,0 +1,27 @@
+---
+layout: null
+permalink: /sitemap.txt
+sitemap: false
+---
+{%- comment -%}
+  Plain-text sitemap (one absolute URL per line), alongside jekyll-sitemap's sitemap.xml. Google Search Console kept
+  reporting "Sitemap could not be read" for the XML file (Nov 2026) although it is valid and Bing reads it.
+  Lists the same pages: every HTML page and collection document that is not marked `sitemap: false`.
+{%- endcomment -%}
+{%- capture urls -%}
+{%- for p in site.html_pages -%}
+{%- if p.sitemap != false and p.url != "/404.html" and p.redirect == nil %}
+{{ site.url }}{{ p.url | replace: "/index.html", "/" }}
+{%- endif -%}
+{%- endfor -%}
+{%- for c in site.collections -%}
+{%- if c.output and c.label != "posts" -%}
+{%- for d in c.docs -%}
+{%- if d.sitemap != false %}
+{{ site.url }}{{ d.url }}
+{%- endif -%}
+{%- endfor -%}
+{%- endif -%}
+{%- endfor -%}
+{%- endcapture -%}
+{{ urls | strip }}
